@@ -1,0 +1,4 @@
+
+img[data-gi-css~=gi-error-server-error][data-gi-id=image] {}
+
+div[data-gi-css~=gi-error-server-error][data-gi-id=message] {padding: 50px 0 0 20px;}

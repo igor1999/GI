@@ -1,0 +1,29 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Mock\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<html lang="en">
+<head>
+    <title><?php echo $this->getMessage(); ?></title>
+    <style>
+        * {font-size: 14px; background: whitesmoke;}
+        div.left {float: left;}
+        div.clear {clear: both;}
+        div.message {padding: 80px 0 0 20px; font-weight: bold; font-size: 30px;}
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="left">
+            <img src="<?php echo $this->createImageSource(); ?>" alt="Unexpected error" />
+        </div>
+        <div class="left message">
+            <?php echo $this->getMessage(); ?>
+        </div>
+        <div class="clear"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,8 @@
+
+div[data-gi-css~=gi-locales][data-gi-id=option] {
+    padding-left: 25px; background: no-repeat 5px center;
+}
+
+div[data-gi-css~=gi-locales][data-gi-id=option] a {
+    color: black; font-size: 12px;
+}

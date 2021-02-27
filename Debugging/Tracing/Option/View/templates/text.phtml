@@ -1,0 +1,10 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Tracing\Option\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php echo $this->getMethod(), PHP_EOL; ?>
+<?php echo 'Called in file: ', $this->getFile(), PHP_EOL; ?>
+<?php echo 'Called on line: ', $this->getLine(), PHP_EOL; ?>
+<?php echo $this->getArguments()->toString(); ?>

@@ -1,0 +1,60 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Handler\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+<style>
+    #gi-debugging {font-size: 14px;}
+    #gi-debugging ul {list-style: none;}
+    #gi-debugging ul[data-key] {padding: 5px 0 5px 10px;}
+    #gi-debugging > div.container {padding: 5px 0 5px 10px;}
+    #gi-debugging > div.container-exception {background: linen;}
+    #gi-debugging > div.container-error {background: lightyellow;}
+    #gi-debugging > div.container div.title {padding: 5px 0 5px 10px; width: 110px; float: left;}
+    #gi-debugging > div.container div.content {padding: 5px 0 5px 10px; font-weight: bold; float: left;}
+    #gi-debugging > div.container div.clear {clear: both;}
+    #gi-debugging > div.container span.message {font-weight: bold;}
+    #gi-debugging > div.container ul.detail {padding: 0; border-top: 1px solid black; border-bottom: 1px solid black;}
+</style>
+<div id="gi-debugging">
+    <div class="container <?php echo $this->isExceptionType() ? 'container-exception' : 'container-error'; ?>">
+        <div>
+            <span><?php echo $this->getTitle(); ?></span>
+            <span class="message"><?php echo $this->getMessage(); ?></span>
+        </div>
+        <ul class="detail">
+            <?php if ($this->hasThrowableClass()): ?>
+                <li>
+                    <div class="title">throwable class:</div>
+                    <div class="content"><?php echo $this->getThrowableClass(); ?></div>
+                    <div class="clear"></div>
+                </li>
+            <?php endif; ?>
+            <?php if ($this->hasExceptionCaller()): ?>
+                <li>
+                    <div class="title">exception caller:</div>
+                    <div class="content"><?php echo $this->getExceptionCaller(); ?></div>
+                    <div class="clear"></div>
+                </li>
+            <?php endif; ?>
+            <li>
+                <div class="title">code:</div>
+                <div class="content"><?php echo $this->getCode(); ?></div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="title">located in file:</div>
+                <div class="content"><?php echo $this->getFile(); ?></div>
+                <div class="clear"></div>
+            </li>
+            <li>
+                <div class="title">located on line:</div>
+                <div class="content"><?php echo $this->getLine(); ?></div>
+                <div class="clear"></div>
+            </li>
+        </ul>
+    </div>
+    <div class="tracing-container">
+        <?php echo $this->getTracing()->toString(); ?>
+    </div>
+</div>

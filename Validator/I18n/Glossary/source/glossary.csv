@@ -1,0 +1,38 @@
+en_GB
+'%validatedParam%' '%source%' includes not alphabet content
+'%validatedParam%' '%source%' includes not alphanumeric content
+'%validatedParam%' '%source%' includes not digits content
+'%validatedParam%' '%source%' is identical with token '%token%'
+'%validatedParam%' '%source%' is in array '%array%'
+'%validatedParam%' '%source%' is not a number
+'%validatedParam%' is not a scalar
+'%validatedParam%' '%source%' is not a valid URL
+'%validatedParam%' '%source%' is not a word
+'%validatedParam%' is not an object
+'%validatedParam%' '%source%' is not a valid e-mail address
+'%validatedParam%' '%source%' is not a valid IP
+'%validatedParam%' '%source%' is not float
+'%validatedParam%' '%source%' is not identical with token '%token%'
+'%validatedParam%' '%source%' is not in array '%array%'
+'%validatedParam%' '%source%' is not integer
+'%validatedParam%' is not an array
+'%validatedParam%' should be greater than '%minimum%', '%source%' given
+'%validatedParam%' should be greater or equal '%minimum%', '%source%' given
+'%validatedParam%' should be less than '%maximum%', '%source%' given
+'%validatedParam%' should be less or equal '%maximum%', '%source%' given
+'%validatedParam%' should be set. Empty given.
+Captcha checkup failed ('%source%' given)
+CSRF checkup failed
+Either login or password not found
+Given e-mails are not identical
+Given passwords are not identical
+MIME-type of file '%source%' not in list of types: '%mimeTypes%'
+No matches in '%validatedParam%' '%source%' by '%regExp%' found
+parameter '%validatedParam%' not found
+Password has length greater than %maximum%
+Password has length less than %minimum%
+Password should to include at last one letter, one digit and one not alpha-numeric symbol
+Please check and accept legal policy
+Size of file '%source%' is greater than '%maxFileSize%'
+String of '%validatedParam%' '%source%' has length greater than %maximum%
+String of '%validatedParam%' '%source%' has length less than %minimum%

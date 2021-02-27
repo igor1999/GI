@@ -1,0 +1,4 @@
+
+div[data-gi-css~=gi-bread-crumbs][data-gi-id=container] a[data-node-id] {
+    font-size: 11px; color: black; padding: 5px;
+}

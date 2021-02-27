@@ -1,0 +1,6 @@
+
+div[data-gi-css~=gi-captcha-base][data-gi-id=container] {}
+
+button[data-gi-css~=gi-captcha-base][data-gi-id=recaptcha-button] {}
+
+img[data-gi-css~=gi-captcha-base][data-gi-id=recaptcha-image] {}

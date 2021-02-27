@@ -1,0 +1,26 @@
+
+ul[data-gi-css~=gi-menu][data-gi-id=top-menu] {}
+
+ul[data-gi-css~=gi-menu][data-gi-id=menu] {background-color: #eaeaea;}
+
+div[data-gi-css~=gi-menu][data-gi-id=option] {
+    padding: 5px 15px 5px 5px; font-size: 10px;
+}
+
+div[data-gi-css~=gi-menu][data-gi-id=option] a {color: #777777;}
+
+div[data-gi-css~=gi-menu][data-gi-id=option].gi-option-disabled {}
+
+div[data-gi-css~=gi-menu][data-gi-id=option].gi-option-selected a {
+    color: black;
+}
+
+div[data-gi-css~=gi-menu][data-gi-id=option].gi-option-vertical-pointer {
+    background: url("../img/arrow-right.png") no-repeat right center;
+}
+
+div[data-gi-css~=gi-menu][data-gi-id=option].gi-option-horizontal-pointer {}
+
+div[data-gi-css~=gi-menu][data-gi-id=option].gi-option-hover {background-color: white;}
+
+/*[data-menu-option-id=...]|[data-menu-option-level=...]|a*/

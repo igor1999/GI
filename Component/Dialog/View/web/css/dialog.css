@@ -1,0 +1,52 @@
+
+div[data-gi-css~=gi-dialog][data-gi-id=container] {
+    position: absolute; left: 0; top: 0;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=cover] {
+    height: 100%; width: 100%; position: fixed; display: none;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=cover].gi-cover-modal {
+    background-image: url('../img/opacity.png');
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=frame] {
+    width: auto; background-color: #aaa; padding: 2px; display: none; position: fixed;
+    min-height: 50px; min-width: 200px; overflow: hidden;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=header] {
+    height: 20px; background-color: #7777ff; border: outset 1px #7777ff; padding: 1px;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=title] {
+    height: 100%; padding-left: 2px; color: white; cursor: move; font-size: 14px;
+    -moz-user-select: none; /noinspection CssUnknownProperty/-khtml-user-select: none;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=close-button] {
+    height: 100%; float: right; width: 20px; cursor: pointer; position: relative; top: -20px;
+    background: url('../img/close-inactive.png') no-repeat;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=close-button]:hover {
+    background-image: url('../img/close-active.png');
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=content] {
+    height: auto; width: 100%; min-height: 100px; background-color: #ccc;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=footer] {
+    height: 20px; background-color: #ccc; border: inset 2px #ccc;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=footer-description] {
+    padding-left: 2px;
+}
+
+div[data-gi-css~=gi-dialog][data-gi-id=resize] {
+    height: 18px; width: 18px; float: right; cursor: nw-resize;
+    background-image: url('../img/win-resize.png');
+}

@@ -1,0 +1,8 @@
+<?php
+/** @noinspection PhpUnhandledExceptionInspection */
+
+use GI\RDB\Synchronizing\View\Dump\DumpInterface;
+/** @var DumpInterface $this */
+
+echo $this->getDOMFactory()->createXMLDeclaration()->toString();
+echo $this->getTablesRenderer()->toString();

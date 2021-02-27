@@ -1,0 +1,18 @@
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=container] {}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=container] > div > div[data-gi-cell] {}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=pages-container] {}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=item] {
+    padding: 3px;
+}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=item] a {
+    text-decoration: none;
+}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id^=item-].gi-selected-item {}
+
+div[data-gi-css~=gi-paging-chain][data-gi-id=separator] {}

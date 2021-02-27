@@ -1,0 +1,8 @@
+
+div[data-gi-css~=gi-bread-crumbs-tree][data-gi-id=container] {}
+
+div[data-gi-css~=gi-bread-crumbs-tree][data-gi-id=container] ul[data-key] {
+    list-style: none;
+}
+
+div[data-gi-css~=gi-bread-crumbs-tree][data-gi-id=container] ul[data-key] > li {}

@@ -1,0 +1,16 @@
+
+div[data-gi-css~=gi-authentication-login][data-gi-id=container] {}
+
+div[data-gi-css~=gi-authentication-login][data-gi-id=container] > div > div[data-gi-cell] {}
+
+div[data-gi-css~=gi-authentication-login][data-gi-id=container] > div > div:nth-child(1) {}
+
+div[data-gi-css~=gi-authentication-login][data-gi-id=container] > div > div:nth-child(2) {}
+
+div[data-gi-css~=gi-authentication-login][data-gi-id=container] > div > div:nth-child(3) {}
+
+a[data-gi-css~=gi-authentication-login][data-gi-id=login-link] {}
+
+a[data-gi-css~=gi-authentication-login][data-gi-id=register-link] {}
+
+a[data-gi-css~=gi-authentication-login][data-gi-id=restore-password-link] {}

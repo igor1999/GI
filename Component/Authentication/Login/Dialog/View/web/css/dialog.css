@@ -1,0 +1,48 @@
+
+/* Dialog */
+
+div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=frame] {
+    min-width: auto; width: 170px;
+}
+
+div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=footer] {
+    display: none;
+}
+
+/* Login Dialog */
+
+form[data-gi-css~=gi-authentication-login-dialog][data-gi-id=form] > div {}
+
+form[data-gi-css~=gi-authentication-login-dialog][data-gi-id=form] > div > div > div[data-gi-cell] {}
+
+form[data-gi-css~=gi-authentication-login-dialog][data-gi-id=form] > div > div:nth-child(1) > div[data-gi-cell] {
+    padding: 10px 0 0 10px;
+}
+
+form[data-gi-css~=gi-authentication-login-dialog][data-gi-id=form] > div > div:nth-child(2) > div[data-gi-cell] {
+    padding: 10px 0 0 10px;
+}
+
+form[data-gi-css~=gi-authentication-login-dialog][data-gi-id=form] > div > div:nth-child(4) > div:nth-child(1) {
+    padding: 15px 30px 0 0;
+}
+
+input[data-gi-css~=gi-authentication-login-dialog][data-gi-id=login-textbox] {
+    border: 1px solid #ccc; font-size: 10px; width: 125px;
+}
+
+input[data-gi-css~=gi-authentication-login-dialog][data-gi-id=password-textbox] {
+    border: 1px solid #ccc; font-size: 10px; width: 125px;
+}
+
+input[data-gi-css~=gi-authentication-login-dialog][data-gi-id=submit-button] {
+    background-color: white; font-size: 10px; padding: 3px;
+}
+
+div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=result-message-container] {
+    font-size: 11px; padding: 2px; color: green;
+}
+
+div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=result-message-container].gi-error {
+    color: red;
+}

@@ -1,0 +1,4 @@
+
+img[data-gi-css~=gi-error-not-found][data-gi-id=image] {}
+
+div[data-gi-css~=gi-error-not-found][data-gi-id=message] {padding: 100px 0 0 20px;}

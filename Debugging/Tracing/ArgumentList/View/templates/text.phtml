@@ -1,0 +1,13 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Tracing\ArgumentList\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php if (!$this->isEmpty()): ?>
+Arguments
+<?php foreach ($this->getItems() as $item): ?>
+---------------------
+<?php echo $item->toString() ?>
+<?php endforeach;?>
+<?php endif ?>

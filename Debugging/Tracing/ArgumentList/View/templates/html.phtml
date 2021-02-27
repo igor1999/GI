@@ -1,0 +1,18 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Tracing\ArgumentList\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php if (!$this->isEmpty()): ?>
+    <div class="arguments-container">
+        <div class="arguments-title">
+            <a href="javascript:void(0);">Arguments</a>
+        </div>
+        <ul class="arguments-list" style="display: none;">
+            <?php foreach ($this->getItems() as $item): ?>
+                <li><?php echo $item->toString() ?></li>
+            <?php endforeach;?>
+        </ul>
+    </div>
+<?php endif ?>

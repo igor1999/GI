@@ -1,0 +1,26 @@
+
+select[data-gi-css~=gi-paging-base][data-gi-id=sizes-select] {}
+
+div[data-gi-css~=gi-paging-base][data-gi-id^=navi-to-] {
+    padding: 2px 5px 2px 5px;
+}
+
+div[data-gi-css~=gi-paging-base][data-gi-id^=navi-to-] a {
+    color: black;
+}
+
+div[data-gi-css~=gi-paging-base][data-gi-id=navi-to-first] {}
+
+div[data-gi-css~=gi-paging-base][data-gi-id=navi-to-prev] {
+    padding-right: 10px;
+}
+
+div[data-gi-css~=gi-paging-base][data-gi-id=navi-to-next] {
+    padding-left: 10px;
+}
+
+div[data-gi-css~=gi-paging-base][data-gi-id=navi-to-last] {}
+
+div[data-gi-css~=gi-paging-base][data-gi-id^=navi-to-].gi-navi-inactive {
+    display: none;
+}

@@ -1,0 +1,16 @@
+
+div[data-gi-css~=gi-authentication-logout][data-gi-id=container] > div > div:nth-child(1) {
+    padding: 0 10px 0 0; border-right: 1px solid;
+}
+
+div[data-gi-css~=gi-authentication-logout][data-gi-id=container] > div > div:nth-child(2) {
+    padding: 0 0 0 10px;
+}
+
+span[data-gi-css~=gi-authentication-logout][data-gi-id=salutation] {
+    font-size: 12px; color: black;
+}
+
+a[data-gi-css~=gi-authentication-logout][data-gi-id=link] {
+    font-size: 12px; color: black;
+}

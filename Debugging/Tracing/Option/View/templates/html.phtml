@@ -1,0 +1,25 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Tracing\Option\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+<div class="option-container">
+    <div class="option-title">
+        <a href="javascript:void(0);"><?php echo $this->getMethod(); ?></a>
+    </div>
+    <ul class="option-detail" style="display: none;">
+        <li>
+            <span>Called in file:</span>
+            <span class="detail-content"><?php echo $this->getFile(); ?></span>
+        </li>
+        <li>
+            <span>Called on line:</span>
+            <span class="detail-content"><?php echo $this->getLine(); ?></span>
+        </li>
+        <?php if (!$this->getArguments()->isEmpty()): ?>
+            <li>
+                <?php echo $this->getArguments()->toString(); ?>
+            </li>
+        <?php endif; ?>
+    </ul>
+</div>

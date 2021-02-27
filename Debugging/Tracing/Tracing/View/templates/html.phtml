@@ -1,0 +1,62 @@
+<?php
+    use GI\Debugging\Tracing\Tracing\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+<style>
+    #gi-debugging > div.tracing-container div.option-title {padding: 10px 0 10px 10px; background: ghostwhite;}
+    #gi-debugging > div.tracing-container ul.option-detail {padding: 10px 0 10px 10px; border: 1px solid gray;}
+    #gi-debugging > div.tracing-container ul.option-detail li {padding: 5px 0 5px 5px;}
+    #gi-debugging > div.tracing-container span.detail-content {font-weight: bold;}
+</style>
+<style>
+    #gi-debugging > div.tracing-container ul.arguments-list {padding: 5px 0 5px 20px;}
+    #gi-debugging > div.tracing-container ul.arguments-list li {
+        border-bottom: 1px solid gray; border-left: 1px solid gray;
+    }
+</style>
+<style>
+    #gi-debugging > div.tracing-container div.argument-contents {padding: 5px 0 5px 5px;}
+</style>
+<script>
+    function openOption(e)
+    {
+        let ul = e.target.parentNode.parentNode.querySelector('ul.option-detail');
+
+        ul.style.display = (ul.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function openArguments(e)
+    {
+        let ul = e.target.parentNode.parentNode.querySelector('ul.arguments-list');
+
+        ul.style.display = (ul.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function openArgument(e)
+    {
+        let div = e.target.parentNode.parentNode.querySelector('div.argument-contents');
+
+        div.style.display = (div.style.display === 'none') ? 'block' : 'none';
+    }
+
+    function load()
+    {
+        let optionTitles = document.querySelectorAll('#gi-debugging > div.tracing-container div.option-title a');
+        for (let i = 0; i <= optionTitles.length - 1; i ++) {
+            optionTitles[i].addEventListener('click', openOption);
+        }
+
+        let argumentsTitles = document.querySelectorAll('#gi-debugging > div.tracing-container div.arguments-title a');
+        for (let i = 0; i <= argumentsTitles.length - 1; i ++) {
+            argumentsTitles[i].addEventListener('click', openArguments);
+        }
+
+        let argumentTitles = document.querySelectorAll('#gi-debugging > div.tracing-container div.argument-title a');
+        for (let i = 0; i <= argumentTitles.length - 1; i ++) {
+            argumentTitles[i].addEventListener('click', openArgument);
+        }
+    }
+
+    window.addEventListener('load', load);
+</script>
+<?php echo $this->createLinkedList()->toString(); ?>

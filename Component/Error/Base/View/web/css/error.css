@@ -1,0 +1,4 @@
+
+img[data-gi-css~=gi-error][data-gi-id=image] {}
+
+div[data-gi-css~=gi-error][data-gi-id=message] {font-size: 20px; font-weight: bold;}

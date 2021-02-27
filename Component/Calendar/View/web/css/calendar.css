@@ -1,0 +1,36 @@
+
+div[data-gi-css~=gi-calendar][data-gi-id=container] {}
+
+form[data-gi-css~=gi-calendar][data-gi-id=navigation-form] {}
+
+form[data-gi-css~=gi-calendar][data-gi-id=navigation-form] > div > div > div:nth-child(1) {
+    padding: 5px 0 10px 0;
+}
+
+form[data-gi-css~=gi-calendar][data-gi-id=navigation-form] > div > div > div:nth-child(2) {
+    padding: 7px 0 0 5px;
+}
+
+input[data-gi-css~=gi-calendar][data-gi-id=navigation-month] {
+
+}
+
+button[data-gi-css~=gi-calendar][data-gi-id=navigation-button] {
+    background-color: white; font-size: 12px; padding: 3px;
+}
+
+table[data-gi-css~=gi-calendar][data-gi-id=content-table] {}
+
+table[data-gi-css~=gi-calendar][data-gi-id=content-table] tr > td {
+    background-color: white; font-size: 12px; padding: 3px; text-align: center;
+}
+
+table[data-gi-css~=gi-calendar][data-gi-id=content-table]  tr > td.gi-cell-inactive {
+    color: #ccc;
+}
+
+tr[data-gi-css~=gi-calendar][data-gi-id=content-head-row] {}
+
+tr[data-gi-css~=gi-calendar][data-gi-id=content-head-row] > td {
+    font-weight: bold;
+}

@@ -1,0 +1,19 @@
+
+div[data-gi-css~=gi-switcher][data-gi-id=container] > div > div[data-gi-cell] {
+}
+
+div[data-gi-css~=gi-switcher][data-gi-id=container] > div > div[data-gi-cell] > div[data-value] {
+    border: 2px inset black; border-right: 2px inset #bbb; padding: 3px; cursor: pointer;
+}
+
+div[data-gi-css~=gi-switcher][data-gi-id=container] > div > div[data-gi-cell] > div[data-value][data-selected="1"] {
+    background: lightgreen;
+}
+
+div[data-gi-css~=gi-switcher][data-gi-id=container] > div > div[data-gi-cell] > div[data-value][data-selected="0"] {
+    background: #ddd; color: gray;
+}
+
+div[data-gi-css~=gi-switcher][data-gi-id=container] > div > div[data-gi-cell] > div[data-value="unknown"][data-selected="1"] {
+    background: white;
+}

@@ -1,0 +1,10 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Tracing\Tracing\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php foreach ($this->getOptions() as $option): ?>
+=================================
+<?php echo $option->toString(); ?>
+<?php endforeach ?>

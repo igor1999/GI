@@ -1,0 +1,19 @@
+
+input[data-gi-css~=gi-autocomplete][data-gi-id=textbox] {}
+
+div[data-gi-css~=gi-autocomplete][data-gi-id=list-container] {
+    position: absolute; border: solid 1px black; z-index: 100000; background-color: white;
+}
+
+div[data-gi-css~=gi-autocomplete][data-gi-id=list-container] ul {
+    list-style: none;  padding: 0; margin: 0;
+}
+
+div[data-gi-css~=gi-autocomplete][data-gi-id=list-container] li {
+    padding: 2px; cursor: default; font-size: 13px;
+}
+
+div[data-gi-css~=gi-autocomplete][data-gi-id=list-container] li:hover {
+    background-color: #eee;
+}
+

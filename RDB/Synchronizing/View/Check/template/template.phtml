@@ -1,0 +1,30 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\RDB\Synchronizing\View\Check\CheckInterface;
+    /** @var CheckInterface $this */
+?>
+
+<!--suppress HtmlUnknownTag, HtmlUnknownAttribute -->
+<check-result>
+    <dump-only>
+        <?php
+            if (!empty($this->getDumpOnly())) {
+                echo $this->getTablesRenderer()->setContents($this->getDumpOnly())->toString();
+            }
+        ?>
+    </dump-only>
+    <database-only>
+        <?php
+            if (!empty($this->getDatabaseOnly())) {
+                echo $this->getTablesRenderer()->setContents($this->getDatabaseOnly())->toString();
+            }
+        ?>
+    </database-only>
+    <unequals>
+        <?php
+            if (!empty($this->getUnequals())) {
+                echo $this->getTablesRenderer()->setContents($this->getUnequals())->toString();
+            }
+        ?>
+    </unequals>
+</check-result>

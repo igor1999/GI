@@ -1,0 +1,4 @@
+
+div[data-gi-css~=gi-switcher-on-off][data-gi-id=container] > div > div[data-gi-cell] > div[data-value="off"][data-selected="1"] {
+    background: #ff8888;
+}

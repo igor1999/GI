@@ -1,0 +1,12 @@
+
+div[data-gi-css~=gi-bread-crumbs-chain][data-gi-id=container] {
+    background-color: #eee;
+}
+
+div[data-gi-css~=gi-bread-crumbs-chain][data-gi-id=container] > div > div[data-gi-cell] {
+    padding: 0 0 2px 0;
+}
+
+div[data-gi-css~=gi-bread-crumbs-chain][data-gi-id=container] > div > div[data-gi-cell] > span[data-node-id] {
+    padding: 0 5px 0 5px;
+}

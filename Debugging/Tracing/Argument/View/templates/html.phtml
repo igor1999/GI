@@ -1,0 +1,18 @@
+<?php
+    use GI\Debugging\Tracing\Argument\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+<div class="argument-container">
+    <?php if ($this->hasTitle()): ?>
+        <div class="argument-title">
+            <a href="javascript:void(0);"><?php echo $this->getTitle(); ?></a>
+        </div>
+        <div class="argument-contents" style="display: none;">
+            <?php echo $this->getContents(); ?>
+        </div>
+    <?php else: ?>
+        <div class="argument-scalar">
+            <?php echo $this->getContents(); ?>
+        </div>
+    <?php endif ?>
+</div>

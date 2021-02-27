@@ -1,0 +1,6 @@
+
+div[data-gi-css~=gi-captcha-image-text][data-gi-id=container] > div > div[data-gi-cell] {}
+
+img[data-gi-css~=gi-captcha-image-text][data-gi-id=captcha-image] {}
+
+input[data-gi-css~=gi-captcha-image-text][data-gi-id=value-text] {}

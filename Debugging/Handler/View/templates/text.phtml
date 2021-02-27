@@ -1,0 +1,18 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\Debugging\Handler\View\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php echo $this->getTitle(); ?> <?php echo $this->getMessage(), PHP_EOL; ?>
+<?php if ($this->hasThrowableClass()): ?>
+    throwable class: <?php echo $this->getThrowableClass(), PHP_EOL; ?>
+<?php endif; ?>
+<?php if ($this->hasExceptionCaller()): ?>
+    exception caller: <?php echo $this->getExceptionCaller(), PHP_EOL; ?>
+<?php endif; ?>
+code: <?php echo $this->getCode(), PHP_EOL; ?>
+located in file: <?php echo $this->getFile(), PHP_EOL; ?>
+located on line: <?php echo $this->getLine(), PHP_EOL; ?>
+
+<?php echo $this->getTracing()->toString(); ?>

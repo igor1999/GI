@@ -1,0 +1,27 @@
+<?php
+    use GI\RDB\Synchronizing\View\Tables\TablesInterface;
+    /** @var TablesInterface $this */
+?>
+
+<!--suppress HtmlUnknownTag, HtmlUnknownAttribute -->
+<tables>
+    <?php foreach ($this->getContents() as $table => $tableContents): ?>
+        <table name="<?php echo $table; ?>">
+            <columns>
+                <?php foreach ($tableContents as $column => $columnContents): ?>
+                    <column name="<?php echo $column; ?>">
+                        <?php foreach ($columnContents as $attribute => $value): ?>
+                            <?php
+                                if ($attribute != 'name') {
+                                    $element = $this->getDOMFactory()->createContainerElement($attribute);
+                                    $element->getChildNodes()->set($value);
+                                    echo $element->toString();
+                                }
+                            ?>
+                        <?php endforeach; ?>
+                    </column>
+                <?php endforeach; ?>
+            </columns>
+        </table>
+    <?php endforeach; ?>
+</tables>

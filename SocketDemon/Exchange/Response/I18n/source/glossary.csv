@@ -1,0 +1,9 @@
+en_GB
+Connection closed with code {code} and reason {reason}
+Error on connection with message: {message}
+Authentication successful
+Your authentication failed
+Connection with given socket id already exists
+Connection socket id not found in database
+Connection expired
+Actual session does not exists

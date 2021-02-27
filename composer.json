@@ -1,0 +1,11 @@
+{
+    "name": "gi-framework/gi-framework",
+    "version": "1.0",
+    "license": "GPL-3.0-only",
+    "description": "GI framework",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.2"
+    }
+}

@@ -1,0 +1,8 @@
+
+div[data-gi-css~=gi-switcher-salutation][data-gi-id=container] > div > div[data-gi-cell] > div[data-value="Mr"][data-selected="1"] {
+    background: #bbbbff;
+}
+
+div[data-gi-css~=gi-switcher-salutation][data-gi-id=container] > div > div[data-gi-cell] > div[data-value="Mrs"][data-selected="1"] {
+    background: #ff8888;
+}

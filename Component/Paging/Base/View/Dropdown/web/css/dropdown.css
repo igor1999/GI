@@ -1,0 +1,6 @@
+
+div[data-gi-css~=gi-paging-dropdown][data-gi-id=container] {}
+
+div[data-gi-css~=gi-paging-dropdown][data-gi-id=container] > div > div[data-gi-cell] {}
+
+div[data-gi-css~=gi-paging-dropdown][data-gi-id=pages-select] {}
