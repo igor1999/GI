@@ -7,5 +7,10 @@
     "prefer-stable": true,
     "require": {
         "php": "^7.2"
+    },
+    "autoload": {
+        "classmap": [
+            ""
+        ]
     }
 }
