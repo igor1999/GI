@@ -24,6 +24,26 @@ abstract class AbstractPlatform implements PlatformInterface
     use ServiceLocatorAwareTrait;
 
 
+    const PHP_INT_TYPES = [];
+
+    const PHP_INT_TYPE  = 'int';
+
+    const PHP_FLOAT_TYPES = [];
+
+    const PHP_FLOAT_TYPE  = 'float';
+
+    const PHP_STRING_TYPES = [];
+
+    const PHP_STRING_TYPE  = 'string';
+
+    const PHP_DATE_TYPES = [];
+
+    const PHP_BOOL_TYPES = [];
+
+
+    const PHP_UNDEFINED_TYPE = 'undefined';
+
+
     /**
      * @param string|array $entity
      * @return string
@@ -70,5 +90,42 @@ abstract class AbstractPlatform implements PlatformInterface
     public function splitEntities(string $identifiers)
     {
         return explode(self::ENTITY_POINTER, $identifiers);
+    }
+
+    /**
+     * @param string $dbType
+     * @return string
+     */
+    public function getPHPType(string $dbType)
+    {
+        if (in_array($dbType, static::PHP_INT_TYPES)) {
+            $type = static::PHP_INT_TYPE;
+        } elseif (in_array($dbType, static::PHP_FLOAT_TYPES)) {
+            $type = static::PHP_FLOAT_TYPE;
+        } elseif (in_array($dbType, static::PHP_STRING_TYPES)) {
+            $type = static::PHP_STRING_TYPE;
+        } else {
+            $type = static::PHP_UNDEFINED_TYPE;
+        }
+
+        return $type;
+    }
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isDatePHPType(string $dbType)
+    {
+        return in_array($dbType, static::PHP_DATE_TYPES);
+    }
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isBoolPHPType(string $dbType)
+    {
+        return in_array($dbType, static::PHP_BOOL_TYPES);
     }
 }

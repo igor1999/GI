@@ -59,4 +59,22 @@ interface PlatformInterface
      * @return string
      */
     public function getTableIdentityQuery();
+
+    /**
+     * @param string $dbType
+     * @return string
+     */
+    public function getPHPType(string $dbType);
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isDatePHPType(string $dbType);
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isBoolPHPType(string $dbType);
 }
