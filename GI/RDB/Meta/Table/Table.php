@@ -115,6 +115,56 @@ class Table implements TableInterface
     }
 
     /**
+     * @return string
+     */
+    public function getSchemaNamespace()
+    {
+        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst($this->getSchema());
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalNamespace()
+    {
+        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst($this->getLocalName());
+    }
+
+    /**
+     * @return array
+     */
+    protected function getNamespaces()
+    {
+        return array_filter([$this->getSchemaNamespace(), $this->getLocalNamespace()]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return implode('\\', $this->getNamespaces());
+    }
+
+    /**
+     * @return string
+     */
+    public function getDir()
+    {
+        return implode('/', $this->getNamespaces());
+    }
+
+    /**
+     * @return string
+     */
+    public function getGetter()
+    {
+        $getter = implode('_', $this->getNamespaces());
+
+        return $this->giGetPSRFormatBuilder()->buildGet($getter);
+    }
+
+    /**
      * @return ColumnListInterface
      */
     public function getColumnList()
