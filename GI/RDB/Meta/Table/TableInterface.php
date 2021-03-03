@@ -41,6 +41,16 @@ interface TableInterface extends ExtractionInterface
     public function getFullName();
 
     /**
+     * @return string
+     */
+    public function getSchema();
+
+    /**
+     * @return string
+     */
+    public function getLocalName();
+
+    /**
      * @return ColumnListInterface
      */
     public function getColumnList();

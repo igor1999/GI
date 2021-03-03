@@ -95,6 +95,26 @@ class Table implements TableInterface
     }
 
     /**
+     * @return string
+     */
+    public function getSchema()
+    {
+        $entities = $this->getDriver()->getPlatform()->splitEntities($this->name);
+
+        return (count($entities) > 1) ? $entities[0] : '';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocalName()
+    {
+        $entities = $this->getDriver()->getPlatform()->splitEntities($this->name);
+
+        return (count($entities) > 1) ? $entities[1] : $this->name;
+    }
+
+    /**
      * @return ColumnListInterface
      */
     public function getColumnList()

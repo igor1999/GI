@@ -101,7 +101,9 @@ class TableList implements TableListInterface
             $this->giThrowMagicMethodException($method);
         }
 
+        $name = str_replace('_', '.', $name);
         $name = $this->giGetCamelCaseConverter()->convertToUnderlineLowerCase($name);
+        $name = str_replace('._', '.', $name);
 
         return $this->get($name);
     }
@@ -117,6 +119,21 @@ class TableList implements TableListInterface
         }
 
         return $this->items;
+    }
+
+    /**
+     * @param string $schema
+     * @return TableInterface[]
+     * @throws \Exception
+     */
+    public function getSchemaItems(string $schema)
+    {
+        $f = function(Table $item) use ($schema)
+        {
+            return $item->getSchema() == $schema;
+        };
+
+        return array_filter($this->getItems(), $f);
     }
 
     /**

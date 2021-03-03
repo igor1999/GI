@@ -46,6 +46,13 @@ interface TableListInterface extends ExtractionInterface
     public function getItems();
 
     /**
+     * @param string $schema
+     * @return TableInterface[]
+     * @throws \Exception
+     */
+    public function getSchemaItems(string $schema);
+
+    /**
      * @return int
      */
     public function getLength();
