@@ -48,6 +48,12 @@ interface ColumnInterface extends ExtractionInterface
     public function getType();
 
     /**
+     * @extract
+     * @return int
+     */
+    public function getLength();
+
+    /**
      * @return mixed
      */
     public function getDefault();
@@ -61,4 +67,34 @@ interface ColumnInterface extends ExtractionInterface
      * @return bool
      */
     public function isNull();
+
+    /**
+     * @return string
+     */
+    public function getPHPType();
+
+    /**
+     * @return bool
+     */
+    public function isDatePHPType();
+
+    /**
+     * @return bool
+     */
+    public function isBoolPHPType();
+
+    /**
+     * @return string
+     */
+    public function getClassProperty();
+
+    /**
+     * @return string
+     */
+    public function getClassGetter();
+
+    /**
+     * @return string
+     */
+    public function getClassSetter();
 }

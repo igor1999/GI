@@ -58,6 +58,7 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
                 `ORDINAL_POSITION` AS `index`, 
                 `COLUMN_NAME` as `name`,
                 `DATA_TYPE` as `type`,
+                `CHARACTER_MAXIMUM_LENGTH` as `length`,
                 `COLUMN_DEFAULT` as `default`,
                 if(`COLUMN_KEY` = \'PRI\', 1 , 0) as `primary`,
                 if(`IS_NULLABLE` = \'YES\', 1 , 0) as `null`

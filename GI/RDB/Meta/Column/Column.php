@@ -48,6 +48,11 @@ class Column implements ColumnInterface
     private $type = '';
 
     /**
+     * @var int
+     */
+    private $length;
+
+    /**
      * @var mixed
      */
     private $default;
@@ -192,6 +197,38 @@ class Column implements ColumnInterface
 
     /**
      * @extract
+     * @return int
+     */
+    public function getLength()
+    {
+        return $this->length;
+    }
+
+    /**
+     * @hydrate
+     * @param int $length
+     * @return static
+     */
+    protected function setLength(int $length)
+    {
+        $this->length = (int)$length;
+
+        return $this;
+    }
+
+    /**
+     * @validate
+     * @throws \Exception
+     */
+    protected function validateLength()
+    {
+        if (!is_int($this->length)) {
+            $this->giThrowInvalidTypeException('Column length', $this->length, 'int');
+        }
+    }
+
+    /**
+     * @extract
      * @return mixed
      */
     public function getDefault()
@@ -251,5 +288,53 @@ class Column implements ColumnInterface
         $this->null = (bool)$null;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->getPHPType($this->type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDatePHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->isDatePHPType($this->type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isBoolPHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->isBoolPHPType($this->type);
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassProperty()
+    {
+        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseLowerFirst($this->name);
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassGetter()
+    {
+        return $this->giGetPSRFormatBuilder()->buildGet($this->getClassProperty());
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassSetter()
+    {
+        return $this->giGetPSRFormatBuilder()->buildSet($this->getClassProperty());
     }
 }
