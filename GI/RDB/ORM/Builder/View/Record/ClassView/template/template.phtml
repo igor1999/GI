@@ -21,12 +21,31 @@ class Record extends <?php echo $this->getBaseClassShortName(); ?>
 
 
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+    <?php
+        $type         = $column->getPHPType();
+        $property     = $column->getClassProperty();
+        $setterAccess = $this->getTable()->getColumnList()->getIdentity() === $column ? 'protected' : 'public';
+    ?>
+
     /**
-     * @return <?php echo $column->getPHPType(); ?>
+     * @to-db <?php echo $column->getName(); ?>
+     * @return <?php echo $type; ?>
      */
     public function <?php echo $column->getClassGetter(); ?>()
     {
-        return $this-><?php echo $column->getClassProperty(); ?>;
+        return $this-><?php echo $property; ?>;
+    }
+
+    /**
+     * @from-db <?php echo $column->getName(); ?>
+     * @param <?php echo $type; ?> $<?php echo $property; ?>
+     * @return static
+     */
+    <?php echo $setterAccess; ?> function <?php echo $column->getClassSetter(); ?>(<?php echo $type; ?> $<?php echo $property; ?>)
+    {
+        $this-><?php echo $property; ?> = $<?php echo $property; ?>;
+
+        return $this;
     }
 <?php endforeach;?>
 }
