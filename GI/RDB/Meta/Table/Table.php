@@ -33,6 +33,9 @@ class Table implements TableInterface
     use ServiceLocatorAwareTrait, ExceptionAwareTrait;
 
 
+    const GETTER_SEPARATOR = '_';
+
+
     /**
      * @var DriverInterface
      */
@@ -159,7 +162,7 @@ class Table implements TableInterface
      */
     public function getGetter()
     {
-        $getter = implode('_', $this->getNamespaces());
+        $getter = implode(static::GETTER_SEPARATOR, $this->getNamespaces());
 
         return $this->giGetPSRFormatBuilder()->buildGet($getter);
     }

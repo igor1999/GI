@@ -20,6 +20,7 @@ namespace GI\RDB\Meta\Table;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\RDB\Driver\DriverInterface;
+use GI\RDB\Platform\PlatformInterface;
 
 class TableList implements TableListInterface
 {
@@ -101,9 +102,12 @@ class TableList implements TableListInterface
             $this->giThrowMagicMethodException($method);
         }
 
-        $name = str_replace('_', '.', $name);
+        $entityPointer   = PlatformInterface::ENTITY_POINTER;
+        $getterSeparator = Table::GETTER_SEPARATOR;
+
+        $name = str_replace($getterSeparator, $entityPointer, $name);
         $name = $this->giGetCamelCaseConverter()->convertToUnderlineLowerCase($name);
-        $name = str_replace('._', '.', $name);
+        $name = str_replace($entityPointer . $getterSeparator, $entityPointer, $name);
 
         return $this->get($name);
     }
