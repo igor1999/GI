@@ -35,5 +35,9 @@ use GI\RDB\Meta\Table\TableInterface;
  */
 interface ViewInterface extends RendererInterface
 {
-
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getBaseClassShortName();
 }

@@ -1,6 +1,32 @@
 <?php
+    /** @noinspection PhpUnhandledExceptionInspection */
     use GI\RDB\ORM\Builder\View\Record\ClassView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
 
-class Record
+namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>
+
+use <?php echo $this->getBaseClass(); ?>
+
+class Record extends <?php echo $this->getBaseClassShortName(); ?>
+{
+
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+    /**
+     * @var <?php echo $column->getPHPType(); ?>
+     */
+    private $<?php echo $column->getClassProperty(); ?>;
+
+<?php endforeach;?>
+
+
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+    /**
+     * @return <?php echo $column->getPHPType(); ?>
+     */
+    public function <?php echo $column->getClassGetter(); ?>()
+    {
+        return $this-><?php echo $column->getClassProperty(); ?>;
+    }
+<?php endforeach;?>
+}
