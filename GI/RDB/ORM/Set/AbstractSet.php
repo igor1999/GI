@@ -167,7 +167,7 @@ abstract class AbstractSet implements SetInterface
      * @param int $index
      * @return bool
      */
-    public function has($index)
+    public function has(int $index)
     {
         return isset($this->items[$index]);
     }
@@ -363,7 +363,7 @@ abstract class AbstractSet implements SetInterface
      * @return string[]
      * @throws \Exception
      */
-    protected function getProxyJoinFields($proxyClass)
+    protected function getProxyJoinFields(string $proxyClass)
     {
         $methodReflections = $this->giGetClassMeta($this->getItemClass())
             ->getMethods()
@@ -403,7 +403,7 @@ abstract class AbstractSet implements SetInterface
      * @return static
      * @throws \Exception
      */
-    public function selectByProxy($proxyClass, array $contents, string $order = null)
+    public function selectByProxy(string $proxyClass, array $contents, string $order = null)
     {
         $this->fillByProxy($proxyClass, $contents, $order);
 

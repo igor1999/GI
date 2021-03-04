@@ -83,7 +83,7 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
      * @return static
      * @throws \Exception
      */
-    public function __call($method, array $arguments = [])
+    public function __call(string $method, array $arguments = [])
     {
         if (!method_exists($this->getMenuModel(), $method)) {
             $this->giThrowMagicMethodException($method);

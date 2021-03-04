@@ -187,7 +187,7 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -199,7 +199,7 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -211,7 +211,7 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -223,7 +223,7 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */

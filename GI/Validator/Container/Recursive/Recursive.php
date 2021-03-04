@@ -52,7 +52,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     }
 
     /**
-     * @param string $key
+     * @param string|int $key
      * @return ValidatorInterface
      * @throws \Exception
      */
@@ -74,7 +74,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     }
 
     /**
-     * @param string $key
+     * @param string|int $key
      * @param ValidatorInterface $validator
      * @return static
      */

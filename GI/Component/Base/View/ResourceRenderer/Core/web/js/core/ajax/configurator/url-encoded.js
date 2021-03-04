@@ -100,9 +100,14 @@ giClient.core.ajax.configurator.UrlEncoded = function()
         let queryString = [];
 
         for (let key in query) {
-            if (query[key] instanceof Array) {
-                queryString.push(encodeArray(key, query[key]));
-            } else if (typeof(query[key]) !== 'object') {
+            // noinspection JSUnfilteredForInLoop
+            let value = query[key]
+
+            if (value instanceof Array) {
+                // noinspection JSUnfilteredForInLoop
+                queryString.push(encodeArray(key, value));
+            } else if (typeof(value) !== 'object') {
+                // noinspection JSUnfilteredForInLoop
                 queryString.push(key + '=' + encodeURIComponent(query[key]));
             } else {
                 throw new Error('Format of url encoded AJAX request failed');

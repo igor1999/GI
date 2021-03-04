@@ -132,7 +132,7 @@ giClient.core.cookie.Cookie = function()
 
     this.has = function()
     {
-        let {found = false, value = ''} = find();
+        let {found = false} = find();
 
         return found;
     };

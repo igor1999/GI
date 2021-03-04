@@ -114,7 +114,7 @@ class ViewModel extends AbstractViewModel implements ViewModelInterface
      * @param bool $save
      * @return static
      */
-    protected function setSave($save)
+    protected function setSave(bool $save)
     {
         $this->save = (bool)$save;
 

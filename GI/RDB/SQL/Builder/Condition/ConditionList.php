@@ -187,7 +187,7 @@ class ConditionList implements ConditionListInterface
      * @param bool|null $alt
      * @return ConditionInterface
      */
-    protected function createCondition(string $placeholder, $predicate, \Closure $validator = null, bool $alt = null)
+    protected function createCondition(string $placeholder, string $predicate, \Closure $validator = null, bool $alt = null)
     {
         try {
             $result = $this->giGetDi(

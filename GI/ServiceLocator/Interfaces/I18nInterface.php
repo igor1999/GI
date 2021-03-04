@@ -33,7 +33,7 @@ interface I18nInterface
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @param string $text
      * @return string
      */
@@ -41,7 +41,7 @@ interface I18nInterface
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @return TranslatorInterface
      * @throws \Exception
      */

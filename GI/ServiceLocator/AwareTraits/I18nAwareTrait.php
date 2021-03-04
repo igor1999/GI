@@ -37,7 +37,7 @@ trait I18nAwareTrait
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @param string $text
      * @return string
      */
@@ -51,7 +51,7 @@ trait I18nAwareTrait
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @return TranslatorInterface
      * @throws \Exception
      */

@@ -158,7 +158,7 @@ class Status extends AbstractHeader implements StatusInterface
      * @param int $code
      * @return static
      */
-    protected function setCode($code)
+    protected function setCode(int $code)
     {
         $this->code = $code;
 

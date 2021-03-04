@@ -49,10 +49,13 @@ class HashSet extends AbstractService implements HashSetInterface
     }
 
     /**
-     * @return OptionInterface
+     * @return OptionInterface|\GI\Storage\Collection\Behaviour\Option\OptionInterface
      */
     protected function getOption()
     {
-        return parent::getOption();
+        /** @var OptionInterface $option */
+        $option = parent::getOption();
+
+        return $option;
     }
 }

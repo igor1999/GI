@@ -28,5 +28,5 @@ interface JobDataInterface
      * @param bool $done
      * @return static
      */
-    public function setDone($done);
+    public function setDone(bool $done);
 }

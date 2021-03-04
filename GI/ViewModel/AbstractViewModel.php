@@ -194,7 +194,7 @@ abstract class AbstractViewModel implements ViewModelInterface
      * @param string $property
      * @throws \Exception
      */
-    protected function validateGetter($property)
+    protected function validateGetter(string $property)
     {
         $getter     = $this->giGetPSRFormatBuilder()->buildGet($property);
         $boolGetter = $this->giGetPSRFormatBuilder()->buildIs($property);

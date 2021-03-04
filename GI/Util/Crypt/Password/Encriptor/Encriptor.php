@@ -77,7 +77,7 @@ class Encriptor implements EncriptorInterface
      * @param string $algorithm
      * @return static
      */
-    protected function setAlgorithm($algorithm)
+    protected function setAlgorithm(string $algorithm)
     {
         $this->algorithm = $algorithm;
 

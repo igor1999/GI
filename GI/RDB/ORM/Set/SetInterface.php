@@ -51,7 +51,7 @@ interface SetInterface extends  ArrayExchangeInterface
      * @param int $index
      * @return bool
      */
-    public function has($index);
+    public function has(int $index);
 
     /**
      * @param int $index

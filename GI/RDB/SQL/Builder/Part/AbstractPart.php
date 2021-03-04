@@ -50,7 +50,7 @@ abstract class AbstractPart implements PartInterface
     /**
      * AbstractPart constructor.
      * @param BuilderInterface $builder
-     * @param mixed|string $value
+     * @param mixed $value
      * @param string $placeholder
      */
     public function __construct(BuilderInterface $builder, $value, string $placeholder = '')
@@ -80,7 +80,7 @@ abstract class AbstractPart implements PartInterface
      * @param string $placeholder
      * @return static
      */
-    protected function setPlaceholder($placeholder)
+    protected function setPlaceholder(string $placeholder)
     {
         $this->placeholder = $placeholder;
 
@@ -96,7 +96,7 @@ abstract class AbstractPart implements PartInterface
     }
 
     /**
-     * @param mixed|string $value
+     * @param mixed $value
      * @return static
      */
     protected function setValue($value)

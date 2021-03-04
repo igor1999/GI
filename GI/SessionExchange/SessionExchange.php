@@ -94,7 +94,7 @@ class SessionExchange extends Alterable implements SessionExchangeInterface
      * @return ClassMeta
      * @throws \Exception
      */
-    protected function createClassMeta($class)
+    protected function createClassMeta(string $class)
     {
         return new ClassMeta($class);
     }
@@ -125,7 +125,7 @@ class SessionExchange extends Alterable implements SessionExchangeInterface
      * @param bool $realSession
      * @return static
      */
-    protected function setIsRealSession($realSession)
+    protected function setIsRealSession(bool $realSession)
     {
         $this->realSession = $realSession;
 

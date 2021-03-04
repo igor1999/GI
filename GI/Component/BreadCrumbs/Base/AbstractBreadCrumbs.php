@@ -60,7 +60,7 @@ abstract class AbstractBreadCrumbs extends AbstractComponent implements BreadCru
      * @return static
      * @throws \Exception
      */
-    public function __call($method, array $arguments = [])
+    public function __call(string $method, array $arguments = [])
     {
         if (!method_exists($this->getBreadCrumbsContainer(), $method)) {
             $this->giThrowMagicMethodException($method);

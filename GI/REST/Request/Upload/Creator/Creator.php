@@ -77,7 +77,7 @@ class Creator implements CreatorInterface
      * @param int $error
      * @return Item
      */
-    protected function createItem(string $name, string $mimeType, string $tmpName, $size, $error)
+    protected function createItem(string $name, string $mimeType, string $tmpName, int $size, int $error)
     {
         try {
             $result = $this->giGetDi(

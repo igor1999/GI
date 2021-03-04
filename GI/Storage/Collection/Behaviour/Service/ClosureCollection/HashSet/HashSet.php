@@ -51,6 +51,9 @@ class HashSet extends AbstractService implements HashSetInterface
      */
     protected function getOption()
     {
-        return parent::getOption();
+        /** @var OptionInterface $option */
+        $option = parent::getOption();
+
+        return $option;
     }
 }

@@ -176,7 +176,7 @@ class Colorizing implements ColorizingInterface
      * @return mixed
      * @throws \Exception
      */
-    protected function parseColor($method, $foreground = true)
+    protected function parseColor(string $method, bool $foreground = true)
     {
         $setterPrefix = $foreground ? self::FOREGROUND_SETTER_PREFIX : self::BACKGROUND_SETTER_PREFIX;
         $constPrefix  = $foreground ? self::FOREGROUND_CONST_PREFIX : self::BACKGROUND_CONST_PREFIX;

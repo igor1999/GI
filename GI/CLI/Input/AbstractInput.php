@@ -85,7 +85,7 @@ abstract class AbstractInput implements InputInterface
      * @param string $input
      * @return static
      */
-    protected function setInput($input)
+    protected function setInput(string $input)
     {
         $this->input = $input;
 

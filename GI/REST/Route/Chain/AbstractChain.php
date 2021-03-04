@@ -97,7 +97,7 @@ abstract class AbstractChain extends AbstractRoute implements ChainInterface
      * @return static
      * @throws \Exception
      */
-    protected function _set($key, RouteInterface $item)
+    protected function _set(string $key, RouteInterface $item)
     {
         $this->validateClosing();
 
@@ -162,7 +162,7 @@ abstract class AbstractChain extends AbstractRoute implements ChainInterface
      * @param string $param
      * @return array
      */
-    protected function parseParam($param)
+    protected function parseParam(string $param)
     {
         $keys = explode('', $param);
 

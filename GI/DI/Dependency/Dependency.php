@@ -47,7 +47,7 @@ class Dependency implements DependencyInterface
 
     /**
      * Item constructor.
-     * @param mixed|string $source
+     * @param mixed $source
      * @param bool $cached
      * @param bool $forCallerInherits
      */

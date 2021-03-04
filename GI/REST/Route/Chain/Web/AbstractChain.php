@@ -102,7 +102,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      * @return static|bool|WebInterface
      * @throws \Exception
      */
-    public function __call($method, array $arguments = [])
+    public function __call(string $method, array $arguments = [])
     {
         try {
             $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);

@@ -19,9 +19,6 @@ giClient.component.switcher.Switcher = function()
     giClient.core.widget.Base.call(this);
 
 
-    let me = this;
-
-
     let _selectionHolder = null;
     this.getSelectionHolder = function()
     {
@@ -81,6 +78,7 @@ giClient.component.switcher.Switcher = function()
         return option.getAttribute('data-value');
     };
 
+    // noinspection JSUnusedLocalSymbols
     let isOptionSelected = function(option)
     {
         return option.getAttribute('data-selected') === 1;

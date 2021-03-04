@@ -32,7 +32,7 @@ abstract class AbstractError extends AbstractComponent implements ErrorInterface
      * @param string $message
      * @throws \Exception
      */
-    public function __construct($message)
+    public function __construct(string $message)
     {
         $this->message = $message;
     }

@@ -134,7 +134,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $upperCaseFlag
      * @return static
      */
-    public function setUpperCaseFlag($upperCaseFlag)
+    public function setUpperCaseFlag(bool $upperCaseFlag)
     {
         $this->upperCaseFlag = $upperCaseFlag;
 
@@ -153,7 +153,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $lowerCaseFlag
      * @return static
      */
-    public function setLowerCaseFlag($lowerCaseFlag)
+    public function setLowerCaseFlag(bool $lowerCaseFlag)
     {
         $this->lowerCaseFlag = $lowerCaseFlag;
 
@@ -172,7 +172,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $digitsFlag
      * @return static
      */
-    public function setDigitsFlag($digitsFlag)
+    public function setDigitsFlag(bool $digitsFlag)
     {
         $this->digitsFlag = $digitsFlag;
 
@@ -191,7 +191,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $specialCharsFlag
      * @return static
      */
-    public function setSpecialCharsFlag($specialCharsFlag)
+    public function setSpecialCharsFlag(bool $specialCharsFlag)
     {
         $this->specialCharsFlag = $specialCharsFlag;
 
@@ -210,7 +210,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $customFlag
      * @return static
      */
-    public function setCustomFlag($customFlag)
+    public function setCustomFlag(bool $customFlag)
     {
         $this->customFlag = $customFlag;
 
@@ -221,7 +221,7 @@ class Alphabet implements AlphabetInterface
      * @param bool $value
      * @return static
      */
-    public function setAll($value)
+    public function setAll(bool $value)
     {
         $this->setUpperCaseFlag($value)
             ->setLowerCaseFlag($value)

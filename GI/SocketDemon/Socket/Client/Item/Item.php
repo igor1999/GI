@@ -200,7 +200,7 @@ class Item implements ItemInterface
      * @param string $session
      * @return static
      */
-    protected function setSession($session)
+    protected function setSession(string $session)
     {
         $this->session = $session;
 
@@ -256,7 +256,7 @@ class Item implements ItemInterface
      * @param bool $waiting
      * @return static
      */
-    protected function setWaiting($waiting)
+    protected function setWaiting(bool $waiting)
     {
         $this->waiting = $waiting;
 

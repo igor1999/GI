@@ -106,8 +106,8 @@ class ImageText extends AbstractCaptcha implements ImageTextInterface
     }
 
     /**
-     * @param string $value
-     * @param string $cacheValue
+     * @param mixed $value
+     * @param mixed $cacheValue
      * @return bool
      */
     protected function validateValue($value, $cacheValue)

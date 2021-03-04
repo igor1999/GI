@@ -63,7 +63,7 @@ class ViewModel extends Base implements ViewModelInterface
 
     /**
      * @hydrate
-     * @param int $entriesProPage
+     * @param mixed $entriesProPage
      * @return static
      */
     protected function setEntriesProPage($entriesProPage)
@@ -84,7 +84,7 @@ class ViewModel extends Base implements ViewModelInterface
 
     /**
      * @hydrate
-     * @param int $selectedPage
+     * @param mixed $selectedPage
      * @return static
      */
     protected function setSelectedPage($selectedPage)

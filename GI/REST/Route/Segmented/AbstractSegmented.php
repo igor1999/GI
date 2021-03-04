@@ -214,7 +214,7 @@ abstract class AbstractSegmented extends AbstractRoute implements SegmentedInter
      * @return static
      * @throws \Exception
      */
-    protected function setRelativePath($relativePath)
+    protected function setRelativePath(string $relativePath)
     {
         $this->validateClosing();
 

@@ -93,7 +93,7 @@ class ResultMessageCreator implements ResultMessageCreatorInterface
      * @param string $message
      * @return static
      */
-    protected function setMessage($message)
+    protected function setMessage(string $message)
     {
         $this->message = $message;
 

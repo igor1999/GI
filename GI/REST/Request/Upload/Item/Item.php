@@ -62,7 +62,7 @@ class Item implements ItemInterface
      * @param int $size
      * @param int $error
      */
-    public function __construct(string $name, string $mimeType, string $tmpName, $size, $error = 0)
+    public function __construct(string $name, string $mimeType, string $tmpName, int $size, int $error = 0)
     {
         $this->name     = $name;
         $this->mimeType = $mimeType;

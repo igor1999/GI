@@ -65,7 +65,7 @@ class Chain extends AbstractContainer implements ChainInterface
     }
 
     /**
-     * @param int $index
+     * @param string|int $index
      * @return ValidatorInterface
      * @throws \Exception
      */
@@ -86,7 +86,7 @@ class Chain extends AbstractContainer implements ChainInterface
     }
 
     /**
-     * @param int $index
+     * @param string|int $index
      * @param ValidatorInterface $validator
      * @return static
      */

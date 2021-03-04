@@ -62,7 +62,7 @@ class Text implements TextInterface
      * @param string $text
      * @return static
      */
-    public function setText($text)
+    public function setText(string $text)
     {
         $this->text = $text;
 

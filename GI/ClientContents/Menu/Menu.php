@@ -103,7 +103,7 @@ class Menu implements MenuInterface
      * @param string $localID
      * @return Option
      */
-    protected function createOption($localID)
+    protected function createOption(string $localID)
     {
         try {
             $option = $this->giGetDi(OptionInterface::class, null, [$this, $localID]);

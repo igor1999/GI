@@ -54,7 +54,7 @@ interface BuilderInterface extends  StringConvertableInterface
 
     /**
      * @param string $param
-     * @param string $value
+     * @param mixed $value
      * @return static
      */
     public function setParam(string $param, $value);
@@ -97,28 +97,28 @@ interface BuilderInterface extends  StringConvertableInterface
     public function setCortegeByContents(string $placeholder, PredicateCortegeInterface $cortege, bool $alt = null);
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addOrder($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addGroup($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addLimit($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */

@@ -141,7 +141,7 @@ class Option implements OptionInterface
      * @return static
      * @throws \Exception
      */
-    protected function setFloatLIStyle($li)
+    protected function setFloatLIStyle(LIInterface $li)
     {
         $this->setBasicLIStyle($li);
         $li->getStyle()->setFloatToLeft();
@@ -154,7 +154,7 @@ class Option implements OptionInterface
      * @return static
      * @throws \Exception
      */
-    protected function setClearLIStyle($li)
+    protected function setClearLIStyle(LIInterface $li)
     {
         $this->setBasicLIStyle($li);
         $li->getStyle()->setClearToBoth();

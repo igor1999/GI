@@ -93,7 +93,7 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
      * @return ValidatorInterface
      * @throws \Exception
      */
-    public function __call($method, array $arguments = [])
+    public function __call(string $method, array $arguments = [])
     {
         try {
             $keys = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);

@@ -19,7 +19,9 @@ giClient.core.textProcessing = new function()
     this.render = function(template, params)
     {
         for (let key in params) {
+            // noinspection JSUnfilteredForInLoop
             let placeholder = `{${key}}`;
+            // noinspection JSUnfilteredForInLoop
             template = template.replaceAll(placeholder, params[key])
         }
 

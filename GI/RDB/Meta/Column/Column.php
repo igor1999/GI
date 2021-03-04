@@ -105,7 +105,7 @@ class Column implements ColumnInterface
 
     /**
      * @hydrate
-     * @param int $index
+     * @param mixed $index
      * @return static
      */
     protected function setIndex($index)
@@ -264,7 +264,7 @@ class Column implements ColumnInterface
 
     /**
      * @hydrate
-     * @param bool $primary
+     * @param mixed $primary
      * @return static
      */
     protected function setPrimary($primary)
@@ -285,7 +285,7 @@ class Column implements ColumnInterface
 
     /**
      * @hydrate
-     * @param bool $null
+     * @param mixed $null
      * @return static
      */
     protected function setNull($null)
@@ -306,7 +306,7 @@ class Column implements ColumnInterface
 
     /**
      * @hydrate
-     * @param bool $identity
+     * @param mixed $identity
      * @return static
      */
     protected function setIdentity($identity)

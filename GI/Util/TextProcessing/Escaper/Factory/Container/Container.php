@@ -53,7 +53,7 @@ class Container extends AbstractFactory implements ContainerInterface
      * @return static
      * @throws \Exception
      */
-    public function setEncoding($encoding)
+    public function setEncoding(string $encoding)
     {
         $this->getHTMLText()->setEncoding($encoding);
         $this->getHTMLAttribute()->setEncoding($encoding);

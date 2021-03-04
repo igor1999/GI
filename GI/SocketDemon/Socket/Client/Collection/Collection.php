@@ -89,7 +89,7 @@ class Collection implements CollectionInterface
      * @param string $id
      * @return bool
      */
-    protected function has($id)
+    protected function has(string $id)
     {
         return isset($this->items[$id]);
     }
@@ -99,7 +99,7 @@ class Collection implements CollectionInterface
      * @return ClientSocketInterface
      * @throws \Exception
      */
-    protected function get($id)
+    protected function get(string $id)
     {
         if (!$this->has($id)) {
             $this->giThrowNotInScopeException($id);

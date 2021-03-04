@@ -63,7 +63,7 @@ trait I18nTrait
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @return TranslatorGlossaryInterface
      * @throws \Exception
      */
@@ -101,7 +101,7 @@ trait I18nTrait
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @param string $text
      * @return string
      */
@@ -120,7 +120,7 @@ trait I18nTrait
 
     /**
      * @param string $interface
-     * @param string|mixed $default
+     * @param mixed $default
      * @return TranslatorInterface
      * @throws \Exception
      */

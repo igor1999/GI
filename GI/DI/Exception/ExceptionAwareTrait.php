@@ -25,7 +25,7 @@ trait ExceptionAwareTrait
      * @param \Throwable|null $previous
      * @throws Exception
      */
-    protected function throwDependencyNotFoundException($interface, $diCaller = '', \Throwable $previous = null)
+    protected function throwDependencyNotFoundException(string $interface, string $diCaller = '', \Throwable $previous = null)
     {
         throw new Exception($this, $interface, $diCaller, $previous);
     }

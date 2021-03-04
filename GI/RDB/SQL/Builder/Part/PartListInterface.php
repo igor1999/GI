@@ -54,28 +54,28 @@ interface PartListInterface
     public function add(PartInterface $part);
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addOrder($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addGroup($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
     public function addLimit($value, string $placeholder = '');
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */

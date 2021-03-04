@@ -39,7 +39,7 @@ interface AlphabetInterface
      * @param bool $upperCaseFlag
      * @return static
      */
-    public function setUpperCaseFlag($upperCaseFlag);
+    public function setUpperCaseFlag(bool $upperCaseFlag);
 
     /**
      * @return bool
@@ -50,7 +50,7 @@ interface AlphabetInterface
      * @param bool $lowerCaseFlag
      * @return static
      */
-    public function setLowerCaseFlag($lowerCaseFlag);
+    public function setLowerCaseFlag(bool $lowerCaseFlag);
 
     /**
      * @return bool
@@ -61,7 +61,7 @@ interface AlphabetInterface
      * @param bool $digitsFlag
      * @return static
      */
-    public function setDigitsFlag($digitsFlag);
+    public function setDigitsFlag(bool $digitsFlag);
 
     /**
      * @return bool
@@ -72,7 +72,7 @@ interface AlphabetInterface
      * @param bool $specialCharsFlag
      * @return static
      */
-    public function setSpecialCharsFlag($specialCharsFlag);
+    public function setSpecialCharsFlag(bool $specialCharsFlag);
 
     /**
      * @return bool
@@ -83,13 +83,13 @@ interface AlphabetInterface
      * @param bool $customFlag
      * @return static
      */
-    public function setCustomFlag($customFlag);
+    public function setCustomFlag(bool $customFlag);
 
     /**
      * @param bool $value
      * @return static
      */
-    public function setAll($value);
+    public function setAll(bool $value);
 
     /**
      * @return string[]

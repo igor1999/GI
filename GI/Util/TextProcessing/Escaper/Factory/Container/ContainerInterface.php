@@ -42,5 +42,5 @@ interface ContainerInterface extends FactoryInterface
      * @return static
      * @throws \Exception
      */
-    public function setEncoding($encoding);
+    public function setEncoding(string $encoding);
 }

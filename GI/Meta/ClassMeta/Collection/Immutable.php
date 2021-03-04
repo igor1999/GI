@@ -280,7 +280,7 @@ class Immutable implements ImmutableInterface
      * @return static
      * @throws \Exception
      */
-    protected function _setByName($class)
+    protected function _setByName(string $class)
     {
         $this->_set($this->createClassMeta($class));
 
@@ -292,7 +292,7 @@ class Immutable implements ImmutableInterface
      * @return ClassMeta
      * @throws \Exception
      */
-    protected function createClassMeta($class)
+    protected function createClassMeta(string $class)
     {
         return new ClassMeta($class);
     }

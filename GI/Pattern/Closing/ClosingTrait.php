@@ -37,7 +37,7 @@ trait ClosingTrait
      * @param bool $closed
      * @return static
      */
-    protected function setClosed($closed)
+    protected function setClosed(bool $closed)
     {
         $this->closed = $closed;
 

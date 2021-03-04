@@ -38,7 +38,7 @@ interface TextInterface extends PartInterface
      * @param string $text
      * @return static
      */
-    public function setText($text);
+    public function setText(string $text);
 
     /**
      * @return string

@@ -99,7 +99,7 @@ giClient.core.widget.Base = function()
         return new _nsCookie.Cookie().construct(name);
     };
 
-    this.createCookieCollection = function(name)
+    this.createCookieCollection = function()
     {
         return new _nsCookie.Collection();
     };

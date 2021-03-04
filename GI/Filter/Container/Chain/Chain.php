@@ -52,7 +52,7 @@ class Chain extends AbstractContainer implements ChainInterface
     }
 
     /**
-     * @param int $index
+     * @param string|int $index
      * @return FilterInterface
      * @throws \Exception
      */
@@ -73,7 +73,7 @@ class Chain extends AbstractContainer implements ChainInterface
     }
 
     /**
-     * @param int $index
+     * @param string|int $index
      * @param FilterInterface $filter
      * @return static
      */
@@ -89,7 +89,7 @@ class Chain extends AbstractContainer implements ChainInterface
      * @param FilterInterface $filter
      * @return static
      */
-    protected function set($key, FilterInterface $filter)
+    protected function set(int $key, FilterInterface $filter)
     {
         $this->insert($key, $filter);
 

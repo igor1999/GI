@@ -123,7 +123,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -135,7 +135,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return OrderInterface
      */
@@ -153,7 +153,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -165,7 +165,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return GroupInterface
      */
@@ -183,7 +183,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -195,7 +195,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return LimitInterface
      */
@@ -213,7 +213,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return static
      */
@@ -225,7 +225,7 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param string|mixed $value
+     * @param mixed $value
      * @param string $placeholder
      * @return OffsetInterface
      */

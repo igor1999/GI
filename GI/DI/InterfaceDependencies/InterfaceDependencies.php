@@ -63,7 +63,7 @@ class InterfaceDependencies implements InterfaceDependenciesInterface
     }
 
     /**
-     * @param mixed|string $source
+     * @param mixed $source
      * @param bool $cached
      * @param bool $forCallerInherits
      * @return Dependency
@@ -95,7 +95,7 @@ class InterfaceDependencies implements InterfaceDependenciesInterface
     }
 
     /**
-     * @param mixed|string $source
+     * @param mixed $source
      * @param bool $cached
      * @param bool $forCallerInherits
      * @return static

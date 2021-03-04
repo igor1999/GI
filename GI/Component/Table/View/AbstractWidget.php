@@ -241,7 +241,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @param ColumnInterface $column
      * @return static
      */
-    protected function fillColumn($rowNumber, $dataRow, $index, ColumnInterface $column)
+    protected function fillColumn(int $rowNumber, $dataRow, int $index, ColumnInterface $column)
     {
         try {
             $this->table->set($rowNumber, $index, $column->getDataSource()->get($dataRow, $rowNumber));

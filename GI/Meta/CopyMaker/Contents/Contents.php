@@ -103,7 +103,7 @@ class Contents implements ContentsInterface
      * @param string $class
      * @return static
      */
-    protected function setClass($class)
+    protected function setClass(string $class)
     {
         $this->class = $class;
 
@@ -115,7 +115,7 @@ class Contents implements ContentsInterface
      * @param string $class
      * @return static
      */
-    protected function setDecodedClass($class)
+    protected function setDecodedClass(string $class)
     {
         try {
             $class = call_user_func($this->getClassDecoder(), $class);
@@ -140,7 +140,7 @@ class Contents implements ContentsInterface
      * @param string $hash
      * @return static
      */
-    protected function setHash($hash)
+    protected function setHash(string $hash)
     {
         $this->hash = $hash;
 
@@ -161,7 +161,7 @@ class Contents implements ContentsInterface
      * @param bool $registered
      * @return static
      */
-    protected function setRegistered($registered)
+    protected function setRegistered(bool $registered)
     {
         $this->registered = $registered;
 

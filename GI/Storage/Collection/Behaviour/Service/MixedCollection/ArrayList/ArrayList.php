@@ -51,6 +51,9 @@ class ArrayList extends AbstractService implements ArrayListInterface
      */
     protected function getOption()
     {
-        return parent::getOption();
+        /** @var OptionInterface $option */
+        $option = parent::getOption();
+
+        return $option;
     }
 }
