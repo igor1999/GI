@@ -10,7 +10,7 @@ use <?php echo $this->getBaseClass(); ?>
 
 use GI\RDB\Meta\Table\TableInterface;
 
-class Record extends <?php echo $this->getBaseClassShortName(); ?>
+class Record extends <?php echo $this->getBaseClassShortName(); ?> implements RecordInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
     /**

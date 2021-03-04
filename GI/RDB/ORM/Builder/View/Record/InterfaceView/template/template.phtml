@@ -1,6 +1,50 @@
 <?php
+    /** @noinspection PhpUnhandledExceptionInspection */
     use GI\RDB\ORM\Builder\View\Record\InterfaceView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
 
-interface RecordInterface
+namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>
+
+use <?php echo $this->getBaseClass(); ?>
+
+interface RecordInterface extends <?php echo $this->getBaseClassShortName(); ?>Interface
+{
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+    <?php
+        $name         = $column->getName();
+        $type         = $column->getPHPType();
+        $property     = $column->getClassProperty();
+        $getter       = $column->getClassGetter();
+        $setter       = $column->getClassSetter();
+    ?>
+
+    /**
+     * @return <?php echo $type; ?>
+     */
+    public function <?php echo $getter; ?>();
+
+<?php if (!$column->isIdentity()): ?>
+    /**
+     * @param <?php echo $type; ?> $<?php echo $property; ?>
+     * @return static
+     */
+    public function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>);
+<?php endif;?>
+
+<?php if ($column->isDatePHPType()): ?>
+    /**
+     * @return \DateTime
+     */
+    public function <?php echo $getter, 'AsDate'; ?>();
+<?php endif;?>
+
+<?php if ($column->isBoolPHPType()): ?>
+    /**
+     * @return bool
+     */
+    public function <?php echo $getter, 'AsBool'; ?>();
+<?php endif;?>
+
+<?php endforeach;?>
+}
