@@ -56,11 +56,6 @@ interface PlatformInterface
     public function getTableDetailQuery();
 
     /**
-     * @return string
-     */
-    public function getTableIdentityQuery();
-
-    /**
      * @param string $dbType
      * @return string
      */

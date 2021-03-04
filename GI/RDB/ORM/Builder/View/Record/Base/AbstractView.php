@@ -18,6 +18,7 @@
 namespace GI\RDB\ORM\Builder\View\Record\Base;
 
 use GI\Markup\Renderer\AbstractRenderer;
+use GI\RDB\Meta\Column\ColumnInterface;
 use GI\RDB\Meta\Table\TableInterface;
 
 /**
@@ -42,5 +43,14 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     public function getBaseClassShortName()
     {
         return $this->giGetClassMeta($this->getBaseClass())->getShortName();
+    }
+
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getAccess(ColumnInterface $column)
+    {
+        return $column->isIdentity() ? 'protected' : 'public';
     }
 }

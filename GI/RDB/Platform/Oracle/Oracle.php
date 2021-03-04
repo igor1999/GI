@@ -53,12 +53,4 @@ class Oracle extends AbstractPlatform implements OracleInterface
     {
         $this->giThrowCommonException('Option is not available');
     }
-
-    /**
-     * @throws \Exception
-     */
-    public function getTableIdentityQuery()
-    {
-        $this->giThrowCommonException('Option is not available');
-    }
 }

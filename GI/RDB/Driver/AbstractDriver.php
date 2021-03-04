@@ -249,22 +249,6 @@ abstract class AbstractDriver implements DriverInterface
 
     /**
      * @param string $table
-     * @return string
-     */
-    public function fetchTableIdentity(string $table)
-    {
-        $sql = $this->getPlatform()->getTableIdentityQuery();
-
-        $params = [
-            'database' => $this->getDatabase(),
-            'table'    => $table
-        ];
-
-        return $this->fetchValue($sql, $params);
-    }
-
-    /**
-     * @param string $table
      * @return int
      * @throws \Exception
      */

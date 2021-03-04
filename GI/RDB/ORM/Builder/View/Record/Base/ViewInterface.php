@@ -18,6 +18,7 @@
 namespace GI\RDB\ORM\Builder\View\Record\Base;
 
 use GI\Markup\Renderer\RendererInterface;
+use GI\RDB\Meta\Column\ColumnInterface;
 use GI\RDB\Meta\Table\TableInterface;
 
 /**
@@ -40,4 +41,10 @@ interface ViewInterface extends RendererInterface
      * @throws \Exception
      */
     public function getBaseClassShortName();
+
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getAccess(ColumnInterface $column);
 }

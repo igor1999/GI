@@ -75,12 +75,6 @@ interface DriverInterface
 
     /**
      * @param string $table
-     * @return string
-     */
-    public function fetchTableIdentity(string $table);
-
-    /**
-     * @param string $table
      * @return int
      * @throws \Exception
      */

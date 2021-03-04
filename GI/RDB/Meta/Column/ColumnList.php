@@ -58,8 +58,6 @@ class ColumnList implements ColumnListInterface
     {
         $this->table = $table;
 
-        $identityName = $this->table->fetchTableIdentity();
-
         foreach ($this->table->fetchColumnList() as $columnContent) {
             $column = $this->createColumn($columnContent);
 
@@ -69,7 +67,7 @@ class ColumnList implements ColumnListInterface
                 $this->primary[$column->getName()] = $column;
             }
 
-            if ($column->getName() == $identityName) {
+            if ($column->isIdentity()) {
                 $this->identity = $column;
             }
         }

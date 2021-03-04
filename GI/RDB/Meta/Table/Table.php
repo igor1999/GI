@@ -200,14 +200,6 @@ class Table implements TableInterface
     }
 
     /**
-     * @return string
-     */
-    public function fetchTableIdentity()
-    {
-        return $this->getDriver()->fetchTableIdentity($this->name);
-    }
-
-    /**
      * @return int
      * @throws \Exception
      */

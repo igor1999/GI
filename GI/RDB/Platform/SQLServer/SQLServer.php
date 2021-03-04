@@ -64,18 +64,4 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
                 AND [TABLE_CATALOG] = :database 
         ';
     }
-
-    /**
-     * @return string
-     */
-    public function getTableIdentityQuery()
-    {
-        return '
-            SELECT *
-            FROM [information_schema].[COLUMNS] 
-            WHERE CONCAT([TABLE_SCHEMA], '.', [TABLE_NAME]) = :table
-                AND [TABLE_CATALOG] = :database 
-                AND [IS_IDENTITY] = 1 
-        ';
-    }
 }

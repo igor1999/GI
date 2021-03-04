@@ -69,6 +69,12 @@ interface ColumnInterface extends ExtractionInterface
     public function isNull();
 
     /**
+     * @extract
+     * @return bool
+     */
+    public function isIdentity();
+
+    /**
      * @return string
      */
     public function getPHPType();

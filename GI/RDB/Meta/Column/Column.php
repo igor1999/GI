@@ -67,6 +67,11 @@ class Column implements ColumnInterface
      */
     private $null = true;
 
+    /**
+     * @var bool
+     */
+    private $identity = false;
+
 
     /**
      * Column constructor.
@@ -286,6 +291,27 @@ class Column implements ColumnInterface
     protected function setNull($null)
     {
         $this->null = (bool)$null;
+
+        return $this;
+    }
+
+    /**
+     * @extract
+     * @return bool
+     */
+    public function isIdentity()
+    {
+        return $this->identity;
+    }
+
+    /**
+     * @hydrate
+     * @param bool $identity
+     * @return static
+     */
+    protected function setIdentity($identity)
+    {
+        $this->identity = (bool)$identity;
 
         return $this;
     }

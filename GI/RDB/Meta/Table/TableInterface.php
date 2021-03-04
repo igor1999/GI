@@ -91,11 +91,6 @@ interface TableInterface extends ExtractionInterface
     public function fetchTableDetail();
 
     /**
-     * @return string
-     */
-    public function fetchTableIdentity();
-
-    /**
      * @return int
      * @throws \Exception
      */

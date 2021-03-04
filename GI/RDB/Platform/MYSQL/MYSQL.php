@@ -61,7 +61,8 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
                 `CHARACTER_MAXIMUM_LENGTH` as `length`,
                 `COLUMN_DEFAULT` as `default`,
                 if(`COLUMN_KEY` = \'PRI\', 1 , 0) as `primary`,
-                if(`IS_NULLABLE` = \'YES\', 1 , 0) as `null`
+                if(`IS_NULLABLE` = \'YES\', 1 , 0) as `null`,
+                if(`EXTRA` = \'auto_increment\', 1 , 0) as `identity`
             FROM `information_schema`.`COLUMNS`
             WHERE `TABLE_SCHEMA` = :database 
                 AND `TABLE_NAME` = :table 
@@ -92,20 +93,6 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
             WHERE `TABLE_SCHEMA` = :database 
                 AND `TABLE_NAME` = :table 
                 AND `TABLE_TYPE` = \'BASE TABLE\'
-        ';
-    }
-
-    /**
-     * @return string
-     */
-    public function getTableIdentityQuery()
-    {
-        return '
-            SELECT `COLUMN_NAME`
-            FROM `information_schema`.`COLUMNS`
-            WHERE `TABLE_SCHEMA` = :database 
-                AND `TABLE_NAME` = :table 
-                AND `EXTRA` = \'auto_increment\'
         ';
     }
 }
