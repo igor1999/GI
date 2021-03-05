@@ -211,10 +211,10 @@ class Column implements ColumnInterface
 
     /**
      * @hydrate
-     * @param int $length
+     * @param mixed $length
      * @return static
      */
-    protected function setLength(int $length)
+    protected function setLength($length)
     {
         $this->length = (int)$length;
 
