@@ -103,7 +103,7 @@ class TableList implements TableListInterface
         }
 
         $entityPointer   = PlatformInterface::ENTITY_POINTER;
-        $getterSeparator = Table::METHOD_SEPARATOR;
+        $getterSeparator = Table::ALIAS_SEPARATOR;
 
         $name = str_replace($getterSeparator, $entityPointer, $name);
         $name = $this->giGetCamelCaseConverter()->convertToUnderlineLowerCase($name);

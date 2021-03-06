@@ -73,6 +73,11 @@ interface TableInterface extends ExtractionInterface
     /**
      * @return string
      */
+    public function getAlias();
+
+    /**
+     * @return string
+     */
     public function getMethodGetter();
 
     /**
