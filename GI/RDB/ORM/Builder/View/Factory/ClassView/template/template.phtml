@@ -39,4 +39,24 @@ use <?php echo $namespace, '\\Set'; ?> as <?php echo $alias, 'Set'; ?>;
 class Factory extends Base implements FactoryInterface
 {
     use <?php echo $this->getServiceLocatorTrait(); ?>;
+
+
+    /**
+     * Factory constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this
+<?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
+    <?php
+    $alias     = $table->getAlias();
+    ?>
+            ->setNamed('<?php echo $alias, 'Record, '; ?>', <?php echo $alias, 'Record'; ?>::class)
+            ->setNamed('<?php echo $alias, 'Set, '; ?>', <?php echo $alias, 'Set'; ?>::class)
+<?php endforeach; ?>
+        ;
+    }
 }
