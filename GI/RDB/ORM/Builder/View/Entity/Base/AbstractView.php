@@ -35,12 +35,5 @@ use GI\RDB\Meta\Table\TableInterface;
  */
 abstract class AbstractView extends AbstractRenderer implements ViewInterface
 {
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public function getBaseClassShortName()
-    {
-        return $this->giGetClassMeta($this->getBaseClass())->getShortName();
-    }
+
 }

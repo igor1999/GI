@@ -73,7 +73,12 @@ interface TableInterface extends ExtractionInterface
     /**
      * @return string
      */
-    public function getGetter();
+    public function getMethodGetter();
+
+    /**
+     * @return string
+     */
+    public function getMethodCreator();
 
     /**
      * @return ColumnListInterface

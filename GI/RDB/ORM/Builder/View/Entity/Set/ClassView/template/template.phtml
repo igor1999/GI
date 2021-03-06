@@ -1,5 +1,4 @@
 <?php
-    /** @noinspection PhpUnhandledExceptionInspection */
     use GI\RDB\ORM\Builder\View\Entity\Set\ClassView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
@@ -10,18 +9,18 @@
 
 namespace <?php echo $namespace; ?>;
 
-use <?php echo $this->getBaseClass(); ?>;
+use <?php echo $this->getBaseClass(); ?> as Base;
 
 use <?php echo $namespace; ?>\RecordInterface;
 
-class Set extends <?php echo $this->getBaseClassShortName(); ?> implements SetInterface
+class Set extends Base implements SetInterface
 {
     /**
      * @return RecordInterface
      */
     protected function createTemplateItem()
     {
-        return $this->getFactory()-><?php echo $this->getTable()->getGetter(); ?>Record();
+        return $this->getFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>Record();
     }
 
     /**
@@ -29,7 +28,7 @@ class Set extends <?php echo $this->getBaseClassShortName(); ?> implements SetIn
      * @return RecordInterface
      * @throws \Exception
      */
-    public function get($index)
+    public function get(int $index)
     {
         /** @var RecordInterface $result */
         $result = parent::get($index);

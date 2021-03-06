@@ -33,7 +33,7 @@ class Table implements TableInterface
     use ServiceLocatorAwareTrait, ExceptionAwareTrait;
 
 
-    const GETTER_SEPARATOR = '_';
+    const METHOD_SEPARATOR = '_';
 
 
     /**
@@ -160,11 +160,21 @@ class Table implements TableInterface
     /**
      * @return string
      */
-    public function getGetter()
+    public function getMethodGetter()
     {
-        $getter = implode(static::GETTER_SEPARATOR, $this->getNamespaces());
+        $getter = implode(static::METHOD_SEPARATOR, $this->getNamespaces());
 
         return $this->giGetPSRFormatBuilder()->buildGet($getter);
+    }
+
+    /**
+     * @return string
+     */
+    public function getMethodCreator()
+    {
+        $creator = implode(static::METHOD_SEPARATOR, $this->getNamespaces());
+
+        return $this->giGetPSRFormatBuilder()->buildCreate($creator);
     }
 
     /**
