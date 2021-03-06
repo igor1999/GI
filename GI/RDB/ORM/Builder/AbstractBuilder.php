@@ -18,6 +18,8 @@
 namespace GI\GI\RDB\ORM\Builder;
 
 use GI\GI\RDB\ORM\Builder\Table\Builder as TableBuilder;
+use GI\RDB\ORM\Builder\View\Factory\ClassView\View as FactoryClassView;
+use GI\RDB\ORM\Builder\View\Factory\InterfaceView\View as FactoryInterfaceView;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
@@ -25,6 +27,8 @@ use GI\RDB\Driver\DriverInterface;
 use GI\FileSystem\FSO\FSODir\FSODirInterface;
 use GI\GI\RDB\ORM\Builder\Table\BuilderInterface as TableBuilderInterface;
 use GI\RDB\Meta\Table\TableInterface;
+use GI\RDB\ORM\Builder\View\Factory\ClassView\ViewInterface as FactoryClassViewInterface;
+use GI\RDB\ORM\Builder\View\Factory\InterfaceView\ViewInterface as FactoryInterfaceViewInterface;
 
 abstract class AbstractBuilder implements BuilderInterface
 {
@@ -46,6 +50,16 @@ abstract class AbstractBuilder implements BuilderInterface
      */
     private $tableBuilders = [];
 
+    /**
+     * @var FactoryClassViewInterface
+     */
+    private $factoryClassView;
+
+    /**
+     * @var FactoryInterfaceViewInterface
+     */
+    private $factoryInterfaceView;
+
 
     /**
      * AbstractBuilder constructor.
@@ -57,6 +71,14 @@ abstract class AbstractBuilder implements BuilderInterface
         $this->ormDir = $this->createOrmDir();
 
         $this->createTableBuilders();
+
+        $this->factoryClassView = $this->giGetDi(
+            FactoryClassViewInterface::class, FactoryClassView::class
+        );
+
+        $this->factoryInterfaceView = $this->giGetDi(
+            FactoryInterfaceViewInterface::class, FactoryInterfaceView::class
+        );
     }
 
     /**
@@ -119,6 +141,22 @@ abstract class AbstractBuilder implements BuilderInterface
     }
 
     /**
+     * @return FactoryClassViewInterface
+     */
+    protected function getFactoryClassView()
+    {
+        return $this->factoryClassView;
+    }
+
+    /**
+     * @return FactoryInterfaceViewInterface
+     */
+    protected function getFactoryInterfaceView()
+    {
+        return $this->factoryInterfaceView;
+    }
+
+    /**
      * @return DriverInterface
      */
     abstract protected function createDriver();
@@ -149,11 +187,43 @@ abstract class AbstractBuilder implements BuilderInterface
      */
     public function create()
     {
+        $this->createEntities()->createFactory();
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    protected function createEntities()
+    {
         foreach ($this->getTableBuilders() as $tableBuilder) {
             $tableBuilder->create();
         }
 
-        //todo factory
+        return $this;
+    }
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    protected function createFactory()
+    {
+        $dir = $this->getOrmDir()->createChildDir('Factory');
+
+        $this->getFactoryClassView()
+            ->setDriver($this->getDriver())
+            ->setORMNamespace($this->getOrmNamespace())
+            ->setServiceLocatorTrait($this->getServiceLocatorTrait())
+            ->save($dir->createChildFile('Factory.php'));
+
+        $this->getFactoryInterfaceView()
+            ->setDriver($this->getDriver())
+            ->setORMNamespace($this->getOrmNamespace())
+            ->setServiceLocatorTrait($this->getServiceLocatorTrait())
+            ->save($dir->createChildFile('FactoryInterface.php'));
 
         return $this;
     }

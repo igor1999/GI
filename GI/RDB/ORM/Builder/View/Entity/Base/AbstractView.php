@@ -22,7 +22,7 @@ use GI\RDB\Meta\Table\TableInterface;
 
 /**
  * Class View
- * @package GI\RDB\ORM\Builder\View\Record\Base
+ * @package GI\RDB\ORM\Builder\View\Entity\Base
  *
  * @method TableInterface getTable()
  * @method ViewInterface setTable(TableInterface $table)

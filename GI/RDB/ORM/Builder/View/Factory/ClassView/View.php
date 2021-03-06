@@ -15,25 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Entity\Base;
+namespace GI\RDB\ORM\Builder\View\Factory\ClassView;
 
-use GI\Markup\Renderer\RendererInterface;
-use GI\RDB\Meta\Table\TableInterface;
+use GI\RDB\ORM\Builder\View\Factory\Base\AbstractView as Base;
 
-/**
- * Interface ViewInterface
- * @package GI\RDB\ORM\Builder\View\Entity\Base
- *
- * @method TableInterface getTable()
- * @method ViewInterface setTable(TableInterface $table)
- *
- * @method string getORMNamespace()
- * @method ViewInterface setORMNamespace(string $namespace)
- *
- * @method string getBaseNamespace()
- * @method ViewInterface setBaseNamespace(string $namespace)
- */
-interface ViewInterface extends RendererInterface
+class View extends Base implements ViewInterface
 {
 
 }

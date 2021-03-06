@@ -15,23 +15,23 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Entity\Base;
+namespace GI\RDB\ORM\Builder\View\Factory\Base;
 
 use GI\Markup\Renderer\RendererInterface;
-use GI\RDB\Meta\Table\TableInterface;
+use GI\RDB\Driver\DriverInterface;
 
 /**
  * Interface ViewInterface
- * @package GI\RDB\ORM\Builder\View\Entity\Base
+ * @package GI\RDB\ORM\Builder\View\Factory\Base
  *
- * @method TableInterface getTable()
- * @method ViewInterface setTable(TableInterface $table)
+ * @method DriverInterface getDriver()
+ * @method ViewInterface setDriver(DriverInterface $driver)
  *
  * @method string getORMNamespace()
  * @method ViewInterface setORMNamespace(string $namespace)
  *
- * @method string getBaseNamespace()
- * @method ViewInterface setBaseNamespace(string $namespace)
+ * @method string getServiceLocatorTrait()
+ * @method ViewInterface setServiceLocatorTrait(string $trait)
  */
 interface ViewInterface extends RendererInterface
 {
