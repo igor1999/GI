@@ -3,9 +3,9 @@
     /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
+namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
-use <?php echo $this->getBaseClass(); ?> as BaseInterface;
+use <?php echo $this->getBaseNamespace(); ?>\RecordInterface as BaseInterface;
 
 interface RecordInterface extends BaseInterface
 {

@@ -27,11 +27,11 @@ use GI\RDB\Meta\Table\TableInterface;
  * @method TableInterface getTable()
  * @method ViewInterface setTable(TableInterface $table)
  *
+ * @method string getORMNamespace()
+ * @method ViewInterface setORMNamespace(string $namespace)
+ *
  * @method string getBaseNamespace()
  * @method ViewInterface setBaseNamespace(string $namespace)
- *
- * @method string getBaseClass()
- * @method ViewInterface setBaseClass(string $class)
  */
 abstract class AbstractView extends AbstractRenderer implements ViewInterface
 {

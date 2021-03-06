@@ -4,12 +4,12 @@
 ?>
 
 <?php
-    $namespace = $this->getBaseNamespace() . '\\' . $this->getTable()->getNamespace();
+    $namespace = $this->getORMNamespace() . '\\' . $this->getTable()->getNamespace();
 ?>
 
 namespace <?php echo $namespace; ?>;
 
-use <?php echo $this->getBaseClass(); ?> as Base;
+use <?php echo $this->getBaseNamespace(); ?>\Set as Base;
 
 use <?php echo $namespace; ?>\RecordInterface;
 
@@ -20,7 +20,7 @@ class Set extends Base implements SetInterface
      */
     protected function createTemplateItem()
     {
-        return $this->getFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>Record();
+        return $this->getORMFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>Record();
     }
 
     /**

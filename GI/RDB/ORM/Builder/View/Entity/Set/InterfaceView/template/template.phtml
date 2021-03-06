@@ -3,9 +3,9 @@
     /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
+namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
-use <?php echo $this->getBaseClass(); ?>Interface as BaseInterface;
+use <?php echo $this->getBaseNamespace(); ?>\SetInterface as BaseInterface;
 
 interface SetInterface extends BaseInterface
 {
