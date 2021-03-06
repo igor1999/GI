@@ -15,11 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Record\ClassView;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\Base;
 
-use GI\RDB\ORM\Builder\View\Record\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Base\AbstractView as Base;
 
-interface ViewInterface extends BaseInterface
+use GI\RDB\Meta\Column\ColumnInterface;
+
+abstract class AbstractView extends Base implements ViewInterface
 {
-
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getAccess(ColumnInterface $column)
+    {
+        return $column->isIdentity() ? 'protected' : 'public';
+    }
 }

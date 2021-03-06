@@ -15,33 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Record\Base;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\Base;
 
-use GI\Markup\Renderer\RendererInterface;
+use GI\RDB\ORM\Builder\View\Entity\Base\ViewInterface as BaseInterface;
 use GI\RDB\Meta\Column\ColumnInterface;
-use GI\RDB\Meta\Table\TableInterface;
 
-/**
- * Interface ViewInterface
- * @package GI\RDB\ORM\Builder\View\Record\Base
- *
- * @method TableInterface getTable()
- * @method ViewInterface setTable(TableInterface $table)
- *
- * @method string getBaseNamespace()
- * @method ViewInterface setBaseNamespace(string $namespace)
- *
- * @method string getBaseClass()
- * @method ViewInterface setBaseClass(string $class)
- */
-interface ViewInterface extends RendererInterface
+interface ViewInterface extends BaseInterface
 {
-    /**
-     * @return string
-     * @throws \Exception
-     */
-    public function getBaseClassShortName();
-
     /**
      * @param ColumnInterface $column
      * @return string

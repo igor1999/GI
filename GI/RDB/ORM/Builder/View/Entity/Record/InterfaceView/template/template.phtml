@@ -1,12 +1,12 @@
 <?php
     /** @noinspection PhpUnhandledExceptionInspection */
-    use GI\RDB\ORM\Builder\View\Record\InterfaceView\ViewInterface;
+    use GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>
+namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
-use <?php echo $this->getBaseClass(); ?>
+use <?php echo $this->getBaseClass(); ?>;
 
 interface RecordInterface extends <?php echo $this->getBaseClassShortName(); ?>Interface
 {

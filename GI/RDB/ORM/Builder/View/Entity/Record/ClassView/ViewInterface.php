@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Record\ClassView;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\ClassView;
 
-use GI\RDB\ORM\Builder\View\Record\Base\AbstractView as Base;
+use GI\RDB\ORM\Builder\View\Entity\Record\Base\ViewInterface as BaseInterface;
 
-class View extends Base implements ViewInterface
+interface ViewInterface extends BaseInterface
 {
 
 }

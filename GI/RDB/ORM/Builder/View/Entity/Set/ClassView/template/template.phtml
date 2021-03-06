@@ -1,0 +1,75 @@
+<?php
+    /** @noinspection PhpUnhandledExceptionInspection */
+    use GI\RDB\ORM\Builder\View\Entity\Set\ClassView\ViewInterface;
+    /** @var ViewInterface $this */
+?>
+
+<?php
+    $namespace = $this->getBaseNamespace() . '\\' . $this->getTable()->getNamespace();
+?>
+
+namespace <?php echo $namespace; ?>;
+
+use <?php echo $this->getBaseClass(); ?>;
+
+use <?php echo $namespace; ?>\RecordInterface;
+
+class Set extends <?php echo $this->getBaseClassShortName(); ?> implements SetInterface
+{
+    /**
+     * @return RecordInterface
+     */
+    protected function createTemplateItem()
+    {
+        return $this->getFactory()-><?php echo $this->getTable()->getGetter(); ?>Record();
+    }
+
+    /**
+     * @param int $index
+     * @return RecordInterface
+     * @throws \Exception
+     */
+    public function get($index)
+    {
+        /** @var RecordInterface $result */
+        $result = parent::get($index);
+
+        return $result;
+    }
+
+    /**
+     * @return RecordInterface
+     * @throws \Exception
+     */
+    public function getFirst()
+    {
+        /** @var RecordInterface $result */
+        $result = parent::getFirst();
+
+        return $result;
+    }
+
+    /**
+     * @return RecordInterface
+     * @throws \Exception
+     */
+    public function getLast()
+    {
+        /** @var RecordInterface $result */
+        $result = parent::getLast();
+
+        return $result;
+    }
+
+    /**
+     * @return RecordInterface[]
+     * @throws \Exception
+     */
+    public function getItems()
+    {
+        /** @var RecordInterface[] $result */
+        $result = parent::getItems();
+
+        return $result;
+    }
+}

@@ -1,12 +1,12 @@
 <?php
     /** @noinspection PhpUnhandledExceptionInspection */
-    use GI\RDB\ORM\Builder\View\Record\ClassView\ViewInterface;
+    use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>
+namespace <?php echo $this->getBaseNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
-use <?php echo $this->getBaseClass(); ?>
+use <?php echo $this->getBaseClass(); ?>;
 
 use GI\RDB\Meta\Table\TableInterface;
 
