@@ -19,4 +19,9 @@ namespace GI\GI\RDB\ORM\Builder\Table;
 
 interface BuilderInterface
 {
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    public function create();
 }
