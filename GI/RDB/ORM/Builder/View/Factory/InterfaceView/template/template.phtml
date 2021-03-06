@@ -13,7 +13,7 @@ use GI\RDB\ORM\Factory\FactoryInterface as BaseInterface;
     $alias     = $table->getAlias();
     ?>
 use <?php echo $namespace, '\\RecordInterface'; ?> as <?php echo $alias, 'RecordInterface'; ?>;
-use <?php echo $namespace, '\\SetInterface'; ?> as <?php echo $alias, 'SetInterface'; ?>;;
+use <?php echo $namespace, '\\SetInterface'; ?> as <?php echo $alias, 'SetInterface'; ?>;
 <?php endforeach; ?>
 
 
