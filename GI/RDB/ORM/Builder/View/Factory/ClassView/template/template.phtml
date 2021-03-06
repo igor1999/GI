@@ -27,6 +27,15 @@ use <?php echo $namespace, '\\Set'; ?> as <?php echo $alias, 'Set'; ?>;
 <?php endforeach; ?>
 
 
+/**
+ * Class Factory
+ * @package <?php echo $this->getORMNamespace(), '\\Factory'; ?>
+ *
+<?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
+ * @method <?php echo $table->getAlias(), 'RecordInterface ', $table->getMethodCreator(), 'Record'; ?>()
+ * @method <?php echo $table->getAlias(), 'SetInterface ', $table->getMethodCreator(), 'Set'; ?>()
+<?php endforeach; ?>
+ */
 class Factory extends Base implements FactoryInterface
 {
     use <?php echo $this->getServiceLocatorTrait(); ?>;

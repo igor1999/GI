@@ -17,6 +17,15 @@ use <?php echo $namespace, '\\SetInterface'; ?> as <?php echo $alias, 'SetInterf
 <?php endforeach; ?>
 
 
+/**
+ * Interface FactoryInterface
+ * @package <?php echo $this->getORMNamespace(), '\\Factory'; ?>
+ *
+<?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
+ * @method <?php echo $table->getAlias(), 'RecordInterface ', $table->getMethodCreator(), 'Record'; ?>()
+ * @method <?php echo $table->getAlias(), 'SetInterface ', $table->getMethodCreator(), 'Set'; ?>()
+<?php endforeach; ?>
+ */
 interface FactoryInterface extends BaseInterface
 {
 
