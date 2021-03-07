@@ -3,7 +3,7 @@
     /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getORMNamespace(), '\\Factory'; ?>;
+namespace <?php echo $this->getORMNamespace(); ?>\Factory;
 
 use GI\RDB\ORM\Factory\FactoryInterface as BaseInterface;
 
@@ -12,18 +12,22 @@ use GI\RDB\ORM\Factory\FactoryInterface as BaseInterface;
     $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
     $alias     = $table->getAlias();
     ?>
-use <?php echo $namespace, '\\RecordInterface'; ?> as <?php echo $alias, 'RecordInterface'; ?>;
-use <?php echo $namespace, '\\SetInterface'; ?> as <?php echo $alias, 'SetInterface'; ?>;
+use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>\RecordInterface;
+use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>\SetInterface;
 <?php endforeach; ?>
 
 
 /**
  * Interface FactoryInterface
- * @package <?php echo $this->getORMNamespace(), '\\Factory'; ?>
+ * @package <?php echo $this->getORMNamespace(); ?>\Factory
  *
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
- * @method <?php echo $table->getAlias(), 'RecordInterface ', $table->getMethodCreator(), 'Record'; ?>()
- * @method <?php echo $table->getAlias(), 'SetInterface ', $table->getMethodCreator(), 'Set'; ?>()
+    <?php
+    $alias  = $table->getAlias();
+    $method = $table->getMethodCreator();
+    ?>
+ * @method <?php echo $alias ?>RecordInterface <?php echo $method; ?>Record()
+ * @method <?php echo $alias ?>SetInterface <?php echo $method; ?>Set()
 <?php endforeach; ?>
  */
 interface FactoryInterface extends BaseInterface

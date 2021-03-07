@@ -5,7 +5,7 @@
 
 namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
-use <?php echo $this->getBaseNamespace(); ?>\Record as Base;
+use <?php echo $this->getBaseNamespace(); ?>\AbstractRecord as Base;
 
 use GI\RDB\Meta\Table\TableInterface;
 
@@ -62,7 +62,7 @@ class Record extends Base implements RecordInterface
     /**
      * @return \DateTime
      */
-    public function <?php echo $getter, 'AsDate'; ?>()
+    public function <?php echo $getter; ?>AsDate()
     {
         return new \DateTime($this-><?php echo $property; ?>); //todo get date in required format
     }
@@ -72,7 +72,7 @@ class Record extends Base implements RecordInterface
     /**
      * @return bool
      */
-    public function <?php echo $getter, 'AsBool'; ?>()
+    public function <?php echo $getter; ?>AsBool()
     {
         return (bool)$this-><?php echo $property; ?>;
     }

@@ -35,14 +35,14 @@ interface RecordInterface extends BaseInterface
     /**
      * @return \DateTime
      */
-    public function <?php echo $getter, 'AsDate'; ?>();
+    public function <?php echo $getter; ?>AsDate();
 <?php endif;?>
 
 <?php if ($column->isBoolPHPType()): ?>
     /**
      * @return bool
      */
-    public function <?php echo $getter, 'AsBool'; ?>();
+    public function <?php echo $getter; ?>AsBool();
 <?php endif;?>
 
 <?php endforeach;?>
