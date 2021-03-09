@@ -23,10 +23,11 @@ class Record extends Base implements RecordInterface
 
     /**
      * @return TableInterface
+     * @throws \Exception
      */
     public function getTable()
     {
-        return $this->getDriver()->getTableList()->get(<?php echo $this->getTable()->getName(); ?>);
+        return $this->getDriver()->getTableList()->get('<?php echo $this->getTable()->getName(); ?>');
     }
 
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
@@ -63,6 +64,7 @@ class Record extends Base implements RecordInterface
 <?php if ($column->isDatePHPType()): ?>
     /**
      * @return \DateTime
+     * @throws \Exception
      */
     public function <?php echo $getter; ?>AsDate()
     {
