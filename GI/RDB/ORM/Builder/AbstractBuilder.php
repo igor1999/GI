@@ -217,13 +217,13 @@ abstract class AbstractBuilder implements BuilderInterface
             ->setDriver($this->getDriver())
             ->setORMNamespace($this->getOrmNamespace())
             ->setServiceLocatorTrait($this->getServiceLocatorTrait())
-            ->save($dir->createChildFile('Factory.php'));
+            ->save($dir->createChildFile('Factory.php')->create());
 
         $this->getFactoryInterfaceView()
             ->setDriver($this->getDriver())
             ->setORMNamespace($this->getOrmNamespace())
             ->setServiceLocatorTrait($this->getServiceLocatorTrait())
-            ->save($dir->createChildFile('FactoryInterface.php'));
+            ->save($dir->createChildFile('FactoryInterface.php')->create());
 
         return $this;
     }

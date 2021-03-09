@@ -205,25 +205,25 @@ class Builder implements BuilderInterface
             ->setTable($this->getTable())
             ->setORMNamespace($this->ormNamespace)
             ->setBaseNamespace($this->baseNamespace)
-            ->save($dir->createChildFile('Record.php'));
+            ->save($dir->createChildFile('Record.php')->create());
 
         $this->getRecordInterfaceView()
             ->setTable($this->getTable())
             ->setORMNamespace($this->ormNamespace)
             ->setBaseNamespace($this->baseNamespace)
-            ->save($dir->createChildFile('RecordInterface.php'));
+            ->save($dir->createChildFile('RecordInterface.php')->create());
 
         $this->getSetClassView()
             ->setTable($this->getTable())
             ->setORMNamespace($this->ormNamespace)
             ->setBaseNamespace($this->baseNamespace)
-            ->save($dir->createChildFile('Set.php'));
+            ->save($dir->createChildFile('Set.php')->create());
 
         $this->getSetInterfaceView()
             ->setTable($this->getTable())
             ->setORMNamespace($this->ormNamespace)
             ->setBaseNamespace($this->baseNamespace)
-            ->save($dir->createChildFile('SetInterface.php'));
+            ->save($dir->createChildFile('SetInterface.php')->create());
 
         return $this;
     }
