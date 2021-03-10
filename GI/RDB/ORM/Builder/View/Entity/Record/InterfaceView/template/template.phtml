@@ -1,9 +1,9 @@
+<?php echo '<?php'; ?>
+
 <?php
     use GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
-
-<?php echo '<?php'; ?>
 
 namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
 
@@ -12,35 +12,34 @@ use <?php echo $this->getBaseNamespace(); ?>\RecordInterface as BaseInterface;
 interface RecordInterface extends BaseInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
-    <?php
-        $name         = $column->getName();
-        $type         = $column->getPHPType();
-        $property     = $column->getClassProperty();
-        $getter       = $column->getClassGetter();
-        $setter       = $column->getClassSetter();
-    ?>
-
+<?php
+    $name         = $column->getName();
+    $type         = $column->getPHPType();
+    $property     = $column->getClassProperty();
+    $getter       = $column->getClassGetter();
+    $setter       = $column->getClassSetter();
+?>
     /**
-     * @return <?php echo $type; ?>
+     * @return <?php echo $type, PHP_EOL; ?>
      */
     public function <?php echo $getter; ?>();
-
 <?php if (!$column->isIdentity()): ?>
+
     /**
-     * @param <?php echo $type; ?> $<?php echo $property; ?>
+     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
      * @return static
      */
     public function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>);
 <?php endif;?>
-
 <?php if ($column->isDatePHPType()): ?>
+
     /**
      * @return \DateTime
      */
     public function <?php echo $getter; ?>AsDate();
 <?php endif;?>
-
 <?php if ($column->isBoolPHPType()): ?>
+
     /**
      * @return bool
      */

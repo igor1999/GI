@@ -1,21 +1,21 @@
+<?php echo '<?php'; ?>
+
 <?php
     use GI\RDB\ORM\Builder\View\Factory\InterfaceView\ViewInterface;
     /** @var ViewInterface $this */
 ?>
-
-<?php echo '<?php'; ?>
 
 namespace <?php echo $this->getORMNamespace(); ?>\Factory;
 
 use GI\RDB\ORM\Factory\FactoryInterface as BaseInterface;
 
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-    <?php
-    $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-    $alias     = $table->getAlias();
-    ?>
-use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>\RecordInterface;
-use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>\SetInterface;
+<?php
+$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
+$alias     = $table->getAlias();
+?>
+use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
+use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
 
 
@@ -24,10 +24,10 @@ use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>\SetInterface
  * @package <?php echo $this->getORMNamespace(); ?>\Factory
  *
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-    <?php
-    $alias  = $table->getAlias();
-    $method = $table->getMethodCreator();
-    ?>
+<?php
+$alias  = $table->getAlias();
+$method = $table->getMethodCreator();
+?>
  * @method <?php echo $alias ?>RecordInterface <?php echo $method; ?>Record()
  * @method <?php echo $alias ?>SetInterface <?php echo $method; ?>Set()
 <?php endforeach; ?>
