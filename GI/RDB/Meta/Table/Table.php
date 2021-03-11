@@ -59,12 +59,22 @@ class Table implements TableInterface
     /**
      * @var array
      */
-    private $tableParentReferences;
+    private $parentTableReferences;
 
     /**
      * @var array
      */
-    private $tableChildReferences;
+    private $parentColumnReferences;
+
+    /**
+     * @var array
+     */
+    private $childTableReferences;
+
+    /**
+     * @var array
+     */
+    private $childColumnReferences;
 
 
     /**
@@ -338,48 +348,124 @@ class Table implements TableInterface
     }
 
     /**
-     * @return array
+     * @return static
      */
-    public function getTableParentReferences()
+    protected function createParentReferences()
     {
-        if (!is_array($this->tableParentReferences)) {
-            $this->tableParentReferences = $this->getDriver()->fetchTableReferences($this->name);
+        if (!is_array($this->parentTableReferences)) {
+            $contents = $this->getDriver()->fetchTableParentReferences($this->name);
+            $this->parentTableReferences  = $this->createTableReferences($contents);
+            $this->parentColumnReferences = $this->createColumnReferences($contents);
         }
 
-        return $this->tableParentReferences;
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    protected function createChildReferences()
+    {
+        if (!is_array($this->parentTableReferences)) {
+            $contents = $this->getDriver()->fetchTableChildReferences($this->name);
+            $this->childTableReferences  = $this->createTableReferences($contents);
+            $this->childColumnReferences = $this->createColumnReferences($contents);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param array $contents
+     * @return array
+     */
+    protected function createTableReferences(array $contents)
+    {
+        $f = function(array $row)
+        {
+            return $row['referenced_table'];
+        };
+
+        return array_unique(array_filter($contents, $f));
+    }
+
+    /**
+     * @param array $contents
+     * @return array
+     */
+    protected function createColumnReferences(array $contents)
+    {
+        $result = [];
+
+        foreach ($contents as $row)
+        {
+            $column = $row['column'];
+
+            if (!isset($result[$column])) {
+                $result[$column] = [];
+            }
+
+            $result[$column][] = $row;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParentTableReferences()
+    {
+        $this->createParentReferences();
+
+        return $this->parentTableReferences;
     }
 
     /**
      * @param string $column
      * @return array
      */
-    public function getColumnParentReferences(string $column)
+    public function getParentColumnReferences(string $column = '')
     {
-        $relations = $this->getTableParentReferences();
+        $this->createParentReferences();
 
-        return isset($relations[$column]) ? $relations[$column] : [];
+        if (empty($column)) {
+            $result = $this->parentColumnReferences;
+        } elseif (isset($this->parentColumnReferences[$column])) {
+            $result = $this->parentColumnReferences[$column];
+        } else {
+            $result = [];
+        }
+
+        return $result;
     }
 
     /**
      * @return array
      */
-    public function getTableChildReferences()
+    public function getChildTableReferences()
     {
-        if (!is_array($this->tableChildReferences)) {
-            $this->tableChildReferences = $this->getDriver()->fetchTableReferences($this->name, false);
-        }
+        $this->createChildReferences();
 
-        return $this->tableChildReferences;
+        return $this->childTableReferences;
     }
 
     /**
      * @param string $column
      * @return array
      */
-    public function getColumnChildReferences(string $column)
+    public function getChildColumnReferences(string $column = '')
     {
-        $relations = $this->getTableChildReferences();
+        $this->createChildReferences();
 
-        return isset($relations[$column]) ? $relations[$column] : [];
+        if (empty($column)) {
+            $result = $this->childColumnReferences;
+        } elseif (isset($this->childColumnReferences[$column])) {
+            $result = $this->childColumnReferences[$column];
+        } else {
+            $result = [];
+        }
+
+        return $result;
     }
 }

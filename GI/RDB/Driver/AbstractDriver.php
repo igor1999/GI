@@ -249,33 +249,34 @@ abstract class AbstractDriver implements DriverInterface
 
     /**
      * @param string $table
-     * @param bool $parent
      * @return array
      */
-    public function fetchTableReferences(string $table, bool $parent = true)
+    public function fetchTableParentReferences(string $table)
     {
-        $sql = $parent
-            ? $this->getPlatform()->getTableParentReferencesQuery()
-            : $this->getPlatform()->getTableChildReferencesQuery();
+        $sql = $this->getPlatform()->getTableParentReferencesQuery();
 
         $params = [
             'database' => $this->getDatabase(),
             'table'    => $table
         ];
 
-        $result = [];
-        foreach ($this->fetchAll($sql, $params) as $row)
-        {
-            $column = $row['column'];
+        return $this->fetchAll($sql, $params);
+    }
 
-            if (!isset($result[$column])) {
-                $result[$column] = [];
-            }
+    /**
+     * @param string $table
+     * @return array
+     */
+    public function fetchTableChildReferences(string $table)
+    {
+        $sql = $this->getPlatform()->getTableChildReferencesQuery();
 
-            $result[$column][] = $row;
-        }
+        $params = [
+            'database' => $this->getDatabase(),
+            'table'    => $table
+        ];
 
-        return $result;
+        return $this->fetchAll($sql, $params);
     }
 
     /**

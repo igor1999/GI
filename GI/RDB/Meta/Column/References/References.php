@@ -54,8 +54,8 @@ class References implements ReferencesInterface
         $this->parent = $parent;
 
         $references = $this->parent
-            ? $this->column->getTable()->getColumnParentReferences($this->column->getName())
-            : $this->column->getTable()->getColumnChildReferences($this->column->getName());
+            ? $this->column->getTable()->getParentColumnReferences($this->column->getName())
+            : $this->column->getTable()->getChildColumnReferences($this->column->getName());
 
         foreach ($references as $contents) {
             $referencedTableName  = $contents['referenced_table'];
