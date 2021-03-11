@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\Meta\Column\References;
+namespace GI\GI\RDB\Meta\Column\References\Base;
 
 use GI\RDB\Meta\Column\ColumnInterface;
 
@@ -25,11 +25,6 @@ interface ReferencesInterface
      * @return ColumnInterface
      */
     public function getColumn();
-
-    /**
-     * @return bool
-     */
-    public function isParent();
 
     /**
      * @param string $name

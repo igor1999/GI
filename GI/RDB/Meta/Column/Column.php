@@ -17,13 +17,15 @@
  */
 namespace GI\RDB\Meta\Column;
 
-use GI\GI\RDB\Meta\Column\References\References;
+use GI\GI\RDB\Meta\Column\References\ParentReferences\References as ParentReferences;
+use GI\GI\RDB\Meta\Column\References\ChildReferences\References as ChildReferences;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Pattern\ArrayExchange\ExtractionTrait;
 
 use GI\RDB\Meta\Table\TableInterface;
-use GI\GI\RDB\Meta\Column\References\ReferencesInterface;
+use GI\GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 class Column implements ColumnInterface
 {
@@ -76,12 +78,12 @@ class Column implements ColumnInterface
     private $identity = false;
 
     /**
-     * @var ReferencesInterface
+     * @var ParentReferencesInterface
      */
     private $parentReferenceList;
 
     /**
-     * @var ReferencesInterface
+     * @var ChildReferencesInterface
      */
     private $childReferenceList;
 
@@ -378,14 +380,14 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @return ReferencesInterface
+     * @return ParentReferencesInterface
      * @throws \Exception
      */
     public function getParentReferenceList()
     {
-        if (!($this->parentReferenceList instanceof ReferencesInterface)) {
+        if (!($this->parentReferenceList instanceof ParentReferencesInterface)) {
             $this->parentReferenceList = $this->giGetDi(
-                ReferencesInterface::class, References::class, [$this]
+                ParentReferencesInterface::class, ParentReferences::class, [$this]
             );
         }
 
@@ -393,14 +395,14 @@ class Column implements ColumnInterface
     }
 
     /**
-     * @return ReferencesInterface
+     * @return ChildReferencesInterface
      * @throws \Exception
      */
     public function getChildReferenceList()
     {
-        if (!($this->childReferenceList instanceof ReferencesInterface)) {
+        if (!($this->childReferenceList instanceof ChildReferencesInterface)) {
             $this->childReferenceList = $this->giGetDi(
-                ReferencesInterface::class, References::class, [$this, false]
+                ChildReferencesInterface::class, ChildReferences::class, [$this]
             );
         }
 

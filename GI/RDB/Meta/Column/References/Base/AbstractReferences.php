@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\Meta\Column\References;
+namespace GI\GI\RDB\Meta\Column\References\Base;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\RDB\Meta\Column\ColumnInterface;
 
-class References implements ReferencesInterface
+abstract class AbstractReferences implements ReferencesInterface
 {
     use ServiceLocatorAwareTrait;
 
@@ -32,32 +32,25 @@ class References implements ReferencesInterface
     private $column;
 
     /**
-     * @var bool
-     */
-    private $parent = true;
-
-    /**
      * @var ColumnInterface[]
      */
     private $items = [];
 
 
     /**
-     * References constructor.
+     * AbstractReferences constructor.
      * @param ColumnInterface $column
-     * @param bool $parent
      * @throws \Exception
      */
-    public function __construct(ColumnInterface $column, bool $parent = true)
+    public function __construct(ColumnInterface $column)
     {
         $this->column = $column;
-        $this->parent = $parent;
 
-        $references = $this->parent
-            ? $this->column->getTable()->getParentColumnReferences($this->column->getName())
-            : $this->column->getTable()->getChildColumnReferences($this->column->getName());
+        foreach ($this->getContents() as $contents) {
+            if ($contents['column'] != $this->column->getName()) {
+                continue;
+            }
 
-        foreach ($references as $contents) {
             $referencedTableName  = $contents['referenced_table'];
             $referencedColumnName = $contents['referenced_column'];
             $referencedTable  = $this->column->getTable()->getDriver()->getTableList()->get($referencedTableName);
@@ -68,19 +61,16 @@ class References implements ReferencesInterface
     }
 
     /**
+     * @return array
+     */
+    abstract protected function getContents();
+
+    /**
      * @return ColumnInterface
      */
     public function getColumn()
     {
         return $this->column;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isParent()
-    {
-        return $this->parent;
     }
 
     /**
