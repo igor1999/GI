@@ -55,7 +55,7 @@ foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
     $namespace = $referencedColumn->getTable()->getNamespace();
     $name      = $referencedColumn->getName();
 ?>
-    * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Record <?php echo $name, PHP_EOL; ?>
+     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Set <?php echo $name, PHP_EOL; ?>
 <?php endforeach; ?>
      */
     public function <?php echo $getter; ?>()
