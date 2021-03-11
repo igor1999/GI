@@ -109,5 +109,5 @@ interface ColumnInterface extends ExtractionInterface
      * @return ReferencesInterface
      * @throws \Exception
      */
-    public function getReferenceList();
+    public function getParentReferenceList();
 }

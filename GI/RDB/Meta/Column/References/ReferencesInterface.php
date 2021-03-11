@@ -27,6 +27,11 @@ interface ReferencesInterface
     public function getColumn();
 
     /**
+     * @return bool
+     */
+    public function isParent();
+
+    /**
      * @param string $name
      * @return bool
      */

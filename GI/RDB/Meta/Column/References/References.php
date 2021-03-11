@@ -32,6 +32,11 @@ class References implements ReferencesInterface
     private $column;
 
     /**
+     * @var bool
+     */
+    private $parent = true;
+
+    /**
      * @var ColumnInterface[]
      */
     private $items = [];
@@ -40,14 +45,21 @@ class References implements ReferencesInterface
     /**
      * References constructor.
      * @param ColumnInterface $column
+     * @param bool $parent
      * @throws \Exception
      */
-    public function __construct(ColumnInterface $column)
+    public function __construct(ColumnInterface $column, bool $parent = true)
     {
         $this->column = $column;
+        $this->parent = $parent;
 
-        foreach ($this->column->getTable()->getColumnRelations($this->column->getName()) as $contents) {
-            list($referencedTableName, $referencedColumnName) = $contents;
+        $references = $this->parent
+            ? $this->column->getTable()->getColumnParentReferences($this->column->getName())
+            : $this->column->getTable()->getColumnChildReferences($this->column->getName());
+
+        foreach ($references as $contents) {
+            $referencedTableName  = $contents['referencedTableName'];
+            $referencedColumnName = $contents['referencedColumnName'];
 
             $referencedTable  = $this->column->getTable()->getDriver()->getTableList()->get($referencedTableName);
             $referencedColumn = $referencedTable->getColumnList()->get($referencedColumnName);
@@ -62,6 +74,14 @@ class References implements ReferencesInterface
     public function getColumn()
     {
         return $this->column;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isParent()
+    {
+        return $this->parent;
     }
 
     /**

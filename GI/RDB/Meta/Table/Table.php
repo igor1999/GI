@@ -59,7 +59,12 @@ class Table implements TableInterface
     /**
      * @var array
      */
-    private $tableRelations;
+    private $tableParentReferences;
+
+    /**
+     * @var array
+     */
+    private $tableChildReferences;
 
 
     /**
@@ -335,22 +340,45 @@ class Table implements TableInterface
     /**
      * @return array
      */
-    public function getTableRelations()
+    public function getTableParentReferences()
     {
-        if (!is_array($this->tableRelations)) {
-            $this->tableRelations = $this->getDriver()->fetchTableRelations($this->name);
+        if (!is_array($this->tableParentReferences)) {
+            $this->tableParentReferences = $this->getDriver()->fetchTableReferences($this->name);
         }
 
-        return $this->tableRelations;
+        return $this->tableParentReferences;
     }
 
     /**
      * @param string $column
      * @return array
      */
-    public function getColumnRelations(string $column)
+    public function getColumnParentReferences(string $column)
     {
-        $relations = $this->getTableRelations();
+        $relations = $this->getTableParentReferences();
+
+        return isset($relations[$column]) ? $relations[$column] : [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getTableChildReferences()
+    {
+        if (!is_array($this->tableChildReferences)) {
+            $this->tableChildReferences = $this->getDriver()->fetchTableReferences($this->name, false);
+        }
+
+        return $this->tableChildReferences;
+    }
+
+    /**
+     * @param string $column
+     * @return array
+     */
+    public function getColumnChildReferences(string $column)
+    {
+        $relations = $this->getTableChildReferences();
 
         return isset($relations[$column]) ? $relations[$column] : [];
     }

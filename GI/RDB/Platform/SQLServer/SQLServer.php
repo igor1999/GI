@@ -68,7 +68,15 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
     /**
      * @throws \Exception
      */
-    public function getTableRelationsQuery()
+    public function getTableParentReferencesQuery()
+    {
+        $this->giThrowCommonException('Option is not available');
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function getTableChildReferencesQuery()
     {
         $this->giThrowCommonException('Option is not available');
     }

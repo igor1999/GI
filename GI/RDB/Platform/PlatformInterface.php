@@ -58,7 +58,12 @@ interface PlatformInterface
     /**
      * @return string
      */
-    public function getTableRelationsQuery();
+    public function getTableParentReferencesQuery();
+
+    /**
+     * @return string
+     */
+    public function getTableChildReferencesQuery();
 
     /**
      * @param string $dbType

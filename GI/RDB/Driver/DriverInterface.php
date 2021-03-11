@@ -75,9 +75,10 @@ interface DriverInterface
 
     /**
      * @param string $table
+     * @param bool $parent
      * @return array
      */
-    public function fetchTableRelations(string $table);
+    public function fetchTableReferences(string $table, bool $parent = true);
 
     /**
      * @param string $table

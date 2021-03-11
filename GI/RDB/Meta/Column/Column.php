@@ -78,7 +78,12 @@ class Column implements ColumnInterface
     /**
      * @var ReferencesInterface
      */
-    private $referenceList;
+    private $parentReferenceList;
+
+    /**
+     * @var ReferencesInterface
+     */
+    private $childReferenceList;
 
 
     /**
@@ -376,12 +381,29 @@ class Column implements ColumnInterface
      * @return ReferencesInterface
      * @throws \Exception
      */
-    public function getReferenceList()
+    public function getParentReferenceList()
     {
-        if (!($this->referenceList instanceof ReferencesInterface)) {
-            $this->referenceList = $this->giGetDi(ReferencesInterface::class, References::class, [$this]);
+        if (!($this->parentReferenceList instanceof ReferencesInterface)) {
+            $this->parentReferenceList = $this->giGetDi(
+                ReferencesInterface::class, References::class, [$this]
+            );
         }
 
-        return $this->referenceList;
+        return $this->parentReferenceList;
+    }
+
+    /**
+     * @return ReferencesInterface
+     * @throws \Exception
+     */
+    public function getChildReferenceList()
+    {
+        if (!($this->childReferenceList instanceof ReferencesInterface)) {
+            $this->childReferenceList = $this->giGetDi(
+                ReferencesInterface::class, References::class, [$this, false]
+            );
+        }
+
+        return $this->childReferenceList;
     }
 }

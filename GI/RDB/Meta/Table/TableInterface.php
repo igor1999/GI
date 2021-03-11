@@ -160,11 +160,22 @@ interface TableInterface extends ExtractionInterface
     /**
      * @return array
      */
-    public function getTableRelations();
+    public function getTableParentReferences();
 
     /**
      * @param string $column
      * @return array
      */
-    public function getColumnRelations(string $column);
+    public function getColumnParentReferences(string $column);
+
+    /**
+     * @return array
+     */
+    public function getTableChildReferences();
+
+    /**
+     * @param string $column
+     * @return array
+     */
+    public function getColumnChildReferences(string $column);
 }
