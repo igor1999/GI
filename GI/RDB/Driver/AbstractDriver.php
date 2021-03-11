@@ -249,6 +249,34 @@ abstract class AbstractDriver implements DriverInterface
 
     /**
      * @param string $table
+     * @return array
+     */
+    public function fetchTableRelations(string $table)
+    {
+        $sql = $this->getPlatform()->getTableRelationsQuery();
+
+        $params = [
+            'database' => $this->getDatabase(),
+            'table'    => $table
+        ];
+
+        $result = [];
+        foreach ($this->fetchAll($sql, $params) as $row)
+        {
+            $column = $row['column'];
+
+            if (!isset($result[$column])) {
+                $result[$column] = [];
+            }
+
+            $result[$column][] = $row;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $table
      * @return int
      * @throws \Exception
      */

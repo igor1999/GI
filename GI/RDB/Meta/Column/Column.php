@@ -17,10 +17,13 @@
  */
 namespace GI\RDB\Meta\Column;
 
+use GI\GI\RDB\Meta\Column\References\References;
+
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Pattern\ArrayExchange\ExtractionTrait;
 
 use GI\RDB\Meta\Table\TableInterface;
+use GI\GI\RDB\Meta\Column\References\ReferencesInterface;
 
 class Column implements ColumnInterface
 {
@@ -71,6 +74,11 @@ class Column implements ColumnInterface
      * @var bool
      */
     private $identity = false;
+
+    /**
+     * @var ReferencesInterface
+     */
+    private $referenceList;
 
 
     /**
@@ -362,5 +370,18 @@ class Column implements ColumnInterface
     public function getClassSetter()
     {
         return $this->giGetPSRFormatBuilder()->buildSet($this->getClassProperty());
+    }
+
+    /**
+     * @return ReferencesInterface
+     * @throws \Exception
+     */
+    public function getReferenceList()
+    {
+        if (!($this->referenceList instanceof ReferencesInterface)) {
+            $this->referenceList = $this->giGetDi(ReferencesInterface::class, References::class, [$this]);
+        }
+
+        return $this->referenceList;
     }
 }

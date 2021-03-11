@@ -95,4 +95,21 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
                 AND `TABLE_TYPE` = \'BASE TABLE\'
         ';
     }
+
+    /**
+     * @return string
+     */
+    public function getTableRelationsQuery()
+    {
+        return '
+            SELECT 
+                `COLUMN_NAME` AS `column`, 
+                `REFERENCED_TABLE_NAME` AS `referenced_table`, 
+                `REFERENCED_COLUMN_NAME` AS `referenced_column`
+            FROM `information_schema`.`KEY_COLUMN_USAGE`
+            WHERE `TABLE_SCHEMA` = :database 
+                AND `TABLE_NAME` = :table 
+                AND `REFERENCED_TABLE_SCHEMA` = :database
+        ';
+    }
 }

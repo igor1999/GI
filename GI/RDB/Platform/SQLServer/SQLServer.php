@@ -64,4 +64,12 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
                 AND [TABLE_CATALOG] = :database 
         ';
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function getTableRelationsQuery()
+    {
+        $this->giThrowCommonException('Option is not available');
+    }
 }

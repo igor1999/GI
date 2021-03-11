@@ -56,6 +56,11 @@ class Table implements TableInterface
      */
     private $queryBuilder;
 
+    /**
+     * @var array
+     */
+    private $tableRelations;
+
 
     /**
      * Table constructor.
@@ -325,5 +330,28 @@ class Table implements TableInterface
         $contents = array_combine(array_keys($this->getColumnList()->getPrimary()), $values);
 
         return $this->selectOne($contents, null, $builder);
+    }
+
+    /**
+     * @return array
+     */
+    public function getTableRelations()
+    {
+        if (!is_array($this->tableRelations)) {
+            $this->tableRelations = $this->getDriver()->fetchTableRelations($this->name);
+        }
+
+        return $this->tableRelations;
+    }
+
+    /**
+     * @param string $column
+     * @return array
+     */
+    public function getColumnRelations(string $column)
+    {
+        $relations = $this->getTableRelations();
+
+        return isset($relations[$column]) ? $relations[$column] : [];
     }
 }

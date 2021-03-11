@@ -53,4 +53,12 @@ class DB2 extends AbstractPlatform implements DB2Interface
     {
         $this->giThrowCommonException('Option is not available');
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function getTableRelationsQuery()
+    {
+        $this->giThrowCommonException('Option is not available');
+    }
 }

@@ -156,4 +156,15 @@ interface TableInterface extends ExtractionInterface
      * @throws \Exception
      */
     public function find($values, SQLBuilderInterface $builder = null);
+
+    /**
+     * @return array
+     */
+    public function getTableRelations();
+
+    /**
+     * @param string $column
+     * @return array
+     */
+    public function getColumnRelations(string $column);
 }

@@ -75,6 +75,12 @@ interface DriverInterface
 
     /**
      * @param string $table
+     * @return array
+     */
+    public function fetchTableRelations(string $table);
+
+    /**
+     * @param string $table
      * @return int
      * @throws \Exception
      */
