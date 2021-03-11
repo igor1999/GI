@@ -1,5 +1,4 @@
 <?php echo '<?php';?>
-
 <?php
     use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\ViewInterface;
     /** @var ViewInterface $this */
@@ -13,7 +12,7 @@ use GI\RDB\Meta\Table\TableInterface;
 
 class Record extends Base implements RecordInterface
 {
-<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
     /**
      * @var <?php echo $column->getPHPType(), PHP_EOL; ?>
      */
@@ -30,7 +29,7 @@ class Record extends Base implements RecordInterface
         return $this->getDriver()->getTableList()->get('<?php echo $this->getTable()->getName(); ?>');
     }
 
-<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
 <?php
     $name         = $column->getName();
     $type         = $column->getPHPType();
@@ -42,6 +41,22 @@ class Record extends Base implements RecordInterface
     /**
      * @to-db <?php echo $name, PHP_EOL; ?>
      * @return <?php echo $type, PHP_EOL; ?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($column->getParentReferenceList()->getItems() as $referencedColumn): ?>
+<?php
+    $namespace = $referencedColumn->getTable()->getNamespace();
+    $name      = $referencedColumn->getName();
+?>
+     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Record <?php echo $name, PHP_EOL; ?>
+<?php endforeach; ?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
+<?php
+    $namespace = $referencedColumn->getTable()->getNamespace();
+    $name      = $referencedColumn->getName();
+?>
+    * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Record <?php echo $name, PHP_EOL; ?>
+<?php endforeach; ?>
      */
     public function <?php echo $getter; ?>()
     {

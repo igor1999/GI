@@ -110,4 +110,10 @@ interface ColumnInterface extends ExtractionInterface
      * @throws \Exception
      */
     public function getParentReferenceList();
+
+    /**
+     * @return ReferencesInterface
+     * @throws \Exception
+     */
+    public function getChildReferenceList();
 }
