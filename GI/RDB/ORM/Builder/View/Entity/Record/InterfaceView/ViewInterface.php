@@ -17,9 +17,28 @@
  */
 namespace GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView;
 
-use GI\RDB\ORM\Builder\View\Entity\Record\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewInterface
+    as ColumnSignaturesViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\ViewInterface
+    as ParentRefSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\ViewInterface
+    as ChildRefSignatureViewInterface;
 
 interface ViewInterface extends BaseInterface
 {
+    /**
+     * @return ColumnSignaturesViewInterface
+     */
+    public function getColumnSignaturesView();
 
+    /**
+     * @return ParentRefSignatureViewInterface
+     */
+    public function getParentRefSignatureView();
+
+    /**
+     * @return ChildRefSignatureViewInterface
+     */
+    public function getChildRefSignatureView();
 }

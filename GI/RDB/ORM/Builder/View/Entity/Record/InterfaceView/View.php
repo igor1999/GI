@@ -17,9 +17,81 @@
  */
 namespace GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView;
 
-use GI\RDB\ORM\Builder\View\Entity\Record\Base\AbstractView as Base;
+use GI\RDB\ORM\Builder\View\Entity\Base\AbstractView as Base;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\View
+    as ColumnSignaturesView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\View
+    as ParentRefSignatureView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\View
+    as ChildRefSignatureView;
+
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewInterface
+    as ColumnSignaturesViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\ViewInterface
+    as ParentRefSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\ViewInterface
+    as ChildRefSignatureViewInterface;
 
 class View extends Base implements ViewInterface
 {
+    /**
+     * @var ColumnSignaturesViewInterface
+     */
+    private $columnSignaturesView;
 
+    /**
+     * @var ParentRefSignatureViewInterface
+     */
+    private $parentRefSignatureView;
+
+    /**
+     * @var ChildRefSignatureViewInterface
+     */
+    private $childRefSignatureView;
+
+
+    /**
+     * View constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->columnSignaturesView = $this->giGetDi(
+            ColumnSignaturesViewInterface::class, ColumnSignaturesView::class
+        );
+
+        $this->parentRefSignatureView = $this->giGetDi(
+            ParentRefSignatureViewInterface::class, ParentRefSignatureView::class
+        );
+
+        $this->childRefSignatureView = $this->giGetDi(
+            ChildRefSignatureViewInterface::class, ChildRefSignatureView::class
+        );
+    }
+
+    /**
+     * @return ColumnSignaturesViewInterface
+     */
+    public function getColumnSignaturesView()
+    {
+        return $this->columnSignaturesView;
+    }
+
+    /**
+     * @return ParentRefSignatureViewInterface
+     */
+    public function getParentRefSignatureView()
+    {
+        return $this->parentRefSignatureView;
+    }
+
+    /**
+     * @return ChildRefSignatureViewInterface
+     */
+    public function getChildRefSignatureView()
+    {
+        return $this->childRefSignatureView;
+    }
 }

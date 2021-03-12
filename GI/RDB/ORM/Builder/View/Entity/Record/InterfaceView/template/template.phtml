@@ -1,8 +1,7 @@
-<?php echo '<?php'; ?>
-
+<?php /** @noinspection PhpUnhandledExceptionInspection */ echo '<?php';?>
 <?php
-    use GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView\ViewInterface;
-    /** @var ViewInterface $this */
+use GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView\ViewInterface;
+/** @var ViewInterface $this */
 ?>
 
 namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
@@ -11,79 +10,32 @@ use <?php echo $this->getBaseNamespace(); ?>\RecordInterface as BaseInterface;
 
 <?php /** @noinspection PhpUnhandledExceptionInspection */
 foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-    <?php
-    $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-    $alias     = $table->getAlias();
-    ?>
+<?php
+$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
+$alias     = $table->getAlias();
+?>
     use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
 <?php endforeach; ?>
 <?php /** @noinspection PhpUnhandledExceptionInspection */
 foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-    <?php
-    $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-    $alias     = $table->getAlias();
-    ?>
+<?php
+$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
+$alias     = $table->getAlias();
+?>
     use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
 
 interface RecordInterface extends BaseInterface
 {
-<?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
-<?php
-    $name         = $column->getName();
-    $type         = $column->getPHPType();
-    $property     = $column->getClassProperty();
-    $getter       = $column->getClassGetter();
-    $setter       = $column->getClassSetter();
-?>
-    /**
-     * @return <?php echo $type, PHP_EOL; ?>
-     */
-    public function <?php echo $getter; ?>();
-<?php if (!$column->isIdentity()): ?>
-
-    /**
-     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
-     * @return static
-     */
-    public function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>);
-<?php endif;?>
-<?php if ($column->isDatePHPType()): ?>
-
-    /**
-     * @return \DateTime
-     */
-    public function <?php echo $getter; ?>AsDate();
-<?php endif;?>
-<?php if ($column->isBoolPHPType()): ?>
-
-    /**
-     * @return bool
-     */
-    public function <?php echo $getter; ?>AsBool();
-<?php endif;?>
-
+<?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
+<?php echo $this->getColumnSignaturesView()->setColumn($column)->toString(); ?>
 <?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-$getter = $table->getMethodGetter();
-?>
-    /**
-    * @return <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
-    */
-    public function <?php echo $getter; ?>();
+
+<?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getParentRefSignatureView()->setTable($table)->toString(); ?>
 <?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-$getter = $table->getMethodGetter();
-?>
-    /**
-    * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
-    */
-    public function <?php echo $getter; ?>Set();
+
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getChildRefSignatureView()->setTable($table)->toString(); ?>
 <?php endforeach;?>
 }
