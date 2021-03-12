@@ -17,9 +17,49 @@
  */
 namespace GI\RDB\ORM\Builder\View\Entity\Record\ClassView;
 
-use GI\RDB\ORM\Builder\View\Entity\Record\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInterface as ColumnMethodsViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface
+    as ColumnPropertyViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface
+    as ChildRefGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\ViewInterface
+    as ChildRefPropertyViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface
+    as ParentRefGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\ViewInterface
+    as ParentRefPropertyViewInterface;
 
 interface ViewInterface extends BaseInterface
 {
 
+    /**
+     * @return ColumnPropertyViewInterface
+     */
+    public function getColumnPropertyView();
+
+    /**
+     * @return ColumnMethodsViewInterface
+     */
+    public function getColumnMethodsView();
+
+    /**
+     * @return ParentRefPropertyViewInterface
+     */
+    public function getParentRefPropertyView();
+
+    /**
+     * @return ChildRefPropertyViewInterface
+     */
+    public function getChildRefPropertyView();
+
+    /**
+     * @return ParentRefGetterViewInterface
+     */
+    public function getParentRefGetterView();
+
+    /**
+     * @return ChildRefGetterViewInterface
+     */
+    public function getChildRefGetterView();
 }
