@@ -1,0 +1,20 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$table  = $this->getTable();
+$alias  = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+     * @return <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+     */
+    public function <?php echo $getter; ?>()
+    {
+        if (!($this-><?php echo lcfirst($alias); ?> instanceof <?php echo $alias; ?>RecordInterface)) {
+            $this-><?php echo lcfirst($alias); ?> = $this->getRelatedRecord(<?php echo $alias; ?>Record::class);
+        }
+
+        return $this-><?php echo lcfirst($alias); ?>;
+    }
