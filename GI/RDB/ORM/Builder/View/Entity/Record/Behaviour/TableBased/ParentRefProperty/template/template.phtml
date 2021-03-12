@@ -1,0 +1,11 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$alias = $this->getTable()->getAlias();
+?>
+    /**
+     * @var <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+     */
+    private $<?php echo lcfirst($alias); ?>;

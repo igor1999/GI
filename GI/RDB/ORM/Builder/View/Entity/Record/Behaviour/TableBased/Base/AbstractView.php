@@ -25,7 +25,7 @@ use GI\RDB\Meta\Table\TableInterface;
  * @package GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base
  *
  * @method TableInterface getTable()
- * @method ViewInterface setTable(TableInterface $column)
+ * @method ViewInterface setTable(TableInterface $table)
  */
 abstract class AbstractView extends Base implements ViewInterface
 {

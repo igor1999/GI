@@ -15,18 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty;
 
-use GI\Markup\Renderer\RendererInterface as BaseInterface;
-use GI\RDB\Meta\Table\TableInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base\ViewInterface as BaseInterface;
 
-/**
- * Interface ViewInterface
- * @package GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base
- *
- * @method TableInterface getTable()
- * @method ViewInterface setTable(TableInterface $table)
- */
 interface ViewInterface extends BaseInterface
 {
 
