@@ -1,0 +1,30 @@
+<?php
+/** @noinspection PhpUnhandledExceptionInspection */
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Getter\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$column = $this->getColumn();
+?>
+    /**
+     * @to-db <?php echo $column->getName(), PHP_EOL; ?>
+     * @return <?php echo $column->getPHPType(), PHP_EOL; ?>
+<?php foreach ($column->getParentReferenceList()->getItems() as $referencedColumn): ?>
+<?php
+$namespace = $referencedColumn->getTable()->getNamespace();
+$name      = $referencedColumn->getName();
+?>
+     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Record <?php echo $name, PHP_EOL; ?>
+<?php endforeach; ?>
+<?php foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
+<?php
+$namespace = $referencedColumn->getTable()->getNamespace();
+$name      = $referencedColumn->getName();
+?>
+     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Set <?php echo $name, PHP_EOL; ?>
+<?php endforeach; ?>
+     */
+    public function <?php echo $column->getClassGetter(); ?>()
+    {
+        return $this-><?php echo $column->getClassProperty(); ?>;
+    }
