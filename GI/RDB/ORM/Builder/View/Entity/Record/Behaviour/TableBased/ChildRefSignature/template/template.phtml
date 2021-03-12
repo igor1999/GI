@@ -1,0 +1,13 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$table  = $this->getTable();
+$alias  = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+     * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
+     */
+    public function <?php echo $getter; ?>Set();
