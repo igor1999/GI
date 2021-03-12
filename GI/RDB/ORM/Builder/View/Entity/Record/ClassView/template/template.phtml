@@ -16,8 +16,8 @@ foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): 
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
 ?>
+    use <?php echo $namespace; ?>\Record as <?php echo $alias; ?>Record;
     use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
-    use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
 <?php /** @noinspection PhpUnhandledExceptionInspection */
 foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
@@ -25,7 +25,7 @@ foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
 ?>
-    use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
+    use <?php echo $namespace; ?>\Set as <?php echo $alias; ?>Set;
     use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
 
@@ -55,9 +55,9 @@ foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?
     $alias = $table->getAlias();
     ?>
     /**
-    * @var <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+    * @var <?php echo $alias, 'SetInterface', PHP_EOL; ?>
     */
-    private $<?php echo lcfirst($alias); ?>;
+    private $<?php echo lcfirst($alias); ?>Set;
 
 <?php endforeach;?>
 
