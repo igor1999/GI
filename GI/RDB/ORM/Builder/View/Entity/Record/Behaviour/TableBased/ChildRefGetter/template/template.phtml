@@ -1,0 +1,20 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$table  = $this->getTable();
+$alias  = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+     * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
+     */
+    public function <?php echo $getter; ?>Set()
+    {
+        if (!($this-><?php echo lcfirst($alias); ?>Set instanceof <?php echo $alias; ?>SetInterface)) {
+            $this-><?php echo lcfirst($alias); ?>Set = $this->getRelatedSet(<?php echo $alias; ?>Set::class);
+        }
+
+        return $this-><?php echo lcfirst($alias); ?>Set;
+    }
