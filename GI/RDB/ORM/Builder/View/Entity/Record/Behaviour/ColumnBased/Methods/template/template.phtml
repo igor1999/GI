@@ -1,0 +1,49 @@
+<?php
+/** @noinspection PhpUnhandledExceptionInspection */
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$column = $this->getColumn();
+$name         = $column->getName();
+$type         = $column->getPHPType();
+$property     = $column->getClassProperty();
+$getter       = $column->getClassGetter();
+$setter       = $column->getClassSetter();
+$setterAccess = $this->getAccess($column);
+?>
+<?php echo $this->getGetterView()->toString(), PHP_EOL; ?>
+
+    /**
+     * @from-db <?php echo $name, PHP_EOL; ?>
+     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
+     * @return static
+     */
+    <?php echo $setterAccess; ?> function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>)
+    {
+        $this-><?php echo $property; ?> = $<?php echo $property; ?>;
+
+        return $this;
+    }
+<?php if ($column->isDatePHPType()): ?>
+
+    /**
+     * @return \DateTime
+     * @throws \Exception
+     */
+    public function <?php echo $getter; ?>AsDate()
+    {
+        return new \DateTime($this-><?php echo $property; ?>); //todo get date in required format
+    }
+<?php endif;?>
+<?php if ($column->isBoolPHPType()): ?>
+
+    /**
+     * @return bool
+     */
+    public function <?php echo $getter; ?>AsBool()
+    {
+        return (bool)$this-><?php echo $property; ?>;
+    }
+<?php endif;?>
+
