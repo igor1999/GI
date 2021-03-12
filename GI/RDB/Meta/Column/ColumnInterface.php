@@ -19,7 +19,8 @@ namespace GI\RDB\Meta\Column;
 
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\RDB\Meta\Table\TableInterface;
-use GI\GI\RDB\Meta\Column\References\ReferencesInterface;
+use GI\GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 interface ColumnInterface extends ExtractionInterface
 {
@@ -106,13 +107,13 @@ interface ColumnInterface extends ExtractionInterface
     public function getClassSetter();
 
     /**
-     * @return ReferencesInterface
+     * @return ParentReferencesInterface
      * @throws \Exception
      */
     public function getParentReferenceList();
 
     /**
-     * @return ReferencesInterface
+     * @return ChildReferencesInterface
      * @throws \Exception
      */
     public function getChildReferenceList();
