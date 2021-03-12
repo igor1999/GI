@@ -10,7 +10,8 @@ use <?php echo $this->getBaseNamespace(); ?>\AbstractRecord as Base;
 
 use GI\RDB\Meta\Table\TableInterface;
 
-<?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
 <?php
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
@@ -18,7 +19,8 @@ $alias     = $table->getAlias();
     use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
     use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
@@ -34,6 +36,28 @@ class Record extends Base implements RecordInterface
      * @var <?php echo $column->getPHPType(), PHP_EOL; ?>
      */
     private $<?php echo $column->getClassProperty(); ?>;
+
+<?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php
+$alias = $table->getAlias();
+?>
+    /**
+    * @var <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+    */
+    private $<?php echo lcfirst($alias); ?>;
+
+<?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+    <?php
+    $alias = $table->getAlias();
+    ?>
+    /**
+    * @var <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+    */
+    private $<?php echo lcfirst($alias); ?>;
 
 <?php endforeach;?>
 
