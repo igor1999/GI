@@ -138,4 +138,40 @@ foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
 <?php endif;?>
 
 <?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php
+$alias = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+    * @return <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+    */
+    public function <?php echo $getter; ?>()
+    {
+        if (!($this-><?php echo lcfirst($alias); ?> instanceof <?php echo $alias; ?>RecordInterface)) {
+            $this-><?php echo lcfirst($alias); ?> = $this->getRelatedRecord(<?php echo $alias; ?>Record::class);
+        }
+
+        return $this-><?php echo lcfirst($alias); ?>;
+    }
+<?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php
+$alias = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+    * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
+    */
+    public function <?php echo $getter; ?>Set()
+    {
+        if (!($this-><?php echo lcfirst($alias); ?>Set instanceof <?php echo $alias; ?>SetInterface)) {
+            $this-><?php echo lcfirst($alias); ?>Set = $this->getRelatedSet(<?php echo $alias; ?>Set::class);
+        }
+
+        return $this-><?php echo lcfirst($alias); ?>Set;
+    }
+<?php endforeach;?>
 }

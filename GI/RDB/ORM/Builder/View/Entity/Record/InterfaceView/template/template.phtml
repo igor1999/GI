@@ -64,4 +64,26 @@ interface RecordInterface extends BaseInterface
 <?php endif;?>
 
 <?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php
+$alias = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+    * @return <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
+    */
+    public function <?php echo $getter; ?>();
+<?php endforeach;?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php
+$alias = $table->getAlias();
+$getter = $table->getMethodGetter();
+?>
+    /**
+    * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
+    */
+    public function <?php echo $getter; ?>Set();
+<?php endforeach;?>
 }
