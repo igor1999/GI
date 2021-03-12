@@ -9,6 +9,23 @@ namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNames
 
 use <?php echo $this->getBaseNamespace(); ?>\RecordInterface as BaseInterface;
 
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+    <?php
+    $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
+    $alias     = $table->getAlias();
+    ?>
+    use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
+<?php endforeach; ?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */
+foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+    <?php
+    $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
+    $alias     = $table->getAlias();
+    ?>
+    use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
+<?php endforeach; ?>
+
 interface RecordInterface extends BaseInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column) :?>
