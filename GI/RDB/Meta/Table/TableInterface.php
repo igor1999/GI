@@ -21,6 +21,8 @@ use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Column\ColumnListInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
+use GI\GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
+use GI\GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
 
 interface TableInterface extends ExtractionInterface
 {
@@ -166,4 +168,16 @@ interface TableInterface extends ExtractionInterface
      * @return array
      */
     public function getChildReferences();
+
+    /**
+     * @return ParentReferencesInterface
+     * @throws \Exception
+     */
+    public function getParentReferencedTables();
+
+    /**
+     * @return ChildReferencesInterface
+     * @throws \Exception
+     */
+    public function getChildReferencedTables();
 }

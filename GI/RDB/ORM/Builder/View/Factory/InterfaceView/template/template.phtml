@@ -28,7 +28,7 @@ use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 $alias  = $table->getAlias();
 $method = $table->getMethodCreator();
 ?>
- * @method <?php echo $alias ?>RecordInterface <?php echo $method; ?>Record()
+ * @method <?php echo $alias ?>RecordInterface <?php echo $method; ?>()
  * @method <?php echo $alias ?>SetInterface <?php echo $method; ?>Set()
 <?php endforeach; ?>
  */

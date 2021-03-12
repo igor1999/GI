@@ -19,6 +19,8 @@ namespace GI\RDB\Meta\Table;
 
 use GI\RDB\Meta\Column\ColumnList;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilder;
+use GI\GI\RDB\Meta\Table\References\ParentReferences\References as ParentReferences;
+use GI\GI\RDB\Meta\Table\References\ChildReferences\References as ChildReferences;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\RDB\Meta\Exception\ExceptionAwareTrait;
@@ -27,6 +29,8 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Column\ColumnListInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilderInterface;
+use GI\GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 class Table implements TableInterface
 {
@@ -65,6 +69,16 @@ class Table implements TableInterface
      * @var array
      */
     private $childReferences;
+
+    /**
+     * @var ParentReferencesInterface
+     */
+    private $parentReferencedTables;
+
+    /**
+     * @var ChildReferencesInterface
+     */
+    private $childReferencedTables;
 
 
     /**
@@ -359,5 +373,35 @@ class Table implements TableInterface
         }
 
         return $this->childReferences;
+    }
+
+    /**
+     * @return ParentReferencesInterface
+     * @throws \Exception
+     */
+    public function getParentReferencedTables()
+    {
+        if (!($this->parentReferencedTables instanceof ParentReferencesInterface)) {
+            $this->parentReferencedTables = $this->giGetDi(
+                ParentReferencesInterface::class, ParentReferences::class, [$this]
+            );
+        }
+
+        return $this->parentReferencedTables;
+    }
+
+    /**
+     * @return ChildReferencesInterface
+     * @throws \Exception
+     */
+    public function getChildReferencedTables()
+    {
+        if (!($this->childReferencedTables instanceof ChildReferencesInterface)) {
+            $this->childReferencedTables = $this->giGetDi(
+                ChildReferencesInterface::class, ChildReferences::class, [$this]
+            );
+        }
+
+        return $this->childReferencedTables;
     }
 }
