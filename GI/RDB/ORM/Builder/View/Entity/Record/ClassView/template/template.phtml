@@ -1,7 +1,7 @@
-<?php echo '<?php';?>
+<?php /** @noinspection PhpUnhandledExceptionInspection */ echo '<?php';?>
 <?php
-    use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\ViewInterface;
-    /** @var ViewInterface $this */
+use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\ViewInterface;
+/** @var ViewInterface $this */
 ?>
 
 namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
@@ -10,8 +10,7 @@ use <?php echo $this->getBaseNamespace(); ?>\AbstractRecord as Base;
 
 use GI\RDB\Meta\Table\TableInterface;
 
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
 <?php
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
@@ -19,8 +18,7 @@ $alias     = $table->getAlias();
     use <?php echo $namespace; ?>\Record as <?php echo $alias; ?>Record;
     use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
 <?php endforeach; ?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
@@ -32,146 +30,26 @@ $alias     = $table->getAlias();
 class Record extends Base implements RecordInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-    /**
-     * @var <?php echo $column->getPHPType(), PHP_EOL; ?>
-     */
-    private $<?php echo $column->getClassProperty(); ?>;
-
-<?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-?>
-    /**
-    * @var <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
-    */
-    private $<?php echo lcfirst($alias); ?>;
-
-<?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-    <?php
-    $alias = $table->getAlias();
-    ?>
-    /**
-    * @var <?php echo $alias, 'SetInterface', PHP_EOL; ?>
-    */
-    private $<?php echo lcfirst($alias); ?>Set;
-
+<?php echo $this->getColumnPropertyView()->setColumn($column)->toString(); ?>
 <?php endforeach;?>
 
-    /**
-     * @return TableInterface
-     * @throws \Exception
-     */
-    public function getTable()
-    {
-        return $this->getDriver()->getTableList()->get('<?php echo $this->getTable()->getName(); ?>');
-    }
+<?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getParentRefPropertyView()->setTable($table)->toString(); ?>
+<?php endforeach;?>
+
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getChildRefPropertyView()->setTable($table)->toString(); ?>
+<?php endforeach;?>
 
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-<?php
-    $name         = $column->getName();
-    $type         = $column->getPHPType();
-    $property     = $column->getClassProperty();
-    $getter       = $column->getClassGetter();
-    $setter       = $column->getClassSetter();
-    $setterAccess = $this->getAccess($column);
-?>
-    /**
-     * @to-db <?php echo $name, PHP_EOL; ?>
-     * @return <?php echo $type, PHP_EOL; ?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($column->getParentReferenceList()->getItems() as $referencedColumn): ?>
-<?php
-    $namespace = $referencedColumn->getTable()->getNamespace();
-    $name      = $referencedColumn->getName();
-?>
-     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Record <?php echo $name, PHP_EOL; ?>
-<?php endforeach; ?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
-<?php
-    $namespace = $referencedColumn->getTable()->getNamespace();
-    $name      = $referencedColumn->getName();
-?>
-     * @<?php echo $this->getORMNamespace(), '\\', $namespace; ?>\Set <?php echo $name, PHP_EOL; ?>
-<?php endforeach; ?>
-     */
-    public function <?php echo $getter; ?>()
-    {
-        return $this-><?php echo $property; ?>;
-    }
-
-    /**
-     * @from-db <?php echo $name, PHP_EOL; ?>
-     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
-     * @return static
-     */
-    <?php echo $setterAccess; ?> function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>)
-    {
-        $this-><?php echo $property; ?> = $<?php echo $property; ?>;
-
-        return $this;
-    }
-<?php if ($column->isDatePHPType()): ?>
-
-    /**
-     * @return \DateTime
-     * @throws \Exception
-     */
-    public function <?php echo $getter; ?>AsDate()
-    {
-        return new \DateTime($this-><?php echo $property; ?>); //todo get date in required format
-    }
-<?php endif;?>
-<?php if ($column->isBoolPHPType()): ?>
-
-    /**
-     * @return bool
-     */
-    public function <?php echo $getter; ?>AsBool()
-    {
-        return (bool)$this-><?php echo $property; ?>;
-    }
-<?php endif;?>
-
+<?php echo $this->getColumnMethodsView()->setORMNamespace($this->getORMNamespace())->setColumn($column)->toString(); ?>
 <?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-$getter = $table->getMethodGetter();
-?>
-    /**
-    * @return <?php echo $alias, 'RecordInterface', PHP_EOL; ?>
-    */
-    public function <?php echo $getter; ?>()
-    {
-        if (!($this-><?php echo lcfirst($alias); ?> instanceof <?php echo $alias; ?>RecordInterface)) {
-            $this-><?php echo lcfirst($alias); ?> = $this->getRelatedRecord(<?php echo $alias; ?>Record::class);
-        }
 
-        return $this-><?php echo lcfirst($alias); ?>;
-    }
+<?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getParentRefGetterView()->setTable($table)->toString(); ?>
 <?php endforeach;?>
-<?php /** @noinspection PhpUnhandledExceptionInspection */
-foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-$getter = $table->getMethodGetter();
-?>
-    /**
-    * @return <?php echo $alias, 'SetInterface', PHP_EOL; ?>
-    */
-    public function <?php echo $getter; ?>Set()
-    {
-        if (!($this-><?php echo lcfirst($alias); ?>Set instanceof <?php echo $alias; ?>SetInterface)) {
-            $this-><?php echo lcfirst($alias); ?>Set = $this->getRelatedSet(<?php echo $alias; ?>Set::class);
-        }
 
-        return $this-><?php echo lcfirst($alias); ?>Set;
-    }
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
+<?php echo $this->getChildRefGetterView()->setTable($table)->toString(); ?>
 <?php endforeach;?>
 }
