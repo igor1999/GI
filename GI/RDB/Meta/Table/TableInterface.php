@@ -20,6 +20,7 @@ namespace GI\RDB\Meta\Table;
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Column\ColumnListInterface;
+use GI\GI\RDB\Meta\Table\PHPNames\PHPNamesInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 use GI\GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
@@ -91,6 +92,11 @@ interface TableInterface extends ExtractionInterface
      * @return ColumnListInterface
      */
     public function getColumnList();
+
+    /**
+     * @return PHPNamesInterface
+     */
+    public function getPhpNames();
 
     /**
      * @return array

@@ -19,6 +19,7 @@ namespace GI\RDB\Meta\Table;
 
 use GI\RDB\Meta\Column\ColumnList;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilder;
+use GI\GI\RDB\Meta\Table\PHPNames\PHPNames;
 use GI\GI\RDB\Meta\Table\References\ParentReferences\References as ParentReferences;
 use GI\GI\RDB\Meta\Table\References\ChildReferences\References as ChildReferences;
 
@@ -29,6 +30,7 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Column\ColumnListInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilderInterface;
+use GI\GI\RDB\Meta\Table\PHPNames\PHPNamesInterface;
 use GI\GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
 use GI\GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
@@ -59,6 +61,11 @@ class Table implements TableInterface
      * @var QueryBuilderInterface
      */
     private $queryBuilder;
+
+    /**
+     * @var PHPNamesInterface
+     */
+    private $phpNames;
 
     /**
      * @var array
@@ -95,6 +102,8 @@ class Table implements TableInterface
         $this->columnList = $this->giGetDi(ColumnListInterface::class, new ColumnList($this),  [$this]);
 
         $this->queryBuilder = $this->giGetDi(QueryBuilderInterface::class, new QueryBuilder($this),  [$this]);
+
+        $this->phpNames = $this->giGetDi(PHPNamesInterface::class, new PHPNames($this),  [$this]);
     }
 
     /**
@@ -223,6 +232,14 @@ class Table implements TableInterface
     protected function getQueryBuilder()
     {
         return $this->queryBuilder;
+    }
+
+    /**
+     * @return PHPNamesInterface
+     */
+    public function getPhpNames()
+    {
+        return $this->phpNames;
     }
 
     /**
