@@ -36,7 +36,7 @@ $prefix = $column->isIntPHPType() ? '@' : '';
      */
     public function <?php echo $getter; ?>AsDate()
     {
-        return new \DateTime(<?php echo $prefix; ?> . $this-><?php echo $property; ?>);
+        return new \DateTime('<?php echo $prefix; ?>' . $this-><?php echo $property; ?>);
     }
 <?php endif;?>
 <?php if ($column->isBoolPHPType()): ?>
