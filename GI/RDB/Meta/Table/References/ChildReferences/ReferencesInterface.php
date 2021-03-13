@@ -18,8 +18,24 @@
 namespace GI\GI\RDB\Meta\Table\References\ChildReferences;
 
 use GI\GI\RDB\Meta\Table\References\Base\ReferencesInterface as BaseInterface;
+use GI\RDB\Meta\Table\TableInterface;
 
 interface ReferencesInterface extends BaseInterface
 {
+    /**
+     * @param string $name
+     * @return bool
+     * @throws \Exception
+     */
+    public function isUnique(string $name);
 
+    /**
+     * @return TableInterface[]
+     */
+    public function getUniqueItems();
+
+    /**
+     * @return TableInterface[]
+     */
+    public function getNonUniqueItems();
 }

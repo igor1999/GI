@@ -18,8 +18,17 @@
 namespace GI\GI\RDB\Meta\Column\References\ChildReferences;
 
 use GI\GI\RDB\Meta\Column\References\Base\ReferencesInterface as BaseInterface;
+use GI\RDB\Meta\Column\ColumnInterface;
 
 interface ReferencesInterface extends BaseInterface
 {
+    /**
+     * @return ColumnInterface[]
+     */
+    public function getUniqueItems();
 
+    /**
+     * @return ColumnInterface[]
+     */
+    public function getNonUniqueItems();
 }

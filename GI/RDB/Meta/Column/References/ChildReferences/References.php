@@ -19,6 +19,8 @@ namespace GI\GI\RDB\Meta\Column\References\ChildReferences;
 
 use GI\GI\RDB\Meta\Column\References\Base\AbstractReferences as Base;
 
+use GI\RDB\Meta\Column\ColumnInterface;
+
 class References extends Base implements ReferencesInterface
 {
     /**
@@ -27,5 +29,31 @@ class References extends Base implements ReferencesInterface
     protected function getContents()
     {
         return $this->getColumn()->getTable()->getChildReferences();
+    }
+
+    /**
+     * @return ColumnInterface[]
+     */
+    public function getUniqueItems()
+    {
+        $f = function(ColumnInterface $column)
+        {
+            return $column->isUnique();
+        };
+
+        return array_filter($this->getItems(), $f);
+    }
+
+    /**
+     * @return ColumnInterface[]
+     */
+    public function getNonUniqueItems()
+    {
+        $f = function(ColumnInterface $column)
+        {
+            return !$column->isUnique();
+        };
+
+        return array_filter($this->getItems(), $f);
     }
 }

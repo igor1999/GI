@@ -70,6 +70,11 @@ class Column implements ColumnInterface
     /**
      * @var bool
      */
+    private $unique = false;
+
+    /**
+     * @var bool
+     */
     private $null = true;
 
     /**
@@ -285,6 +290,27 @@ class Column implements ColumnInterface
     protected function setPrimary($primary)
     {
         $this->primary = (bool)$primary;
+
+        return $this;
+    }
+
+    /**
+     * @extract
+     * @return bool
+     */
+    public function isUnique()
+    {
+        return $this->unique;
+    }
+
+    /**
+     * @hydrate
+     * @param mixed $unique
+     * @return static
+     */
+    protected function setUnique($unique)
+    {
+        $this->unique = (bool)$unique;
 
         return $this;
     }

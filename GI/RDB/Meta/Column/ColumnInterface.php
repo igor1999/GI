@@ -50,7 +50,6 @@ interface ColumnInterface extends ExtractionInterface
     public function getType();
 
     /**
-     * @extract
      * @return int
      */
     public function getLength();
@@ -64,6 +63,11 @@ interface ColumnInterface extends ExtractionInterface
      * @return bool
      */
     public function isPrimary();
+
+    /**
+     * @return bool
+     */
+    public function isUnique();
 
     /**
      * @return bool

@@ -61,6 +61,7 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
                 `CHARACTER_MAXIMUM_LENGTH` as `length`,
                 `COLUMN_DEFAULT` as `default`,
                 if(`COLUMN_KEY` = \'PRI\', 1 , 0) as `primary`,
+                if((`COLUMN_KEY` = \'PRI\') OR (`COLUMN_KEY` = \'UNI\'), 1 , 0) as `unique`,
                 if(`IS_NULLABLE` = \'YES\', 1 , 0) as `null`,
                 if(`EXTRA` = \'auto_increment\', 1 , 0) as `identity`
             FROM `information_schema`.`COLUMNS`
