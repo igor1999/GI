@@ -14,7 +14,7 @@ foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): 
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
 ?>
-    use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
+use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
 <?php endforeach; ?>
 <?php /** @noinspection PhpUnhandledExceptionInspection */
 foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
@@ -22,20 +22,23 @@ foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?
 $namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
 $alias     = $table->getAlias();
 ?>
-    use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
+use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
 <?php endforeach; ?>
 
 interface RecordInterface extends BaseInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
 <?php echo $this->getColumnSignaturesView()->setColumn($column)->toString(); ?>
+
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
 <?php echo $this->getParentRefSignatureView()->setTable($table)->toString(); ?>
+
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php echo $this->getChildRefSignatureView()->setTable($table)->toString(); ?>
+
 <?php endforeach;?>
 }

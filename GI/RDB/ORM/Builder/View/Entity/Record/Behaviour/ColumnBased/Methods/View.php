@@ -51,6 +51,19 @@ class View extends Base implements ViewInterface
     }
 
     /**
+     * @param ColumnInterface $column
+     * @return static
+     */
+    public function setColumn(ColumnInterface $column)
+    {
+        parent::setColumn($column);
+        
+        $this->getGetterView()->setColumn($column);
+        
+        return $this;
+    }
+
+    /**
      * @param string $namespace
      * @return static
      */

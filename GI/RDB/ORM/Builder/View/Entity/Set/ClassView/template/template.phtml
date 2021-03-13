@@ -19,7 +19,7 @@ class Set extends Base implements SetInterface
      */
     protected function createTemplateItem()
     {
-        return $this->getORMFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>Record();
+        return $this->getORMFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>();
     }
 
     /**
