@@ -98,17 +98,44 @@ abstract class AbstractPlatform implements PlatformInterface
      */
     public function getPHPType(string $dbType)
     {
-        if (in_array($dbType, static::PHP_INT_TYPES)) {
+        if ($this->isIntPHPType($dbType)) {
             $type = static::PHP_INT_TYPE;
-        } elseif (in_array($dbType, static::PHP_FLOAT_TYPES)) {
+        } elseif ($this->isFloatPHPType($dbType)) {
             $type = static::PHP_FLOAT_TYPE;
-        } elseif (in_array($dbType, static::PHP_STRING_TYPES)) {
+        } elseif ($this->isStringPHPType($dbType)) {
             $type = static::PHP_STRING_TYPE;
         } else {
             $type = static::PHP_UNDEFINED_TYPE;
         }
 
         return $type;
+    }
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isIntPHPType(string $dbType)
+    {
+        return in_array($dbType, static::PHP_INT_TYPES);
+    }
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isFloatPHPType(string $dbType)
+    {
+        return in_array($dbType, static::PHP_FLOAT_TYPES);
+    }
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isStringPHPType(string $dbType)
+    {
+        return in_array($dbType, static::PHP_STRING_TYPES);
     }
 
     /**

@@ -75,6 +75,24 @@ interface PlatformInterface
      * @param string $dbType
      * @return bool
      */
+    public function isIntPHPType(string $dbType);
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isFloatPHPType(string $dbType);
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
+    public function isStringPHPType(string $dbType);
+
+    /**
+     * @param string $dbType
+     * @return bool
+     */
     public function isDatePHPType(string $dbType);
 
     /**

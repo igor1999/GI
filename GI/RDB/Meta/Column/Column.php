@@ -342,6 +342,30 @@ class Column implements ColumnInterface
     /**
      * @return bool
      */
+    public function isIntPHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->isIntPHPType($this->type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isFloatPHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->isFloatPHPType($this->type);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isStringPHPType()
+    {
+        return $this->getTable()->getDriver()->getPlatform()->isStringPHPType($this->type);
+    }
+
+    /**
+     * @return bool
+     */
     public function isDatePHPType()
     {
         return $this->getTable()->getDriver()->getPlatform()->isDatePHPType($this->type);

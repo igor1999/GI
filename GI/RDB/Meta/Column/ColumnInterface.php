@@ -84,6 +84,21 @@ interface ColumnInterface extends ExtractionInterface
     /**
      * @return bool
      */
+    public function isIntPHPType();
+
+    /**
+     * @return bool
+     */
+    public function isFloatPHPType();
+
+    /**
+     * @return bool
+     */
+    public function isStringPHPType();
+
+    /**
+     * @return bool
+     */
     public function isDatePHPType();
 
     /**

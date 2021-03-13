@@ -27,13 +27,16 @@ $setterAccess = $this->getAccess($column);
     }
 <?php if ($column->isDatePHPType()): ?>
 
+<?php
+$prefix = $column->isIntPHPType() ? '@' : '';
+?>
     /**
      * @return \DateTime
      * @throws \Exception
      */
     public function <?php echo $getter; ?>AsDate()
     {
-        return new \DateTime($this-><?php echo $property; ?>); //todo get date in required format
+        return new \DateTime(<?php echo $prefix; ?> . $this-><?php echo $property; ?>);
     }
 <?php endif;?>
 <?php if ($column->isBoolPHPType()): ?>
