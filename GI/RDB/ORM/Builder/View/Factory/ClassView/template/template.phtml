@@ -1,46 +1,37 @@
 <?php echo '<?php'; ?>
-
 <?php
-    use GI\RDB\ORM\Builder\View\Factory\ClassView\ViewInterface;
-    /** @var ViewInterface $this */
+use GI\RDB\ORM\Builder\View\Factory\ClassView\ViewInterface;
+/** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getORMNamespace(); ?>\Factory;
+<?php $namespace = $this->getORMNamespace(); ?>
+namespace <?php echo $namespace; ?>\Factory;
 
 use GI\RDB\ORM\Factory\AbstractFactory as Base;
 
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-<?php
-$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-$alias     = $table->getAlias();
-?>
-use <?php echo $namespace; ?>\Record as <?php echo $alias; ?>Record;
-use <?php echo $namespace; ?>\Set as <?php echo $alias; ?>Set;
+<?php $names = $table->getPhpNames(); ?>
+use <?php echo $namespace; ?>\<?php echo $names->getRecordClass(); ?> as <?php echo $names->getRecordClassAlias(); ?>;
+use <?php echo $namespace; ?>\<?php echo $names->getSetClass(); ?> as <?php echo $names->getSetClassAlias(); ?>;
 <?php endforeach; ?>
 
 use <?php echo $this->getServiceLocatorTrait(); ?> as ServiceLocatorAwareTrait;
 
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-<?php
-$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-$alias     = $table->getAlias();
-?>
-use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
-use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
+<?php $names = $table->getPhpNames(); ?>
+use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
+use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php echo $names->getSetInterfaceAlias(); ?>;
 <?php endforeach; ?>
 
 
 /**
  * Class Factory
- * @package <?php echo $this->getORMNamespace(); ?>\Factory
+ * @package <?php echo $namespace; ?>\Factory
  *
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-<?php
-$alias  = $table->getAlias();
-$method = $table->getMethodCreator();
-?>
-* @method <?php echo $alias ?>RecordInterface <?php echo $method; ?>()
-* @method <?php echo $alias ?>SetInterface <?php echo $method; ?>Set()
+<?php $names = $table->getPhpNames(); ?>
+ * @method <?php echo $names->getRecordInterfaceAlias() ?> <?php echo $names->getRecordCreator(); ?>()
+ * @method <?php echo $names->getSetInterfaceAlias() ?> <?php echo $names->getSetCreator(); ?>()
 <?php endforeach; ?>
  */
 class Factory extends Base implements FactoryInterface
@@ -58,11 +49,9 @@ class Factory extends Base implements FactoryInterface
 
         $this
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
-<?php
-$alias = $table->getAlias();
-?>
-            ->setNamed('<?php echo $alias; ?>Record', <?php echo $alias; ?>Record::class)
-            ->setNamed('<?php echo $alias; ?>Set', <?php echo $alias; ?>Set::class)
+<?php $names = $table->getPhpNames(); ?>
+            ->setNamed('<?php echo $names->getRecordClass(); ?>', <?php echo $names->getRecordClass(); ?>::class)
+            ->setNamed('<?php echo $names->getSetClass(); ?>', <?php echo $names->getSetClass(); ?>::class)
 <?php endforeach; ?>
         ;
     }
