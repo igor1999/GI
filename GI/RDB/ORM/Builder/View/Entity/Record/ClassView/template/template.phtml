@@ -25,15 +25,15 @@ use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php 
 class Record extends Base implements RecordInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-<?php echo $this->getColumnPropertyView()->setColumn($column)->toString(), PHP_EOL; ?>
+<?php echo $this->getColumnPropertyView()->setColumn($column)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getSetPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php echo $this->getSetPropertyView()->setTable($table)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 
 
@@ -47,14 +47,14 @@ class Record extends Base implements RecordInterface
     }
 
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-<?php echo $this->getColumnMethodsView()->setORMNamespace($this->getORMNamespace())->setColumn($column)->toString(), PHP_EOL; ?>
+<?php echo $this->getColumnMethodsView()->setORMNamespace($this->getORMNamespace())->setColumn($column)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getSetGetterView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php echo $this->getSetGetterView()->setTable($table)->toString(), PHP_EOL, PHP_EOL; ?>
 <?php endforeach;?>
 }
