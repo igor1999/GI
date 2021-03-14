@@ -123,6 +123,16 @@ interface ColumnInterface extends ExtractionInterface
     /**
      * @return string
      */
+    public function getClassDateGetter();
+
+    /**
+     * @return string
+     */
+    public function getClassBoolGetter();
+
+    /**
+     * @return string
+     */
     public function getClassSetter();
 
     /**

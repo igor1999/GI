@@ -32,6 +32,11 @@ class Column implements ColumnInterface
     use ServiceLocatorAwareTrait, ExtractionTrait;
 
 
+    const DATE_GETTER_SUFFIX = 'AsDate';
+
+    const BOOL_GETTER_SUFFIX = 'AsBool';
+
+
     /**
      * @var TableInterface
      */
@@ -419,6 +424,22 @@ class Column implements ColumnInterface
     public function getClassGetter()
     {
         return $this->giGetPSRFormatBuilder()->buildGet($this->getClassProperty());
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassDateGetter()
+    {
+        return $this->getClassGetter() . static::DATE_GETTER_SUFFIX;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClassBoolGetter()
+    {
+        return $this->getClassGetter() . static::BOOL_GETTER_SUFFIX;
     }
 
     /**

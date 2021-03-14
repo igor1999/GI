@@ -6,32 +6,30 @@ use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewI
 $column   = $this->getColumn();
 $type     = $column->getPHPType();
 $property = $column->getClassProperty();
-$getter   = $column->getClassGetter();
-$setter   = $column->getClassSetter();
 ?>
     /**
      * @return <?php echo $type, PHP_EOL; ?>
      */
-    public function <?php echo $getter; ?>();
+    public function <?php echo $column->getClassGetter(); ?>();
 <?php if (!$column->isIdentity()): ?>
 
     /**
      * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
      * @return static
      */
-    public function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>);
+    public function <?php echo $column->getClassSetter(); ?>(<?php echo $type; ?> $<?php echo $property; ?>);
 <?php endif;?>
 <?php if ($column->isDatePHPType()): ?>
 
     /**
      * @return \DateTime
      */
-    public function <?php echo $getter; ?>AsDate();
+    public function <?php echo $column->getClassDateGetter(); ?>();
 <?php endif;?>
 <?php if ($column->isBoolPHPType()): ?>
 
     /**
      * @return bool
      */
-    public function <?php echo $getter; ?>AsBool();
+    public function <?php echo $column->getClassBoolGetter(); ?>();
 <?php endif;?>
