@@ -1,11 +1,11 @@
 <?php echo '<?php'; ?>
-
 <?php
-    use GI\RDB\ORM\Builder\View\Entity\Set\InterfaceView\ViewInterface;
-    /** @var ViewInterface $this */
+use GI\RDB\ORM\Builder\View\Entity\Set\InterfaceView\ViewInterface;
+/** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
+<?php $namespace = $this->getORMNamespace() . '\\' . $this->getTable()->getPhpNames()->getNamespace();?>
+namespace <?php echo $namespace; ?>;
 
 use <?php echo $this->getBaseNamespace(); ?>\SetInterface as BaseInterface;
 

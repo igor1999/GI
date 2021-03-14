@@ -1,13 +1,10 @@
 <?php echo '<?php'; ?>
-
 <?php
-    use GI\RDB\ORM\Builder\View\Entity\Set\ClassView\ViewInterface;
-    /** @var ViewInterface $this */
-?>
-<?php
-    $namespace = $this->getORMNamespace() . '\\' . $this->getTable()->getNamespace();
+use GI\RDB\ORM\Builder\View\Entity\Set\ClassView\ViewInterface;
+/** @var ViewInterface $this */
 ?>
 
+<?php $namespace = $this->getORMNamespace() . '\\' . $this->getTable()->getPhpNames()->getNamespace();?>
 namespace <?php echo $namespace; ?>;
 
 use <?php echo $this->getBaseNamespace(); ?>\AbstractSet as Base;
@@ -19,7 +16,7 @@ class Set extends Base implements SetInterface
      */
     protected function createTemplateItem()
     {
-        return $this->getORMFactory()-><?php echo $this->getTable()->getMethodCreator(); ?>();
+        return $this->getORMFactory()-><?php echo $this->getTable()->getPhpNames()->getRecordCreator(); ?>();
     }
 
     /**
