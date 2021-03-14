@@ -198,7 +198,7 @@ class Builder implements BuilderInterface
      */
     public function create()
     {
-        $childDir = $this->getTable()->getDir();
+        $childDir = $this->getTable()->getPhpNames()->getDir();
         $dir      = $this->getOrmDir()->createChildDir($childDir);
 
         $this->getRecordClassView()
