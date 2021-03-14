@@ -13,11 +13,7 @@ use <?php echo $this->getBaseNamespace(); ?>\RecordInterface as BaseInterface;
 <?php $names = $table->getPhpNames(); ?>
 use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
 <?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
-<?php $names = $table->getPhpNames(); ?>
-use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
-<?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php $names = $table->getPhpNames(); ?>
 use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php echo $names->getSetInterfaceAlias(); ?>;
 <?php endforeach; ?>
@@ -32,11 +28,7 @@ interface RecordInterface extends BaseInterface
 <?php echo $this->getRecordSignatureView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
-<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
-<?php echo $this->getRecordSignatureView()->setTable($table)->toString(), PHP_EOL; ?>
-<?php endforeach;?>
-
-<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php echo $this->getSetSignatureView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 }

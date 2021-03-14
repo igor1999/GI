@@ -50,8 +50,8 @@ class Factory extends Base implements FactoryInterface
         $this
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
 <?php $names = $table->getPhpNames(); ?>
-            ->setNamed('<?php echo $names->getRecordClass(); ?>', <?php echo $names->getRecordClass(); ?>::class)
-            ->setNamed('<?php echo $names->getSetClass(); ?>', <?php echo $names->getSetClass(); ?>::class)
+            ->setNamed('<?php echo $names->getRecordClassAlias(); ?>', <?php echo $names->getRecordClassAlias(); ?>::class)
+            ->setNamed('<?php echo $names->getSetClassAlias(); ?>', <?php echo $names->getSetClassAlias(); ?>::class)
 <?php endforeach; ?>
         ;
     }

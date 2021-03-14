@@ -13,11 +13,7 @@ $column = $this->getColumn();
 <?php $class = $referencedColumn->getTable()->getPhpNames()->getRecordClass(); ?>
      * @<?php echo $this->getORMNamespace(), '\\', $class; ?> <?php echo $referencedColumn->getName(), PHP_EOL; ?>
 <?php endforeach; ?>
-<?php foreach ($column->getChildReferenceList()->getUniqueItems() as $referencedColumn): ?>
-<?php $class = $referencedColumn->getTable()->getPhpNames()->getRecordClass(); ?>
-    * @<?php echo $this->getORMNamespace(), '\\', $class; ?> <?php echo $referencedColumn->getName(), PHP_EOL; ?>
-<?php endforeach; ?>
-<?php foreach ($column->getChildReferenceList()->getNonUniqueItems() as $referencedColumn): ?>
+<?php foreach ($column->getChildReferenceList()->getItems() as $referencedColumn): ?>
 <?php $class = $referencedColumn->getTable()->getPhpNames()->getSetClass();?>
      * @<?php echo $this->getORMNamespace(), '\\', $class; ?> <?php echo $referencedColumn->getName(), PHP_EOL; ?>
 <?php endforeach; ?>

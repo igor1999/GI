@@ -16,12 +16,7 @@ use GI\RDB\Meta\Table\TableInterface;
 use <?php echo $namespace; ?>\<?php echo $names->getRecordClass(); ?> as <?php echo $names->getRecordClassAlias(); ?>;
 use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
 <?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
-<?php $names = $table->getPhpNames(); ?>
-use <?php echo $namespace; ?>\<?php echo $names->getRecordClass(); ?> as <?php echo $names->getRecordClassAlias(); ?>;
-use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
-<?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php $names = $table->getPhpNames(); ?>
 use <?php echo $namespace; ?>\<?php echo $names->getSetClass(); ?> as <?php echo $names->getSetClassAlias(); ?>;
 use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php echo $names->getSetInterfaceAlias(); ?>;
@@ -37,11 +32,7 @@ class Record extends Base implements RecordInterface
 <?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
-<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
-<?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
-<?php endforeach;?>
-
-<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php echo $this->getSetPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
@@ -63,11 +54,7 @@ class Record extends Base implements RecordInterface
 <?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
-<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
-<?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL; ?>
-<?php endforeach;?>
-
-<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
 <?php echo $this->getSetGetterView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 }
