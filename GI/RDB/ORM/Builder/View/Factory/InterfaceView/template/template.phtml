@@ -22,7 +22,7 @@ use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php 
  *
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
 <?php $names = $table->getPhpNames(); ?>
- * @method <?php echo $names->getRecordInterfaceAlias() ?> <?php echo $names->getRecordCreator(); ?>()
+ * @method <?php echo $names->getRecordInterfaceAlias() ?> <?php echo $names->getRecordCreator(); ?>($primaryKey = null)
  * @method <?php echo $names->getSetInterfaceAlias() ?> <?php echo $names->getSetCreator(); ?>()
 <?php endforeach; ?>
  */
