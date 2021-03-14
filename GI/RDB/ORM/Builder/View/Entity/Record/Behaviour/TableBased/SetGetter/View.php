@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetGetter;
 
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base\ViewInterface as BaseInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base\AbstractView as Base;
 
-interface ViewInterface extends BaseInterface
+class View extends Base implements ViewInterface
 {
 
 }

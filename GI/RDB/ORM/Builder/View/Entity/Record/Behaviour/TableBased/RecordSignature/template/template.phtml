@@ -1,0 +1,12 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordSignature\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$names  = $this->getTable()->getPhpNames();
+?>
+    /**
+     * @return <?php echo $names->getRecordInterfaceAlias(), PHP_EOL; ?>
+     * @throws \Exception
+     */
+    public function <?php echo $names->getRecordGetter(); ?>();

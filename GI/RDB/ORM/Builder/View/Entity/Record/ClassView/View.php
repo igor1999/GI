@@ -21,20 +21,18 @@ use GI\RDB\ORM\Builder\View\Entity\Base\AbstractView as Base;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\View as ColumnPropertyView;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\View as ColumnMethodsView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\View as RecordPropertyView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\View as SetPropertyView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\View as RecordGetterView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\View as SetGetterView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordProperty\View as RecordPropertyView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetProperty\View as SetPropertyView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordGetter\View as RecordGetterView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetGetter\View as SetGetterView;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface as ColumnPropertyViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInterface as ColumnMethodsViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\ViewInterface
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordProperty\ViewInterface
     as RecordPropertyViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\ViewInterface
-    as SetPropertyViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface
-    as RecordGetterViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface as SetGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetProperty\ViewInterface as SetPropertyViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordGetter\ViewInterface as RecordGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetGetter\ViewInterface as SetGetterViewInterface;
 
 class View extends Base implements ViewInterface
 {

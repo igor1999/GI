@@ -1,0 +1,22 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetGetter\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$names  = $this->getTable()->getPhpNames();
+$property  = $names->getSetProperty();
+$interfaceAlias = $names->getSetInterfaceAlias();
+$classAlias = $names->getSetClassAlias();
+?>
+    /**
+     * @return <?php echo $interfaceAlias, PHP_EOL; ?>
+     * @throws \Exception
+     */
+    public function <?php echo $names->getSetGetter(); ?>()
+    {
+        if (!($this-><?php echo $property; ?> instanceof <?php echo $interfaceAlias; ?>)) {
+            $this-><?php echo $property; ?> = $this->getRelatedSet(<?php echo $classAlias; ?>::class);
+        }
+
+        return $this-><?php echo $property; ?>;
+    }

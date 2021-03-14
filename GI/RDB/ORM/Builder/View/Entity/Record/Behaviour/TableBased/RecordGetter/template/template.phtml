@@ -1,0 +1,22 @@
+<?php
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordGetter\ViewInterface;
+/** @var ViewInterface $this */
+?>
+<?php
+$names  = $this->getTable()->getPhpNames();
+$property  = $names->getRecordProperty();
+$interfaceAlias = $names->getRecordInterfaceAlias();
+$classAlias = $names->getRecordClassAlias();
+?>
+    /**
+     * @return <?php echo $interfaceAlias, PHP_EOL; ?>
+     * @throws \Exception
+     */
+    public function <?php echo $names->getRecordGetter(); ?>()
+    {
+        if (!($this-><?php echo $property; ?> instanceof <?php echo $interfaceAlias; ?>)) {
+            $this-><?php echo $property; ?> = $this->getRelatedRecord(<?php echo $classAlias; ?>::class);
+        }
+
+        return $this-><?php echo $property; ?>;
+    }

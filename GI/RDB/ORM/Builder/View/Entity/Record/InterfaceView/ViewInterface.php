@@ -20,10 +20,9 @@ namespace GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView;
 use GI\RDB\ORM\Builder\View\Entity\Base\ViewInterface as BaseInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewInterface
     as ColumnSignaturesViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\ViewInterface
-    as ParentRefSignatureViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\ViewInterface
-    as ChildRefSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordSignature\ViewInterface
+    as RecordSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetSignature\ViewInterface as SetSignatureViewInterface;
 
 interface ViewInterface extends BaseInterface
 {
@@ -33,12 +32,12 @@ interface ViewInterface extends BaseInterface
     public function getColumnSignaturesView();
 
     /**
-     * @return ParentRefSignatureViewInterface
+     * @return RecordSignatureViewInterface
      */
-    public function getParentRefSignatureView();
+    public function getRecordSignatureView();
 
     /**
-     * @return ChildRefSignatureViewInterface
+     * @return SetSignatureViewInterface
      */
-    public function getChildRefSignatureView();
+    public function getSetSignatureView();
 }

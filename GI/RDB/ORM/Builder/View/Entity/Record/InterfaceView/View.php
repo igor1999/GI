@@ -20,17 +20,14 @@ namespace GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView;
 use GI\RDB\ORM\Builder\View\Entity\Base\AbstractView as Base;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\View
     as ColumnSignaturesView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\View
-    as ParentRefSignatureView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\View
-    as ChildRefSignatureView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordSignature\View as RecordSignatureView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetSignature\View as SetSignatureView;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewInterface
     as ColumnSignaturesViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefSignature\ViewInterface
-    as ParentRefSignatureViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature\ViewInterface
-    as ChildRefSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\RecordSignature\ViewInterface
+    as RecordSignatureViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetSignature\ViewInterface as SetSignatureViewInterface;
 
 class View extends Base implements ViewInterface
 {
@@ -40,14 +37,14 @@ class View extends Base implements ViewInterface
     private $columnSignaturesView;
 
     /**
-     * @var ParentRefSignatureViewInterface
+     * @var RecordSignatureViewInterface
      */
-    private $parentRefSignatureView;
+    private $recordSignatureView;
 
     /**
-     * @var ChildRefSignatureViewInterface
+     * @var SetSignatureViewInterface
      */
-    private $childRefSignatureView;
+    private $setSignatureView;
 
 
     /**
@@ -62,12 +59,12 @@ class View extends Base implements ViewInterface
             ColumnSignaturesViewInterface::class, ColumnSignaturesView::class
         );
 
-        $this->parentRefSignatureView = $this->giGetDi(
-            ParentRefSignatureViewInterface::class, ParentRefSignatureView::class
+        $this->recordSignatureView = $this->giGetDi(
+            RecordSignatureViewInterface::class, RecordSignatureView::class
         );
 
-        $this->childRefSignatureView = $this->giGetDi(
-            ChildRefSignatureViewInterface::class, ChildRefSignatureView::class
+        $this->setSignatureView = $this->giGetDi(
+            SetSignatureViewInterface::class, SetSignatureView::class
         );
     }
 
@@ -80,18 +77,18 @@ class View extends Base implements ViewInterface
     }
 
     /**
-     * @return ParentRefSignatureViewInterface
+     * @return RecordSignatureViewInterface
      */
-    public function getParentRefSignatureView()
+    public function getRecordSignatureView()
     {
-        return $this->parentRefSignatureView;
+        return $this->recordSignatureView;
     }
 
     /**
-     * @return ChildRefSignatureViewInterface
+     * @return SetSignatureViewInterface
      */
-    public function getChildRefSignatureView()
+    public function getSetSignatureView()
     {
-        return $this->childRefSignatureView;
+        return $this->setSignatureView;
     }
 }

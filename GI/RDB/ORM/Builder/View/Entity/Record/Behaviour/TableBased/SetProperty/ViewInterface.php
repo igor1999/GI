@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefSignature;
+namespace GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\SetProperty;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\Base\ViewInterface as BaseInterface;
 
