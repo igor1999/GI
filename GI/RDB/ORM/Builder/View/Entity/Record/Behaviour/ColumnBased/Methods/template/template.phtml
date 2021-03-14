@@ -8,7 +8,6 @@ $column = $this->getColumn();
 $name         = $column->getName();
 $type         = $column->getPHPType();
 $property     = $column->getClassProperty();
-$getter       = $column->getClassGetter();
 $setter       = $column->getClassSetter();
 $setterAccess = $this->getAccess($column);
 ?>
@@ -27,16 +26,17 @@ $setterAccess = $this->getAccess($column);
     }
 <?php if ($column->isDatePHPType()): ?>
 
-<?php
-$prefix = $column->isIntPHPType() ? '@' : '';
-?>
     /**
      * @return \DateTime
      * @throws \Exception
      */
-    public function <?php echo $getter; ?>AsDate()
+    public function <?php echo $column->getClassDateGetter(); ?>()
     {
-        return new \DateTime('<?php echo $prefix; ?>' . $this-><?php echo $property; ?>);
+<?php if ($column->isIntPHPType()): ?>
+        return new \DateTime('@' . $this-><?php echo $property; ?>);
+<?php else: ?>
+        return new \DateTime($this-><?php echo $property; ?>);
+<?php endif;?>
     }
 <?php endif;?>
 <?php if ($column->isBoolPHPType()): ?>
@@ -44,7 +44,7 @@ $prefix = $column->isIntPHPType() ? '@' : '';
     /**
      * @return bool
      */
-    public function <?php echo $getter; ?>AsBool()
+    public function <?php echo $column->getClassBoolGetter(); ?>()
     {
         return (bool)$this-><?php echo $property; ?>;
     }
