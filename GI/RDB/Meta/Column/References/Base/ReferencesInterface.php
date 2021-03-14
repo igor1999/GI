@@ -27,17 +27,12 @@ interface ReferencesInterface
     public function getColumn();
 
     /**
-     * @param string $name
-     * @return bool
-     */
-    public function has(string $name);
-
-    /**
-     * @param string $name
+     * @param string $table
+     * @param string $column
      * @return ColumnInterface
      * @throws \Exception
      */
-    public function get(string $name);
+    public function get(string $table, string $column);
 
     /**
      * @return ColumnInterface[]

@@ -56,7 +56,7 @@ abstract class AbstractReferences implements ReferencesInterface
             $referencedTable  = $this->column->getTable()->getDriver()->getTableList()->get($referencedTableName);
             $referencedColumn = $referencedTable->getColumnList()->get($referencedColumnName);
 
-            $this->items[$referencedColumn->getName()] = $referencedColumn;
+            $this->items[] = $referencedColumn;
         }
     }
 
@@ -74,26 +74,24 @@ abstract class AbstractReferences implements ReferencesInterface
     }
 
     /**
-     * @param string $name
-     * @return bool
-     */
-    public function has(string $name)
-    {
-        return array_key_exists($name, $this->items);
-    }
-
-    /**
-     * @param string $name
+     * @param string $table
+     * @param string $column
      * @return ColumnInterface
      * @throws \Exception
      */
-    public function get(string $name)
+    public function get(string $table, string $column)
     {
-        if (!$this->has($name)) {
-            $this->giThrowNotInScopeException($name);
+        $f = function(ColumnInterface $item) use ($table, $column)
+        {
+            return ($item->getTable()->getName() == $table) && ($item->getName() == $column);
+        };
+        $columns = array_filter($this->items, $f);
+
+        if (empty($columns)) {
+            $this->giThrowNotInScopeException("$table.$column");
         }
 
-        return $this->items[$name];
+        return array_shift($columns);
     }
 
     /**
