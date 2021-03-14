@@ -21,25 +21,20 @@ use GI\RDB\ORM\Builder\View\Entity\Base\AbstractView as Base;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\View as ColumnPropertyView;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\View as ColumnMethodsView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\View
-    as ParentRefPropertyView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\View
-    as ChildRefPropertyView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\View
-    as ParentRefGetterView;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\View
-    as ChildRefGetterView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\View as RecordPropertyView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\View as SetPropertyView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\View as RecordGetterView;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\View as SetGetterView;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface as ColumnPropertyViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInterface as ColumnMethodsViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\ViewInterface
-    as ParentRefPropertyViewInterface;
+    as RecordPropertyViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\ViewInterface
-    as ChildRefPropertyViewInterface;
+    as SetPropertyViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface
-    as ParentRefGetterViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface
-    as ChildRefGetterViewInterface;
+    as RecordGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface as SetGetterViewInterface;
 
 class View extends Base implements ViewInterface
 {
@@ -54,24 +49,24 @@ class View extends Base implements ViewInterface
     private $columnMethodsView;
 
     /**
-     * @var ParentRefPropertyViewInterface
+     * @var RecordPropertyViewInterface
      */
-    private $parentRefPropertyView;
+    private $recordPropertyView;
 
     /**
-     * @var ChildRefPropertyViewInterface
+     * @var SetPropertyViewInterface
      */
-    private $childRefPropertyView;
+    private $setPropertyView;
 
     /**
-     * @var ParentRefGetterViewInterface
+     * @var RecordGetterViewInterface
      */
-    private $parentRefGetterView;
+    private $recordGetterView;
 
     /**
-     * @var ChildRefGetterViewInterface
+     * @var SetGetterViewInterface
      */
-    private $childRefGetterView;
+    private $setGetterView;
 
 
     /**
@@ -90,20 +85,20 @@ class View extends Base implements ViewInterface
             ColumnMethodsViewInterface::class, ColumnMethodsView::class
         );
 
-        $this->parentRefPropertyView = $this->giGetDi(
-            ParentRefPropertyViewInterface::class, ParentRefPropertyView::class
+        $this->recordPropertyView = $this->giGetDi(
+            RecordPropertyViewInterface::class, RecordPropertyView::class
         );
 
-        $this->childRefPropertyView = $this->giGetDi(
-            ChildRefPropertyViewInterface::class, ChildRefPropertyView::class
+        $this->setPropertyView = $this->giGetDi(
+            SetPropertyViewInterface::class, SetPropertyView::class
         );
 
-        $this->parentRefGetterView = $this->giGetDi(
-            ParentRefGetterViewInterface::class, ParentRefGetterView::class
+        $this->recordGetterView = $this->giGetDi(
+            RecordGetterViewInterface::class, RecordGetterView::class
         );
 
-        $this->childRefGetterView = $this->giGetDi(
-            ChildRefGetterViewInterface::class, ChildRefGetterView::class
+        $this->setGetterView = $this->giGetDi(
+            SetGetterViewInterface::class, SetGetterView::class
         );
     }
 
@@ -124,34 +119,34 @@ class View extends Base implements ViewInterface
     }
 
     /**
-     * @return ParentRefPropertyViewInterface
+     * @return RecordPropertyViewInterface
      */
-    public function getParentRefPropertyView()
+    public function getRecordPropertyView()
     {
-        return $this->parentRefPropertyView;
+        return $this->recordPropertyView;
     }
 
     /**
-     * @return ChildRefPropertyViewInterface
+     * @return SetPropertyViewInterface
      */
-    public function getChildRefPropertyView()
+    public function getSetPropertyView()
     {
-        return $this->childRefPropertyView;
+        return $this->setPropertyView;
     }
 
     /**
-     * @return ParentRefGetterViewInterface
+     * @return RecordGetterViewInterface
      */
-    public function getParentRefGetterView()
+    public function getRecordGetterView()
     {
-        return $this->parentRefGetterView;
+        return $this->recordGetterView;
     }
 
     /**
-     * @return ChildRefGetterViewInterface
+     * @return SetGetterViewInterface
      */
-    public function getChildRefGetterView()
+    public function getSetGetterView()
     {
-        return $this->childRefGetterView;
+        return $this->setGetterView;
     }
 }

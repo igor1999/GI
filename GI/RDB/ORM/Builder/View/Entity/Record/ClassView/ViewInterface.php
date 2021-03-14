@@ -19,20 +19,17 @@ namespace GI\RDB\ORM\Builder\View\Entity\Record\ClassView;
 
 use GI\RDB\ORM\Builder\View\Entity\Base\ViewInterface as BaseInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInterface as ColumnMethodsViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface
-    as ColumnPropertyViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface
-    as ChildRefGetterViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\ViewInterface
-    as ChildRefPropertyViewInterface;
-use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface
-    as ParentRefGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface as ColumnPropertyViewInterface;
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefProperty\ViewInterface
-    as ParentRefPropertyViewInterface;
+    as RecordPropertyViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefProperty\ViewInterface
+    as SetPropertyViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ParentRefGetter\ViewInterface
+    as RecordGetterViewInterface;
+use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\TableBased\ChildRefGetter\ViewInterface as SetGetterViewInterface;
 
 interface ViewInterface extends BaseInterface
 {
-
     /**
      * @return ColumnPropertyViewInterface
      */
@@ -44,22 +41,22 @@ interface ViewInterface extends BaseInterface
     public function getColumnMethodsView();
 
     /**
-     * @return ParentRefPropertyViewInterface
+     * @return RecordPropertyViewInterface
      */
-    public function getParentRefPropertyView();
+    public function getRecordPropertyView();
 
     /**
-     * @return ChildRefPropertyViewInterface
+     * @return SetPropertyViewInterface
      */
-    public function getChildRefPropertyView();
+    public function getSetPropertyView();
 
     /**
-     * @return ParentRefGetterViewInterface
+     * @return RecordGetterViewInterface
      */
-    public function getParentRefGetterView();
+    public function getRecordGetterView();
 
     /**
-     * @return ChildRefGetterViewInterface
+     * @return SetGetterViewInterface
      */
-    public function getChildRefGetterView();
+    public function getSetGetterView();
 }

@@ -4,45 +4,45 @@ use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\ViewInterface;
 /** @var ViewInterface $this */
 ?>
 
-namespace <?php echo $this->getORMNamespace(), '\\', $this->getTable()->getNamespace(); ?>;
+<?php $namespace = $this->getORMNamespace(); ?>
+namespace <?php echo $namespace, '\\', $this->getTable()->getPhpNames()->getNamespace(); ?>;
 
 use <?php echo $this->getBaseNamespace(); ?>\AbstractRecord as Base;
 
 use GI\RDB\Meta\Table\TableInterface;
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php
-$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-$alias     = $table->getAlias();
-?>
-use <?php echo $namespace; ?>\Record as <?php echo $alias; ?>Record;
-use <?php echo $namespace; ?>\RecordInterface as <?php echo $alias; ?>RecordInterface;
+<?php $names = $table->getPhpNames(); ?>
+use <?php echo $namespace; ?>\<?php echo $names->getRecordClass(); ?> as <?php echo $names->getRecordClassAlias(); ?>;
+use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
 <?php endforeach; ?>
-<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php
-$namespace = $this->getORMNamespace() . '\\' . $table->getNamespace();
-$alias     = $table->getAlias();
-?>
-use <?php echo $namespace; ?>\Set as <?php echo $alias; ?>Set;
-use <?php echo $namespace; ?>\SetInterface as <?php echo $alias; ?>SetInterface;
+<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
+<?php $names = $table->getPhpNames(); ?>
+use <?php echo $namespace; ?>\<?php echo $names->getRecordClass(); ?> as <?php echo $names->getRecordClassAlias(); ?>;
+use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
+<?php endforeach; ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php $names = $table->getPhpNames(); ?>
+use <?php echo $namespace; ?>\<?php echo $names->getSetClass(); ?> as <?php echo $names->getSetClassAlias(); ?>;
+use <?php echo $namespace; ?>\<?php echo $names->getSetInterface(); ?> as <?php echo $names->getSetInterfaceAlias(); ?>;
 <?php endforeach; ?>
 
 class Record extends Base implements RecordInterface
 {
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-
-<?php echo $this->getColumnPropertyView()->setColumn($column)->toString(); ?>
-
+<?php echo $this->getColumnPropertyView()->setColumn($column)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getParentRefPropertyView()->setTable($table)->toString(); ?>
-
+<?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
-<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getChildRefPropertyView()->setTable($table)->toString(); ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
+<?php echo $this->getRecordPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php endforeach;?>
 
+<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php echo $this->getSetPropertyView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
 
@@ -56,17 +56,18 @@ class Record extends Base implements RecordInterface
     }
 
 <?php foreach ($this->getTable()->getColumnList()->getItems() as $column): ?>
-<?php echo $this->getColumnMethodsView()->setORMNamespace($this->getORMNamespace())->setColumn($column)->toString(); ?>
-
+<?php echo $this->getColumnMethodsView()->setORMNamespace($this->getORMNamespace())->setColumn($column)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
 <?php foreach ($this->getTable()->getParentReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getParentRefGetterView()->setTable($table)->toString(); ?>
-
+<?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 
-<?php foreach ($this->getTable()->getChildReferencedTables()->getItems() as $table): ?>
-<?php echo $this->getChildRefGetterView()->setTable($table)->toString(); ?>
+<?php foreach ($this->getTable()->getChildReferencedTables()->getUniqueItems() as $table): ?>
+<?php echo $this->getRecordGetterView()->setTable($table)->toString(), PHP_EOL; ?>
+<?php endforeach;?>
 
+<?php foreach ($this->getTable()->getChildReferencedTables()->getNonUniqueItems() as $table): ?>
+<?php echo $this->getSetGetterView()->setTable($table)->toString(), PHP_EOL; ?>
 <?php endforeach;?>
 }
