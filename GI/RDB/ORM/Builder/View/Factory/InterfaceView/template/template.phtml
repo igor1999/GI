@@ -7,6 +7,8 @@ use GI\RDB\ORM\Builder\View\Factory\InterfaceView\ViewInterface;
 <?php $namespace = $this->getORMNamespace(); ?>
 namespace <?php echo $namespace; ?>\Factory;
 
+use GI\RDB\ORM\Factory\FactoryInterface as BaseInterface;
+
 <?php foreach ($this->getDriver()->getTableList()->getItems() as $table): ?>
 <?php $names = $table->getPhpNames(); ?>
 use <?php echo $namespace; ?>\<?php echo $names->getRecordInterface(); ?> as <?php echo $names->getRecordInterfaceAlias(); ?>;
