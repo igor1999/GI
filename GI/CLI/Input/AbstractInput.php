@@ -27,9 +27,19 @@ abstract class AbstractInput implements InputInterface
 
 
     /**
-     * @var string
+     * @var string|\Closure
      */
     private $prompt = '';
+
+    /**
+     * @var int
+     */
+    private $repeat = 1;
+
+    /**
+     * @var int
+     */
+    private $attempt = 1;
 
     /**
      * @var string
@@ -43,7 +53,7 @@ abstract class AbstractInput implements InputInterface
 
 
     /**
-     * @return string
+     * @return string|\Closure
      */
     public function getPrompt()
     {
@@ -51,12 +61,75 @@ abstract class AbstractInput implements InputInterface
     }
 
     /**
-     * @param string $prompt
+     * @param string|\Closure $prompt
+     * @return static
+     * @throws \Exception
+     */
+    public function setPrompt($prompt = '')
+    {
+        if (!is_string($prompt) && !($prompt instanceof \Closure)) {
+            $this->giThrowInvalidTypeException('Prompt', gettype($prompt), 'string or Closure');
+        }
+
+        $this->prompt = $prompt;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRepeat()
+    {
+        return $this->repeat;
+    }
+
+    /**
+     * @param int $repeat
      * @return static
      */
-    public function setPrompt(string $prompt)
+    public function setRepeat(int $repeat)
     {
-        $this->prompt = $prompt;
+        $this->repeat = $repeat;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAttempt()
+    {
+        return $this->attempt;
+    }
+
+    /**
+     * @param int $attempt
+     * @return static
+     */
+    protected function setAttempt(int $attempt)
+    {
+        $this->attempt = $attempt;
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    protected function incAttempt()
+    {
+        $this->setAttempt($this->getAttempt() + 1);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    protected function resetAttempt()
+    {
+        $this->setAttempt( 1);
 
         return $this;
     }
@@ -67,7 +140,7 @@ abstract class AbstractInput implements InputInterface
     protected function printPrompt()
     {
         if (!empty($this->prompt)) {
-            echo $this->prompt;
+            echo is_string($this->prompt) ? $this->prompt : call_user_func($this->prompt, $this->attempt);
         }
 
         return $this;
@@ -122,7 +195,16 @@ abstract class AbstractInput implements InputInterface
                 echo $message, PHP_EOL;
             }
 
-            $this->giThrowCommonException($this->getValidator()->getFirstMessage());
+            if ($this->repeat <= 0) {
+                $this->incAttempt()->read();
+            } elseif ($this->repeat > $this->attempt) {
+                $this->incAttempt()->read();
+            } else {
+                $this->resetAttempt();
+                $this->giThrowCommonException($this->getValidator()->getFirstMessage());
+            }
+        } else {
+            $this->resetAttempt();
         }
 
         return $this;

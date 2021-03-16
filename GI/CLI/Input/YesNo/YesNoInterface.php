@@ -36,5 +36,5 @@ interface YesNoInterface extends SimpleInterface
      * @return bool
      * @throws \Exception
      */
-    public function get();
+    public function isYes();
 }

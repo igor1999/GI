@@ -50,11 +50,11 @@ class YesNo extends Simple implements YesNoInterface
     }
 
     /**
-     * @return bool|string
+     * @return bool
      * @throws \Exception
      */
-    public function get()
+    public function isYes()
     {
-        return parent::get() == $this->yesValue;
+        return $this->getInput() == $this->yesValue;
     }
 }

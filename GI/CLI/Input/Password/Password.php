@@ -21,9 +21,9 @@ use GI\CLI\Input\AbstractInput;
 
 class Password extends AbstractInput implements PasswordInterface
 {
-    const MASK_CHAR             = '*';
+    const MASK_CHAR      = '*';
 
-    const DEFAULT_PROMPT        = 'Password: ';
+    const DEFAULT_PROMPT = 'Password: ';
 
 
     /**
@@ -34,6 +34,7 @@ class Password extends AbstractInput implements PasswordInterface
 
     /**
      * Password constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
@@ -49,10 +50,10 @@ class Password extends AbstractInput implements PasswordInterface
     }
 
     /**
-     * @return string
+     * @return static
      * @throws \Exception
      */
-    public function get()
+    public function read()
     {
         $this->done = false;
 
@@ -80,7 +81,7 @@ class Password extends AbstractInput implements PasswordInterface
 
         $this->handleFail();
 
-        return $this->getInput();
+        return $this;
     }
 
     /**

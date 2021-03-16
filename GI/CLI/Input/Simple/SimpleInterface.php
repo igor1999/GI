@@ -22,8 +22,8 @@ use GI\CLI\Input\InputInterface;
 interface SimpleInterface extends InputInterface
 {
     /**
-     * @return string
+     * @return static
      * @throws \Exception
      */
-    public function get();
+    public function read();
 }

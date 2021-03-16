@@ -34,6 +34,22 @@ interface InputInterface extends CLIInterface
     public function setPrompt(string $prompt);
 
     /**
+     * @return int
+     */
+    public function getRepeat();
+
+    /**
+     * @param int $repeat
+     * @return static
+     */
+    public function setRepeat(int $repeat);
+
+    /**
+     * @return int
+     */
+    public function getAttempt();
+
+    /**
      * @return string
      */
     public function getInput();
@@ -50,7 +66,7 @@ interface InputInterface extends CLIInterface
     public function setValidator(ValidatorInterface $validator = null);
 
     /**
-     * @return string
+     * @return static
      */
-    public function get();
+    public function read();
 }

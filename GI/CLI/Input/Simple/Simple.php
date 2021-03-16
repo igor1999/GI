@@ -22,10 +22,10 @@ use GI\CLI\Input\AbstractInput;
 class Simple extends AbstractInput implements SimpleInterface
 {
     /**
-     * @return string
+     * @return static
      * @throws \Exception
      */
-    public function get()
+    public function read()
     {
         $this->printPrompt();
 
@@ -33,6 +33,6 @@ class Simple extends AbstractInput implements SimpleInterface
 
         $this->handleFail();
 
-        return $this->getInput();
+        return $this;
     }
 }
