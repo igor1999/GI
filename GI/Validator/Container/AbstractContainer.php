@@ -138,4 +138,18 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
 
         return $result;
     }
+
+    /**
+     * @return static
+     */
+    public function cleanResult()
+    {
+        parent::cleanResult();
+
+        foreach ($this->getItems() as $item) {
+            $item->cleanResult();
+        }
+
+        return $this;
+    }
 }

@@ -122,17 +122,22 @@ class Recursive extends AbstractContainer implements RecursiveInterface
         }
 
         $result = true;
+        $break  = false;
 
         foreach ($this->items as $key => $item) {
-            $localResult = is_array($this->getSource())
-                ? $this->validateItemByArray($key, $item)
-                : $this->validateItemByArrayObject($key, $item);
+            if ($break) {
+                $item->cleanResult();
+            } else {
+                $localResult = is_array($this->getSource())
+                    ? $this->validateItemByArray($key, $item)
+                    : $this->validateItemByArrayObject($key, $item);
 
-            if (!$localResult) {
-                $result = false;
-                if ($item->hasBreak()) {
-                    $this->setBreak(true);
-                    break;
+                if (!$localResult) {
+                    $result = false;
+                    if ($item->hasBreak()) {
+                        $this->setBreak(true);
+                        $break = true;
+                    }
                 }
             }
         }

@@ -182,6 +182,16 @@ abstract class AbstractValidator implements ValidatorInterface
     }
 
     /**
+     * @return static
+     */
+    public function cleanResult()
+    {
+        $this->setResult(true);
+
+        return $this;
+    }
+
+    /**
      * @param mixed $value
      * @return bool
      */

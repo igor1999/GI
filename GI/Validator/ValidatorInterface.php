@@ -68,6 +68,11 @@ interface ValidatorInterface
     public function getResult();
 
     /**
+     * @return static
+     */
+    public function cleanResult();
+
+    /**
      * @param mixed $value
      * @return bool
      */

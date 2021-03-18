@@ -133,17 +133,23 @@ class Chain extends AbstractContainer implements ChainInterface
     protected function doValidation()
     {
         $result = true;
+        $break  = false;
 
         $value = $this->getSource();
 
         foreach ($this->items as $item) {
-            if (!$item->validate($value)) {
-                $result = false;
-                if ($item->hasBreak()) {
-                    $this->setBreak(true);
-                    break;
+            if ($break) {
+                $item->cleanResult();
+            } else {
+                if (!$item->validate($value)) {
+                    $result = false;
+                    if ($item->hasBreak()) {
+                        $this->setBreak(true);
+                        $break = true;
+                    }
                 }
             }
+
         }
 
         return $result;
