@@ -22,6 +22,7 @@ use GI\Application\Call\AbstractCall;
 use GI\REST\Request\Server\ServerInterface;
 use GI\CLI\CommandLine\CommandLineInterface;
 use GI\REST\Route\CLIInterface;
+use GI\I18n\Locales\UserLocaleContextInterface;
 
 class Call extends AbstractCall implements CallInterface
 {
@@ -66,6 +67,7 @@ class Call extends AbstractCall implements CallInterface
             $this->close();
             $this->saveCallAndModuleContents();
             $this->giGetServiceLocator()->loadSession();
+            $this->saveUserLocale();
             $this->giGetServiceLocator()->close();
 
             $this->getHandlers()->executeSequentially([$this]);
@@ -74,6 +76,50 @@ class Call extends AbstractCall implements CallInterface
         }
 
         return $result;
+    }
+
+    /**
+     * @return static
+     */
+    protected function saveUserLocale()
+    {
+        try {
+            /** @var UserLocaleContextInterface $context */
+            $context = $this->giGetDi(UserLocaleContextInterface::class);
+
+            $locale = $this->findLocale($context);
+
+            setlocale(LC_ALL, $locale);
+
+            $this->giGetServiceLocator()->setUserLocale($locale);
+        } catch (\Exception $e) {}
+
+        return $this;
+    }
+
+    /**
+     * @param UserLocaleContextInterface $context
+     * @return string
+     * @throws \Exception
+     */
+    protected function findLocale(UserLocaleContextInterface $context)
+    {
+        try {
+            $locale = '';//todo locale from CLI
+        } catch (\Exception $e) {
+            $locale = '';
+        }
+
+        if (empty($locale))
+        {
+            $locale = $context->getDefaultLocale();
+        }
+
+        if (!in_array($locale, $context->getUsedLocales())) {
+            $locale = '';
+        }
+
+        return $locale;
     }
 
     /**
