@@ -138,6 +138,12 @@ interface CommandLineInterface
      * @return string
      * @throws \Exception
      */
+    public function getLocale();
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function getSession();
 
     /**
@@ -242,6 +248,14 @@ interface CommandLineInterface
     public function addRoute(string $route, bool $base64 = false);
 
     /**
+     * @param string $locale
+     * @param bool $base64
+     * @return static
+     * @throws \Exception
+     */
+    public function addLocale(string $locale, bool $base64 = false);
+
+    /**
      * @param string $sessionID
      * @param bool $base64
      * @return static
@@ -291,6 +305,12 @@ interface CommandLineInterface
      * @throws \Exception
      */
     public function removeRoute();
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    public function removeLocale();
 
     /**
      * @return static

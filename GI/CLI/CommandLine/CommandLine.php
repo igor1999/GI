@@ -37,6 +37,8 @@ class CommandLine implements CommandLineInterface
 
     const ROUTE_ARGUMENT_NAME   = 'route';
 
+    const LOCALE_ARGUMENT_NAME  = 'locale';
+
     const SESSION_ARGUMENT_NAME = 'session';
 
     const DEMON_ARGUMENT_NAME   = 'demon';
@@ -320,6 +322,15 @@ class CommandLine implements CommandLineInterface
      * @return string
      * @throws \Exception
      */
+    public function getLocale()
+    {
+        return $this->findValueByName(static::LOCALE_ARGUMENT_NAME);
+    }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
     public function getSession()
     {
         return $this->findValueByName(static::SESSION_ARGUMENT_NAME);
@@ -513,6 +524,19 @@ class CommandLine implements CommandLineInterface
     }
 
     /**
+     * @param string $locale
+     * @param bool $base64
+     * @return static
+     * @throws \Exception
+     */
+    public function addLocale(string $locale, bool $base64 = false)
+    {
+        $this->createAndAddNamed(static::LOCALE_ARGUMENT_NAME, $locale, $base64);
+
+        return $this;
+    }
+
+    /**
      * @param string $sessionID
      * @param bool $base64
      * @return static
@@ -607,6 +631,17 @@ class CommandLine implements CommandLineInterface
     public function removeRoute()
     {
         $this->removeByName(static::ROUTE_ARGUMENT_NAME);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    public function removeLocale()
+    {
+        $this->removeByName(static::LOCALE_ARGUMENT_NAME);
 
         return $this;
     }
