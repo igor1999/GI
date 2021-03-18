@@ -1,38 +1,38 @@
 en_GB|fr_FR
-'%validatedParam%' '%source%' includes not alphabet content|'% validatedParam%' '% source%' ne comprend pas le contenu de l'alphabet
-'%validatedParam%' '%source%' includes not alphanumeric content|'% validatedParam%' '% source%' ne comprend pas de contenu alphanumérique
-'%validatedParam%' '%source%' includes not digits content|'% validatedParam%' '% source%' ne contient pas de chiffres
-'%validatedParam%' '%source%' is identical with token '%token%'|'% validatedParam%' '% source%' est identique au jeton '% token%'
-'%validatedParam%' '%source%' is in array '%array%'|'% validatedParam%' '% source%' est dans le tableau '% array%'
-'%validatedParam%' '%source%' is not a number|'% validatedParam%' '% source%' n'est pas un nombre
-'%validatedParam%' is not a scalar|'% validatedParam%' n'est pas un scalaire
-'%validatedParam%' '%source%' is not a valid URL|'% validatedParam%' '% source%' n'est pas une URL valide
-'%validatedParam%' '%source%' is not a word|'% validatedParam%' '% source%' n'est pas un mot
-'%validatedParam%' is not an object|'% validatedParam%' n'est pas un objet
-'%validatedParam%' '%source%' is not a valid e-mail address|'% validatedParam%' '% source%' n'est pas une adresse e-mail valide
-'%validatedParam%' '%source%' is not a valid IP|'% validatedParam%' '% source%' n'est pas une adresse IP valide
-'%validatedParam%' '%source%' is not float|'% validatedParam%' '% source%' n'est pas flottant
-'%validatedParam%' '%source%' is not identical with token '%token%'|'% validatedParam%' '% source%' n'est pas identique au jeton '% token%'
-'%validatedParam%' '%source%' is not in array '%array%'|'% validatedParam%' '% source%' n'est pas dans le tableau '% array%'
-'%validatedParam%' '%source%' is not integer|'% validatedParam%' '% source%' n'est pas un entier
-'%validatedParam%' is not an array|'% validatedParam%' n'est pas un tableau
-'%validatedParam%' should be greater than '%minimum%', '%source%' given|'% validatedParam%' doit être supérieur à '% minimum%', '% source%' donné
-'%validatedParam%' should be greater or equal '%minimum%', '%source%' given|'% validatedParam%' doit être supérieur ou égal à '% minimum%', '% source%' donné
-'%validatedParam%' should be less than '%maximum%', '%source%' given|'% validatedParam%' doit être inférieur à '% maximum%', '% source%' donné
-'%validatedParam%' should be less or equal '%maximum%', '%source%' given|'% validatedParam%' doit être inférieur ou égal à '% maximum%', '% source%' donné
-'%validatedParam%' should be set. Empty given|'% validatedParam%' doit être défini. Vide donné
-Captcha checkup failed ('%source%' given)|La vérification du captcha a échoué ('% source%' donné)
+'%validatedParam%' '%source%' includes not alphabet content|'%validatedParam%' '%source%' ne comprend pas le contenu de l'alphabet
+'%validatedParam%' '%source%' includes not alphanumeric content|'%validatedParam%' '%source%' ne comprend pas de contenu alphanumérique
+'%validatedParam%' '%source%' includes not digits content|'%validatedParam%' '%source%' ne contient pas de chiffres
+'%validatedParam%' '%source%' is identical with token '%token%'|'%validatedParam%' '%source%' est identique au jeton '%token%'
+'%validatedParam%' '%source%' is in array '%array%'|'%validatedParam%' '%source%' est dans le tableau '%array%'
+'%validatedParam%' '%source%' is not a number|'%validatedParam%' '%source%' n'est pas un nombre
+'%validatedParam%' is not a scalar|'%validatedParam%' n'est pas un scalaire
+'%validatedParam%' '%source%' is not a valid URL|'%validatedParam%' '%source%' n'est pas une URL valide
+'%validatedParam%' '%source%' is not a word|'%validatedParam%' '%source%' n'est pas un mot
+'%validatedParam%' is not an object|'%validatedParam%' n'est pas un objet
+'%validatedParam%' '%source%' is not a valid e-mail address|'%validatedParam%' '%source%' n'est pas une adresse e-mail valide
+'%validatedParam%' '%source%' is not a valid IP|'%validatedParam%' '%source%' n'est pas une adresse IP valide
+'%validatedParam%' '%source%' is not float|'%validatedParam%' '%source%' n'est pas flottant
+'%validatedParam%' '%source%' is not identical with token '%token%'|'%validatedParam%' '%source%' n'est pas identique au jeton '%token%'
+'%validatedParam%' '%source%' is not in array '%array%'|'%validatedParam%' '%source%' n'est pas dans le tableau '%array%'
+'%validatedParam%' '%source%' is not integer|'%validatedParam%' '%source%' n'est pas un entier
+'%validatedParam%' is not an array|'%validatedParam%' n'est pas un tableau
+'%validatedParam%' should be greater than '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur à '%minimum%', '%source%' donné
+'%validatedParam%' should be greater or equal '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur ou égal à '%minimum%', '%source%' donné
+'%validatedParam%' should be less than '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur à '%maximum%', '%source%' donné
+'%validatedParam%' should be less or equal '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur ou égal à '%maximum%', '%source%' donné
+'%validatedParam%' should be set. Empty given|'%validatedParam%' doit être défini. Vide donné
+Captcha checkup failed ('%source%' given)|La vérification du captcha a échoué ('%source%' donné)
 CSRF checkup failed|La vérification CSRF a échoué
 Either login or password not found|Soit login ou mot de passe introuvable
 Given e-mails are not identical|Les e-mails donnés ne sont pas identiques
 Given passwords are not identical|Les mots de passe donnés ne sont pas identiques
-MIME-type of file '%source%' not in list of types: '%mimeTypes%'|Le type MIME du fichier '% source%' ne figure pas dans la liste des types: '% mimeTypes%'
-No matches in '%validatedParam%' '%source%' by '%regExp%' found|Aucune correspondance trouvée dans '% validatedParam%' '% source%' par '% regExp%'
-Parameter '%validatedParam%' not found|Paramètre '% validatedParam%' introuvable
-Password has length greater than %maximum%|Le mot de passe a une longueur supérieure à% maximum%
-Password has length less than %minimum%|Le mot de passe a une longueur inférieure à% minimum%
+MIME-type of file '%source%' not in list of types: '%mimeTypes%'|Le type MIME du fichier '%source%' ne figure pas dans la liste des types: '%mimeTypes%'
+No matches in '%validatedParam%' '%source%' by '%regExp%' found|Aucune correspondance trouvée dans '%validatedParam%' '%source%' par '%regExp%'
+Parameter '%validatedParam%' not found|Paramètre '%validatedParam%' introuvable
+Password has length greater than %maximum%|Le mot de passe a une longueur supérieure à %maximum%
+Password has length less than %minimum%|Le mot de passe a une longueur inférieure à %minimum%
 Password should to include at last one letter, one digit and one not alpha-numeric symbol|Le mot de passe doit inclure au dernier une lettre, un chiffre et un symbole non alphanumérique
 Please check and accept legal policy|Veuillez vérifier et accepter la politique légale
-Size of file '%source%' is greater than '%maxFileSize%'|La taille du fichier '% source%' est supérieure à '% maxFileSize%'
-String of '%validatedParam%' '%source%' has length greater than %maximum%|La chaîne de '% validatedParam%' '% source%' a une longueur supérieure à% maximum%
-String of '%validatedParam%' '%source%' has length less than %minimum%|La chaîne de '% validatedParam%' '% source%' a une longueur inférieure à% minimum%
+Size of file '%source%' is greater than '%maxFileSize%'|La taille du fichier '%source%' est supérieure à '%maxFileSize%'
+String of '%validatedParam%' '%source%' has length greater than %maximum%|La chaîne de '%validatedParam%' '%source%' a une longueur supérieure à %maximum%
+String of '%validatedParam%' '%source%' has length less than %minimum%|La chaîne de '%validatedParam%' '%source%' a une longueur inférieure à %minimum%
