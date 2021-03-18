@@ -80,7 +80,7 @@ class DefaultMessages
 
     const MAX_FILE_SIZE            = 'Size of file \'%source%\' is greater than \'%maxFileSize%\'';
 
-    const NOT_EMPTY                = '\'%validatedParam%\' should be set. Empty given.';
+    const NOT_EMPTY                = '\'%validatedParam%\' should be set. Empty given';
 
     const PASSWORD_LENGTH_MAX      = 'Password has length greater than %maximum%';
 
