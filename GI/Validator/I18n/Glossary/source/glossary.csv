@@ -21,18 +21,18 @@ en_GB|fr_FR
 '%validatedParam%' should be less than '%maximum%', '%source%' given|'% validatedParam%' doit être inférieur à '% maximum%', '% source%' donné
 '%validatedParam%' should be less or equal '%maximum%', '%source%' given|'% validatedParam%' doit être inférieur ou égal à '% maximum%', '% source%' donné
 '%validatedParam%' should be set. Empty given|'% validatedParam%' doit être défini. Vide donné
-Captcha checkup failed ('%source%' given)|
-CSRF checkup failed|
-Either login or password not found|
-Given e-mails are not identical|
-Given passwords are not identical|
-MIME-type of file '%source%' not in list of types: '%mimeTypes%'|
-No matches in '%validatedParam%' '%source%' by '%regExp%' found|
-parameter '%validatedParam%' not found|
-Password has length greater than %maximum%|
-Password has length less than %minimum%|
-Password should to include at last one letter, one digit and one not alpha-numeric symbol|
-Please check and accept legal policy|
-Size of file '%source%' is greater than '%maxFileSize%'|
-String of '%validatedParam%' '%source%' has length greater than %maximum%|
-String of '%validatedParam%' '%source%' has length less than %minimum%|
+Captcha checkup failed ('%source%' given)|La vérification du captcha a échoué ('% source%' donné)
+CSRF checkup failed|La vérification CSRF a échoué
+Either login or password not found|Soit login ou mot de passe introuvable
+Given e-mails are not identical|Les e-mails donnés ne sont pas identiques
+Given passwords are not identical|Les mots de passe donnés ne sont pas identiques
+MIME-type of file '%source%' not in list of types: '%mimeTypes%'|Le type MIME du fichier '% source%' ne figure pas dans la liste des types: '% mimeTypes%'
+No matches in '%validatedParam%' '%source%' by '%regExp%' found|Aucune correspondance trouvée dans '% validatedParam%' '% source%' par '% regExp%'
+Parameter '%validatedParam%' not found|Paramètre '% validatedParam%' introuvable
+Password has length greater than %maximum%|Le mot de passe a une longueur supérieure à% maximum%
+Password has length less than %minimum%|Le mot de passe a une longueur inférieure à% minimum%
+Password should to include at last one letter, one digit and one not alpha-numeric symbol|Le mot de passe doit inclure au dernier une lettre, un chiffre et un symbole non alphanumérique
+Please check and accept legal policy|Veuillez vérifier et accepter la politique légale
+Size of file '%source%' is greater than '%maxFileSize%'|La taille du fichier '% source%' est supérieure à '% maxFileSize%'
+String of '%validatedParam%' '%source%' has length greater than %maximum%|La chaîne de '% validatedParam%' '% source%' a une longueur supérieure à% maximum%
+String of '%validatedParam%' '%source%' has length less than %minimum%|La chaîne de '% validatedParam%' '% source%' a une longueur inférieure à% minimum%
