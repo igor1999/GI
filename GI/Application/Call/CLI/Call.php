@@ -105,13 +105,8 @@ class Call extends AbstractCall implements CallInterface
     protected function findLocale(UserLocaleContextInterface $context)
     {
         try {
-            $locale = '';//todo locale from CLI
+            $locale = $this->getCommandLine()->getLocale();
         } catch (\Exception $e) {
-            $locale = '';
-        }
-
-        if (empty($locale))
-        {
             $locale = $context->getDefaultLocale();
         }
 
