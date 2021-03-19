@@ -18,9 +18,9 @@ en_GB|fr_FR|de_DE
 '%validatedParam%' is not an array|'%validatedParam%' n'est pas un tableau|'%validatedParam%' ist kein Array
 '%validatedParam%' should be greater than '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur à '%minimum%', '%source%' donné|'%validatedParam%' sollte größer sein als '%minimum%', '%source%' angegeben
 '%validatedParam%' should be greater or equal '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur ou égal à '%minimum%', '%source%' donné|'%validatedParam%' sollte größer oder gleich '%minimum%' sein, '%source%' angegeben
-'%validatedParam%' should be less than '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur à '%maximum%', '%source%' donné|
-'%validatedParam%' should be less or equal '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur ou égal à '%maximum%', '%source%' donné|
-'%validatedParam%' should be set. Empty given|'%validatedParam%' doit être défini. Vide donné|
+'%validatedParam%' should be less than '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur à '%maximum%', '%source%' donné|'%validatedParam%' sollte kleiner sein als '%maximum%', '%source%' angegeben
+'%validatedParam%' should be less or equal '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur ou égal à '%maximum%', '%source%' donné|'%validatedParam%' sollte kleiner oder gleich '%maximum%' sein, '%source%' angegeben
+'%validatedParam%' should be set. Empty given|'%validatedParam%' doit être défini. Vide donné|'%validatedParam%' sollte gesetzt sein. Leer gegeben
 Captcha checkup failed ('%source%' given)|La vérification du captcha a échoué ('%source%' donné)|Captcha-Überprüfung fehlgeschlagen ('%source%' angegeben)
 CSRF checkup failed|La vérification CSRF a échoué|CSRF-Überprüfung fehlgeschlagen
 Either login or password not found|Soit login ou mot de passe introuvable|Entweder Login oder Passwort nicht gefunden
