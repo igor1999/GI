@@ -1,9 +1,9 @@
 en_GB|fr_FR|de_DE
-'%validatedParam%' '%source%' includes not alphabet content|'%validatedParam%' '%source%' ne comprend pas le contenu de l'alphabet|'%validatedParam%' '%source%' enthält keinen Alphabetinhalt
-'%validatedParam%' '%source%' includes not alphanumeric content|'%validatedParam%' '%source%' ne comprend pas de contenu alphanumérique|'%validatedParam%' '%source%' enthält keinen alphanumerischen Inhalt
-'%validatedParam%' '%source%' includes not digits content|'%validatedParam%' '%source%' ne contient pas de chiffres|'%validatedParam%' '%source%' enthält nicht ziffernhaltigen Inhalt
-'%validatedParam%' '%source%' is identical with token '%token%'|'%validatedParam%' '%source%' est identique au jeton '%token%'|'%validatedParam%' '%source%' ist identisch mit Token '%token%'
-'%validatedParam%' '%source%' is in array '%array%'|'%validatedParam%' '%source%' est dans le tableau '%array%'|'%validatedParam%' '%source%' befindet sich im Array '%array%'
+'%validatedParam%' '%source%' includes not alphabet content|'%validatedParam%' '%source%' ne comprend pas le contenu de l'alphabet|'%validatedParam%' '%source%' enthält keinen Alphabetinhalt|'%validatedParam%' '%source%' no incluye contenido alfabético
+'%validatedParam%' '%source%' includes not alphanumeric content|'%validatedParam%' '%source%' ne comprend pas de contenu alphanumérique|'%validatedParam%' '%source%' enthält keinen alphanumerischen Inhalt|'%validatedParam%' '%source%' incluye contenido no alfanumérico
+'%validatedParam%' '%source%' includes not digits content|'%validatedParam%' '%source%' ne contient pas de chiffres|'%validatedParam%' '%source%' enthält nicht ziffernhaltigen Inhalt|'%validatedParam%' '%source%' no incluye contenido de dígitos
+'%validatedParam%' '%source%' is identical with token '%token%'|'%validatedParam%' '%source%' est identique au jeton '%token%'|'%validatedParam%' '%source%' ist identisch mit Token '%token%'|'%validatedParam%' '%source%' es idéntico al token '%token%'
+'%validatedParam%' '%source%' is in array '%array%'|'%validatedParam%' '%source%' est dans le tableau '%array%'|'%validatedParam%' '%source%' befindet sich im Array '%array%'|'%validatedParam%' '%source%' está en la matriz '%array%'
 '%validatedParam%' '%source%' is not a number|'%validatedParam%' '%source%' n'est pas un nombre|'%validatedParam%' '%source%' ist keine Zahl
 '%validatedParam%' is not a scalar|'%validatedParam%' n'est pas un scalaire|'%validatedParam%' ist kein Skalar
 '%validatedParam%' '%source%' is not a valid URL|'%validatedParam%' '%source%' n'est pas une URL valide|'%validatedParam%' '%source%' ist keine gültige URL
