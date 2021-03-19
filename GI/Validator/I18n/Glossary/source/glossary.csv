@@ -9,13 +9,13 @@ en_GB|fr_FR|de_DE
 '%validatedParam%' '%source%' is not a valid URL|'%validatedParam%' '%source%' n'est pas une URL valide|'%validatedParam%' '%source%' ist keine gültige URL|'%validatedParam%' '%source%' no es una URL válida
 '%validatedParam%' '%source%' is not a word|'%validatedParam%' '%source%' n'est pas un mot|'%validatedParam%' '%source%' ist kein Wort|'%validatedParam%' '%source%' no es una palabra
 '%validatedParam%' is not an object|'%validatedParam%' n'est pas un objet|'%validatedParam%' ist kein Objekt|'%validatedParam%' no es un objeto
-'%validatedParam%' '%source%' is not a valid e-mail address|'%validatedParam%' '%source%' n'est pas une adresse e-mail valide|'%validatedParam%' '%source%' ist keine gültige E-Mail-Adresse
-'%validatedParam%' '%source%' is not a valid IP|'%validatedParam%' '%source%' n'est pas une adresse IP valide|'%validatedParam%' '%source%' ist keine gültige IP
-'%validatedParam%' '%source%' is not float|'%validatedParam%' '%source%' n'est pas flottant|'%validatedParam%' '%source%' ist nicht float
-'%validatedParam%' '%source%' is not identical with token '%token%'|'%validatedParam%' '%source%' n'est pas identique au jeton '%token%'|'%validatedParam%' '%source%' ist nicht identisch mit Token '%token%'
-'%validatedParam%' '%source%' is not in array '%array%'|'%validatedParam%' '%source%' n'est pas dans le tableau '%array%'|'%validatedParam%' '%source%' befindet sich nicht im Array '%array%'
-'%validatedParam%' '%source%' is not integer|'%validatedParam%' '%source%' n'est pas un entier|'%validatedParam%' '%source%' ist keine Ganzzahl
-'%validatedParam%' is not an array|'%validatedParam%' n'est pas un tableau|'%validatedParam%' ist kein Array
+'%validatedParam%' '%source%' is not a valid e-mail address|'%validatedParam%' '%source%' n'est pas une adresse e-mail valide|'%validatedParam%' '%source%' ist keine gültige E-Mail-Adresse|'%validatedParam%' '%source%' no es una dirección de correo electrónico válida
+'%validatedParam%' '%source%' is not a valid IP|'%validatedParam%' '%source%' n'est pas une adresse IP valide|'%validatedParam%' '%source%' ist keine gültige IP|'%validatedParam%' '%source%' no es una IP válida
+'%validatedParam%' '%source%' is not float|'%validatedParam%' '%source%' n'est pas flottant|'%validatedParam%' '%source%' ist nicht float|'%validatedParam%' '%source%' no es flotante
+'%validatedParam%' '%source%' is not identical with token '%token%'|'%validatedParam%' '%source%' n'est pas identique au jeton '%token%'|'%validatedParam%' '%source%' ist nicht identisch mit Token '%token%'|'%validatedParam%' '%source%' no es idéntico al token '%token%'
+'%validatedParam%' '%source%' is not in array '%array%'|'%validatedParam%' '%source%' n'est pas dans le tableau '%array%'|'%validatedParam%' '%source%' befindet sich nicht im Array '%array%'|'%validatedParam%' '%source%' no está en la matriz '%array%'
+'%validatedParam%' '%source%' is not integer|'%validatedParam%' '%source%' n'est pas un entier|'%validatedParam%' '%source%' ist keine Ganzzahl|'%validatedParam%' '%source%' no es un entero
+'%validatedParam%' is not an array|'%validatedParam%' n'est pas un tableau|'%validatedParam%' ist kein Array|'%validatedParam%' no es una matriz
 '%validatedParam%' should be greater than '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur à '%minimum%', '%source%' donné|'%validatedParam%' sollte größer sein als '%minimum%', '%source%' angegeben
 '%validatedParam%' should be greater or equal '%minimum%', '%source%' given|'%validatedParam%' doit être supérieur ou égal à '%minimum%', '%source%' donné|'%validatedParam%' sollte größer oder gleich '%minimum%' sein, '%source%' angegeben
 '%validatedParam%' should be less than '%maximum%', '%source%' given|'%validatedParam%' doit être inférieur à '%maximum%', '%source%' donné|'%validatedParam%' sollte kleiner sein als '%maximum%', '%source%' angegeben
