@@ -27,7 +27,7 @@ Either login or password not found|Soit login ou mot de passe introuvable|Entwed
 Given e-mails are not identical|Les e-mails donnés ne sont pas identiques|Angegebene E-Mails sind nicht identisch|Los correos electrónicos dados no son idénticos
 Given passwords are not identical|Les mots de passe donnés ne sont pas identiques|Die angegebenen Passwörter sind nicht identisch|Las contraseñas dadas no son idénticas
 MIME-type of file '%source%' not in list of types: '%mimeTypes%'|Le type MIME du fichier '%source%' ne figure pas dans la liste des types: '%mimeTypes%'|MIME-Typ der Datei '%source%' nicht in der Liste der Typen: '%mimeTypes%'|El tipo MIME del archivo '%source%' no está en la lista de tipos: '%mimeTypes%'
-No matches in '%validatedParam%' '%source%' by '%regExp%' found|Aucune correspondance trouvée dans '%validatedParam%' '%source%' par '%regExp%'|Es wurden keine Übereinstimmungen in '%validatedParam%' '%source%' von '%regExp%' gefunden
+No matches in '%validatedParam%' '%source%' by '%regExp%' found|Aucune correspondance trouvée dans '%validatedParam%' '%source%' par '%regExp%'|Es wurden keine Übereinstimmungen in '%validatedParam%' '%source%' von '%regExp%' gefunden|No se encontraron coincidencias en '%validatedParam%' '%source%' por '%regExp%'
 Parameter '%validatedParam%' not found|Paramètre '%validatedParam%' introuvable|Parameter '%validatedParam%' nicht gefunden
 Password has length greater than %maximum%|Le mot de passe a une longueur supérieure à %maximum%|Das Passwort hat eine Länge von mehr als %maximum%
 Password has length less than %minimum%|Le mot de passe a une longueur inférieure à %minimum%|Das Passwort hat eine Länge von weniger als %minimum%
