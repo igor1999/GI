@@ -36,14 +36,6 @@ interface IdentityInterface extends SessionExchangeAwareInterface
     public function authenticate(string $login, string $password, bool $saveInCookie = false);
 
     /**
-     * @param array $data
-     * @param bool $saveInCookie
-     * @return bool
-     * @throws \Exception
-     */
-    public function fillByUserData(array $data, bool $saveInCookie = false);
-
-    /**
      * @return bool
      */
     public function authenticateByCookie();
@@ -78,18 +70,4 @@ interface IdentityInterface extends SessionExchangeAwareInterface
      * @return bool
      */
     public function isAuthenticated();
-
-    /**
-     * @param string|int|array $key
-     * @return bool
-     * @throws \Exception
-     */
-    public function has($key);
-
-    /**
-     * @param string|int|array $key
-     * @return mixed
-     * @throws \Exception
-     */
-    public function get($key);
 }

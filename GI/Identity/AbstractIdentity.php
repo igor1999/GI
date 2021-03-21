@@ -18,14 +18,12 @@
 namespace GI\Identity;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
-use GI\Identity\Exception\ExceptionAwareTrait;
 
-use GI\Storage\Tree\TreeInterface;
 use GI\Identity\Context\ContextInterface;
 
 abstract class AbstractIdentity implements IdentityInterface
 {
-    use ServiceLocatorAwareTrait, ExceptionAwareTrait;
+    use ServiceLocatorAwareTrait;
 
 
     /**
@@ -77,7 +75,7 @@ abstract class AbstractIdentity implements IdentityInterface
     }
 
     /**
-     * @return TreeInterface
+     * @return mixed
      */
     abstract protected function getSessionCache();
 
@@ -98,28 +96,9 @@ abstract class AbstractIdentity implements IdentityInterface
     /**
      * @param string $login
      * @param string $password
-     * @return array
+     * @return mixed
      */
     abstract protected function createByCredentials(string $login, string $password);
-
-    /**
-     * @param array $data
-     * @param bool $saveInCookie
-     * @return bool
-     * @throws \Exception
-     */
-    public function fillByUserData(array $data, bool $saveInCookie = false)
-    {
-        $this->set($this->createByUserData($data), $saveInCookie);
-
-        return $this->isAuthenticated();
-    }
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    abstract protected function createByUserData(array $data);
 
     /**
      * @return bool
@@ -138,26 +117,17 @@ abstract class AbstractIdentity implements IdentityInterface
 
     /**
      * @param int $id
-     * @return array
+     * @return mixed
      */
     abstract protected function createByUserID(int $id);
 
     /**
-     * @param array $data
+     * @param mixed $data
      * @param bool $saveInCookie
      * @return static
      * @throws \Exception
      */
-    protected function set(array $data, bool $saveInCookie = false)
-    {
-        $this->getSessionCache()->hydrate($data);
-
-        if ($this->isAuthenticated() && $saveInCookie && $this->hasCookie()) {
-            setcookie($this->cookieName, $this->getID(), time() + $this->expires);
-        }
-
-        return $this;
-    }
+    abstract protected function set($data, bool $saveInCookie = false);
 
     /**
      * @return static
@@ -165,7 +135,7 @@ abstract class AbstractIdentity implements IdentityInterface
      */
     public function clean()
     {
-        $this->getSessionCache()->clean();
+        $this->cleanCache();
 
         if ($this->hasCookie() && $this->giGetRequest()->getCookie()->has($this->cookieName)) {
             setcookie($this->cookieName);
@@ -175,70 +145,7 @@ abstract class AbstractIdentity implements IdentityInterface
     }
 
     /**
-     * @return bool
+     * @return static
      */
-    public function isAuthenticated()
-    {
-        return !$this->getSessionCache()->isEmpty();
-    }
-
-    /**
-     * @param string|int|array $key
-     * @return bool
-     * @throws \Exception
-     */
-    public function has($key)
-    {
-        return $this->getSessionCache()->has($key);
-    }
-
-    /**
-     * @param string|int|array $key
-     * @return mixed
-     * @throws \Exception
-     */
-    public function get($key)
-    {
-        try {
-            $result = $this->getSessionCache()->get($key);
-        } catch (\Exception $exception) {
-            $result = null;
-            if (is_array($key)) {
-                $key = implode(', ', $key);
-            }
-
-            $this->throwIdentityKeyException($key);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param string $method
-     * @param array $arguments
-     * @return bool|mixed
-     * @throws \Exception
-     */
-    public function __call(string $method, array $arguments = [])
-    {
-        try {
-            $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);
-        } catch (\Exception $exception) {
-            try {
-                $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
-            } catch (\Exception $exception) {
-                $this->giThrowMagicMethodException($method);
-            }
-        }
-
-        $result = null;
-
-        if (!empty($has)) {
-            $result = $this->has($has);
-        } elseif (!empty($get)) {
-            $result = $this->get($get);
-        }
-
-        return $result;
-    }
+    abstract protected function cleanCache();
 }
