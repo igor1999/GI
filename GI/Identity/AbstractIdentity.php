@@ -18,12 +18,13 @@
 namespace GI\Identity;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\Identity\Exception\ExceptionAwareTrait;
 
 use GI\Identity\Context\ContextInterface;
 
 abstract class AbstractIdentity implements IdentityInterface
 {
-    use ServiceLocatorAwareTrait;
+    use ServiceLocatorAwareTrait, ExceptionAwareTrait;
 
 
     /**
@@ -128,6 +129,20 @@ abstract class AbstractIdentity implements IdentityInterface
      * @throws \Exception
      */
     abstract protected function set($data, bool $saveInCookie = false);
+
+    /**
+     * @param bool $saveInCookie
+     * @return static
+     * @throws \Exception
+     */
+    protected function setCookie(bool $saveInCookie)
+    {
+        if ($this->isAuthenticated() && $saveInCookie && $this->hasCookie()) {
+            setcookie($this->getCookieName(), $this->getID(), time() + $this->getExpires());
+        }
+
+        return $this;
+    }
 
     /**
      * @return static

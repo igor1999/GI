@@ -15,29 +15,58 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Identity\ArrayIdentity;
+namespace GI\Identity\ORM;
 
 use GI\Identity\AbstractIdentity as Base;
+use GI\Identity\ORM\Record\Record as EmptyRecord;
 
-use GI\Storage\Tree\TreeInterface;
+use GI\Identity\Exception\ExceptionAwareTrait;
+
+use GI\RDB\ORM\Record\RecordInterface;
+use GI\Identity\ORM\Record\RecordInterface as EmptyRecordInterface;
 
 abstract class AbstractIdentity extends Base implements IdentityInterface
 {
+    use ExceptionAwareTrait;
+
+
     /**
-     * @return TreeInterface
+     * @return string
+     */
+    public static function getSessionCacheClass()
+    {
+        return EmptyRecord::class;
+    }
+
+    /**
+     * @return RecordInterface
      */
     abstract protected function getSessionCache();
 
     /**
+     * @return EmptyRecordInterface
+     */
+    protected function createEmptyRecord()
+    {
+        try {
+           $record = $this->giGetDi(EmptyRecordInterface::class);
+        } catch (\Exception $exception) {
+            $record = new EmptyRecord();
+        }
+
+        return $record;
+    }
+
+    /**
      * @param string $login
      * @param string $password
-     * @return array
+     * @return RecordInterface
      */
     abstract protected function createByCredentials(string $login, string $password);
 
     /**
      * @param int $id
-     * @return array
+     * @return RecordInterface
      */
     abstract protected function createByUserID(int $id);
 
@@ -49,22 +78,17 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
      */
     protected function set($data, bool $saveInCookie = false)
     {
-        $this->setArray($data)->setCookie($saveInCookie);
+        $this->setRecord($data)->setCookie($saveInCookie);
 
         return $this;
     }
 
     /**
-     * @param array $data
+     * @param RecordInterface $data
      * @return static
      * @throws \Exception
      */
-    protected function setArray(array $data)
-    {
-        $this->getSessionCache()->hydrate($data);
-
-        return $this;
-    }
+    abstract protected function setRecord(RecordInterface $data);
 
     /**
      * @return static
@@ -72,7 +96,7 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
      */
     protected function cleanCache()
     {
-        $this->getSessionCache()->clean();
+        $this->setRecord($this->createEmptyRecord());
 
         return $this;
     }
@@ -82,64 +106,26 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
      */
     public function isAuthenticated()
     {
-        return !$this->getSessionCache()->isEmpty();
-    }
-
-    /**
-     * @param string|int|array $key
-     * @return bool
-     * @throws \Exception
-     */
-    public function has($key)
-    {
-        return $this->getSessionCache()->has($key);
-    }
-
-    /**
-     * @param string|int|array $key
-     * @return mixed
-     * @throws \Exception
-     */
-    public function get($key)
-    {
-        try {
-            $result = $this->getSessionCache()->get($key);
-        } catch (\Exception $exception) {
-            $result = null;
-            if (is_array($key)) {
-                $key = implode(', ', $key);
-            }
-
-            $this->throwIdentityKeyException($key);
-        }
-
-        return $result;
+        return ($this->getSessionCache() instanceof RecordInterface)
+            && !($this->getSessionCache() instanceof EmptyRecordInterface);
     }
 
     /**
      * @param string $method
      * @param array $arguments
-     * @return bool|mixed
+     * @return mixed
      * @throws \Exception
      */
     public function __call(string $method, array $arguments = [])
     {
-        try {
-            $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);
-        } catch (\Exception $exception) {
-            try {
-                $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
-            } catch (\Exception $exception) {
-                $this->giThrowMagicMethodException($method);
+        if (method_exists($this->getSessionCache(), $method)) {
+            $result = call_user_func_array([$this->getSessionCache(), $method], $arguments);
+            if ($result === $this->getSessionCache()) {
+                $result = $this;
             }
-        }
-
-        $result = null;
-
-        if (!empty($has)) {
-            $result = $this->has($has);
-        } elseif (!empty($get)) {
-            $result = $this->get($get);
+        } else {
+            $result = null;
+            $this->giThrowMagicMethodException($method);
         }
 
         return $result;
