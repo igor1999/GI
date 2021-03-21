@@ -36,6 +36,8 @@ abstract class AbstractRecord implements RecordInterface
 
     const DB_HYDRATION_DESCRIPTOR  = 'from-db';
 
+    const DB_RELATION_DESCRIPTOR  = 'relate-db';
+
 
     /**
      * AbstractRecord constructor.

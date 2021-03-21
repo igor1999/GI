@@ -372,7 +372,7 @@ abstract class AbstractSet implements SetInterface
         $joinFields = [];
 
         foreach ($methodReflections as $methodReflection) {
-            $myField    = $methodReflection->getDescriptor(AbstractRecord::DB_EXTRACTION_DESCRIPTOR);
+            $myField    = $methodReflection->getDescriptor(AbstractRecord::DB_RELATION_DESCRIPTOR);
             $proxyField = $methodReflection->getDescriptor($proxyClass);
 
             $joinFields[$myField] = $proxyField;
