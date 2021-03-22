@@ -109,25 +109,4 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
         return ($this->getSessionCache() instanceof RecordInterface)
             && !($this->getSessionCache() instanceof EmptyRecordInterface);
     }
-
-    /**
-     * @param string $method
-     * @param array $arguments
-     * @return mixed
-     * @throws \Exception
-     */
-    public function __call(string $method, array $arguments = [])
-    {
-        if (method_exists($this->getSessionCache(), $method)) {
-            $result = call_user_func_array([$this->getSessionCache(), $method], $arguments);
-            if ($result === $this->getSessionCache()) {
-                $result = $this;
-            }
-        } else {
-            $result = null;
-            $this->giThrowMagicMethodException($method);
-        }
-
-        return $result;
-    }
 }
