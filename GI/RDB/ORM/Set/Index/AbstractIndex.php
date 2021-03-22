@@ -45,8 +45,6 @@ abstract class AbstractIndex implements IndexInterface
     public function __construct(SetInterface $source)
     {
         $this->source = $source;
-
-        $this->refresh();
     }
 
     /**
