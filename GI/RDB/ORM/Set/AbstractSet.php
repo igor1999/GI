@@ -27,7 +27,6 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Table\TableInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\RDB\ORM\Set\Index\Collection\CollectionInterface as IndexCollectionInterface;
-use GI\RDB\ORM\Set\Index\IndexInterface;
 
 abstract class AbstractSet implements SetInterface
 {
@@ -455,19 +454,5 @@ abstract class AbstractSet implements SetInterface
         }
 
         return $result;
-    }
-
-    /**
-     * @param string $method
-     * @param array $arguments
-     * @return IndexInterface
-     * @throws \Exception
-     */
-    public function __call(string $method, array $arguments = [])
-    {
-        /** @var IndexInterface $index */
-        $index = call_user_func_array([$this->getIndexList(), $method], $arguments);
-
-        return $index;
     }
 }

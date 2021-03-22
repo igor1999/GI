@@ -35,31 +35,33 @@ abstract class AbstractIndex implements IndexInterface
     /**
      * @var SetInterface
      */
-    private $set;
+    private $source;
 
 
     /**
      * AbstractIndex constructor.
-     * @param SetInterface $set
+     * @param SetInterface $source
      */
-    public function __construct(SetInterface $set)
+    public function __construct(SetInterface $source)
     {
-        $this->set = $set;
+        $this->source = $source;
+
+        $this->refresh();
     }
 
     /**
      * @return SetInterface
      */
-    protected function getSet()
+    protected function getSource()
     {
-        return $this->set;
+        return $this->source;
     }
 
     /**
-     * @param RecordInterface $record
+     * @param int $index
      * @return string
      */
-    abstract protected function createKey(RecordInterface $record);
+    abstract protected function createKey(int $index);
 
     /**
      * @param array $keys
@@ -132,17 +134,6 @@ abstract class AbstractIndex implements IndexInterface
     }
 
     /**
-     * @param RecordInterface $record
-     * @return static
-     */
-    protected function set(RecordInterface $record)
-    {
-        $this->items[$this->createKey($record)] = $record;
-
-        return $this;
-    }
-
-    /**
      * @return static
      */
     protected function clean()
@@ -159,8 +150,8 @@ abstract class AbstractIndex implements IndexInterface
     {
         $this->clean();
 
-        foreach ($this->getSet()->getItems() as $record) {
-            $this->set($record);
+        foreach ($this->getSource()->getItems() as $index => $record) {
+            $this->items[$this->createKey($index)] = $record;
         }
 
         return $this;

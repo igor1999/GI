@@ -27,26 +27,29 @@ class Collection extends AbstractFactory implements CollectionInterface
     /**
      * @var SetInterface
      */
-    private $set;
+    private $source;
 
 
     /**
-     * Collection constructor.
-     * @param SetInterface $set
+     * AbstractCollection constructor.
+     * @param SetInterface $source
+     * @throws \Exception
      */
-    public function __construct(SetInterface $set)
+    public function __construct(SetInterface $source)
     {
         $this->setCached(true)->setPrefixToGet();
 
-        $this->set = $set;
+        $this->getTemplateClasses()->add(IndexInterface::class);
+
+        $this->source = $source;
     }
 
     /**
      * @return SetInterface
      */
-    protected function getSet()
+    protected function getSource()
     {
-        return $this->set;
+        return $this->source;
     }
 
     /**
@@ -58,7 +61,7 @@ class Collection extends AbstractFactory implements CollectionInterface
      */
     public function create(string $method, array $arguments = [], string $prefix = '')
     {
-        $arguments = [$this->getSet()];
+        $arguments = [$this->getSource()];
 
         return parent::create($method, $arguments, $prefix);
     }
