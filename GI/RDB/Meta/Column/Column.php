@@ -17,15 +17,15 @@
  */
 namespace GI\RDB\Meta\Column;
 
-use GI\GI\RDB\Meta\Column\References\ParentReferences\References as ParentReferences;
-use GI\GI\RDB\Meta\Column\References\ChildReferences\References as ChildReferences;
+use GI\RDB\Meta\Column\References\ParentReferences\References as ParentReferences;
+use GI\RDB\Meta\Column\References\ChildReferences\References as ChildReferences;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Pattern\ArrayExchange\ExtractionTrait;
 
 use GI\RDB\Meta\Table\TableInterface;
-use GI\GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
-use GI\GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
+use GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 class Column implements ColumnInterface
 {

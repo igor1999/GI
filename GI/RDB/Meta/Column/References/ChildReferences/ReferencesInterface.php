@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\Meta\Column\References\ChildReferences;
+namespace GI\RDB\Meta\Column\References\ChildReferences;
 
-use GI\GI\RDB\Meta\Column\References\Base\ReferencesInterface as BaseInterface;
+use GI\RDB\Meta\Column\References\Base\ReferencesInterface as BaseInterface;
 use GI\RDB\Meta\Column\ColumnInterface;
 
 interface ReferencesInterface extends BaseInterface

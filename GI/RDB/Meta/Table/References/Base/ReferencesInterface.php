@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\Meta\Table\References\Base;
+namespace GI\RDB\Meta\Table\References\Base;
 
 use GI\RDB\Meta\Table\TableInterface;
 

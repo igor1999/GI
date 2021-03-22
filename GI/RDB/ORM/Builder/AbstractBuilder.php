@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\ORM\Builder;
+namespace GI\RDB\ORM\Builder;
 
-use GI\GI\RDB\ORM\Builder\Table\Builder as TableBuilder;
+use GI\RDB\ORM\Builder\Table\Builder as TableBuilder;
 use GI\RDB\ORM\Builder\View\Factory\ClassView\View as FactoryClassView;
 use GI\RDB\ORM\Builder\View\Factory\InterfaceView\View as FactoryInterfaceView;
 
@@ -25,7 +25,7 @@ use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\RDB\Driver\DriverInterface;
 use GI\FileSystem\FSO\FSODir\FSODirInterface;
-use GI\GI\RDB\ORM\Builder\Table\BuilderInterface as TableBuilderInterface;
+use GI\RDB\ORM\Builder\Table\BuilderInterface as TableBuilderInterface;
 use GI\RDB\Meta\Table\TableInterface;
 use GI\RDB\ORM\Builder\View\Factory\ClassView\ViewInterface as FactoryClassViewInterface;
 use GI\RDB\ORM\Builder\View\Factory\InterfaceView\ViewInterface as FactoryInterfaceViewInterface;

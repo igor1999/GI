@@ -19,8 +19,8 @@ namespace GI\RDB\Meta\Column;
 
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\RDB\Meta\Table\TableInterface;
-use GI\GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
-use GI\GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
+use GI\RDB\Meta\Column\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\RDB\Meta\Column\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 interface ColumnInterface extends ExtractionInterface
 {

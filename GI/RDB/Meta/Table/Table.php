@@ -19,9 +19,9 @@ namespace GI\RDB\Meta\Table;
 
 use GI\RDB\Meta\Column\ColumnList;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilder;
-use GI\GI\RDB\Meta\Table\PHPNames\PHPNames;
-use GI\GI\RDB\Meta\Table\References\ParentReferences\References as ParentReferences;
-use GI\GI\RDB\Meta\Table\References\ChildReferences\References as ChildReferences;
+use GI\RDB\Meta\Table\PHPNames\PHPNames;
+use GI\RDB\Meta\Table\References\ParentReferences\References as ParentReferences;
+use GI\RDB\Meta\Table\References\ChildReferences\References as ChildReferences;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\RDB\Meta\Exception\ExceptionAwareTrait;
@@ -30,9 +30,9 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Column\ColumnListInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\RDB\Meta\Table\QueryBuilder\QueryBuilderInterface;
-use GI\GI\RDB\Meta\Table\PHPNames\PHPNamesInterface;
-use GI\GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
-use GI\GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
+use GI\RDB\Meta\Table\PHPNames\PHPNamesInterface;
+use GI\RDB\Meta\Table\References\ParentReferences\ReferencesInterface as ParentReferencesInterface;
+use GI\RDB\Meta\Table\References\ChildReferences\ReferencesInterface as ChildReferencesInterface;
 
 class Table implements TableInterface
 {

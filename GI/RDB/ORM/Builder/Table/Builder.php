@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\GI\RDB\ORM\Builder\Table;
+namespace GI\RDB\ORM\Builder\Table;
 
 use GI\RDB\ORM\Builder\View\Entity\Record\ClassView\View as RecordClassView;
 use GI\RDB\ORM\Builder\View\Entity\Record\InterfaceView\View as RecordInterfaceView;
