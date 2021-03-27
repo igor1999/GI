@@ -35,6 +35,10 @@ use GI\REST\Response\JSON\JSONInterface;
 
 use GI\REST\Response\Simple\SimpleInterface;
 
+use GI\REST\Response\Location\LocationInterface;
+
+use GI\REST\Response\Refresh\RefreshInterface;
+
 use GI\REST\Response\Status\StatusInterface;
 use GI\REST\Response\Status\Status200\Status200Interface;
 use GI\REST\Response\Status\Status403\Status403Interface;
@@ -61,6 +65,8 @@ use GI\REST\Response\Header\Factory\FactoryInterface as HeaderFactoryInterface;
  * @method JPEGInterface createJPEG(string $resource)
  * @method PNGInterface createPNG(string $resource)
  * @method JSONInterface createJSON($data)
+ * @method LocationInterface createLocation(string $url)
+ * @method RefreshInterface createRefresh(int $time, string $url)
  * @method StatusInterface createStatus(int $code, $output = '', string $protocol = '')
  * @method Status200Interface createStatus200($output = '', string $protocol = '')
  * @method Status403Interface createStatus403($output = '', string $protocol = '')

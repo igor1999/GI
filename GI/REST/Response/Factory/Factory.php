@@ -33,6 +33,10 @@ use GI\REST\Response\Image\PNG\PNG;
 
 use GI\REST\Response\JSON\JSON;
 
+use GI\REST\Response\Location\Location;
+
+use GI\REST\Response\Refresh\Refresh;
+
 use GI\REST\Response\Simple\Simple;
 
 use GI\REST\Response\Status\Status;
@@ -63,6 +67,10 @@ use GI\REST\Response\Image\PNG\PNGInterface;
 
 use GI\REST\Response\JSON\JSONInterface;
 
+use GI\REST\Response\Location\LocationInterface;
+
+use GI\REST\Response\Refresh\RefreshInterface;
+
 use GI\REST\Response\Simple\SimpleInterface;
 
 use GI\REST\Response\Status\StatusInterface;
@@ -91,6 +99,8 @@ use GI\REST\Response\Header\Factory\FactoryInterface as HeaderFactoryInterface;
  * @method JPEGInterface createJPEG(string $resource)
  * @method PNGInterface createPNG(string $resource)
  * @method JSONInterface createJSON($data)
+ * @method LocationInterface createLocation(string $url)
+ * @method RefreshInterface createRefresh(int $time, string $url)
  * @method StatusInterface createStatus(int $code, $output = '', string $protocol = '')
  * @method Status200Interface createStatus200($output = '', string $protocol = '')
  * @method Status403Interface createStatus403($output = '', string $protocol = '')
@@ -127,6 +137,8 @@ class Factory extends AbstractFactory implements FactoryInterface
             ->set(JPEG::class)
             ->set(PNG::class)
             ->set(JSON::class)
+            ->set(Location::class)
+            ->set(Refresh::class)
             ->set(Status::class)
             ->set(Status200::class)
             ->set(Status403::class)
