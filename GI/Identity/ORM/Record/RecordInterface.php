@@ -18,8 +18,9 @@
 namespace GI\Identity\ORM\Record;
 
 use GI\RDB\ORM\Record\RecordInterface as BaseInterface;
+use GI\SessionExchange\BaseInterface\CacheClassInterface;
 
-interface RecordInterface extends BaseInterface
+interface RecordInterface extends BaseInterface, CacheClassInterface
 {
     /**
      * @return null
