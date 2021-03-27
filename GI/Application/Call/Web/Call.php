@@ -47,6 +47,8 @@ use GI\Application\Mock\CSRFFailed\View\ViewInterface as CSRFFailedViewInterface
  * @method CallInterface setResponseToJPEG($resource)
  * @method CallInterface setResponseToPNG($resource)
  * @method CallInterface setResponseToJSON($data)
+ * @method CallInterface setResponseToLocation(string $url)
+ * @method CallInterface setResponseToRefresh(int $time, string $url)
  * @method CallInterface setResponseToStatus200(string $output = '', string $protocol = '')
  * @method CallInterface setResponseToStatus403(string $output = '', string $protocol = '')
  * @method CallInterface setResponseToStatus404(string $output = '', string $protocol = '')
