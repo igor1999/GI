@@ -1,8 +1,8 @@
-en_GB
-Either login or password failed
-Login
-login
-password
-remember me
-login!
-You have a successfully login. Please wait a moment...
+en_GB|fr_FR|de_DE|es_ES|it_IT
+Either login or password failed|Échec de la connexion ou du mot de passe|Login oder Passwort fehlgeschlagen|Error de inicio de sesión o contraseña|Accesso o password non riusciti
+Login|Connexion|Login|Acceso|Login
+login|connexion|login|acceso|Accedere
+password|le mot de passe|Passwort|contraseña|parola d'ordine
+remember me|souviens-toi de moi|auf passwort erinnern|recuérdame|ricordati di me
+login!|connexion!|login!|¡acceso!|accedere!
+You have a successfully login. Please wait a moment...|Vous avez réussi à vous connecter. Patientez s'il-vous-plait...|Sie haben sich erfolgreich angemeldet. Bitte warte einen Moment...|Tiene un inicio de sesión exitoso. Por favor, espere un momento...|Hai un login con successo. Per favore aspetta un momento...
