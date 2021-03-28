@@ -4,21 +4,23 @@ use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Methods\ViewInte
 /** @var ViewInterface $this */
 ?>
 <?php
-$column = $this->getColumn();
+$column       = $this->getColumn();
 $name         = $column->getName();
 $type         = $column->getPHPType();
 $property     = $column->getClassProperty();
 $setter       = $column->getClassSetter();
 $setterAccess = $this->getAccess($column);
+$nullForDoc   = $this->getNullForDoc($column);
+$nullForArg   = $this->getNullForArg($column);
 ?>
 <?php echo $this->getGetterView()->toString(), PHP_EOL; ?>
 
     /**
      * @from-db <?php echo $name, PHP_EOL; ?>
-     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
+     * @param <?php echo $type, $nullForDoc; ?> $<?php echo $property, PHP_EOL; ?>
      * @return static
      */
-    <?php echo $setterAccess; ?> function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property; ?>)
+    <?php echo $setterAccess; ?> function <?php echo $setter; ?>(<?php echo $type; ?> $<?php echo $property, $nullForArg; ?>)
     {
         $this-><?php echo $property; ?> = (<?php echo $type; ?>)$<?php echo $property; ?>;
 

@@ -23,7 +23,7 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
 {
     const PHP_INT_TYPES = [
         'bigint', 'binary', 'bit', 'bool', 'boolean', 'int',
-        'mediumint', 'smallint', 'timestamp', 'tinyint', 'year'
+        'mediumint', 'smallint', 'tinyint', 'year'
     ];
 
     const PHP_FLOAT_TYPES = ['decimal', 'double', 'float', 'numeric', 'real'];
@@ -31,7 +31,7 @@ class MYSQL extends AbstractPlatform implements MYSQLInterface
     const PHP_STRING_TYPES = [
         'blob', 'char', 'date', 'datetime', 'enum',
         'longblob', 'longtext', 'mediumblob', 'mediumtext', 'set',
-        'text', 'time', 'tinyblob', 'tinytext', 'varbinary', 'varchar'
+        'text', 'time', 'timestamp', 'tinyblob', 'tinytext', 'varbinary', 'varchar'
     ];
 
     const PHP_DATE_TYPES = ['timestamp', 'year', 'date', 'datetime', 'time'];
