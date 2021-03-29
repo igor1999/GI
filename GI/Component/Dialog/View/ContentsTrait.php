@@ -23,16 +23,6 @@ use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 trait ContentsTrait
 {
     /**
-     * @var string
-     */
-    private $titleText = '';
-
-    /**
-     * @var bool
-     */
-    private $modality = false;
-
-    /**
      * @var DivInterface
      */
     private $container;

@@ -91,7 +91,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         $this->cover = $this->giGetDOMFactory()->createDiv();
 
-        if ($this->modality) {
+        if ($this->isModality()) {
             $this->content->getClasses()->add(static::CLASS_COVER_MODAL);
         }
 
@@ -130,7 +130,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
         $this->title = $this->giGetDOMFactory()->createDiv();
 
         $this->title->getAttributes()->setUnselectableToOn();
-        $this->title->getChildNodes()->set($this->titleText);
+        $this->title->getChildNodes()->set($this->getTitleText());
 
         return $this->title;
     }
@@ -197,7 +197,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function createModalityHidden()
     {
         $this->modalityHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            [], $this->modality ? 1 : 0
+            [], $this->isModality() ? 1 : 0
         );
 
         return $this->modalityHidden;
