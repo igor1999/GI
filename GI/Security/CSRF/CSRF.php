@@ -71,7 +71,7 @@ class CSRF implements CSRFInterface
     /**
      * @return string
      */
-    public static function getSessionCacheClass()
+    public static function getDefaultSessionCacheClass()
     {
         return Cache::class;
     }

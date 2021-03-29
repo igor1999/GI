@@ -18,11 +18,12 @@
 namespace GI\RDB\ORM\Record;
 
 use GI\Pattern\ArrayExchange\ArrayExchangeInterface;
+use GI\SessionExchange\BaseInterface\CacheClassInterface;
 use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Table\TableInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 
-interface RecordInterface extends  ArrayExchangeInterface
+interface RecordInterface extends ArrayExchangeInterface, CacheClassInterface
 {
     /**
      * @return TableInterface

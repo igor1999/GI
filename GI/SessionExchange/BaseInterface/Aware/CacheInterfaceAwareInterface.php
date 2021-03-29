@@ -17,10 +17,10 @@
  */
 namespace GI\SessionExchange\BaseInterface\Aware;
 
-interface CacheClassAwareInterface extends SessionExchangeAwareInterface
+interface CacheInterfaceAwareInterface extends CacheClassAwareInterface
 {
     /**
      * @return string
      */
-    public static function getDefaultSessionCacheClass();
+    public static function getPossibleSessionCacheInterface();
 }

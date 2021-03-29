@@ -33,7 +33,7 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
     /**
      * @return string
      */
-    public static function getSessionCacheClass()
+    public static function getDefaultSessionCacheClass()
     {
         return EmptyRecord::class;
     }

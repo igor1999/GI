@@ -18,6 +18,7 @@
 namespace GI\SessionExchange\ClassMeta;
 
 use GI\Meta\ClassMeta\ClassMeta as Base;
+use GI\SessionExchange\BaseInterface\Aware\CacheInterfaceAwareInterface;
 use GI\Storage\Tree\Tree;
 
 use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
@@ -26,15 +27,22 @@ use GI\SessionExchange\BaseInterface\CacheClassInterface;
 
 class ClassMeta extends Base implements ClassMetaInterface
 {
-    const CACHE_PROPERTY     = 'sessionCache';
+    const CACHE_PROPERTY                  = 'sessionCache';
 
-    const CACHE_CLASS_GETTER = 'getSessionCacheClass';
+    const DEFAULT_CACHE_CLASS_GETTER      = 'getDefaultSessionCacheClass';
+
+    const POSSIBLE_CACHE_INTERFACE_GETTER = 'getPossibleSessionCacheInterface';
 
 
     /**
      * @var string
      */
-    private $cacheClass = '';
+    private $defaultCacheClass = '';
+
+    /**
+     * @var string
+     */
+    private $possibleCacheInterface = '';
 
 
     /**
@@ -46,6 +54,26 @@ class ClassMeta extends Base implements ClassMetaInterface
     {
         parent::__construct($class);
 
+        if (is_a($this->getName(), CacheClassAwareInterface::class, true)) {
+            $this->defaultCacheClass = $this->getMethods()->get(static::DEFAULT_CACHE_CLASS_GETTER)->execute();
+        }
+
+        if (is_a($this->getName(), CacheInterfaceAwareInterface::class, true)) {
+            $this->possibleCacheInterface = $this->getMethods()
+                ->get(static::POSSIBLE_CACHE_INTERFACE_GETTER)
+                ->execute();
+        } else {
+            $this->possibleCacheInterface = $this->defaultCacheClass;
+        }
+
+        $this->validateClass()->validateProperty()->validateDefaultCacheClass()->validatePossibleCacheInterface();
+    }
+
+    /**
+     * @return static
+     */
+    protected function validateClass()
+    {
         if (!is_a($this->getName(), SessionExchangeAwareInterface::class, true)) {
             trigger_error(
                 'Class is not instance of SessionExchangeAwareInterface: ' . $this->getName(),
@@ -53,28 +81,66 @@ class ClassMeta extends Base implements ClassMetaInterface
             );
         }
 
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    protected function validateProperty()
+    {
         if (!$this->getProperties()->has(static::CACHE_PROPERTY)) {
             trigger_error('Cache property not found: ' . static::CACHE_PROPERTY, E_USER_ERROR);
         }
 
-        if (is_a($this->getName(), CacheClassAwareInterface::class, true)) {
-            $this->cacheClass = $this->getMethods()->get(static::CACHE_CLASS_GETTER)->execute();
+        return $this;
+    }
 
-            if (!is_a($this->cacheClass, CacheClassInterface::class, true)) {
-                trigger_error(
-                    'Class cache is not instance of CacheClassInterface: ' . $this->cacheClass,
-                    E_USER_ERROR
-                );
-            }
+    /**
+     * @return static
+     */
+    protected function validateDefaultCacheClass()
+    {
+        if (!is_a($this->defaultCacheClass, CacheClassInterface::class, true)) {
+            trigger_error(
+                'Default class cache is not instance of CacheClassInterface: ' . $this->defaultCacheClass,
+                E_USER_ERROR
+            );
         }
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    protected function validatePossibleCacheInterface()
+    {
+        if (!is_a($this->possibleCacheInterface, CacheClassInterface::class, true)) {
+            trigger_error(
+                'Possible class cache is not instance of CacheClassInterface: '
+                . $this->possibleCacheInterface,
+                E_USER_ERROR
+            );
+        }
+
+        return $this;
     }
 
     /**
      * @return CacheClassInterface
      */
-    protected function getCacheClass()
+    protected function getDefaultCacheClass()
     {
-        return $this->cacheClass;
+        return $this->defaultCacheClass;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPossibleCacheInterface()
+    {
+        return $this->possibleCacheInterface;
     }
 
     /**
@@ -87,8 +153,8 @@ class ClassMeta extends Base implements ClassMetaInterface
         $cache = @unserialize($data);
 
         if (!$this->checkCacheType($cache)) {
-            $cacheClass = $this->cacheClass;
-            $cache = is_a($this->cacheClass, CacheClassInterface::class, true)
+            $cacheClass = $this->defaultCacheClass;
+            $cache = is_a($this->defaultCacheClass, CacheClassInterface::class, true)
                 ? new $cacheClass()
                 : $this->createDefaultCache();
         }
@@ -123,7 +189,7 @@ class ClassMeta extends Base implements ClassMetaInterface
      */
     protected function checkCacheType($cache)
     {
-        return (empty($this->cacheClass) && ($cache instanceof CacheClassInterface))
-            || (!empty($this->cacheClass) && is_a($cache, $this->cacheClass, true));
+        return (empty($this->possibleCacheInterface) && ($cache instanceof CacheClassInterface))
+            || (!empty($this->possibleCacheInterface) && is_a($cache, $this->possibleCacheInterface, true));
     }
 }

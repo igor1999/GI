@@ -69,7 +69,7 @@ abstract class AbstractJob implements JobInterface
     /**
      * @return string
      */
-    public static function getSessionCacheClass()
+    public static function getDefaultSessionCacheClass()
     {
         return Cache::class;
     }

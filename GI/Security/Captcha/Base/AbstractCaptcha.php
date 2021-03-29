@@ -77,7 +77,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
     /**
      * @return string
      */
-    public static function getSessionCacheClass()
+    public static function getDefaultSessionCacheClass()
     {
         return Cache::class;
     }
