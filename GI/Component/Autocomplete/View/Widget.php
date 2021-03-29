@@ -24,6 +24,17 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 use GI\Component\Autocomplete\Context\ContextInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Autocomplete\View
+ *
+ * @method array getName()
+ * @method WidgetInterface setName(array $name)
+ * @method getValue()
+ * @method WidgetInterface setValue($value)
+ * @method ContextInterface getContext()
+ * @method WidgetInterface setContext(ContextInterface $contents)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     const CLIENT_JS        = 'gi-autocomplete';
@@ -37,21 +48,6 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     const ATTRIBUTE_URI       = 'uri';
 
-
-    /**
-     * @var array
-     */
-    private $name;
-
-    /**
-     * @var mixed
-     */
-    private $value;
-
-    /**
-     * @var ContextInterface
-     */
-    private $context;
 
     /**
      * @var ResourceRendererInterface
@@ -85,63 +81,6 @@ class Widget extends AbstractWidget implements WidgetInterface
         );
     }
 
-     /**
-     * @return array
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param array $name
-     * @return static
-     */
-    public function setName(array $name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * @param mixed $value
-     * @return static
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return ContextInterface
-     */
-    protected function getContext()
-    {
-        return $this->context;
-    }
-
-    /**
-     * @param ContextInterface $context
-     * @return static
-     */
-    public function setContext(ContextInterface $context)
-    {
-        $this->context = $context;
-
-        return $this;
-    }
-
     /**
      * @validate
      * @throws \Exception
@@ -154,7 +93,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     /**
      * @return ResourceRendererInterface
      */
-    public function getResourceRenderer()
+    protected function getResourceRenderer()
     {
         return $this->resourceRenderer;
     }
@@ -204,7 +143,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createTextbox()
     {
-        $this->textbox = $this->giGetDOMFactory()->getInputFactory()->createText($this->name, $this->value);
+        $this->textbox = $this->giGetDOMFactory()->getInputFactory()->createText($this->getName(), $this->getValue());
 
         $this->textbox->getAttributes()->setAutocompleteToOff();
         $this->textbox->setPlaceholder($this->getContext()->getPlaceholder());

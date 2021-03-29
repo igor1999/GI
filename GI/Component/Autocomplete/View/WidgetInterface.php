@@ -23,41 +23,19 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Autocomplete\View
+ *
+ * @method array getName()
+ * @method WidgetInterface setName(array $name)
+ * @method getValue()
+ * @method WidgetInterface setValue($value)
+ * @method ContextInterface getContext()
+ * @method WidgetInterface setContext(ContextInterface $contents)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return ResourceRendererInterface
-     */
-    public function getResourceRenderer();
-
-    /**
-     * @return array
-     */
-    public function getName();
-
-    /**
-     * @param array $name
-     * @return static
-     */
-    public function setName(array $name);
-
-    /**
-     * @return mixed
-     */
-    public function getValue();
-
-    /**
-     * @param mixed $value
-     * @return static
-     */
-    public function setValue($value);
-
-    /**
-     * @param ContextInterface $contents
-     * @return static
-     */
-    public function setContext(ContextInterface $contents);
-
     /**
      * @return TextInterface
      */

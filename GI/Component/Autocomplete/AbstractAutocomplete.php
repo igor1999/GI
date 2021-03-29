@@ -104,7 +104,8 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
         return $this->getView()
             ->setName($this->name)
             ->setValue($this->value)
-            ->setContext($this->getContext())->toString();
+            ->setContext($this->getContext())
+            ->toString();
     }
 
     /**
