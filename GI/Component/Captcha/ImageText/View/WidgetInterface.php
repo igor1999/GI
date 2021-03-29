@@ -22,20 +22,17 @@ use GI\Component\Captcha\ImageText\ViewModel\ViewModelInterface;
 use GI\DOM\HTML\Element\Image\ImageInterface;
 use GI\DOM\HTML\Element\Input\Text\TextInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Captcha\ImageText\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method string getImageSource()
+ * @method WidgetInterface setImageSource(string $imageSource)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel);
-
-    /**
-     * @param string $imageSource
-     * @return static
-     */
-    public function setImageSource(string $imageSource);
-
     /**
      * @return ImageInterface
      */

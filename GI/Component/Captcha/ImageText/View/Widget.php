@@ -25,22 +25,21 @@ use GI\DOM\HTML\Element\Image\ImageInterface;
 use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\Component\Captcha\I18n\GlossaryInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Captcha\ImageText\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method string getImageSource()
+ * @method WidgetInterface setImageSource(string $imageSource)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     const CLIENT_JS  = 'gi-captcha-image-text';
 
     const CLIENT_CSS = self::CLIENT_JS;
 
-
-    /**
-     * @var ViewModelInterface
-     */
-    private $viewModel;
-
-    /**
-     * @var string
-     */
-    private $imageSource = '';
 
     /**
      * @var ResourceRendererInterface
@@ -67,44 +66,6 @@ class Widget extends AbstractWidget implements WidgetInterface
         $this->resourceRenderer = $this->giGetDi(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
-    }
-
-    /**
-     * @return ViewModelInterface
-     */
-    protected function getViewModel()
-    {
-        return $this->viewModel;
-    }
-
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel)
-    {
-        $this->viewModel = $viewModel;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getImageSource()
-    {
-        return $this->imageSource;
-    }
-
-    /**
-     * @param string $imageSource
-     * @return static
-     */
-    public function setImageSource(string $imageSource)
-    {
-        $this->imageSource = $imageSource;
-
-        return $this;
     }
 
     /**
@@ -156,7 +117,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function createCaptchaImage()
     {
         $this->captchaImage = $this->giGetDOMFactory()->createImage(
-            $this->imageSource,
+            $this->getImageSource(),
             $this->giTranslate(GlossaryInterface::class, Glossary::class,'Captcha')
         );
 
