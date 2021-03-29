@@ -23,20 +23,17 @@ use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Image\ImageInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Captcha\Base\View
+ *
+ * @method string getId()
+ * @method WidgetInterface setId(string $id)
+ * @method string getRecaptchaURI()
+ * @method WidgetInterface setRecaptchaURI(string $recaptchaURI)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param string $id
-     * @return static
-     */
-    public function setId(string $id);
-
-    /**
-     * @param string $recaptchaURI
-     * @return static
-     */
-    public function setRecaptchaURI(string $recaptchaURI);
-
     /**
      * @return LayoutInterface
      */

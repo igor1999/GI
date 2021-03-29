@@ -27,22 +27,21 @@ use GI\DOM\HTML\Element\Image\ImageInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\Component\Captcha\I18n\GlossaryInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\Captcha\Base\View
+ *
+ * @method string getId()
+ * @method WidgetInterface setId(string $id)
+ * @method string getRecaptchaURI()
+ * @method WidgetInterface setRecaptchaURI(string $recaptchaURI)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     const CLIENT_CSS              = 'gi-captcha-base';
 
     const ATTRIBUTE_RECAPTCHA_URL = 'recaptcha-url';
 
-
-    /**
-     * @var string
-     */
-    private $id = '';
-
-    /**
-     * @var string
-     */
-    private $recaptchaURI = '';
 
     /**
      * @var LayoutInterface
@@ -69,44 +68,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return ResourceRendererInterface
      */
     abstract protected function getResourceRenderer();
-
-    /**
-     * @return string
-     */
-    protected function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param string $id
-     * @return static
-     */
-    public function setId(string $id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getRecaptchaURI()
-    {
-        return $this->recaptchaURI;
-    }
-
-    /**
-     * @param string $recaptchaURI
-     * @return static
-     */
-    public function setRecaptchaURI(string $recaptchaURI)
-    {
-        $this->recaptchaURI = $recaptchaURI;
-
-        return $this;
-    }
 
     /**
      * @validate
@@ -184,7 +145,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function build()
     {
-        $this->getServerDataList()->set(static::ATTRIBUTE_RECAPTCHA_URL, $this->recaptchaURI);
+        $this->getServerDataList()->set(static::ATTRIBUTE_RECAPTCHA_URL, $this->getRecaptchaURI());
 
         $this->recaptchaButton->getChildNodes()->set($this->recaptchaImage);
 
@@ -211,7 +172,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         $this->idHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
             $this->getViewModel()->getIdName(),
-            $this->id
+            $this->getId()
         );
 
         return $this->idHidden;

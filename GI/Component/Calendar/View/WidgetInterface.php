@@ -26,14 +26,15 @@ use GI\DOM\HTML\Element\Input\DateTime\MonthInterface;
 use GI\DOM\HTML\Element\Table\Row\TRInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Calendar\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel);
-
     /**
      * @return DivInterface
      */

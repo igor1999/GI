@@ -28,11 +28,6 @@ use GI\DOM\HTML\Element\Input\DateTime\MonthInterface;
 trait ContentsTrait
 {
     /**
-     * @var ViewModelInterface
-     */
-    private $viewModel;
-
-    /**
      * @var DivInterface
      */
     private $container;
@@ -64,31 +59,12 @@ trait ContentsTrait
 
 
     /**
-     * @return ViewModelInterface
-     */
-    protected function getViewModel()
-    {
-        return $this->viewModel;
-    }
-
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel)
-    {
-        $this->viewModel = $viewModel;
-
-        return $this;
-    }
-
-    /**
      * @validate
      * @throws \Exception
      */
     protected function validateViewModel()
     {
-        if (!($this->viewModel instanceof ViewModelInterface)) {
+        if (!($this->getViewModel() instanceof ViewModelInterface)) {
             $this->giThrowInvalidTypeException('View model', '', 'ViewModelInterface');
         }
     }

@@ -31,6 +31,13 @@ use GI\Calendar\Month\MonthInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Component\Calendar\I18n\GlossaryInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\Calendar\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     use ContentsTrait;
@@ -54,14 +61,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return ResourceRendererInterface
      */
     abstract protected function getResourceRenderer();
-
-    /**
-     * @return ViewModelInterface
-     */
-    protected function getViewModel()
-    {
-        return $this->viewModel;
-    }
 
     /**
      * @return static
