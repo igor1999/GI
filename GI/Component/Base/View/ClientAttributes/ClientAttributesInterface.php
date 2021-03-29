@@ -19,6 +19,7 @@ namespace GI\Component\Base\View\ClientAttributes;
 
 use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
+use GI\Component\Base\ComponentInterface;
 
 interface ClientAttributesInterface
 {
@@ -64,11 +65,11 @@ interface ClientAttributesInterface
 
     /**
      * @param string $relation
-     * @param ClientAttributesInterface $relatedObject
+     * @param ComponentInterface $relatedObject
      * @return HiddenInterface
      * @throws \Exception
      */
-    public function createRelationHidden(string $relation, ClientAttributesInterface $relatedObject);
+    public function createRelationHidden(string $relation, ComponentInterface $relatedObject);
 
     /**
      * @return string

@@ -19,7 +19,7 @@ namespace GI\Component\Table\View;
 
 use GI\Component\Base\View\Widget\AbstractWidget as Base;
 
-use GI\Component\Paging\Base\View\Base\WidgetInterface as PagingWidgetInterface;
+use GI\Component\Paging\Base\PagingInterface;
 use GI\ClientContents\TableHeader\Column\ColumnInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
@@ -65,13 +65,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     abstract protected function getHeaderModel();
 
     /**
-     * @param PagingWidgetInterface $pagingWidget
+     * @param PagingInterface $paging
      * @return static
      * @throws \Exception
      */
-    public function setPagingRelation(PagingWidgetInterface $pagingWidget)
+    public function setPagingRelation(PagingInterface $paging)
     {
-        $this->getRelationList()->set(static::PAGING_RELATION, $pagingWidget);
+        $this->getRelationList()->set(static::PAGING_RELATION, $paging);
 
         return $this;
     }

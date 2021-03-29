@@ -25,6 +25,7 @@ use GI\DOM\HTML\Element\HTMLInterface;
 use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
+use GI\Component\Base\ComponentInterface;
 
 trait ClientAttributesTrait
 {
@@ -119,11 +120,11 @@ trait ClientAttributesTrait
 
     /**
      * @param string $relation
-     * @param ClientAttributesInterface $relatedObject
+     * @param ComponentInterface $relatedObject
      * @return HiddenInterface
      * @throws \Exception
      */
-    public function createRelationHidden(string $relation, ClientAttributesInterface $relatedObject)
+    public function createRelationHidden(string $relation, ComponentInterface $relatedObject)
     {
         /** @var ServiceLocatorAwareTrait $me */
         $me = $this;
@@ -133,7 +134,7 @@ trait ClientAttributesTrait
         $hidden->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject())
             ->setDataAttribute(static::ATTRIBUTE_RELATION, $relation)
-            ->setDataAttribute(static::ATTRIBUTE_RELATED_OBJECT, $relatedObject->getClientJSObject());
+            ->setDataAttribute(static::ATTRIBUTE_RELATED_OBJECT, $relatedObject->getViewClientJSObject());
 
         return $hidden;
     }

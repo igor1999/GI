@@ -21,5 +21,8 @@ use GI\DOM\Base\NodeInterface;
 
 interface ComponentInterface extends NodeInterface
 {
-
+    /**
+     * @return string
+     */
+    public function getViewClientJSObject();
 }

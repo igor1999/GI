@@ -79,7 +79,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function addDialogRelation(DialogInterface $dialog)
     {
-        $this->getRelationList()->set(static::RELATION_NAME_TO_DIALOG, $dialog->getView());
+        $this->getRelationList()->set(static::RELATION_NAME_TO_DIALOG, $dialog);
 
         return $this;
     }

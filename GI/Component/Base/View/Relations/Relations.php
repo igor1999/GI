@@ -20,6 +20,7 @@ namespace GI\Component\Base\View\Relations;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
+use GI\Component\Base\ComponentInterface;
 
 class Relations implements RelationsInterface
 {
@@ -32,7 +33,7 @@ class Relations implements RelationsInterface
     private $owner;
 
     /**
-     * @var ClientAttributesInterface[]
+     * @var ComponentInterface[]
      */
     private $items = [];
 
@@ -65,7 +66,7 @@ class Relations implements RelationsInterface
 
     /**
      * @param string $key
-     * @return ClientAttributesInterface
+     * @return ComponentInterface
      * @throws \Exception
      */
     public function get(string $key)
@@ -78,7 +79,7 @@ class Relations implements RelationsInterface
     }
 
     /**
-     * @return ClientAttributesInterface[]
+     * @return ComponentInterface[]
      */
     public function getItems()
     {
@@ -103,11 +104,11 @@ class Relations implements RelationsInterface
 
     /**
      * @param string $key
-     * @param ClientAttributesInterface $item
+     * @param ComponentInterface $item
      * @return static
      * @throws \Exception
      */
-    public function set(string $key, ClientAttributesInterface $item)
+    public function set(string $key, ComponentInterface $item)
     {
         $this->items[$key] = $item;
 

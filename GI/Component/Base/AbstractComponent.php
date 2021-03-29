@@ -19,7 +19,23 @@ namespace GI\Component\Base;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
+use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
+
 abstract class AbstractComponent implements ComponentInterface
 {
     use ServiceLocatorAwareTrait;
+
+
+    /**
+     * @return ClientAttributesInterface
+     */
+    abstract protected function getView();
+
+    /**
+     * @return string
+     */
+    public function getViewClientJSObject()
+    {
+        return $this->getView()->getClientJSObject();
+    }
 }

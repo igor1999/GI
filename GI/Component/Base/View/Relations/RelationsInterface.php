@@ -17,8 +17,8 @@
  */
 namespace GI\Component\Base\View\Relations;
 
-use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
 use GI\Pattern\StringConvertable\StringConvertableInterface;
+use GI\Component\Base\ComponentInterface;
 
 interface RelationsInterface extends StringConvertableInterface
 {
@@ -30,13 +30,13 @@ interface RelationsInterface extends StringConvertableInterface
 
     /**
      * @param string $key
-     * @return ClientAttributesInterface
+     * @return ComponentInterface
      * @throws \Exception
      */
     public function get(string $key);
 
     /**
-     * @return ClientAttributesInterface[]
+     * @return ComponentInterface[]
      */
     public function getItems();
 
@@ -52,11 +52,11 @@ interface RelationsInterface extends StringConvertableInterface
 
     /**
      * @param string $key
-     * @param ClientAttributesInterface $item
+     * @param ComponentInterface $item
      * @return static
      * @throws \Exception
      */
-    public function set(string $key, ClientAttributesInterface $item);
+    public function set(string $key, ComponentInterface $item);
 
     /**
      * @param string $key
