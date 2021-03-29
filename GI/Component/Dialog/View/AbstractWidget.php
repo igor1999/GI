@@ -23,6 +23,15 @@ use GI\DOM\HTML\Element\Div\Float\Clear\Clear;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\Dialog\View
+ *
+ * @method string getTitleText()
+ * @method WidgetInterface setTitleText(string $titleText)
+ * @method bool isModality()
+ * @method WidgetInterface setModality(bool $modality)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     use ContentsTrait;
@@ -32,6 +41,14 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
     const CLASS_COVER_MODAL = 'gi-cover-modal';
 
+
+    /**
+     * AbstractWidget constructor.
+     */
+    public function __construct()
+    {
+        $this->setTitleText('')->setModality(false);
+    }
 
     /**
      * @return ResourceRendererInterface

@@ -21,30 +21,17 @@ use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Dialog\View
+ *
+ * @method string getTitleText()
+ * @method WidgetInterface setTitleText(string $titleText)
+ * @method bool isModality()
+ * @method WidgetInterface setModality(bool $modality)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return string
-     */
-    public function getTitleText();
-
-    /**
-     * @param string $titleText
-     * @return static
-     */
-    public function setTitleText(string $titleText);
-
-    /**
-     * @return bool
-     */
-    public function isModality();
-
-    /**
-     * @param bool $modality
-     * @return static
-     */
-    public function setModality(bool $modality);
-
     /**
      * @return DivInterface
      */

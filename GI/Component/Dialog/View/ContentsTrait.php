@@ -89,44 +89,6 @@ trait ContentsTrait
 
 
     /**
-     * @return string
-     */
-    public function getTitleText()
-    {
-        return $this->titleText;
-    }
-
-    /**
-     * @param string $titleText
-     * @return static
-     */
-    public function setTitleText(string $titleText)
-    {
-        $this->titleText = $titleText;
-
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isModality()
-    {
-        return $this->modality;
-    }
-
-    /**
-     * @param bool $modality
-     * @return static
-     */
-    public function setModality(bool $modality)
-    {
-        $this->modality = $modality;
-
-        return $this;
-    }
-
-    /**
      * @return DivInterface
      */
     public function getContainer()
