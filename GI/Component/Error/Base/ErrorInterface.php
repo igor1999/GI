@@ -18,15 +18,9 @@
 namespace GI\Component\Error\Base;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Error\Base\View\ViewInterface;
 
 interface ErrorInterface extends ComponentInterface
 {
-    /**
-     * @return ViewInterface
-     */
-    public function getView();
-
     /**
      * @return string
      * @throws \Exception
