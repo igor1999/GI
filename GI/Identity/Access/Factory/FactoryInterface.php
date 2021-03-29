@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Identity\Access\Factory\Base;
+namespace GI\Identity\Access\Factory;
 
 use GI\Pattern\Factory\FactoryInterface as BaseInterface;
 
