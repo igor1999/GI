@@ -28,16 +28,6 @@ use GI\DOM\HTML\Element\Div\DivInterface;
 trait ContentsTrait
 {
     /**
-     * @var ViewModelInterface
-     */
-    private $viewModel;
-
-    /**
-     * @var PagingInterface
-     */
-    private $pagingModel;
-
-    /**
      * @var FormInterface
      */
     private $form;
@@ -79,52 +69,14 @@ trait ContentsTrait
 
 
     /**
-     * @return ViewModelInterface
-     */
-    protected function getViewModel()
-    {
-        return $this->viewModel;
-    }
-
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel)
-    {
-        $this->viewModel = $viewModel;
-
-        return $this;
-    }
-
-    /**
      * @validate
      * @throws \Exception
      */
     protected function validateViewModel()
     {
-        if (!($this->viewModel instanceof ViewModelInterface)) {
+        if (!($this->getViewModel() instanceof ViewModelInterface)) {
             $this->giThrowInvalidTypeException('View model', '', 'ViewModelInterface');
         }
-    }
-
-    /**
-     * @return PagingInterface
-     */
-    protected function getPagingModel()
-    {
-        return $this->pagingModel;
-    }
-
-    /**
-     * @param PagingInterface $pagingModel
-     * @return static
-     */
-    public function setPagingModel(PagingInterface $pagingModel)
-    {
-        $this->pagingModel = $pagingModel;
-
-        return $this;
     }
 
     /**
@@ -133,7 +85,7 @@ trait ContentsTrait
      */
     protected function validatePagingModel()
     {
-        if (!($this->pagingModel instanceof PagingInterface)) {
+        if (!($this->getPagingModel() instanceof PagingInterface)) {
             $this->giThrowInvalidTypeException('Paging model', '', 'PagingInterface');
         }
     }

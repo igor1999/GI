@@ -20,6 +20,8 @@ namespace GI\Component\Paging\Base\View\Base;
 use GI\Component\Base\View\Widget\AbstractWidget as Base;
 use GI\Component\Paging\I18n\Glossary;
 
+use GI\Component\Paging\Base\ViewModel\ViewModelInterface;
+use GI\ClientContents\Paging\Base\PagingInterface;
 use GI\Component\Paging\I18n\GlossaryInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
@@ -27,6 +29,15 @@ use GI\DOM\HTML\Element\Select\SelectInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\Paging\Base\View\Base
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method PagingInterface getPagingModel()
+ * @method WidgetInterface setPagingModel(PagingInterface $pagingModel)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     use ContentsTrait;

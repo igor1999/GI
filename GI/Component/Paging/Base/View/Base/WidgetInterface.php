@@ -26,20 +26,17 @@ use GI\DOM\HTML\Element\Select\SelectInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Paging\Base\View\Base
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method PagingInterface getPagingModel()
+ * @method WidgetInterface setPagingModel(PagingInterface $pagingModel)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel);
-
-    /**
-     * @param PagingInterface $pagingModel
-     * @return static
-     */
-    public function setPagingModel(PagingInterface $pagingModel);
-
     /**
      * @return FormInterface
      */
