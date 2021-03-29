@@ -31,6 +31,8 @@ use GI\Component\Captcha\I18n\GlossaryInterface;
  * Class AbstractWidget
  * @package GI\Component\Captcha\Base\View
  *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
  * @method string getId()
  * @method WidgetInterface setId(string $id)
  * @method string getRecaptchaURI()
@@ -75,7 +77,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function validateId()
     {
-        if (empty($this->id)) {
+        if (empty($this->getId())) {
             $this->giThrowIsEmptyException('Captcha ID');
         }
     }
@@ -86,15 +88,10 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function validateRecaptchaURI()
     {
-        if (empty($this->recaptchaURI)) {
+        if (empty($this->getRecaptchaURI())) {
             $this->giThrowIsEmptyException('Recaptcha URI');
         }
     }
-
-    /**
-     * @return ViewModelInterface
-     */
-    abstract protected function getViewModel();
 
     /**
      * @validate
