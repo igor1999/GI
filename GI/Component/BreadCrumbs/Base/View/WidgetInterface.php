@@ -21,14 +21,15 @@ use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\ClientContents\BreadCrumbs\Track\TrackInterface as BreadCrumbsTrackInterface;
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\BreadCrumbs\Base\View
+ *
+ * @method BreadCrumbsTrackInterface getBreadCrumbsTrack()
+ * @method WidgetInterface setBreadCrumbsTrack(BreadCrumbsTrackInterface $breadCrumbsTrack)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param BreadCrumbsTrackInterface $breadCrumbsTrack
-     * @return static
-     */
-    public function setBreadCrumbsTrack(BreadCrumbsTrackInterface $breadCrumbsTrack);
-
     /**
      * @param string $id
      * @return bool

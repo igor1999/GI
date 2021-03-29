@@ -24,6 +24,13 @@ use GI\ClientContents\BreadCrumbs\Node\NodeInterface as BreadCrumbsNodeInterface
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 use GI\Component\BreadCrumbs\Base\View\Context\ContextInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\BreadCrumbs\Base\View
+ *
+ * @method BreadCrumbsTrackInterface getBreadCrumbsTrack()
+ * @method WidgetInterface setBreadCrumbsTrack(BreadCrumbsTrackInterface $breadCrumbsTrack)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     const CLIENT_CSS = 'gi-bread-crumbs';
@@ -31,11 +38,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
     const ATTRIBUTE_NODE_ID = 'node-id';
 
-
-    /**
-     * @var BreadCrumbsTrackInterface
-     */
-    private $breadCrumbsTrack;
 
     /**
      * @var HyperlinkInterface[]
@@ -49,31 +51,12 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     abstract protected function getResourceRenderer();
 
     /**
-     * @return BreadCrumbsTrackInterface
-     */
-    public function getBreadCrumbsTrack()
-    {
-        return $this->breadCrumbsTrack;
-    }
-
-    /**
-     * @param BreadCrumbsTrackInterface $breadCrumbsTrack
-     * @return static
-     */
-    public function setBreadCrumbsTrack(BreadCrumbsTrackInterface $breadCrumbsTrack)
-    {
-        $this->breadCrumbsTrack = $breadCrumbsTrack;
-
-        return $this;
-    }
-
-    /**
      * @validate
      * @throws \Exception
      */
     protected function validateBreadCrumbsTrack()
     {
-        if (!($this->breadCrumbsTrack instanceof BreadCrumbsTrackInterface)) {
+        if (!($this->getBreadCrumbsTrack() instanceof BreadCrumbsTrackInterface)) {
             $this->giThrowNotSetException('Bread crumbs track');
         }
     }
