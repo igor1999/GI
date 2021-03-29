@@ -28,6 +28,11 @@ interface PagingInterface extends ComponentInterface
     public function getPagingModel();
 
     /**
+     * @return string
+     */
+    public function getDescriptionForEntriesTotal();
+
+    /**
      * @param array $contents
      * @param int $entriesTotal
      * @return static

@@ -71,6 +71,14 @@ abstract class AbstractPaging extends AbstractComponent implements PagingInterfa
     abstract protected function createPagingModel(int $entriesTotal, int $selectedPage = 1, int $entriesProPage = null);
 
     /**
+     * @return string
+     */
+    public function getDescriptionForEntriesTotal()
+    {
+        return $this->getView()->getDescriptionForEntriesTotal();
+    }
+
+    /**
      * @param array $contents
      * @param int $entriesTotal
      * @return static
