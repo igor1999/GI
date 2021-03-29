@@ -19,17 +19,16 @@ namespace GI\Component\Locales\View;
 
 use GI\Component\Menu\View\WidgetInterface as BaseInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Locales\View
+ *
+ * @method string getCookie()
+ * @method WidgetInterface setCookie(string $cookie)
+ * @method int getExpires()
+ * @method WidgetInterface setExpires(int $expires)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param string $cookie
-     * @return static
-     */
-    public function setCookie(string $cookie);
 
-    /**
-     * @param int $expires
-     * @return static
-     */
-    public function setExpires(int $expires);
 }

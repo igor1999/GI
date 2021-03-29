@@ -19,6 +19,15 @@ namespace GI\Component\Locales\View;
 
 use GI\Component\Menu\View\Widget as Base;
 
+/**
+ * Class Widget
+ * @package GI\Component\Locales\View
+ *
+ * @method string getCookie()
+ * @method WidgetInterface setCookie(string $cookie)
+ * @method int getExpires()
+ * @method WidgetInterface setExpires(int $expires)
+ */
 class Widget extends Base implements WidgetInterface
 {
     const CLIENT_JS                = 'gi-locales';
@@ -29,16 +38,6 @@ class Widget extends Base implements WidgetInterface
 
     const ATTRIBUTE_COOKIE_EXPIRES = 'cookie-expires';
 
-
-    /**
-     * @var string
-     */
-    private $cookie = '';
-
-    /**
-     * @var int
-     */
-    private $expires = 0;
 
     /**
      * @var ResourceRendererInterface
@@ -60,44 +59,6 @@ class Widget extends Base implements WidgetInterface
     }
 
     /**
-     * @return string
-     */
-    public function getCookie()
-    {
-        return $this->cookie;
-    }
-
-    /**
-     * @param string $cookie
-     * @return static
-     */
-    public function setCookie(string $cookie)
-    {
-        $this->cookie = $cookie;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    protected function getExpires()
-    {
-        return $this->expires;
-    }
-
-    /**
-     * @param int $expires
-     * @return static
-     */
-    public function setExpires(int $expires)
-    {
-        $this->expires = $expires;
-
-        return $this;
-    }
-
-    /**
      * @return ResourceRendererInterface
      */
     protected function getResourceRenderer()
@@ -114,8 +75,8 @@ class Widget extends Base implements WidgetInterface
         parent::build();
 
         $this->getServerDataList()
-            ->set(static::ATTRIBUTE_COOKIE_NAME, $this->cookie)
-            ->set(static::ATTRIBUTE_COOKIE_EXPIRES, $this->expires);
+            ->set(static::ATTRIBUTE_COOKIE_NAME, $this->getCookie())
+            ->set(static::ATTRIBUTE_COOKIE_EXPIRES, $this->getExpires());
 
         $this->addLocaleImages();
 

@@ -22,25 +22,17 @@ use GI\ClientContents\Menu\MenuInterface as ModelInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Menu\View
+ *
+ * @method ModelInterface getModel()
+ * @method WidgetInterface setModel(ModelInterface $model)
+ * @method bool isBar()
+ * @method WidgetInterface setBar(bool $bar)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param ModelInterface $model
-     * @return static
-     */
-    public function setModel(ModelInterface $model);
-
-    /**
-     * @return bool
-     */
-    public function isBar();
-
-    /**
-     * @param bool $bar
-     * @return static
-     */
-    public function setBar(bool $bar);
-
     /**
      * @return ULInterface
      */

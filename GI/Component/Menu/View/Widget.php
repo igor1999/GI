@@ -25,6 +25,15 @@ use GI\Component\Menu\View\Builder\Container\ContainerInterface as BuilderContai
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Menu\View
+ *
+ * @method ModelInterface getModel()
+ * @method WidgetInterface setModel(ModelInterface $model)
+ * @method bool isBar()
+ * @method WidgetInterface setBar(bool $bar)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     const CLIENT_JS       = 'gi-menu';
@@ -35,16 +44,6 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     const GI_ID_OPTION    = 'option';
 
-
-    /**
-     * @var ModelInterface
-     */
-    private $model;
-
-    /**
-     * @var bool
-     */
-    private $bar = true;
 
     /**
      * @var ResourceRendererInterface
@@ -88,52 +87,14 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return ModelInterface
-     */
-    protected function getModel()
-    {
-        return $this->model;
-    }
-
-    /**
-     * @param ModelInterface $model
-     * @return static
-     */
-    public function setModel(ModelInterface $model)
-    {
-        $this->model = $model;
-
-        return $this;
-    }
-
-    /**
      * @validate
      * @throws \Exception
      */
     protected function validateModel()
     {
-        if (!($this->model instanceof ModelInterface)) {
+        if (!($this->getModel() instanceof ModelInterface)) {
             $this->giThrowInvalidTypeException('Model', '', 'MenuInterface');
         }
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBar()
-    {
-        return $this->bar;
-    }
-
-    /**
-     * @param bool $bar
-     * @return static
-     */
-    public function setBar(bool $bar)
-    {
-        $this->bar = $bar;
-
-        return $this;
     }
 
     /**
