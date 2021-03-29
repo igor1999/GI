@@ -38,6 +38,7 @@ abstract class AbstractError extends AbstractComponent implements ErrorInterface
     {
         $this->message = $message;
     }
+
     /**
      * @return ViewInterface
      */
