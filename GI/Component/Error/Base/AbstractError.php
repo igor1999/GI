@@ -19,6 +19,8 @@ namespace GI\Component\Error\Base;
 
 use GI\Component\Base\AbstractComponent;
 
+use GI\Component\Error\Base\View\ViewInterface;
+
 abstract class AbstractError extends AbstractComponent implements ErrorInterface
 {
     /**
@@ -36,6 +38,10 @@ abstract class AbstractError extends AbstractComponent implements ErrorInterface
     {
         $this->message = $message;
     }
+    /**
+     * @return ViewInterface
+     */
+    abstract protected function getView();
 
     /**
      * @return string

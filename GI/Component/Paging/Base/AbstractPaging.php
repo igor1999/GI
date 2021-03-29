@@ -21,6 +21,7 @@ use GI\Component\Base\AbstractComponent;
 use GI\Component\Paging\Base\ViewModel\ViewModel;
 
 use GI\Component\Paging\Base\ViewModel\ViewModelInterface;
+use GI\Component\Paging\Base\View\Base\WidgetInterface;
 
 abstract class AbstractPaging extends AbstractComponent implements PagingInterface
 {
@@ -48,6 +49,10 @@ abstract class AbstractPaging extends AbstractComponent implements PagingInterfa
             $entriesTotal, $this->getViewModel()->getSelectedPage(), $this->getViewModel()->getEntriesProPage()
         );
     }
+    /**
+     * @return WidgetInterface
+     */
+    abstract protected function getView();
 
     /**
      * @return ViewModelInterface

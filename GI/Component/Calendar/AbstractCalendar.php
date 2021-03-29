@@ -21,6 +21,7 @@ use GI\Component\Base\AbstractComponent;
 use GI\Component\Calendar\ViewModel\ViewModel;
 
 use GI\Component\Calendar\ViewModel\ViewModelInterface;
+use GI\Component\Calendar\View\WidgetInterface;
 
 abstract class AbstractCalendar extends AbstractComponent implements CalendarInterface
 {
@@ -29,6 +30,11 @@ abstract class AbstractCalendar extends AbstractComponent implements CalendarInt
      */
     private $viewModel;
 
+
+    /**
+     * @return WidgetInterface
+     */
+    abstract protected function getView();
 
     /**
      * AbstractCalendar constructor.

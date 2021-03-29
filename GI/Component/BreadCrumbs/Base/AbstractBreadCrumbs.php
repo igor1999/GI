@@ -19,6 +19,7 @@ namespace GI\Component\BreadCrumbs\Base;
 
 use GI\Component\Base\AbstractComponent;
 
+use GI\Component\BreadCrumbs\Base\View\WidgetInterface;
 use GI\ClientContents\BreadCrumbs\Track\TrackInterface as BreadCrumbsTrackInterface;
 use GI\ClientContents\BreadCrumbs\Container\ContainerInterface as BreadCrumbsContainerInterface;
 
@@ -29,6 +30,11 @@ abstract class AbstractBreadCrumbs extends AbstractComponent implements BreadCru
      */
     private $breadCrumbsTrack;
 
+
+    /**
+     * @return WidgetInterface
+     */
+    abstract protected function getView();
 
     /**
      * @return BreadCrumbsTrackInterface

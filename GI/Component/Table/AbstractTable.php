@@ -21,6 +21,7 @@ use GI\Component\Base\AbstractComponent;
 use GI\Component\Table\ViewModel\Order as ViewModel;
 
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
+use GI\Component\Table\View\WidgetInterface;
 
 abstract class AbstractTable extends AbstractComponent implements TableInterface
 {
@@ -49,6 +50,10 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
             ? $viewModel
             : $this->giGetDi(ViewModelInterface::class, ViewModel::class);
     }
+    /**
+     * @return WidgetInterface
+     */
+    abstract protected function getView();
 
     /**
      * @return ViewModelInterface
