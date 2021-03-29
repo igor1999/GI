@@ -15,20 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Factory\Base;
+namespace GI\Identity\Access\Factory\Base;
 
-use GI\Pattern\Factory\AbstractFactory as Base;
+use GI\Pattern\Factory\FactoryInterface as BaseInterface;
 
-use GI\Component\Base\ComponentInterface;
-
-abstract class AbstractFactory extends Base implements FactoryInterface
+interface FactoryInterface extends BaseInterface
 {
-    /**
-     * AbstractFactory constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        $this->getTemplateClasses()->add(ComponentInterface::class);
-    }
+
 }

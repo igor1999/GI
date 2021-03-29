@@ -15,13 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Factory\Base;
+namespace GI\Identity\Access\Factory\Base;
 
 use GI\Pattern\Factory\AbstractFactory as Base;
+use GI\Identity\Access\Profile;
 
-use GI\Component\Base\ComponentInterface;
+use GI\Identity\Access\ProfileInterface;
 
-abstract class AbstractFactory extends Base implements FactoryInterface
+/**
+ * Class AbstractFactory
+ * @package GI\Identity\Access\Factory\Base
+ *
+ * @method ProfileInterface getCommon()
+ */
+class AbstractFactory extends Base implements FactoryInterface
 {
     /**
      * AbstractFactory constructor.
@@ -29,6 +36,10 @@ abstract class AbstractFactory extends Base implements FactoryInterface
      */
     public function __construct()
     {
-        $this->getTemplateClasses()->add(ComponentInterface::class);
+        $this->getTemplateClasses()->add(ProfileInterface::class);
+
+        $this->setPrefixToGet()->setCached(true);
+
+        $this->setNamed('Common', Profile::class);
     }
 }
