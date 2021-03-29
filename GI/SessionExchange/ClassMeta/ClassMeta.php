@@ -101,7 +101,8 @@ class ClassMeta extends Base implements ClassMetaInterface
      */
     protected function validateDefaultCacheClass()
     {
-        if (!is_a($this->defaultCacheClass, CacheClassInterface::class, true)) {
+        if (!empty($this->defaultCacheClass)
+                && !is_a($this->defaultCacheClass, CacheClassInterface::class, true)) {
             trigger_error(
                 'Default class cache is not instance of CacheClassInterface: ' . $this->defaultCacheClass,
                 E_USER_ERROR
@@ -116,7 +117,8 @@ class ClassMeta extends Base implements ClassMetaInterface
      */
     protected function validatePossibleCacheInterface()
     {
-        if (!is_a($this->possibleCacheInterface, CacheClassInterface::class, true)) {
+        if (!empty($this->possibleCacheInterface)
+                && !is_a($this->possibleCacheInterface, CacheClassInterface::class, true)) {
             trigger_error(
                 'Possible class cache is not instance of CacheClassInterface: '
                 . $this->possibleCacheInterface,
@@ -152,7 +154,7 @@ class ClassMeta extends Base implements ClassMetaInterface
     {
         $cache = @unserialize($data);
 
-        if (!$this->checkCacheType($cache)) {
+        if (!$this->checkDefaultCacheType($cache)) {
             $cacheClass = $this->defaultCacheClass;
             $cache = is_a($this->defaultCacheClass, CacheClassInterface::class, true)
                 ? new $cacheClass()
@@ -162,6 +164,16 @@ class ClassMeta extends Base implements ClassMetaInterface
         $this->getProperties()->get(static::CACHE_PROPERTY)->setValue(null, $cache);
 
         return $this;
+    }
+
+    /**
+     * @param mixed $cache
+     * @return bool
+     */
+    protected function checkDefaultCacheType($cache)
+    {
+        return (empty($this->defaultCacheClass) && ($cache instanceof CacheClassInterface))
+            || (!empty($this->defaultCacheClass) && is_a($cache, $this->defaultCacheClass, true));
     }
 
     /**
@@ -180,14 +192,14 @@ class ClassMeta extends Base implements ClassMetaInterface
     {
         $cache = $this->getProperties()->get(static::CACHE_PROPERTY)->getValue();
 
-        return $this->checkCacheType($cache) ? serialize($cache) : '';
+        return $this->checkPossibleCacheType($cache) ? serialize($cache) : '';
     }
 
     /**
      * @param mixed $cache
      * @return bool
      */
-    protected function checkCacheType($cache)
+    protected function checkPossibleCacheType($cache)
     {
         return (empty($this->possibleCacheInterface) && ($cache instanceof CacheClassInterface))
             || (!empty($this->possibleCacheInterface) && is_a($cache, $this->possibleCacheInterface, true));
