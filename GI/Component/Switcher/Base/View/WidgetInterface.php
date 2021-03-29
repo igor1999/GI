@@ -22,20 +22,17 @@ use GI\ClientContents\Selection\Single\SingleInterface as SelectionInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Switcher\Base\View
+ *
+ * @method array getName()
+ * @method WidgetInterface setName(array $name)
+ * @method SelectionInterface getSelection()
+ * @method WidgetInterface setSelection(SelectionInterface $selection)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param array $name
-     * @return static
-     */
-    public function setName(array $name);
-
-    /**
-     * @param SelectionInterface $selection
-     * @return static
-     */
-    public function setSelection(SelectionInterface $selection);
-
     /**
      * @return LayoutInterface
      */

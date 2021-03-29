@@ -27,6 +27,15 @@ use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\Component\Switcher\Base\View\Context\ContextInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Switcher\Base\View
+ *
+ * @method array getName()
+ * @method WidgetInterface setName(array $name)
+ * @method SelectionInterface getSelection()
+ * @method WidgetInterface setSelection(SelectionInterface $selection)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     const CLIENT_JS  = 'gi-switcher';
@@ -51,16 +60,6 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @var ContextInterface
      */
     private $context;
-
-    /**
-     * @var array
-     */
-    private $name;
-
-    /**
-     * @var SelectionInterface
-     */
-    private $selection;
 
     /**
      * @var LayoutInterface
@@ -100,44 +99,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContext()
     {
         return $this->context;
-    }
-
-     /**
-     * @return array
-     */
-    protected function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param array $name
-     * @return static
-     */
-    public function setName(array $name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return SelectionInterface
-     */
-    protected function getSelection()
-    {
-        return $this->selection;
-    }
-
-    /**
-     * @param SelectionInterface $selection
-     * @return static
-     */
-    public function setSelection(SelectionInterface $selection)
-    {
-        $this->selection = $selection;
-
-        return $this;
     }
 
     /**
@@ -251,7 +212,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function createSelectionHolder()
     {
         $this->selectionHolder = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->name, $this->getSelection()->getSelectedValue()
+            $this->getName(), $this->getSelection()->getSelectedValue()
         );
 
         return $this->selectionHolder;
