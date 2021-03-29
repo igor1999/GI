@@ -22,20 +22,17 @@ use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Authentication\Logout\View
+ *
+ * @method string getSalutation()
+ * @method WidgetInterface setSalutation(string $salutation)
+ * @method string getLogoutAction()
+ * @method WidgetInterface setLogoutAction(string $logoutAction)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param string $salutation
-     * @return static
-     */
-    public function setSalutation(string $salutation);
-
-    /**
-     * @param string $logoutAction
-     * @return static
-     */
-    public function setLogoutAction(string $logoutAction);
-
     /**
      * @return LayoutInterface
      */

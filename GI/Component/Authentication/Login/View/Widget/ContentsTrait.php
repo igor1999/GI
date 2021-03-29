@@ -23,16 +23,6 @@ use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 trait ContentsTrait
 {
     /**
-     * @var string
-     */
-    private $registerURI = '';
-
-    /**
-     * @var string
-     */
-    private $restorePasswordURI = '';
-
-    /**
      * @var LayoutInterface
      */
     private $container;
@@ -52,44 +42,6 @@ trait ContentsTrait
      */
     private $restorePasswordLink;
 
-
-    /**
-     * @return string
-     */
-    public function getRegisterURI()
-    {
-        return $this->registerURI;
-    }
-
-    /**
-     * @param string $registerURI
-     * @return static
-     */
-    public function setRegisterURI(string $registerURI)
-    {
-        $this->registerURI = $registerURI;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getRestorePasswordURI()
-    {
-        return $this->restorePasswordURI;
-    }
-
-    /**
-     * @param string $restorePasswordURI
-     * @return static
-     */
-    public function setRestorePasswordURI(string $restorePasswordURI)
-    {
-        $this->restorePasswordURI = $restorePasswordURI;
-
-        return $this;
-    }
 
     /**
      * @return LayoutInterface

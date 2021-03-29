@@ -27,6 +27,7 @@ use GI\DOM\HTML\Element\HTMLInterface;
 use GI\DOM\HTML\Element\ContainerElementInterface;
 use GI\Component\Base\View\ResourceRenderer\ResourceRendererInterface;
 use GI\DOM\HTML\Element\Input\Hidden\CSRFInterface;
+use GI\Storage\Collection\MixedCollection\HashSet\Alterable\AlterableInterface as ParamsInterface;
 
 abstract class AbstractWidget implements WidgetInterface
 {
@@ -47,6 +48,11 @@ abstract class AbstractWidget implements WidgetInterface
      * @var CSRFInterface
      */
     private $csrf;
+
+    /**
+     * @var ParamsInterface
+     */
+    private $params;
 
 
     /**
@@ -96,6 +102,31 @@ abstract class AbstractWidget implements WidgetInterface
         $this->csrf = $this->giGetDOMFactory()->getInputFactory()->createCSRF();
 
         return $this;
+    }
+
+    /**
+     * @return ParamsInterface
+     */
+    protected function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
+     * @param string $method
+     * @param array $arguments
+     * @return static|mixed
+     * @throws \Exception
+     */
+    public function __call(string $method, array $arguments = [])
+    {
+        $result = call_user_func_array([$this->getParams(), $method], $arguments);
+
+        if ($result === $this->getParams()) {
+            $result = $this;
+        }
+
+        return $result;
     }
 
     /**

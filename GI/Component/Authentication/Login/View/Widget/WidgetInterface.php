@@ -22,6 +22,15 @@ use GI\Component\Authentication\Login\Dialog\DialogInterface;
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Authentication\Login\View\Widget
+ *
+ * @method string getRegisterURI()
+ * @method WidgetInterface setRegisterURI(string $registerURI)
+ * @method string getRestorePasswordURI()
+ * @method WidgetInterface setRestorePasswordURI(string $restorePasswordURI)
+ */
 interface WidgetInterface extends BaseInterface
 {
     /**
@@ -30,28 +39,6 @@ interface WidgetInterface extends BaseInterface
      * @throws \Exception
      */
     public function addDialogRelation(DialogInterface $dialog);
-
-    /**
-     * @return string
-     */
-    public function getRegisterURI();
-
-    /**
-     * @param string $registerURI
-     * @return static
-     */
-    public function setRegisterURI(string $registerURI);
-
-    /**
-     * @return string
-     */
-    public function getRestorePasswordURI();
-
-    /**
-     * @param string $restorePasswordURI
-     * @return static
-     */
-    public function setRestorePasswordURI(string $restorePasswordURI);
 
     /**
      * @return LayoutInterface

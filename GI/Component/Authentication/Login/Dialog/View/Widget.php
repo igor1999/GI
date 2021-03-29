@@ -21,6 +21,7 @@ use GI\Component\Dialog\View\AbstractWidget;
 use GI\REST\Constants\RequestMethods;
 use GI\Component\Authentication\Login\Dialog\I18n\Glossary;
 
+use GI\Component\Authentication\Login\Dialog\ViewModel\ViewModelInterface;
 use GI\Component\Authentication\Login\Dialog\I18n\GlossaryInterface;
 use GI\DOM\HTML\Element\Form\Layouts\Form\FormInterface as FormLayoutInterface;
 use GI\DOM\HTML\Element\Input\Text\TextInterface;
@@ -30,6 +31,17 @@ use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Authentication\Login\Dialog\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method bool isHasCookie()
+ * @method WidgetInterface setHasCookie(bool $hasCookie)
+ * @method string getLoginCheckAction()
+ * @method WidgetInterface setLoginCheckAction(string $loginCheckAction)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     use ContentsTrait;
@@ -101,7 +113,7 @@ class Widget extends AbstractWidget implements WidgetInterface
             ->getLayout()
             ->toggleCellFloat(3, 0, false);
 
-        if ($this->hasCookie) {
+        if ($this->isHasCookie()) {
             $this->form->set(2, 0, [$this->saveCheckbox, $this->saveLabel]);
         }
 
@@ -116,7 +128,9 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createForm()
     {
-        $this->form = $this->giGetDOMFactory()->createFormLayout(RequestMethods::POST, $this->loginCheckAction);
+        $this->form = $this->giGetDOMFactory()->createFormLayout(
+            RequestMethods::POST, $this->getLoginCheckAction()
+        );
 
         return $this->form;
     }

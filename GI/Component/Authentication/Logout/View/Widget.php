@@ -25,6 +25,15 @@ use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
 use GI\Component\Authentication\Logout\I18n\GlossaryInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Authentication\Logout\View
+ *
+ * @method string getSalutation()
+ * @method WidgetInterface setSalutation(string $salutation)
+ * @method string getLogoutAction()
+ * @method WidgetInterface setLogoutAction(string $logoutAction)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     const CLIENT_JS              = 'gi-authentication-logout';
@@ -33,16 +42,6 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     const ATTRIBUTE_CHECK_ACTION = 'check-action';
 
-
-    /**
-     * @var string
-     */
-    private $salutation = '';
-
-    /**
-     * @var string
-     */
-    private $logoutAction = '';
 
     /**
      * @var ResourceRendererInterface
@@ -82,66 +81,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getResourceRenderer()
     {
         return $this->resourceRenderer;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getSalutation()
-    {
-        return $this->salutation;
-    }
-
-    /**
-     * @param string $salutation
-     * @return static
-     */
-    public function setSalutation(string $salutation)
-    {
-        $this->salutation = $salutation;
-
-        return $this;
-    }
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateSalutation()
-    {
-        if (empty($this->salutation)) {
-            $this->giThrowIsEmptyException('User salutation');
-        }
-    }
-
-    /**
-     * @return string
-     */
-    protected function getLogoutAction()
-    {
-        return $this->logoutAction;
-    }
-
-    /**
-     * @param string $logoutAction
-     * @return static
-     */
-    public function setLogoutAction(string $logoutAction)
-    {
-        $this->logoutAction = $logoutAction;
-
-        return $this;
-    }
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateLogoutAction()
-    {
-        if (empty($this->logoutAction)) {
-            $this->giThrowIsEmptyException('Logout action');
-        }
     }
 
     /**
@@ -202,7 +141,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createSalutationSpan()
     {
-        $this->salutationSpan = $this->giGetDOMFactory()->createSpan($this->salutation);
+        $this->salutationSpan = $this->giGetDOMFactory()->createSpan($this->getSalutation());
 
         return $this->salutationSpan;
     }
@@ -218,7 +157,7 @@ class Widget extends AbstractWidget implements WidgetInterface
             '', $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign out')
         )->setHrefToMock();
 
-        $this->logoutLink->getAttributes()->setDataAttribute(static::ATTRIBUTE_CHECK_ACTION, $this->logoutAction);
+        $this->logoutLink->getAttributes()->setDataAttribute(static::ATTRIBUTE_CHECK_ACTION, $this->getLogoutAction());
 
         return $this->logoutLink;
     }

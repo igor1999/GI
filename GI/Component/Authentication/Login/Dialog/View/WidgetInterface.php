@@ -27,41 +27,19 @@ use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Authentication\Login\Dialog\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method bool isHasCookie()
+ * @method WidgetInterface setHasCookie(bool $hasCookie)
+ * @method string getLoginCheckAction()
+ * @method WidgetInterface setLoginCheckAction(string $loginCheckAction)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return ViewModelInterface
-     */
-    public function getViewModel();
-
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel);
-
-    /**
-     * @return bool
-     */
-    public function isHasCookie();
-
-    /**
-     * @param bool $hasCookie
-     * @return static
-     */
-    public function setHasCookie(bool $hasCookie);
-
-    /**
-     * @return string
-     */
-    public function getLoginCheckAction();
-
-    /**
-     * @param string $loginCheckAction
-     * @return static
-     */
-    public function setLoginCheckAction(string $loginCheckAction);
-
     /**
      * @return FormLayoutInterface
      */

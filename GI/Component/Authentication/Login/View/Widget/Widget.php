@@ -25,6 +25,15 @@ use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 use GI\Component\Authentication\Login\I18n\GlossaryInterface;
 
+/**
+ * Class Widget
+ * @package GI\Component\Authentication\Login\View\Widget
+ *
+ * @method string getRegisterURI()
+ * @method WidgetInterface setRegisterURI(string $registerURI)
+ * @method string getRestorePasswordURI()
+ * @method WidgetInterface setRestorePasswordURI(string $restorePasswordURI)
+ */
 class Widget extends AbstractWidget implements WidgetInterface
 {
     use ContentsTrait;
@@ -132,7 +141,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function createRegisterLink()
     {
         $this->registerLink = $this->giGetDOMFactory()->createHyperlink(
-            $this->registerURI,
+            $this->getRegisterURI(),
             $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign up')
         );
 
@@ -146,7 +155,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function createRestorePasswordLink()
     {
         $this->restorePasswordLink = $this->giGetDOMFactory()->createHyperlink(
-            $this->restorePasswordURI,
+            $this->getRestorePasswordURI(),
             $this->giTranslate(GlossaryInterface::class, Glossary::class, 'forget password?')
         );
 
