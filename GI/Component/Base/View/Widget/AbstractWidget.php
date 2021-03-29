@@ -109,6 +109,10 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected function getParams()
     {
+        if (!($this->params instanceof ParamsInterface)) {
+            $this->params = $this->giGetStorageFactory()->createMixedHashSetAlterable();
+        }
+
         return $this->params;
     }
 
