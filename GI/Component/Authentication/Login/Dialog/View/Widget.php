@@ -73,6 +73,8 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->resourceRenderer = $this->giGetDi(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
