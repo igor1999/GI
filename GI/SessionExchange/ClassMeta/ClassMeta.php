@@ -18,11 +18,11 @@
 namespace GI\SessionExchange\ClassMeta;
 
 use GI\Meta\ClassMeta\ClassMeta as Base;
-use GI\SessionExchange\BaseInterface\Aware\CacheInterfaceAwareInterface;
 use GI\Storage\Tree\Tree;
 
-use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
 use GI\SessionExchange\BaseInterface\Aware\SessionExchangeAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\DefaultCacheClassAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\PossibleCacheInterfaceAwareInterface;
 use GI\SessionExchange\BaseInterface\CacheClassInterface;
 
 class ClassMeta extends Base implements ClassMetaInterface
@@ -54,11 +54,11 @@ class ClassMeta extends Base implements ClassMetaInterface
     {
         parent::__construct($class);
 
-        if (is_a($this->getName(), CacheClassAwareInterface::class, true)) {
+        if (is_a($this->getName(), DefaultCacheClassAwareInterface::class, true)) {
             $this->defaultCacheClass = $this->getMethods()->get(static::DEFAULT_CACHE_CLASS_GETTER)->execute();
         }
 
-        if (is_a($this->getName(), CacheInterfaceAwareInterface::class, true)) {
+        if (is_a($this->getName(), PossibleCacheInterfaceAwareInterface::class, true)) {
             $this->possibleCacheInterface = $this->getMethods()
                 ->get(static::POSSIBLE_CACHE_INTERFACE_GETTER)
                 ->execute();

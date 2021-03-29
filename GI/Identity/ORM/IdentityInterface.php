@@ -18,9 +18,9 @@
 namespace GI\Identity\ORM;
 
 use GI\Identity\IdentityInterface as BaseInterface;
-use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\PossibleCacheInterfaceAwareInterface;
 
-interface IdentityInterface extends BaseInterface, CacheClassAwareInterface
+interface IdentityInterface extends BaseInterface, PossibleCacheInterfaceAwareInterface
 {
 
 }

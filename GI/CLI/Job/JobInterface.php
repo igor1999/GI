@@ -17,9 +17,9 @@
  */
 namespace GI\CLI\Job;
 
-use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\DefaultCacheClassAwareInterface;
 
-interface JobInterface extends CacheClassAwareInterface
+interface JobInterface extends DefaultCacheClassAwareInterface
 {
     /**
      * @return bool

@@ -17,9 +17,9 @@
  */
 namespace GI\Security\CSRF;
 
-use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\DefaultCacheClassAwareInterface;
 
-interface CSRFInterface extends CacheClassAwareInterface
+interface CSRFInterface extends DefaultCacheClassAwareInterface
 {
     /**
      * @return string

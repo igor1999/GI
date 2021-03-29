@@ -17,7 +17,7 @@
  */
 namespace GI\SessionExchange\BaseInterface\Aware;
 
-interface CacheInterfaceAwareInterface extends CacheClassAwareInterface
+interface PossibleCacheInterfaceAwareInterface extends DefaultCacheClassAwareInterface
 {
     /**
      * @return string

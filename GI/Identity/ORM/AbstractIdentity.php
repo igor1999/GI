@@ -39,6 +39,14 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
     }
 
     /**
+     * @return string
+     */
+    public static function getPossibleSessionCacheInterface()
+    {
+        return RecordInterface::class;
+    }
+
+    /**
      * @return RecordInterface
      */
     abstract protected function getSessionCache();

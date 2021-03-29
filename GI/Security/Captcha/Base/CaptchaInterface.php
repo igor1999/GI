@@ -17,9 +17,9 @@
  */
 namespace GI\Security\Captcha\Base;
 
-use GI\SessionExchange\BaseInterface\Aware\CacheClassAwareInterface;
+use GI\SessionExchange\BaseInterface\Aware\DefaultCacheClassAwareInterface;
 
-interface CaptchaInterface extends CacheClassAwareInterface
+interface CaptchaInterface extends DefaultCacheClassAwareInterface
 {
     /**
      * @return string
