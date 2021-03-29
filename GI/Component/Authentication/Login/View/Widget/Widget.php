@@ -62,6 +62,8 @@ class Widget extends AbstractWidget implements WidgetInterface
         $this->resourceRenderer = $this->giGetDi(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
+
+        $this->setRegisterURI('')->setRestorePasswordURI('');
     }
 
     /**
