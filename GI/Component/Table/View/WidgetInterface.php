@@ -24,22 +24,18 @@ use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
-use GI\Pattern\ArrayExchange\ExtractionInterface;
 
+/**
+ * Interface WidgetInterface
+ * @package GI\Component\Table\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method getDataSource()
+ * @method WidgetInterface setDataSource($dataSource)
+ */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param ViewModelInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(ViewModelInterface $viewModel);
-
-    /**
-     * @param array|ExtractionInterface $dataSource
-     * @return static
-     */
-    public function setDataSource($dataSource);
-
     /**
      * @return TableInterface
      */

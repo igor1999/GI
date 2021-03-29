@@ -19,6 +19,7 @@ namespace GI\Component\Table\View;
 
 use GI\Component\Base\View\Widget\AbstractWidget as Base;
 
+use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
 use GI\Component\Paging\Base\PagingInterface;
 use GI\ClientContents\TableHeader\Column\ColumnInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
@@ -28,6 +29,15 @@ use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\ClientContents\TableHeader\TableHeaderInterface;
 
+/**
+ * Class AbstractWidget
+ * @package GI\Component\Table\View
+ *
+ * @method ViewModelInterface getViewModel()
+ * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
+ * @method getDataSource()
+ * @method WidgetInterface setDataSource($dataSource)
+ */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
     use ContentsTrait;

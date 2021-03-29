@@ -27,16 +27,6 @@ use GI\Pattern\ArrayExchange\ExtractionInterface;
 trait ContentsTrait
 {
     /**
-     * @var OrderInterface
-     */
-    private $viewModel;
-
-    /**
-     * @var array|ExtractionInterface
-     */
-    private $dataSource;
-
-    /**
      * @var TableInterface
      */
     private $table;
@@ -61,44 +51,6 @@ trait ContentsTrait
      */
     private $orderForm;
 
-
-    /**
-     * @return OrderInterface
-     */
-    protected function getViewModel()
-    {
-        return $this->viewModel;
-    }
-
-    /**
-     * @param OrderInterface $viewModel
-     * @return static
-     */
-    public function setViewModel(OrderInterface $viewModel)
-    {
-        $this->viewModel = $viewModel;
-
-        return $this;
-    }
-
-    /**
-     * @return array|ExtractionInterface
-     */
-    protected function getDataSource()
-    {
-        return $this->dataSource;
-    }
-
-    /**
-     * @param array|ExtractionInterface $dataSource
-     * @return static
-     */
-    public function setDataSource($dataSource)
-    {
-        $this->dataSource = $dataSource;
-
-        return $this;
-    }
 
     /**
      * @validate
