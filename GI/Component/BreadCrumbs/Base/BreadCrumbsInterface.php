@@ -18,15 +18,9 @@
 namespace GI\Component\BreadCrumbs\Base;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\BreadCrumbs\Base\View\WidgetInterface;
 
 interface BreadCrumbsInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return string
      * @throws \Exception

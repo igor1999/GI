@@ -18,16 +18,10 @@
 namespace GI\Component\Paging\Dropdown;
 
 use GI\Component\Paging\Base\PagingInterface;
-use GI\Component\Paging\Base\View\Dropdown\WidgetInterface;
 use GI\ClientContents\Paging\Common\PagingInterface as PagingModelInterface;
 
 interface DropdownInterface extends PagingInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return PagingModelInterface
      */

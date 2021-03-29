@@ -18,16 +18,10 @@
 namespace GI\Component\Paging\Common;
 
 use GI\Component\Paging\Base\PagingInterface;
-use GI\Component\Paging\Base\View\Chain\WidgetInterface;
 use GI\ClientContents\Paging\Common\PagingInterface as PagingModelInterface;
 
 interface CommonInterface extends PagingInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return PagingModelInterface
      */

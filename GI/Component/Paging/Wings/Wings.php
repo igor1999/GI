@@ -55,7 +55,7 @@ class Wings extends AbstractPaging implements WingsInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

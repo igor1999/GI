@@ -54,7 +54,7 @@ class Common extends AbstractPaging implements CommonInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

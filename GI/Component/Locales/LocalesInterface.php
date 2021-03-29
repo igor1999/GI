@@ -18,12 +18,8 @@
 namespace GI\Component\Locales;
 
 use GI\Component\Menu\MenuInterface;
-use GI\Component\Locales\View\WidgetInterface;
 
 interface LocalesInterface extends MenuInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
+
 }

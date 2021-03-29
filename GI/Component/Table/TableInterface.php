@@ -18,16 +18,10 @@
 namespace GI\Component\Table;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Table\View\WidgetInterface;
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
 
 interface TableInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return ViewModelInterface
      */

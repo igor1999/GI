@@ -61,7 +61,7 @@ class Logout extends AbstractComponent implements LogoutInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

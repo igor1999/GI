@@ -18,16 +18,10 @@
 namespace GI\Component\Paging\Dash;
 
 use GI\Component\Paging\Base\PagingInterface;
-use GI\Component\Paging\Base\View\Chain\WidgetInterface;
 use GI\ClientContents\Paging\Dash\PagingInterface as PagingModelInterface;
 
 interface DashInterface extends PagingInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return PagingModelInterface
      */

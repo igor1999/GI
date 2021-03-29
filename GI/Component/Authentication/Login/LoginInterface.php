@@ -18,16 +18,10 @@
 namespace GI\Component\Authentication\Login;
 
 use GI\Component\Authentication\Login\Dialog\DialogInterface;
-use GI\Component\Authentication\Login\View\ViewInterface;
 use GI\Component\Base\ComponentInterface;
 
 interface LoginInterface extends ComponentInterface
 {
-    /**
-     * @return ViewInterface
-     */
-    public function getView();
-
     /**
      * @return DialogInterface
      */

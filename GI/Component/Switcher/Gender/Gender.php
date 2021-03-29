@@ -61,7 +61,7 @@ class Gender extends AbstractSwitcher implements GenderInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

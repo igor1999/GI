@@ -19,7 +19,6 @@ namespace GI\Component\Switcher\Salutation;
 
 use GI\Component\Switcher\Base\SwitcherInterface;
 use GI\ClientContents\Selection\Advanced\Salutation\SalutationInterface as SelectionInterface;
-use GI\Component\Switcher\Salutation\View\WidgetInterface;
 
 interface SalutationInterface extends SwitcherInterface
 {
@@ -27,9 +26,4 @@ interface SalutationInterface extends SwitcherInterface
      * @return SelectionInterface
      */
     public function getSelection();
-
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
 }

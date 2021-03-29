@@ -17,16 +17,10 @@
  */
 namespace GI\Component\Autocomplete;
 
-use GI\Component\Autocomplete\View\WidgetInterface;
 use GI\Component\Base\ComponentInterface;
 
 interface AutocompleteInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return array
      */

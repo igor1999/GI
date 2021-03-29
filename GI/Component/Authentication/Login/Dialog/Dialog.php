@@ -72,7 +72,7 @@ class Dialog extends AbstractComponent implements DialogInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

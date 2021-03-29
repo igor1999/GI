@@ -55,7 +55,7 @@ class Dropdown extends AbstractPaging implements DropdownInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

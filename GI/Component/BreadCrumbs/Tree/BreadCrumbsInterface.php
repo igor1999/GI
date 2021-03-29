@@ -18,12 +18,8 @@
 namespace GI\Component\BreadCrumbs\Tree;
 
 use GI\Component\BreadCrumbs\Base\BreadCrumbsInterface as BaseInterface;
-use GI\Component\BreadCrumbs\Tree\View\WidgetInterface;
 
 interface BreadCrumbsInterface extends BaseInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
+
 }

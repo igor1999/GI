@@ -17,16 +17,10 @@
  */
 namespace GI\Component\Authentication\Login\Dialog;
 
-use GI\Component\Authentication\Login\Dialog\View\WidgetInterface;
 use GI\Component\Base\ComponentInterface;
 
 interface DialogInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @param array $data
      * @return array

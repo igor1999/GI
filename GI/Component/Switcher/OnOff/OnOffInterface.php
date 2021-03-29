@@ -19,7 +19,6 @@ namespace GI\Component\Switcher\OnOff;
 
 use GI\Component\Switcher\Base\SwitcherInterface;
 use GI\ClientContents\Selection\Advanced\OnOff\OnOffInterface as SelectionInterface;
-use GI\Component\Switcher\OnOff\View\WidgetInterface;
 
 interface OnOffInterface extends SwitcherInterface
 {
@@ -27,9 +26,4 @@ interface OnOffInterface extends SwitcherInterface
      * @return SelectionInterface
      */
     public function getSelection();
-
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
 }

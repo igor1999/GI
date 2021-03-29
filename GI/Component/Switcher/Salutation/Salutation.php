@@ -61,7 +61,7 @@ class Salutation extends AbstractSwitcher implements SalutationInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

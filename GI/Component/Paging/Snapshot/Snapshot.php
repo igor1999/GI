@@ -55,7 +55,7 @@ class Snapshot extends AbstractPaging implements SnapshotInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

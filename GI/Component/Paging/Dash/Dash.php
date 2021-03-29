@@ -55,7 +55,7 @@ class Dash extends AbstractPaging implements DashInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

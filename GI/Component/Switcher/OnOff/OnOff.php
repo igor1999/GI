@@ -61,7 +61,7 @@ class OnOff extends AbstractSwitcher implements OnOffInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

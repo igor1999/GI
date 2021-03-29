@@ -42,7 +42,7 @@ abstract class AbstractBreadCrumbs extends Base implements BreadCrumbsInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

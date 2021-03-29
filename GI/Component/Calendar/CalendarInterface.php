@@ -18,15 +18,9 @@
 namespace GI\Component\Calendar;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Calendar\View\WidgetInterface;
 
 interface CalendarInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @param array $data
      * @return static

@@ -19,7 +19,6 @@ namespace GI\Component\Switcher\Gender;
 
 use GI\Component\Switcher\Base\SwitcherInterface;
 use GI\ClientContents\Selection\Advanced\Gender\GenderInterface as SelectionInterface;
-use GI\Component\Switcher\Gender\View\WidgetInterface;
 
 interface GenderInterface extends SwitcherInterface
 {
@@ -27,9 +26,4 @@ interface GenderInterface extends SwitcherInterface
      * @return SelectionInterface
      */
     public function getSelection();
-
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
 }

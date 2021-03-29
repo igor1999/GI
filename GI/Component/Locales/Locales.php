@@ -54,7 +54,7 @@ class Locales extends AbstractMenu implements LocalesInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

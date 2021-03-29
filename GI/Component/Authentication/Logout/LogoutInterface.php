@@ -17,16 +17,10 @@
  */
 namespace GI\Component\Authentication\Logout;
 
-use GI\Component\Authentication\Logout\View\WidgetInterface;
 use GI\Component\Base\ComponentInterface;
 
 interface LogoutInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return string
      * @throws \Exception

@@ -19,7 +19,6 @@ namespace GI\Component\Switcher\YesNo;
 
 use GI\Component\Switcher\Base\SwitcherInterface;
 use GI\ClientContents\Selection\Advanced\YesNo\YesNoInterface as SelectionInterface;
-use GI\Component\Switcher\YesNo\View\WidgetInterface;
 
 interface YesNoInterface extends SwitcherInterface
 {
@@ -27,9 +26,4 @@ interface YesNoInterface extends SwitcherInterface
      * @return SelectionInterface
      */
     public function getSelection();
-
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
 }

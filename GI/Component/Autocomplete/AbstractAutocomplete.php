@@ -62,7 +62,7 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

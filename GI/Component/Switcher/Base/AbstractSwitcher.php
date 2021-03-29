@@ -50,7 +50,7 @@ abstract class AbstractSwitcher extends AbstractComponent implements SwitcherInt
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

@@ -18,15 +18,9 @@
 namespace GI\Component\Captcha\ImageText;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Captcha\ImageText\View\WidgetInterface;
 
 interface ImageTextInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return string
      * @throws \Exception

@@ -18,15 +18,9 @@
 namespace GI\Component\Menu;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Menu\View\WidgetInterface;
 
 interface MenuInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return bool
      */

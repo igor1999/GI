@@ -18,16 +18,10 @@
 namespace GI\Component\Switcher\Base;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Switcher\Base\View\WidgetInterface;
 use GI\ClientContents\Selection\Single\SingleInterface as SelectionInterface;
 
 interface SwitcherInterface extends ComponentInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return array
      */

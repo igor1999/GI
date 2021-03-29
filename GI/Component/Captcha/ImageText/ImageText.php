@@ -73,7 +73,7 @@ class ImageText extends AbstractComponent implements ImageTextInterface
     /**
      * @return WidgetInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }

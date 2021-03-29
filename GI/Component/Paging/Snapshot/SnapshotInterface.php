@@ -18,16 +18,10 @@
 namespace GI\Component\Paging\Snapshot;
 
 use GI\Component\Paging\Base\PagingInterface;
-use GI\Component\Paging\Base\View\Chain\WidgetInterface;
 use GI\ClientContents\Paging\Snapshot\PagingInterface as PagingModelInterface;
 
 interface SnapshotInterface extends PagingInterface
 {
-    /**
-     * @return WidgetInterface
-     */
-    public function getView();
-
     /**
      * @return PagingModelInterface
      */

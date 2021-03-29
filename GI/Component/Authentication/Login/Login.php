@@ -58,7 +58,7 @@ class Login extends AbstractComponent implements LoginInterface
     /**
      * @return ViewInterface
      */
-    public function getView()
+    protected function getView()
     {
         return $this->view;
     }
