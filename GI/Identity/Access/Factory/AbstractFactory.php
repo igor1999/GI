@@ -24,7 +24,7 @@ use GI\Identity\Access\ProfileInterface;
 
 /**
  * Class AbstractFactory
- * @package GI\Identity\Access\Factory\Base
+ * @package GI\Identity\Access\Factory
  *
  * @method ProfileInterface getCommon()
  */

@@ -19,6 +19,14 @@ namespace GI\Identity\Access\Factory;
 
 use GI\Pattern\Factory\FactoryInterface as BaseInterface;
 
+use GI\Identity\Access\ProfileInterface;
+
+/**
+ * Interface FactoryInterface
+ * @package GI\Identity\Access\Factory
+ *
+ * @method ProfileInterface getCommon()
+ */
 interface FactoryInterface extends BaseInterface
 {
 
