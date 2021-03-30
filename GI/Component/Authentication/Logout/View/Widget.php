@@ -29,8 +29,8 @@ use GI\Component\Authentication\Logout\I18n\GlossaryInterface;
  * Class Widget
  * @package GI\Component\Authentication\Logout\View
  *
- * @method string getSalutation()
- * @method WidgetInterface setSalutation(string $salutation)
+ * @method getSalutation()
+ * @method WidgetInterface setSalutation($salutation)
  * @method string getLogoutAction()
  * @method WidgetInterface setLogoutAction(string $logoutAction)
  */
@@ -141,7 +141,9 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createSalutationSpan()
     {
-        $this->salutationSpan = $this->giGetDOMFactory()->createSpan($this->getSalutation());
+        $this->salutationSpan = $this->giGetDOMFactory()->createSpan();
+
+        $this->salutationSpan->getChildNodes()->set($this->getSalutation());
 
         return $this->salutationSpan;
     }

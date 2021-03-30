@@ -26,8 +26,8 @@ use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
  * Interface WidgetInterface
  * @package GI\Component\Authentication\Logout\View
  *
- * @method string getSalutation()
- * @method WidgetInterface setSalutation(string $salutation)
+ * @method getSalutation()
+ * @method WidgetInterface setSalutation($salutation)
  * @method string getLogoutAction()
  * @method WidgetInterface setLogoutAction(string $logoutAction)
  */

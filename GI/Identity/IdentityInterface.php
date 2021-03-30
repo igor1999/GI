@@ -56,7 +56,7 @@ interface IdentityInterface extends SessionExchangeAwareInterface
     public function getRole();
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getSignature();
 
