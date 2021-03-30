@@ -60,7 +60,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
     /**
      * @return ViewInterface
      */
-    abstract public function getView();
+    abstract protected function getView();
 
     /**
      * @return string

@@ -20,16 +20,10 @@ namespace GI\Component\Layout;
 use GI\Component\Base\ComponentInterface;
 use GI\Component\Authentication\AuthenticationInterface;
 use GI\Component\BreadCrumbs\Base\BreadCrumbsInterface;
-use GI\Component\Layout\View\ViewInterface;
 use GI\Component\Menu\MenuInterface;
 
 interface LayoutInterface extends ComponentInterface
 {
-    /**
-     * @return ViewInterface
-     */
-    public function getView();
-
     /**
      * @return AuthenticationInterface
      * @throws \Exception
