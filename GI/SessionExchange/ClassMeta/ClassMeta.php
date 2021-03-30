@@ -154,7 +154,7 @@ class ClassMeta extends Base implements ClassMetaInterface
     {
         $cache = @unserialize($data);
 
-        if (!$this->checkDefaultCacheType($cache)) {
+        if (!$this->checkPossibleCacheType($cache)) {
             $cacheClass = $this->defaultCacheClass;
             $cache = is_a($this->defaultCacheClass, CacheClassInterface::class, true)
                 ? new $cacheClass()
@@ -164,16 +164,6 @@ class ClassMeta extends Base implements ClassMetaInterface
         $this->getProperties()->get(static::CACHE_PROPERTY)->setValue(null, $cache);
 
         return $this;
-    }
-
-    /**
-     * @param mixed $cache
-     * @return bool
-     */
-    protected function checkDefaultCacheType($cache)
-    {
-        return (empty($this->defaultCacheClass) && ($cache instanceof CacheClassInterface))
-            || (!empty($this->defaultCacheClass) && is_a($cache, $this->defaultCacheClass, true));
     }
 
     /**
