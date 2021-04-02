@@ -297,7 +297,7 @@ class Table implements TableInterface
 
         $contents = array_combine(array_keys($this->getColumnList()->getPrimary()), $values);
 
-        return $this->selectOne($contents, null, $builder);
+        return $this->selectOne($contents, [], $builder);
     }
 
     /**
