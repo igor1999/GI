@@ -18,11 +18,55 @@
 namespace GI\RDB\SQL\Builder\Part\Order;
 
 use GI\RDB\SQL\Builder\Part\AbstractPart;
+use GI\RDB\SQL\Constants;
+
+use GI\RDB\SQL\Builder\BuilderInterface;
 
 class Order extends AbstractPart implements OrderInterface
 {
     const DEFAULT_PLACEHOLDER = 'order';
 
+
+    const GLUE = ', ';
+
+
+    /**
+     * Order constructor.
+     * @param BuilderInterface $builder
+     * @param array $fields
+     * @param string $placeholder
+     * @throws \Exception
+     */
+    public function __construct(BuilderInterface $builder, array $fields, string $placeholder = '')
+    {
+        $delimitedFields = [];
+
+        foreach ($fields as $key => $value) {
+            $delimitedFields[] = $this->delimitField($key, $value);
+        }
+
+        parent::__construct($builder, implode(static::GLUE, $delimitedFields), $placeholder);
+    }
+
+    /**
+     * @param string|int $key
+     * @param string|bool|null $value
+     * @return string
+     * @throws \Exception
+     */
+    protected function delimitField($key, $value)
+    {
+        if (is_string($key) && is_bool($value)) {
+            $direction = $value ? '' : ' '. Constants::ORDER_DESC_MODIFICATOR;
+            $field     = $this->giGetSqlFactory()->createFieldExpression($key)->toString() . $direction;
+        } elseif (is_string($key) && !is_bool($value)) {
+            $field = $this->giGetSqlFactory()->createFieldExpression($key)->toString();
+        } else {
+            $field = $this->giGetSqlFactory()->createFieldExpression($value)->toString();
+        }
+
+        return $field;
+    }
 
     /**
      * @return string

@@ -123,11 +123,12 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addOrder($value, string $placeholder = '')
+    public function addOrder(array $value, string $placeholder = '')
     {
         $this->add($this->createOrder($value, $placeholder));
 
@@ -135,11 +136,12 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return OrderInterface
+     * @throws \Exception
      */
-    protected function createOrder($value, string $placeholder)
+    protected function createOrder(array $value, string $placeholder)
     {
         try {
             $result = $this->giGetDi(
@@ -153,11 +155,12 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addGroup($value, string $placeholder = '')
+    public function addGroup(array $value, string $placeholder = '')
     {
         $this->add($this->createGroup($value, $placeholder));
 
@@ -165,11 +168,12 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return GroupInterface
+     * @throws \Exception
      */
-    protected function createGroup($value, string $placeholder)
+    protected function createGroup(array $value, string $placeholder)
     {
         try {
             $result = $this->giGetDi(

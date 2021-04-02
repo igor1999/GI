@@ -19,10 +19,31 @@ namespace GI\RDB\SQL\Builder\Part\Group;
 
 use GI\RDB\SQL\Builder\Part\AbstractPart;
 
+use GI\RDB\SQL\Builder\BuilderInterface;
+
 class Group extends AbstractPart implements GroupInterface
 {
     const DEFAULT_PLACEHOLDER = 'group';
 
+
+    const GLUE = ', ';
+
+
+    /**
+     * Group constructor.
+     * @param BuilderInterface $builder
+     * @param array $fields
+     * @param string $placeholder
+     * @throws \Exception
+     */
+    public function __construct(BuilderInterface $builder, array $fields, string $placeholder = '')
+    {
+        foreach ($fields as &$field) {
+            $field = $this->giGetSqlFactory()->createFieldExpression($field)->toString();
+        }
+
+        parent::__construct($builder, implode(static::GLUE, $fields), $placeholder);
+    }
 
     /**
      * @return string

@@ -100,15 +100,17 @@ interface BuilderInterface extends  StringConvertableInterface
      * @param mixed $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addOrder($value, string $placeholder = '');
+    public function addOrder(array $value, string $placeholder = '');
 
     /**
      * @param mixed $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addGroup($value, string $placeholder = '');
+    public function addGroup(array $value, string $placeholder = '');
 
     /**
      * @param mixed $value

@@ -187,11 +187,12 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addOrder($value, string $placeholder = '')
+    public function addOrder(array $value, string $placeholder = '')
     {
         $this->getPartList()->addOrder($value, $placeholder);
 
@@ -199,11 +200,12 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param mixed $value
+     * @param array $value
      * @param string $placeholder
      * @return static
+     * @throws \Exception
      */
-    public function addGroup($value, string $placeholder = '')
+    public function addGroup(array $value, string $placeholder = '')
     {
         $this->getPartList()->addGroup($value, $placeholder);
 

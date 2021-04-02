@@ -50,13 +50,13 @@ abstract class AbstractPart implements PartInterface
     /**
      * AbstractPart constructor.
      * @param BuilderInterface $builder
-     * @param mixed $value
+     * @param mixed $fields
      * @param string $placeholder
      */
-    public function __construct(BuilderInterface $builder, $value, string $placeholder = '')
+    public function __construct(BuilderInterface $builder, $fields, string $placeholder = '')
     {
         $this->builder     = $builder;
-        $this->value       = $value;
+        $this->value       = $fields;
         $this->placeholder = empty($placeholder) ? static::DEFAULT_PLACEHOLDER : $placeholder;
     }
 
