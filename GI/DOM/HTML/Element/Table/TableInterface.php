@@ -20,6 +20,9 @@ namespace GI\DOM\HTML\Element\Table;
 use GI\DOM\HTML\Element\ContainerElementInterface;
 use GI\DOM\Base\NodeInterface;
 use GI\DOM\HTML\Element\Table\Items\ItemListInterface;
+use GI\DOM\HTML\Element\Table\Row\TRInterface;
+use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 
 interface TableInterface extends ContainerElementInterface
 {
@@ -36,6 +39,20 @@ interface TableInterface extends ContainerElementInterface
      * @throws \Exception
      */
     public function build(int $numberOfRows, int $numberOfCells, bool $withHeader = false);
+
+    /**
+     * @param int $index
+     * @return TRInterface
+     */
+    public function getRow(int $index);
+
+    /**
+     * @param int $rowIndex
+     * @param int $cellIndex
+     * @return TDInterface|THInterface
+     * @throws \Exception
+     */
+    public function get(int $rowIndex, int $cellIndex);
 
     /**
      * @param int $rowIndex

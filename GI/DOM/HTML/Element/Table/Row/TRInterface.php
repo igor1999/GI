@@ -19,6 +19,8 @@ namespace GI\DOM\HTML\Element\Table\Row;
 
 use GI\DOM\HTML\Element\Table\Cell\CellListInterface;
 use GI\DOM\HTML\Element\Table\Items\ItemInterface;
+use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 
 interface TRInterface extends ItemInterface
 {
@@ -33,4 +35,11 @@ interface TRInterface extends ItemInterface
      * @return static
      */
     public function build(int $number, bool $header = false);
+
+    /**
+     * @param int $index
+     * @return TDInterface|THInterface
+     * @throws \Exception
+     */
+    public function getCell(int $index);
 }

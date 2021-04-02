@@ -23,6 +23,8 @@ use GI\DOM\HTML\Element\Table\Items\ItemList;
 use GI\DOM\HTML\Element\Table\Row\TRInterface;
 use GI\DOM\Base\NodeInterface;
 use GI\DOM\HTML\Element\Table\Items\ItemListInterface;
+use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 
 class Table extends ContainerElement implements TableInterface
 {
@@ -111,15 +113,24 @@ class Table extends ContainerElement implements TableInterface
     /**
      * @param int $rowIndex
      * @param int $cellIndex
+     * @return TDInterface|THInterface
+     * @throws \Exception
+     */
+    public function get(int $rowIndex, int $cellIndex)
+    {
+        return $this->getRow($rowIndex)->getCell($cellIndex);
+    }
+
+    /**
+     * @param int $rowIndex
+     * @param int $cellIndex
      * @param string|array|NodeInterface $contents
      * @return static
      * @throws \Exception
      */
     public function set(int $rowIndex, int $cellIndex, $contents)
     {
-        $this->getChildNodes()->getRows()[$rowIndex]
-            ->getChildNodes()->get($cellIndex)
-            ->getChildNodes()->set($contents);
+        $this->get($rowIndex, $cellIndex)->getChildNodes()->set($contents);
 
         return $this;
     }

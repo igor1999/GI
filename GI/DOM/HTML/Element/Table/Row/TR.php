@@ -21,6 +21,8 @@ use GI\DOM\HTML\Element\ContainerElement;
 
 use GI\DOM\HTML\Element\Table\Cell\CellList;
 use GI\DOM\HTML\Element\Table\Cell\CellListInterface;
+use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 
 class TR extends ContainerElement implements TRInterface
 {
@@ -80,5 +82,15 @@ class TR extends ContainerElement implements TRInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @param int $index
+     * @return TDInterface|THInterface
+     * @throws \Exception
+     */
+    public function getCell(int $index)
+    {
+        return $this->getChildNodes()->get($index);
     }
 }
