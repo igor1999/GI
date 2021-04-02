@@ -231,11 +231,11 @@ abstract class AbstractRecord implements RecordInterface
 
     /**
      * @param string $class
-     * @param string|null $order
+     * @param array $order
      * @return SetInterface
      * @throws \Exception
      */
-    protected function getRelatedSet(string $class, string $order = null)
+    protected function getRelatedSet(string $class, array $order = [])
     {
         if (!is_a($class, SetInterface::class, true)) {
             $this->giThrowInvalidTypeException('Related class', $class, 'SetInterface');
@@ -254,11 +254,11 @@ abstract class AbstractRecord implements RecordInterface
     /**
      * @param string $setClass
      * @param string $proxyClass
-     * @param string|null $order
+     * @param array $order
      * @return SetInterface
      * @throws \Exception
      */
-    protected function getRelatedSetByProxy(string $setClass, string $proxyClass, string $order = null)
+    protected function getRelatedSetByProxy(string $setClass, string $proxyClass, array $order = [])
     {
         if (!is_a($setClass, SetInterface::class, true)) {
             $this->giThrowInvalidTypeException('Related class', $setClass, 'SetInterface');

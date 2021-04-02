@@ -283,12 +283,12 @@ abstract class AbstractSet implements SetInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return static
      * @throws \Exception
      */
-    protected function fill(array $contents, string $order = null, SQLBuilderInterface $builder = null)
+    protected function fill(array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
         $this->hydrateFromDB($this->getTable()->select($contents, $order, $builder));
 
@@ -297,11 +297,11 @@ abstract class AbstractSet implements SetInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @return static
      * @throws \Exception
      */
-    public function select(array $contents, string $order = null)
+    public function select(array $contents, array $order = [])
     {
         $this->fill($contents, $order);
 
@@ -311,13 +311,13 @@ abstract class AbstractSet implements SetInterface
     /**
      * @param string $proxyClass
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return static
      * @throws \Exception
      */
     protected function fillByProxy(
-        string $proxyClass, array $contents, string $order = null, SQLBuilderInterface $builder = null)
+        string $proxyClass, array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
         if (!is_a($proxyClass, SetInterface::class, true)
                 && !is_a($proxyClass, RecordInterface::class, true)) {
@@ -402,11 +402,11 @@ abstract class AbstractSet implements SetInterface
     /**
      * @param string $proxyClass
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @return static
      * @throws \Exception
      */
-    public function selectByProxy(string $proxyClass, array $contents, string $order = null)
+    public function selectByProxy(string $proxyClass, array $contents, array $order = [])
     {
         $this->fillByProxy($proxyClass, $contents, $order);
 

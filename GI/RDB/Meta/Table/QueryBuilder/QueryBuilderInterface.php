@@ -49,10 +49,10 @@ interface QueryBuilderInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return string
      * @throws \Exception
      */
-    public function select(array $contents, $order = null, SQLBuilderInterface $builder = null);
+    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null);
 }

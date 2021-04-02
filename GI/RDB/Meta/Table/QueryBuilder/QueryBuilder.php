@@ -171,12 +171,12 @@ class QueryBuilder implements QueryBuilderInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return string
      * @throws \Exception
      */
-    public function select(array $contents, $order = null, SQLBuilderInterface $builder = null)
+    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
         if (empty($contents)) {
             $this->giThrowIsEmptyException('Select contents');
@@ -194,7 +194,7 @@ class QueryBuilder implements QueryBuilderInterface
             : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
         $builder->setParam('predicate-list', $predicateList->toString());
 
-        $builder->setParam('order', $order);
+        $builder->addOrder($order);
 
         return $builder->toString();
     }

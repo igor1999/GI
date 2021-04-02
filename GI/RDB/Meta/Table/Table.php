@@ -250,12 +250,12 @@ class Table implements TableInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return array[]
      * @throws \Exception
     */
-    public function select(array $contents, string $order = null, SQLBuilderInterface $builder = null)
+    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
         $sql = $this->getQueryBuilder()->select($contents, $order, $builder);
 
@@ -264,12 +264,12 @@ class Table implements TableInterface
 
     /**
      * @param array $contents
-     * @param string|null $order
+     * @param array $order
      * @param SQLBuilderInterface|null $builder
      * @return array
      * @throws \Exception
      */
-    public function selectOne(array $contents, string $order = null, SQLBuilderInterface $builder = null)
+    public function selectOne(array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
         $sql = $this->getQueryBuilder()->select($contents, $order, $builder);
 
