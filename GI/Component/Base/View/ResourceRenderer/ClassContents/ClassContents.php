@@ -67,23 +67,23 @@ class ClassContents implements ClassContentsInterface
         $constants = $this->giGetClassMeta($this->targetClass)->getSelfConstants();
 
         try {
-            $this->targetRelativeDir = $constants->get('TARGET_RELATIVE_DIR');
+            $this->targetRelativeDir = $constants->get('TARGET_RELATIVE_DIR')->getValue();
         } catch (\Exception $exception) {}
 
         try {
-            $this->urlBaseDir = $constants->get('URL_BASE_DIR');
+            $this->urlBaseDir = $constants->get('URL_BASE_DIR')->getValue();
         } catch (\Exception $exception) {}
 
         try {
-            $this->cssPaths = $constants->get('CSS_PATHS');
+            $this->cssPaths = $constants->get('CSS_PATHS')->getValue();
         } catch (\Exception $exception) {}
 
         try {
-            $this->jsPaths = $constants->get('JS_PATHS');
+            $this->jsPaths = $constants->get('JS_PATHS')->getValue();
         } catch (\Exception $exception) {}
 
         try {
-            $this->imagePaths = $constants->get('IMAGE_PATHS');
+            $this->imagePaths = $constants->get('IMAGE_PATHS')->getValue();
         } catch (\Exception $exception) {}
     }
 
