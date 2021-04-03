@@ -38,4 +38,16 @@ abstract class AbstractResourceRenderer extends Core implements ResourceRenderer
         'img/opacity.png',
         'img/win-resize.png',
     ];
+
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

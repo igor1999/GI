@@ -28,4 +28,16 @@ abstract class AbstractResourceRenderer extends Core implements ResourceRenderer
         'js/table.js',
         'js/factory.js',
     ];
+
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

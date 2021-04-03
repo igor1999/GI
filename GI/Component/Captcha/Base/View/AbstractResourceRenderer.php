@@ -37,4 +37,16 @@ class AbstractResourceRenderer extends Core implements ResourceRendererInterface
     const IMAGE_PATHS = [
         'recaptcha-image' => 'img/recaptcha.png',
     ];
+
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

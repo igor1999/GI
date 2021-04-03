@@ -27,4 +27,16 @@ abstract class AbstractResourceRenderer extends Core implements ResourceRenderer
     const CSS_PATHS = [
         'css/bread-crumbs.css',
     ];
+
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

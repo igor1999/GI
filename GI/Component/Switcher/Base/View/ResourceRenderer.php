@@ -32,4 +32,16 @@ class ResourceRenderer extends Core implements ResourceRendererInterface
         'js/switcher.js',
         'js/factory.js',
     ];
+
+
+    /**
+     * ResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

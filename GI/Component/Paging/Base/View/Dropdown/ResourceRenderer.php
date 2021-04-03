@@ -32,4 +32,16 @@ class ResourceRenderer extends AbstractResourceRenderer implements ResourceRende
         'js/dropdown.js',
         'js/factory.js',
     ];
+
+
+    /**
+     * ResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }

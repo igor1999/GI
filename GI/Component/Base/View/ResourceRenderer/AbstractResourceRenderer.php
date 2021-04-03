@@ -56,11 +56,6 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     private static $classContentsCache = [];
 
     /**
-     * @var array[]
-     */
-    private static $classContentsChainCache = [];
-
-    /**
      * @var ResourceInterface[]
      */
     private $items = [];
@@ -72,53 +67,30 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
 
 
     /**
-     * AbstractResourceRenderer constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        if (!isset(self::$classContentsChainCache[static::class])) {
-            self::$classContentsChainCache[static::class] = $this->createClassContentsChain(static::class);
-        }
-
-        foreach (self::$classContentsChainCache[static::class] as $classContents) {
-            if ($classContents->validate()) {
-                $this->createContents(
-                    $classContents->getTargetClass(),
-                    $classContents->getTargetRelativeDir(),
-                    $classContents->getUrlBaseDir(),
-                    $classContents->getCssPaths(),
-                    $classContents->getJsPaths(),
-                    $classContents->getImagePaths()
-                );
-            }
-        }
-    }
-
-    /**
      * @param string $class
-     * @return ClassContentsInterface[]
+     * @return static
      * @throws \Exception
      */
-    protected function createClassContentsChain(string $class)
+    protected function createClassContents(string $class)
     {
         if (!isset(self::$classContentsCache[$class])) {
-            self::$classContentsCache[$class] = $this->createClassContents($class);
+            self::$classContentsCache[$class] = $this->createClassContentsContainer($class);
         }
 
-        $chain = [self::$classContentsCache[$class]];
+        $classContents = self::$classContentsCache[$class];
 
-        foreach ($this->giGetClassMeta($class)->getParents()->getItems() as $classMeta) {
-            $parentClass = $classMeta->getName();
-
-            if (!isset(self::$classContentsCache[$parentClass])) {
-                self::$classContentsCache[$parentClass] = $this->createClassContents($parentClass);
-            }
-
-            array_unshift($chain, self::$classContentsCache[$parentClass]);
+        if ($classContents->validate()) {
+            $this->createContents(
+                $classContents->getTargetClass(),
+                $classContents->getTargetRelativeDir(),
+                $classContents->getUrlBaseDir(),
+                $classContents->getCssPaths(),
+                $classContents->getJsPaths(),
+                $classContents->getImagePaths()
+            );
         }
 
-        return $chain;
+        return $this;
     }
 
     /**
@@ -126,7 +98,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
      * @return ClassContentsInterface
      * @throws \Exception
      */
-    protected function createClassContents(string $class)
+    protected function createClassContentsContainer(string $class)
     {
         try {
             $result = $this->giGetDi(ClassContentsInterface::class, ClassContents::class, [$class]);

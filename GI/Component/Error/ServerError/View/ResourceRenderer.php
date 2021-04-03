@@ -31,4 +31,16 @@ class ResourceRenderer extends Base implements ResourceRendererInterface
     const IMAGE_PATHS = [
         'image' => 'img/server-error.png',
     ];
+
+
+    /**
+     * ResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }
