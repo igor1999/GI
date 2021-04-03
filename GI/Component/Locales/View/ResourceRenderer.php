@@ -53,10 +53,6 @@ class ResourceRenderer extends Base implements ResourceRendererInterface
     {
         parent::__construct();
 
-        $this->createContents(
-            self::class, '', self::URL_BASE_DIR,self::CSS_PATHS, self::JS_PATHS
-        );
-
         $this->localeImages = $this->giGetDi(LocaleImagesInterface::class, LocaleImages::class);
 
         $this->createLocaleImages();

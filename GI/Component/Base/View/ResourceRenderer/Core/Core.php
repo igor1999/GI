@@ -50,7 +50,7 @@ class Core extends AbstractResourceRenderer implements CoreInterface
      */
     public function __construct()
     {
-        $this->createContents(self::class, '', self::URL_BASE_DIR, [], self::JS_PATHS);
+        parent::__construct();
 
         $urlBase = $this->giCreateFSODir(self::URL_BASE_DIR);
         foreach (self::JS_PATHS as $js) {

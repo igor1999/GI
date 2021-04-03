@@ -27,18 +27,4 @@ class ResourceRenderer extends Base implements ResourceRendererInterface
     const CSS_PATHS = [
         'css/salutation.css',
     ];
-
-
-    /**
-     * ResourceRenderer constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->createContents(
-            self::class, '', self::URL_BASE_DIR,self::CSS_PATHS
-        );
-    }
 }

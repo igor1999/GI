@@ -37,19 +37,4 @@ class ResourceRenderer extends Core implements ResourceRendererInterface
     const IMAGE_PATHS = [
         'img/arrow-right.png',
     ];
-
-
-    /**
-     * ResourceRenderer constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->createContents(
-            self::class, '', self::URL_BASE_DIR,
-            self::CSS_PATHS, self::JS_PATHS, self::IMAGE_PATHS
-        );
-    }
 }
