@@ -71,14 +71,14 @@ class ClientCSS implements ClientCSSInterface
         $parents = $this->giGetClassMeta($this->class)->getParents();
 
         try {
-            $constants = [$parents->getOwner()->getConstants()->get(static::CLIENT_CSS_CONST)];
+            $constants = [$parents->getOwner()->getSelfConstants()->get(static::CLIENT_CSS_CONST)];
         } catch (\Exception $e) {
             $constants = [];
         }
 
         foreach ($parents->getItems() as $item) {
             try {
-                array_unshift($constants, $item->getConstants()->get(static::CLIENT_CSS_CONST));
+                array_unshift($constants, $item->getSelfConstants()->get(static::CLIENT_CSS_CONST));
             } catch (\Exception $e) {}
         }
 

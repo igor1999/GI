@@ -191,7 +191,7 @@ class Colorizing implements ColorizingInterface
         $const = $this->giGetCamelCaseConverter()->convertToUnderlineUpperCase($const);
         $const = $constPrefix . $const;
 
-        return $this->giGetClassMeta(ColorizingInterface::class)->getConstants()->get($const);
+        return $this->giGetClassMeta(ColorizingInterface::class)->getStaticConstants()->get($const)->getValue();
     }
 
     /**

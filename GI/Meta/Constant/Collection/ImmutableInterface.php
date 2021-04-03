@@ -15,44 +15,55 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Meta\Constant;
+namespace GI\Meta\Constant\Collection;
 
-use GI\Meta\ClassMeta\Behaviour\OwnerAware\OwnerInterface;
+use GI\Meta\Constant\ConstantInterface;
 
-interface ConstantListInterface extends OwnerInterface
+interface ImmutableInterface
 {
     /**
-     * @param string $key
+     * @param string $constant
      * @return bool
      */
-    public function has(string $key);
+    public function has(string $constant);
 
     /**
-     * @param string $key
-     * @return mixed
+     * @param string $constant
+     * @return ConstantInterface
      * @throws \Exception
      */
-    public function get(string $key);
+    public function get(string $constant);
 
     /**
-     * @param string $key
-     * @param mixed|null $default
-     * @return mixed
+     * @return ConstantInterface
+     * @throws \Exception
      */
-    public function getOptional(string $key, $default = null);
+    public function getFirst();
 
     /**
-     * @return array
+     * @return ConstantInterface
+     * @throws \Exception
+     */
+    public function getLast();
+
+    /**
+     * @return ConstantInterface[]
      */
     public function getItems();
 
     /**
-     * @return int
+     * @return bool
      */
     public function getLength();
 
     /**
-     * @return int
+     * @return bool
      */
     public function isEmpty();
+
+    /**
+     * @param \Closure $closure
+     * @return ConstantInterface[]
+     */
+    public function filter(\Closure $closure);
 }

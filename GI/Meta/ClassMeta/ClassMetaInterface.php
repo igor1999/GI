@@ -19,7 +19,8 @@ namespace GI\Meta\ClassMeta;
 
 use GI\Meta\ClassMeta\Behaviour\Properties\PropertiesInterface as PropertyCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Methods\MethodsInterface as MethodCollectionInterface;
-use GI\Meta\Constant\ConstantListInterface;
+use GI\Meta\ClassMeta\Behaviour\Constants\StaticConstants\StaticConstantsInterface as StaticConstantsCollectionInterface;
+use GI\Meta\ClassMeta\Behaviour\Constants\SelfConstants\SelfConstantsInterface as SelfConstantsCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Traits\TraitsInterface as TraitsCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Interfaces\InterfacesInterface as InterfacesCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Parents\ParentsInterface as ParentsCollectionInterface;
@@ -52,9 +53,14 @@ interface ClassMetaInterface
     public function getMethods();
 
     /**
-     * @return ConstantListInterface
+     * @return StaticConstantsCollectionInterface
      */
-    public function getConstants();
+    public function getStaticConstants();
+
+    /**
+     * @return SelfConstantsCollectionInterface
+     */
+    public function getSelfConstants();
 
     /**
      * @return TraitsCollectionInterface

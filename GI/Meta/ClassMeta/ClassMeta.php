@@ -19,7 +19,8 @@ namespace GI\Meta\ClassMeta;
 
 use GI\Meta\ClassMeta\Behaviour\Properties\Properties as PropertyCollection;
 use GI\Meta\ClassMeta\Behaviour\Methods\Methods as MethodCollection;
-use GI\Meta\Constant\ConstantList;
+use GI\Meta\ClassMeta\Behaviour\Constants\StaticConstants\StaticConstants as StaticConstantsCollection;
+use GI\Meta\ClassMeta\Behaviour\Constants\SelfConstants\SelfConstants as SelfConstantsCollection;
 use GI\Meta\ClassMeta\Behaviour\Traits\Traits as TraitsCollection;
 use GI\Meta\ClassMeta\Behaviour\Interfaces\Interfaces as InterfacesCollection;
 use GI\Meta\ClassMeta\Behaviour\Parents\Parents as ParentsCollection;
@@ -28,7 +29,8 @@ use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\Meta\ClassMeta\Behaviour\Properties\PropertiesInterface as PropertyCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Methods\MethodsInterface as MethodCollectionInterface;
-use GI\Meta\Constant\ConstantListInterface;
+use GI\Meta\ClassMeta\Behaviour\Constants\StaticConstants\StaticConstantsInterface as StaticConstantsCollectionInterface;
+use GI\Meta\ClassMeta\Behaviour\Constants\SelfConstants\SelfConstantsInterface as SelfConstantsCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Traits\TraitsInterface as TraitsCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Interfaces\InterfacesInterface as InterfacesCollectionInterface;
 use GI\Meta\ClassMeta\Behaviour\Parents\ParentsInterface as ParentsCollectionInterface;
@@ -61,9 +63,14 @@ class ClassMeta implements ClassMetaInterface
     private $methods;
 
     /**
-     * @var ConstantListInterface
+     * @var StaticConstantsCollectionInterface
      */
-    private $constants;
+    private $staticConstants;
+
+    /**
+     * @var SelfConstantsCollectionInterface
+     */
+    private $selfConstants;
 
     /**
      * @var TraitsCollectionInterface
@@ -88,10 +95,11 @@ class ClassMeta implements ClassMetaInterface
      */
     public function __construct($source)
     {
-        $this->reflection = new \ReflectionClass($source);
-        $this->properties = $this->createPropertyCollection();
-        $this->methods    = $this->createMethodCollection();
-        $this->constants  = $this->createConstantList();
+        $this->reflection      = new \ReflectionClass($source);
+        $this->properties      = $this->createPropertyCollection();
+        $this->methods         = $this->createMethodCollection();
+        $this->staticConstants = $this->createStaticConstantsCollection();
+        $this->selfConstants   = $this->createSelfConstantsCollection();
     }
 
     /**
@@ -111,12 +119,21 @@ class ClassMeta implements ClassMetaInterface
     }
 
     /**
-     * @return ConstantList
+     * @return StaticConstantsCollection
      * @throws \Exception
      */
-    protected function createConstantList()
+    protected function createStaticConstantsCollection()
     {
-        return new ConstantList($this);
+        return new StaticConstantsCollection($this);
+    }
+
+    /**
+     * @return SelfConstantsCollection
+     * @throws \Exception
+     */
+    protected function createSelfConstantsCollection()
+    {
+        return new SelfConstantsCollection($this);
     }
 
     /**
@@ -187,11 +204,19 @@ class ClassMeta implements ClassMetaInterface
     }
 
     /**
-     * @return ConstantListInterface
+     * @return StaticConstantsCollectionInterface
      */
-    public function getConstants()
+    public function getStaticConstants()
     {
-        return $this->constants;
+        return $this->staticConstants;
+    }
+
+    /**
+     * @return SelfConstantsCollectionInterface
+     */
+    public function getSelfConstants()
+    {
+        return $this->selfConstants;
     }
 
     /**

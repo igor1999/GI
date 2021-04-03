@@ -64,7 +64,7 @@ class ClassContents implements ClassContentsInterface
     {
         $this->targetClass = $targetClass;
 
-        $constants = $this->giGetClassMeta($this->targetClass)->getConstants();
+        $constants = $this->giGetClassMeta($this->targetClass)->getSelfConstants();
 
         try {
             $this->targetRelativeDir = $constants->get('TARGET_RELATIVE_DIR');

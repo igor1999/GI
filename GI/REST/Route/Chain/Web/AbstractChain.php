@@ -119,19 +119,19 @@ abstract class AbstractChain extends Base implements ChainInterface
         }
 
         $result    = null;
-        $constants = $this->giGetClassMeta()->getConstants();
+        $constants = $this->giGetClassMeta()->getStaticConstants();
 
         if (!empty($has)) {
-            $param  = $constants->get(strtoupper($has) . static::KEY_CONSTANT_SUFFIX);
+            $param  = $constants->get(strtoupper($has) . static::KEY_CONSTANT_SUFFIX)->getValue();
             $result = $this->has($param);
         } elseif (!empty($get)) {
-            $param  = $constants->get(strtoupper($get) . static::KEY_CONSTANT_SUFFIX);
+            $param  = $constants->get(strtoupper($get) . static::KEY_CONSTANT_SUFFIX)->getValue();
             $result = $this->get($param);
         } elseif (!empty($set)) {
             if (empty($arguments)) {
                 $this->giThrowNotGivenException('Route for set');
             }
-            $param  = $constants->get(strtoupper($set) . static::KEY_CONSTANT_SUFFIX);
+            $param  = $constants->get(strtoupper($set) . static::KEY_CONSTANT_SUFFIX)->getValue();
             $result = $this->set($param, array_shift($arguments));
         }
 
