@@ -20,23 +20,45 @@ namespace GI\Component\Base\View\ResourceRenderer;
 use GI\Component\Base\View\ResourceRenderer\Resource\JS\JS;
 use GI\Component\Base\View\ResourceRenderer\Resource\CSS\CSS;
 use GI\Storage\Collection\StringCollection\HashSet\Alterable\Alterable as Images;
+use GI\Component\Base\View\ResourceRenderer\ClassContents\ClassContents;
 
-use GI\FileSystem\FSO\FSODir\FSODirInterface;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\Component\Base\View\ResourceRenderer\Resource\ResourceInterface;
 use GI\Component\Base\View\ResourceRenderer\Resource\JS\JSInterface;
 use GI\Component\Base\View\ResourceRenderer\Resource\CSS\CSSInterface;
+use GI\FileSystem\FSO\FSODir\FSODirInterface;
 use GI\FileSystem\FSO\FSOFile\FSOFileInterface;
 use GI\Storage\Collection\StringCollection\HashSet\Alterable\AlterableInterface as ImagesInterface;
+use GI\Component\Base\View\ResourceRenderer\ClassContents\ClassContentsInterface;
 
 abstract class AbstractResourceRenderer implements ResourceRendererInterface
 {
     use ServiceLocatorAwareTrait;
 
 
+    const TARGET_RELATIVE_DIR = '';
+
     const DEFAULT_TARGET_RELATIVE_DIR = 'web';
 
+    const URL_BASE_DIR = '';
+
+    const CSS_PATHS   = [];
+
+    const JS_PATHS    = [];
+
+    const IMAGE_PATHS = [];
+
+
+    /**
+     * @var array
+     */
+    private static $classContentsCache = [];
+
+    /**
+     * @var array[]
+     */
+    private static $classContentsChainCache = [];
 
     /**
      * @var ResourceInterface[]
@@ -48,6 +70,72 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
      */
     private $images;
 
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        if (!isset(self::$classContentsChainCache[static::class])) {
+            self::$classContentsChainCache[static::class] = $this->createClassContentsChain(static::class);
+        }
+
+        foreach (self::$classContentsChainCache[static::class] as $classContents) {
+            if ($classContents->validate()) {
+                $this->createContents(
+                    $classContents->getTargetClass(),
+                    $classContents->getTargetRelativeDir(),
+                    $classContents->getUrlBaseDir(),
+                    $classContents->getCssPaths(),
+                    $classContents->getJsPaths(),
+                    $classContents->getImagePaths()
+                );
+            }
+        }
+    }
+
+    /**
+     * @param string $class
+     * @return ClassContentsInterface[]
+     * @throws \Exception
+     */
+    protected function createClassContentsChain(string $class)
+    {
+        if (!isset(self::$classContentsCache[$class])) {
+            self::$classContentsCache[$class] = $this->createClassContents($class);
+        }
+
+        $chain = [self::$classContentsCache[$class]];
+
+        foreach ($this->giGetClassMeta($class)->getParents()->getItems() as $classMeta) {
+            $parentClass = $classMeta->getName();
+
+            if (!isset(self::$classContentsCache[$parentClass])) {
+                self::$classContentsCache[$parentClass] = $this->createClassContents($parentClass);
+            }
+
+            array_unshift($chain, self::$classContentsCache[$parentClass]);
+        }
+
+        return $chain;
+    }
+
+    /**
+     * @param string $class
+     * @return ClassContentsInterface
+     * @throws \Exception
+     */
+    protected function createClassContents(string $class)
+    {
+        try {
+            $result = $this->giGetDi(ClassContentsInterface::class, ClassContents::class, [$class]);
+        } catch (\Exception $exception) {
+            $result = new ClassContents($class);
+        }
+
+        return $result;
+    }
 
     /**
      * @return ImagesInterface
