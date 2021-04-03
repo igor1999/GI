@@ -235,10 +235,6 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
         string $targetClass, string $targetRelativeDir, string $urlDir,
         array $css = [], array $js = [], array $images = [])
     {
-        if (empty($targetClass)) {
-            $targetClass = $this->giGetClassMeta()->getName();
-        }
-
         if (empty($targetRelativeDir)) {
             $targetRelativeDir = static::DEFAULT_TARGET_RELATIVE_DIR;
         }
