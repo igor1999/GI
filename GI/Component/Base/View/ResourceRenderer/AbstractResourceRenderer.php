@@ -20,7 +20,6 @@ namespace GI\Component\Base\View\ResourceRenderer;
 use GI\Component\Base\View\ResourceRenderer\Resource\JS\JS;
 use GI\Component\Base\View\ResourceRenderer\Resource\CSS\CSS;
 use GI\Storage\Collection\StringCollection\HashSet\Alterable\Alterable as Images;
-use GI\Component\Base\View\ResourceRenderer\ContentsContainer\ContentsContainer;
 
 use GI\FileSystem\FSO\FSODir\FSODirInterface;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
@@ -30,7 +29,6 @@ use GI\Component\Base\View\ResourceRenderer\Resource\JS\JSInterface;
 use GI\Component\Base\View\ResourceRenderer\Resource\CSS\CSSInterface;
 use GI\FileSystem\FSO\FSOFile\FSOFileInterface;
 use GI\Storage\Collection\StringCollection\HashSet\Alterable\AlterableInterface as ImagesInterface;
-use GI\Component\Base\View\ResourceRenderer\ContentsContainer\ContentsContainerInterface;
 
 abstract class AbstractResourceRenderer implements ResourceRendererInterface
 {
@@ -256,42 +254,6 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
                 $this->getImages()->set($key, $urlHolder->getUrlWithModificationTime());
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @param string $urlDir
-     * @return ContentsContainerInterface
-     */
-    protected function createContentsContainer(string $urlDir)
-    {
-        try {
-            $container = $this->giGetDi(
-                ContentsContainerInterface::class, ContentsContainer::class, [$urlDir]
-            );
-        } catch (\Exception $exception) {
-            $container = new ContentsContainer($urlDir);
-        }
-
-        return $container;
-    }
-
-    /**
-     * @param ContentsContainerInterface $container
-     * @return static
-     * @throws \Exception
-     */
-    protected function loadContentsFromContainer(ContentsContainerInterface $container)
-    {
-        $this->createContents(
-            $container->getTargetClass(),
-            $container->getTargetRelativeDir(),
-            $container->getUrlDir(),
-            $container->getCss(),
-            $container->getJs(),
-            $container->getImages()
-        );
 
         return $this;
     }
