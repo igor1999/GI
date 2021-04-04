@@ -50,7 +50,8 @@ interface ClassContentsInterface
     public function getImagePaths();
 
     /**
-     * @return bool
+     * @return static
+     * @throws \Exception
      */
     public function validate();
 }

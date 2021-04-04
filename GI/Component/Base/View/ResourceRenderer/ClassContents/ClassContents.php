@@ -136,11 +136,15 @@ class ClassContents implements ClassContentsInterface
     }
 
     /**
-     * @return bool
+     * @return static
+     * @throws \Exception
      */
     public function validate()
     {
-        return !empty($this->urlBaseDir)
-            && (!empty($this->cssPaths) || !empty($this->jsPaths) || !empty($this->imagePaths));
+        if (empty($this->urlBaseDir)) {
+            $this->giThrowIsEmptyException('URl Dir');
+        }
+
+        return $this;
     }
 }

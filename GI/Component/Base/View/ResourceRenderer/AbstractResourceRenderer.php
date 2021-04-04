@@ -68,27 +68,36 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
 
     /**
      * @param string $class
+     * @param string|null $urlClass
      * @return static
      * @throws \Exception
      */
-    protected function createClassContents(string $class)
+    protected function createClassContents(string $class, string $urlClass = null)
     {
         if (!isset(self::$classContentsCache[$class])) {
             self::$classContentsCache[$class] = $this->createClassContentsContainer($class);
         }
 
+        if (!empty($urlClass) && !isset(self::$classContentsCache[$urlClass])) {
+            self::$classContentsCache[$urlClass] = $this->createClassContentsContainer($urlClass);
+        }
+
         $classContents = self::$classContentsCache[$class];
 
-        if ($classContents->validate()) {
-            $this->createContents(
-                $classContents->getTargetClass(),
-                $classContents->getTargetRelativeDir(),
-                $classContents->getUrlBaseDir(),
-                $classContents->getCssPaths(),
-                $classContents->getJsPaths(),
-                $classContents->getImagePaths()
-            );
+        if (!empty($urlClass)) {
+            $urlBaseDir = self::$classContentsCache[$urlClass]->validate()->getUrlBaseDir();
+        } else {
+            $urlBaseDir = $classContents->validate()->getUrlBaseDir();
         }
+
+        $this->createContents(
+            $classContents->getTargetClass(),
+            $classContents->getTargetRelativeDir(),
+            $urlBaseDir,
+            $classContents->getCssPaths(),
+            $classContents->getJsPaths(),
+            $classContents->getImagePaths()
+        );
 
         return $this;
     }
