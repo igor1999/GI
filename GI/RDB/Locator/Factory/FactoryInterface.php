@@ -15,20 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\DBLocator;
+namespace GI\RDB\Locator\Factory;
 
-use GI\RDB\Driver\DriverInterface;
-use GI\RDB\ORM\Factory\FactoryInterface as ORMFactoryInterface;
+use GI\Pattern\Factory\FactoryInterface as BaseInterface;
 
-interface DBLocatorInterface
+interface FactoryInterface extends BaseInterface
 {
-    /**
-     * @return DriverInterface
-     */
-    public function getDriver();
 
-    /**
-     * @return ORMFactoryInterface
-     */
-    public function getORMFactory();
 }

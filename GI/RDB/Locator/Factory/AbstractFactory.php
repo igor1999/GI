@@ -15,11 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\RDB\DBLocator\Factory;
+namespace GI\RDB\Locator\Factory;
 
 use GI\Pattern\Factory\AbstractFactory as Base;
 
-use GI\RDB\DBLocator\DBLocatorInterface;
+use GI\RDB\Locator\LocatorInterface;
 
 abstract class AbstractFactory extends Base implements FactoryInterface
 {
@@ -29,6 +29,6 @@ abstract class AbstractFactory extends Base implements FactoryInterface
      */
     public function __construct()
     {
-        $this->setCached(true)->setPrefixToGet()->getTemplateClasses()->add(DBLocatorInterface::class);
+        $this->setCached(true)->setPrefixToGet()->getTemplateClasses()->add(LocatorInterface::class);
     }
 }
