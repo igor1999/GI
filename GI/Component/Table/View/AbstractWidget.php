@@ -43,7 +43,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     use ContentsTrait;
 
 
-    const CLIENT_JS = 'gi-table';
+    const CLIENT_CSS = 'gi-table';
+
+    const CLIENT_JS  = self::CLIENT_CSS;
 
 
     const PAGING_RELATION = 'paging';
