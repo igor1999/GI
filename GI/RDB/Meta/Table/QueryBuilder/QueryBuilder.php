@@ -178,10 +178,6 @@ class QueryBuilder implements QueryBuilderInterface
      */
     public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null)
     {
-        if (empty($contents)) {
-            $this->giThrowIsEmptyException('Select contents');
-        }
-
         if (!($builder instanceof SQLBuilderInterface)) {
             $builder = $this->getBuilder()->setTemplate(static::SELECT_TEMPLATE)->addOrder($order);
         }
