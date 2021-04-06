@@ -29,6 +29,7 @@ interface LocatorInterface
 
     /**
      * @return ORMFactoryInterface
+     * @throws \Exception
      */
     public function getORMFactory();
 }
