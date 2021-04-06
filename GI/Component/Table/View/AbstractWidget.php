@@ -28,6 +28,7 @@ use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\ClientContents\TableHeader\TableHeaderInterface;
+use GI\RDB\ORM\Set\SetInterface;
 
 /**
  * Class AbstractWidget
@@ -158,7 +159,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
         $this->table = $this->giGetDOMFactory()->createTable();
 
         $dataSource = $this->getDataSource();
-        if ($dataSource instanceof ExtractionInterface) {
+        if ($dataSource instanceof SetInterface) {
+            $rowsNumber = $dataSource->getItems();
+        } elseif ($dataSource instanceof ExtractionInterface) {
             $rowsNumber = count($dataSource->extract());
         } else {
             $rowsNumber = count($dataSource);
@@ -229,7 +232,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function fillTable()
     {
         $dataSource = $this->getDataSource();
-        if ($dataSource instanceof ExtractionInterface) {
+        if ($dataSource instanceof SetInterface) {
+            $dataSource = $dataSource->getItems();
+        } elseif ($dataSource instanceof ExtractionInterface) {
             $dataSource = $dataSource->extract();
         }
 
