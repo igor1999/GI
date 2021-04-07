@@ -135,7 +135,6 @@ class Recursive extends AbstractContainer implements RecursiveInterface
                 if (!$localResult) {
                     $result = false;
                     if ($item->hasBreak()) {
-                        $this->setBreak(true);
                         $break = true;
                     }
                 }

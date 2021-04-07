@@ -82,7 +82,6 @@ class Map extends AbstractValidator implements MapInterface
                 $this->messages[$key] = $this->getValidator()->getMessages();
 
                 if ($this->getValidator()->hasBreak()) {
-                    $this->setBreak(true);
                     break;
                 }
             }

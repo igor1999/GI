@@ -144,7 +144,6 @@ class Chain extends AbstractContainer implements ChainInterface
                 if (!$item->validate($value)) {
                     $result = false;
                     if ($item->hasBreak()) {
-                        $this->setBreak(true);
                         $break = true;
                     }
                 }
