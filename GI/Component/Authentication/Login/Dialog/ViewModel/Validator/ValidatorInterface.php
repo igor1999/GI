@@ -18,7 +18,15 @@
 namespace GI\Component\Authentication\Login\Dialog\ViewModel\Validator;
 
 use GI\Validator\Container\Recursive\RecursiveInterface;
+use GI\Validator\Simple\Existence\NotEmptyInterface;
 
+/**
+ * Interface ValidatorInterface
+ * @package GI\Component\Authentication\Login\Dialog\ViewModel\Validator
+ *
+ * @method NotEmptyInterface getLogin()
+ * @method NotEmptyInterface getPassword()
+ */
 interface ValidatorInterface extends RecursiveInterface
 {
 
