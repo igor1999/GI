@@ -84,6 +84,24 @@ trait ClientAttributesTrait
     }
 
     /**
+     * @param SiblingsInterface $siblings
+     * @param string $id
+     * @return static
+     * @throws \Exception
+     */
+    protected function addClientAttributesToSiblings(SiblingsInterface $siblings, string $id)
+    {
+        $this->addClientAttributes($siblings->getMain(), $id);
+
+        foreach ($siblings->extract() as $key => $element) {
+            $elementId = $id . static::SEPARATOR_FOR_OBJECT_SPECIFIED_ATTRIBUTE . $key;
+            $this->addClientAttributes($element, $elementId);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param HTMLInterface $element
      * @param string $attribute
      * @param mixed $value
