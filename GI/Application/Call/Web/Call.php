@@ -163,6 +163,16 @@ class Call extends AbstractCall implements CallInterface
     }
 
     /**
+     * @return static
+     */
+    public function setResponseToAccessDenied()
+    {
+        $this->setResponseToStatus403($this->createAccessDeniedView());
+
+        return $this;
+    }
+
+    /**
      * @return CSRFFailedViewInterface
      */
     protected function createCSRFFailedView()
@@ -196,7 +206,7 @@ class Call extends AbstractCall implements CallInterface
                 $this->setResponseToStatus403($this->createCSRFFailedView());
             } elseif (($this->getAccessProfile() instanceof AccessProfileInterface)
                     && !$this->getAccessProfile()->validate()) {
-                $this->setResponseToStatus403($this->createAccessDeniedView());
+                $this->setResponseToAccessDenied();
             }else {
                 $this->getHandlers()->executeSequentially([$this]);
             }

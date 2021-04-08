@@ -68,6 +68,11 @@ interface CallInterface extends BaseInterface
     public function setResponse(ResponseInterface $response);
 
     /**
+     * @return static
+     */
+    public function setResponseToAccessDenied();
+
+    /**
      * @return bool
      * @throws \Exception
      */
