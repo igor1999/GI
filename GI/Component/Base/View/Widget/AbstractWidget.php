@@ -24,6 +24,7 @@ use GI\Pattern\Validation\ValidationTrait;
 use GI\Component\Base\View\Relations\RelationsAwareTrait;
 
 use GI\DOM\HTML\Element\HTMLInterface;
+use GI\Component\Base\View\ClientAttributes\SiblingsInterface;
 use GI\DOM\HTML\Element\ContainerElementInterface;
 use GI\Component\Base\View\ResourceRenderer\ResourceRendererInterface;
 use GI\DOM\HTML\Element\Input\Hidden\CSRFInterface;
@@ -159,17 +160,20 @@ abstract class AbstractWidget implements WidgetInterface
             $isRendered = $method->hasDescriptor(static::RENDERING_DESCRIPTOR);
             $element    = $method->execute($this);
 
-            if (!($element instanceof HTMLInterface)) {
-                $this->giThrowInvalidTypeException('Result of method', $method->getName(), HTMLInterface::class);
+            if ($element instanceof HTMLInterface) {
+                if ($isRendered) {
+                    $this->getRenderingContainer()->getChildNodes()->add($element);
+                }
+
+                $this->addClientAttributes($element, $giID, $withJSClass);
+
+                $withJSClass = false;
+            } elseif ($element instanceof SiblingsInterface) {
+                $this->addClientAttributesToSiblings($element, $giID);
+            } else {
+                $type = HTMLInterface::class . '|' . SiblingsInterface::class;
+                $this->giThrowInvalidTypeException('Result of method', $method->getName(), $type);
             }
-
-            if ($isRendered) {
-                $this->getRenderingContainer()->getChildNodes()->add($element);
-            }
-
-            $this->addClientAttributes($element, $giID, $withJSClass);
-
-            $withJSClass = false;
         }
 
         return $this;
