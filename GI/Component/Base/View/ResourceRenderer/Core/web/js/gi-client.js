@@ -74,15 +74,17 @@ giClient.core.getCsrfToken = function()
 
 giClient.core.customNamespace = function(namespace)
 {
-    let namespaces = namespace.split('.');
+    let parts = namespace.split('.');
 
     let container = giClient.custom;
 
-    for (let i = 0; i <= namespaces.length - 1; i ++) {
-        if (!(namespaces[i] in container)) {
-            container[namespaces[i]] = {};
+    for (let i = 0; i <= parts.length - 1; i ++) {
+        let part = parts[i];
+
+        if (!(part in container)) {
+            container[part] = {};
         }
 
-        container = container[namespaces[i]];
+        container = container[part];
     }
 };
