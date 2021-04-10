@@ -72,13 +72,12 @@ giClient.component.authentication.login.dialog.Dialog = function()
 
     let processResponse = function(response)
     {
-        me.hideLoadingImage();
-
         let {success = 0, redirectUri = '', message = ''} = response;
 
         if (success === 1) {
             document.location.href = redirectUri;
         } else {
+            me.hideLoadingImage();
             alert(message);
         }
     };

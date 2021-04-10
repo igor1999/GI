@@ -40,6 +40,8 @@ class LoadingImage extends Image implements LoadingImageInterface
         $src = $this->resourceRenderer->getLoading();
 
         parent::__construct($src);
+
+        $this->getStyle()->setDisplayToNone();
     }
 
     /**

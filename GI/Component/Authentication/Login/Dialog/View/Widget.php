@@ -96,12 +96,11 @@ class Widget extends AbstractWidget implements WidgetInterface
         $this->saveLabel->getAttributes()->setFor($this->saveCheckbox->getAttributes()->getId());
 
         $this->form
-            ->build(5, 1)
+            ->build(5, 2)
             ->set(0, 0, $this->loginTextbox)
             ->set(1, 0, $this->passwordTextbox)
-            ->set(3, 0, [$this->createLoadingImage(), $this->submitButton])
-            ->getLayout()
-            ->toggleCellFloat(3, 0, false);
+            ->set(3, 0, $this->submitButton)
+            ->set(3, 1, $this->createLoadingImage());
 
         if ($this->isHasCookie()) {
             $this->form->set(2, 0, [$this->saveCheckbox, $this->saveLabel]);
