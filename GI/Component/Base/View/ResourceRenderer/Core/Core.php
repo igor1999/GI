@@ -50,7 +50,7 @@ class Core extends AbstractResourceRenderer implements CoreInterface
     ];
 
     const IMAGE_PATHS = [
-        'loading' => 'img/loading.png',
+        'loading' => 'img/loading.gif',
     ];
 
 
