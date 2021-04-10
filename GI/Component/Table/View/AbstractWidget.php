@@ -160,7 +160,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
         $dataSource = $this->getDataSource();
         if ($dataSource instanceof SetInterface) {
-            $rowsNumber = $dataSource->getItems();
+            $rowsNumber = $dataSource->getLength();
         } elseif ($dataSource instanceof ExtractionInterface) {
             $rowsNumber = count($dataSource->extract());
         } else {
