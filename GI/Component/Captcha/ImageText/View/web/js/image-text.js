@@ -67,6 +67,8 @@ giClient.component.captcha.imageText.ImageText = function()
             'click',
             function()
             {
+                me.showLoadingImage();
+
                 let url = me.getServerData('recaptcha-url');
 
                 me.createAjax().getUrlEncoded().setMethodToPost().setResponseTypeToJson().send(url, {}, refresh);
@@ -76,6 +78,8 @@ giClient.component.captcha.imageText.ImageText = function()
 
     let refresh = function(response)
     {
+        me.hideLoadingImage();
+
         let {id = '', src = ''} = response;
 
         _idHidden.value   = id;

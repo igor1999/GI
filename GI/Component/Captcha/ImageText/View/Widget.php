@@ -101,10 +101,11 @@ class Widget extends AbstractWidget implements WidgetInterface
         parent::build();
 
         $this->getContainer()
-            ->build(2, 2)
+            ->build(2, 3)
             ->set(0, 0, [$this->captchaImage, $this->getIdHidden()])
             ->set(1, 0, $this->valueText)
-            ->set(1, 1, $this->getRecaptchaButton());
+            ->set(1, 1, $this->getRecaptchaButton())
+            ->set(1, 2, $this->createLoadingImage());
 
         return $this;
     }
