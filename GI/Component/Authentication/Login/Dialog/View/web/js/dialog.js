@@ -40,18 +40,6 @@ giClient.component.authentication.login.dialog.Dialog = function()
         return _password;
     };
 
-    let _resultMessageContainer;
-    this.getResultMessageContainer = function()
-    {
-        return _resultMessageContainer;
-    };
-
-    let _successMessage;
-    this.getSuccessMessage = function()
-    {
-        return _successMessage;
-    };
-
 
     let _parentConstruct = this.construct;
     this.construct = function(objectHash)
@@ -61,14 +49,14 @@ giClient.component.authentication.login.dialog.Dialog = function()
         _form                   = this.getObjectElement('form');
         _login                  = this.getObjectElement('login-textbox', _form);
         _password               = this.getObjectElement('password-textbox', _form);
-        _resultMessageContainer = this.getObjectElement('result-message-container', _form);
-        _successMessage         = this.getServerData('success-message');
 
         _form.addEventListener(
             'submit',
             function(ev)
             {
                 ev.preventDefault();
+
+                me.showLoadingImage();
 
                 let url     = _form.getAttribute('action');
                 let request = me.extractForm(_form);
@@ -84,28 +72,14 @@ giClient.component.authentication.login.dialog.Dialog = function()
 
     let processResponse = function(response)
     {
+        me.hideLoadingImage();
+
         let {success = 0, redirectUri = '', message = ''} = response;
 
         if (success === 1) {
-            redirect(redirectUri);
+            document.location.href = redirectUri;
         } else {
-            showFail(message);
+            alert(message);
         }
-    };
-
-    let redirect = function(redirectUri)
-    {
-        _resultMessageContainer.classList.remove('gi-error')
-
-        _resultMessageContainer.innerHTML = _successMessage;
-
-        document.location.href = redirectUri;
-    };
-
-    let showFail = function (message)
-    {
-        _resultMessageContainer.classList.add('gi-error')
-
-        _resultMessageContainer.innerHTML = message;
     };
 };

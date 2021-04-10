@@ -28,7 +28,6 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\DOM\HTML\Element\Input\Text\PasswordInterface;
 use GI\DOM\HTML\Element\Input\Logical\CheckboxInterface;
 use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
 /**
@@ -54,11 +53,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     const SAVE_CHECKBOX_ID = 'save-checkbox';
 
     const SAVE_LABEL       = 'remember me';
-
-
-    const SUCCESS_MESSAGE_KEY  = 'success-message';
-
-    const SUCCESS_MESSAGE      = 'You have a successfully login. Please wait a moment...';
 
 
     /**
@@ -101,17 +95,11 @@ class Widget extends AbstractWidget implements WidgetInterface
 
         $this->saveLabel->getAttributes()->setFor($this->saveCheckbox->getAttributes()->getId());
 
-        $message = $this->giTranslate(
-            GlossaryInterface::class, Glossary::class, static::SUCCESS_MESSAGE
-        );
-        $this->getServerDataList()->set(static::SUCCESS_MESSAGE_KEY, $message);
-
         $this->form
             ->build(5, 1)
             ->set(0, 0, $this->loginTextbox)
             ->set(1, 0, $this->passwordTextbox)
-            ->set(3, 0, $this->submitButton)
-            ->set(4, 0, $this->resultMessageContainer)
+            ->set(3, 0, [$this->createLoadingImage(), $this->submitButton])
             ->getLayout()
             ->toggleCellFloat(3, 0, false);
 
@@ -210,16 +198,5 @@ class Widget extends AbstractWidget implements WidgetInterface
         );
 
         return $this->submitButton;
-    }
-
-    /**
-     * @gi-id result-message-container
-     * @return DivInterface
-     */
-    protected function createResultMessageContainer()
-    {
-        $this->resultMessageContainer = $this->giGetDOMFactory()->createDiv();
-
-        return $this->resultMessageContainer;
     }
 }

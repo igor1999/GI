@@ -38,11 +38,3 @@ input[data-gi-css~=gi-authentication-login-dialog][data-gi-id=password-textbox] 
 input[data-gi-css~=gi-authentication-login-dialog][data-gi-id=submit-button] {
     background-color: white; font-size: 10px; padding: 3px;
 }
-
-div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=result-message-container] {
-    font-size: 11px; padding: 2px; color: green;
-}
-
-div[data-gi-css~=gi-authentication-login-dialog][data-gi-id=result-message-container].gi-error {
-    color: red;
-}

@@ -24,7 +24,6 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\DOM\HTML\Element\Input\Text\PasswordInterface;
 use GI\DOM\HTML\Element\Input\Logical\CheckboxInterface;
 use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
 /**
@@ -69,9 +68,4 @@ interface WidgetInterface extends BaseInterface
      * @return SubmitInterface
      */
     public function getSubmitButton();
-
-    /**
-     * @return DivInterface
-     */
-    public function getResultMessageContainer();
 }

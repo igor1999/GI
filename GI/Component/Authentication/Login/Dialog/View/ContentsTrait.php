@@ -23,7 +23,6 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
 use GI\DOM\HTML\Element\Input\Text\PasswordInterface;
 use GI\DOM\HTML\Element\Input\Logical\CheckboxInterface;
 use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
 trait ContentsTrait
@@ -57,11 +56,6 @@ trait ContentsTrait
      * @var SubmitInterface
      */
     private $submitButton;
-
-    /**
-     * @var DivInterface
-     */
-    private $resultMessageContainer;
 
 
     /**
@@ -121,13 +115,5 @@ trait ContentsTrait
     public function getSubmitButton()
     {
         return $this->submitButton;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getResultMessageContainer()
-    {
-        return $this->resultMessageContainer;
     }
 }
