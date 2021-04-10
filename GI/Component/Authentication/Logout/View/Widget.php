@@ -116,9 +116,10 @@ class Widget extends AbstractWidget implements WidgetInterface
         $this->createCsrf();
 
         $this->container
-            ->build(1, 2)
+            ->build(1, 3)
             ->set(0, 0, $this->salutationSpan)
-            ->set(0, 1, $this->logoutLink);
+            ->set(0, 1, $this->logoutLink)
+            ->set(0, 2, $this->createLoadingImage());
 
         return $this;
     }

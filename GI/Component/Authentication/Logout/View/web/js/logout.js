@@ -39,6 +39,8 @@ giClient.component.authentication.logout.Logout = function()
             'click',
             function()
             {
+                me.showLoadingImage();
+
                 let url = _link.getAttribute('data-check-action');
 
                 me.createAjax().getUrlEncoded().setMethodToPost().send(
