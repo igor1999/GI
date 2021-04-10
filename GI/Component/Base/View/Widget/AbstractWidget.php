@@ -17,6 +17,8 @@
  */
 namespace GI\Component\Base\View\Widget;
 
+use GI\Component\Base\View\LoadingImage\LoadingImage;
+
 use GI\Component\Base\View\ServerData\ServerDataAwareTrait;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Component\Base\View\ClientAttributes\ClientAttributesTrait;
@@ -28,6 +30,7 @@ use GI\Component\Base\View\ClientAttributes\SiblingsInterface;
 use GI\DOM\HTML\Element\ContainerElementInterface;
 use GI\Component\Base\View\ResourceRenderer\ResourceRendererInterface;
 use GI\DOM\HTML\Element\Input\Hidden\CSRFInterface;
+use GI\Component\Base\View\LoadingImage\LoadingImageInterface;
 use GI\Storage\Collection\MixedCollection\HashSet\Alterable\AlterableInterface as ParamsInterface;
 
 abstract class AbstractWidget implements WidgetInterface
@@ -103,6 +106,24 @@ abstract class AbstractWidget implements WidgetInterface
         $this->csrf = $this->giGetDOMFactory()->getInputFactory()->createCSRF();
 
         return $this;
+    }
+
+    /**
+     * @param string|null $giId
+     * @return LoadingImageInterface
+     * @throws \Exception
+     */
+    protected function createLoadingImage(string $giId = null)
+    {
+        try {
+            $image = $this->giGetDi(LoadingImageInterface::class);
+        } catch (\Exception $exception) {
+            $image = new LoadingImage();
+        }
+
+        $this->addClientAttributesToLoadingImage($image, $giId);
+
+        return $image;
     }
 
     /**

@@ -26,6 +26,7 @@ use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\Component\Base\ComponentInterface;
+use GI\DOM\HTML\Element\Image\ImageInterface;
 
 trait ClientAttributesTrait
 {
@@ -210,6 +211,23 @@ trait ClientAttributesTrait
     protected function addFormAttribute(HTMLInterface $element)
     {
         $element->getAttributes()->setForm($this->createFormAttribute());
+
+        return $this;
+    }
+
+    /**
+     * @param ImageInterface $image
+     * @param string|null $id
+     * @return static
+     * @throws \Exception
+     */
+    protected function addClientAttributesToLoadingImage(ImageInterface $image, string $id = null)
+    {
+        if (empty($id)) {
+            $id = static::COMMON_LOADING_IMAGE_ID;
+        }
+
+        $this->addClientAttributes($image, $id);
 
         return $this;
     }

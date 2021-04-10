@@ -47,6 +47,8 @@ interface ClientAttributesInterface
 
     const COMMON_FORM_ID = 'form';
 
+    const COMMON_LOADING_IMAGE_ID = 'loading-image';
+
 
     /**
      * @return ClientCSSInterface

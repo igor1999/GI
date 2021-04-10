@@ -113,4 +113,27 @@ giClient.core.widget.Base = function()
     {
         return giClient.core.getCsrfToken();
     };
+
+    this.getLoadingImage = function(id)
+    {
+        if (!id) {
+            id = 'loading-image';
+        }
+
+        return this.getObjectElement(id);
+    };
+
+    this.showLoadingImage = function(id)
+    {
+        this.getLoadingImage(id).style.display = 'block';
+
+        return this;
+    };
+
+    this.hideLoadingImage = function(id)
+    {
+        this.getLoadingImage(id).style.display = 'none';
+
+        return this;
+    };
 };

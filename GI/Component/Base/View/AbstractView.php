@@ -18,9 +18,12 @@
 namespace GI\Component\Base\View;
 
 use GI\Markup\Renderer\AbstractRenderer;
+use GI\Component\Base\View\LoadingImage\LoadingImage;
 
 use GI\Component\Base\View\ClientAttributes\ClientAttributesTrait;
 use GI\Component\Base\View\Relations\RelationsAwareTrait;
+
+use GI\Component\Base\View\LoadingImage\LoadingImageInterface;
 
 abstract class AbstractView extends AbstractRenderer implements ViewInterface
 {
@@ -47,5 +50,23 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     public function renderRelationList()
     {
         return $this->getRelationList()->toString();
+    }
+
+    /**
+     * @param string|null $giId
+     * @return LoadingImageInterface
+     * @throws \Exception
+     */
+    public function createLoadingImage(string $giId = null)
+    {
+        try {
+            $image = $this->giGetDi(LoadingImageInterface::class);
+        } catch (\Exception $exception) {
+            $image = new LoadingImage();
+        }
+
+        $this->addClientAttributesToLoadingImage($image, $giId);
+
+        return $image;
     }
 }

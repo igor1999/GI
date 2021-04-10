@@ -15,24 +15,38 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Base\View;
+namespace GI\Component\Base\View\LoadingImage;
 
-use GI\Markup\Renderer\RendererInterface;
-use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
-use GI\Component\Base\View\LoadingImage\LoadingImageInterface;
+use GI\DOM\HTML\Element\Image\Image;
+use GI\Component\Base\View\ResourceRenderer\Core\Core;
 
-interface ViewInterface extends RendererInterface, ClientAttributesInterface
+use GI\Component\Base\View\ResourceRenderer\Core\CoreInterface;
+
+class LoadingImage extends Image implements LoadingImageInterface
 {
     /**
-     * @return string
-     * @throws \Exception
+     * @var CoreInterface
      */
-    public function renderRelationList();
+    private $resourceRenderer;
+
 
     /**
-     * @param string|null $giId
-     * @return LoadingImageInterface
+     * LoadingImage constructor.
      * @throws \Exception
      */
-    public function createLoadingImage(string $giId = null);
+    public function __construct()
+    {
+        $this->resourceRenderer = $this->giGetDi(CoreInterface::class, Core::class);
+        $src = $this->resourceRenderer->getLoading();
+
+        parent::__construct($src);
+    }
+
+    /**
+     * @return CoreInterface
+     */
+    protected function getResourceRenderer()
+    {
+        return $this->resourceRenderer;
+    }
 }
