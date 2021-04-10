@@ -19,6 +19,12 @@ namespace GI\Component\Base\View\ResourceRenderer\Core;
 
 use GI\Component\Base\View\ResourceRenderer\ResourceRendererInterface;
 
+/**
+ * Interface CoreInterface
+ * @package GI\Component\Base\View\ResourceRenderer\Core
+ *
+ * @method string getLoading()
+ */
 interface CoreInterface extends ResourceRendererInterface
 {
 

@@ -19,6 +19,12 @@ namespace GI\Component\Base\View\ResourceRenderer\Core;
 
 use GI\Component\Base\View\ResourceRenderer\AbstractResourceRenderer;
 
+/**
+ * Class Core
+ * @package GI\Component\Base\View\ResourceRenderer\Core
+ *
+ * @method string getLoading()
+ */
 class Core extends AbstractResourceRenderer implements CoreInterface
 {
     const URL_BASE_DIR = 'GI/Component/Base';
@@ -41,6 +47,10 @@ class Core extends AbstractResourceRenderer implements CoreInterface
         'js/core/widget/factory.js',
         'js/core/widget/repository.js',
         'js/core/widget/selector.js',
+    ];
+
+    const IMAGE_PATHS = [
+        'loading' => 'img/loading.gif',
     ];
 
 
