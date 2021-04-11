@@ -18,12 +18,12 @@
 namespace GI\Component\Base\View\ClientAttributes;
 
 use GI\Pattern\ArrayExchange\ExtractionInterface;
-use GI\DOM\HTML\Element\HTMLInterface;
 
 interface SiblingsInterface extends ExtractionInterface
 {
     /**
-     * @return HTMLInterface
+     * @param string $key
+     * @return string
      */
-    public function getMain();
+    public function getGiId(string $key);
 }

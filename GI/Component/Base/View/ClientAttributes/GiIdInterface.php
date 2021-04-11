@@ -15,23 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Base\View;
+namespace GI\Component\Base\View\ClientAttributes;
 
-use GI\Markup\Renderer\RendererInterface;
-use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
-use GI\Component\Base\View\LoadingImage\LoadingImageInterface;
-
-interface ViewInterface extends RendererInterface, ClientAttributesInterface
+interface GiIdInterface
 {
     /**
      * @return string
-     * @throws \Exception
      */
-    public function renderRelationList();
-
-    /**
-     * @return LoadingImageInterface
-     * @throws \Exception
-     */
-    public function createLoadingImage();
+    public function getGiId();
 }

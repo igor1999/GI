@@ -109,11 +109,10 @@ abstract class AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @param string|null $giId
      * @return LoadingImageInterface
      * @throws \Exception
      */
-    protected function createLoadingImage(string $giId = null)
+    protected function createLoadingImage()
     {
         try {
             $image = $this->giGetDi(LoadingImageInterface::class);
@@ -121,7 +120,7 @@ abstract class AbstractWidget implements WidgetInterface
             $image = new LoadingImage();
         }
 
-        $this->addClientAttributesToLoadingImage($image, $giId);
+        $this->addClientAttributes($image);
 
         return $image;
     }
@@ -190,7 +189,7 @@ abstract class AbstractWidget implements WidgetInterface
 
                 $withJSClass = false;
             } elseif ($element instanceof SiblingsInterface) {
-                $this->addClientAttributesToSiblings($element, $giID);
+                $this->addClientAttributesToSiblings($element);
             } else {
                 $type = HTMLInterface::class . '|' . SiblingsInterface::class;
                 $this->giThrowInvalidTypeException('Result of method', $method->getName(), $type);

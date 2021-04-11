@@ -26,7 +26,6 @@ use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\Component\Base\ComponentInterface;
-use GI\DOM\HTML\Element\Image\ImageInterface;
 
 trait ClientAttributesTrait
 {
@@ -70,8 +69,12 @@ trait ClientAttributesTrait
      * @return static
      * @throws \Exception
      */
-    protected function addClientAttributes(HTMLInterface $element, string $id, bool $withJSClass = false)
+    protected function addClientAttributes(HTMLInterface $element, string $id = '', bool $withJSClass = false)
     {
+        if ($element instanceof GiIdInterface) {
+            $id = $element->getGiId();
+        }
+
         $element->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_CSS, $this->getClientCSS()->toString())
             ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject())
@@ -86,16 +89,13 @@ trait ClientAttributesTrait
 
     /**
      * @param SiblingsInterface $siblings
-     * @param string $id
      * @return static
      * @throws \Exception
      */
-    protected function addClientAttributesToSiblings(SiblingsInterface $siblings, string $id)
+    protected function addClientAttributesToSiblings(SiblingsInterface $siblings)
     {
-        $this->addClientAttributes($siblings->getMain(), $id);
-
         foreach ($siblings->extract() as $key => $element) {
-            $elementId = $id . static::SEPARATOR_FOR_OBJECT_SPECIFIED_ATTRIBUTE . $key;
+            $elementId = $siblings->getGiId($key);
             $this->addClientAttributes($element, $elementId);
         }
 
@@ -211,23 +211,6 @@ trait ClientAttributesTrait
     protected function addFormAttribute(HTMLInterface $element)
     {
         $element->getAttributes()->setForm($this->createFormAttribute());
-
-        return $this;
-    }
-
-    /**
-     * @param ImageInterface $image
-     * @param string|null $id
-     * @return static
-     * @throws \Exception
-     */
-    protected function addClientAttributesToLoadingImage(ImageInterface $image, string $id = null)
-    {
-        if (empty($id)) {
-            $id = static::COMMON_LOADING_IMAGE_ID;
-        }
-
-        $this->addClientAttributes($image, $id);
 
         return $this;
     }

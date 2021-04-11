@@ -53,11 +53,10 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     }
 
     /**
-     * @param string|null $giId
      * @return LoadingImageInterface
      * @throws \Exception
      */
-    public function createLoadingImage(string $giId = null)
+    public function createLoadingImage()
     {
         try {
             $image = $this->giGetDi(LoadingImageInterface::class);
@@ -65,7 +64,7 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
             $image = new LoadingImage();
         }
 
-        $this->addClientAttributesToLoadingImage($image, $giId);
+        $this->addClientAttributes($image);
 
         return $image;
     }
