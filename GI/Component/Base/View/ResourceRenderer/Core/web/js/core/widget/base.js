@@ -19,6 +19,7 @@ giClient.core.widget.Base = function()
     let _singletonSelector       = giClient.core.widget.selector;
     let _singletonRepository     = giClient.core.widget.repository;
     let _nsAjax                  = giClient.core.ajax;
+    let _singletonDom            = giClient.core.dom;
     let _singletonForm           = giClient.core.form;
     let _singletonTextProcessing = giClient.core.textProcessing;
     let _nsCookie                = giClient.core.cookie;
@@ -125,14 +126,14 @@ giClient.core.widget.Base = function()
 
     this.showLoadingImage = function(id)
     {
-        this.getLoadingImage(id).style.display = 'block';
+        _singletonDom.show(this.getLoadingImage(id));
 
         return this;
     };
 
     this.hideLoadingImage = function(id)
     {
-        this.getLoadingImage(id).style.display = 'none';
+        _singletonDom.hide(this.getLoadingImage(id));
 
         return this;
     };

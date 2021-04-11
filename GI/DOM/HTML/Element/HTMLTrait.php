@@ -135,4 +135,39 @@ trait HTMLTrait
             . ' ' . $this->getStyle()->toString()
         );
     }
+
+    /**
+     * @return static
+     */
+    public function show()
+    {
+        $this->getStyle()->setDisplayToBlock();
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function hide()
+    {
+        $this->getStyle()->setDisplayToNone();
+
+        return $this;
+    }
+
+    /**
+     * @param bool $visible
+     * @return static
+     */
+    public function setVisibility(bool $visible)
+    {
+        if ($visible) {
+            $this->show();
+        } else {
+            $this->hide();
+        }
+
+        return $this;
+    }
 }

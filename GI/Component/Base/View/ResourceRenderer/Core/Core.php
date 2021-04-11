@@ -41,6 +41,7 @@ class Core extends AbstractResourceRenderer implements CoreInterface
         'js/core/ajax/configurator/multipart.js',
         'js/core/cookie/cookie.js',
         'js/core/cookie/collection.js',
+        'js/core/dom.js',
         'js/core/form.js',
         'js/core/text-processing.js',
         'js/core/widget/base.js',

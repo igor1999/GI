@@ -44,4 +44,20 @@ interface HTMLInterface extends ElementInterface
      * @return StyleInterface
      */
     public function getStyle();
+
+    /**
+     * @return static
+     */
+    public function show();
+
+    /**
+     * @return static
+     */
+    public function hide();
+
+    /**
+     * @param bool $visible
+     * @return static
+     */
+    public function setVisibility(bool $visible);
 }
