@@ -17,7 +17,7 @@
  */
 namespace GI\DOM\Factory;
 
-use GI\Pattern\Factory\FactoryInterface as BaseInterface;
+use GI\DOM\Factory\Base\FactoryInterface as BaseInterface;
 
 use GI\DOM\HTML\Element\Input\Factory\FactoryInterface as InputFactoryInterface;
 

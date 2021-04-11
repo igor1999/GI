@@ -17,7 +17,7 @@
  */
 namespace GI\DOM\Factory;
 
-use GI\Pattern\Factory\AbstractFactory;
+use GI\DOM\Factory\Base\AbstractFactory;
 
 use GI\DOM\HTML\Element\Input\Factory\Factory as InputFactory;
 
@@ -123,8 +123,6 @@ use GI\DOM\HTML\Element\TextContainer\Paragraph\Paragraph;
 use GI\DOM\HTML\Element\TextContainer\Pre\Pre;
 use GI\DOM\HTML\Element\TextContainer\Span\Span;
 
-
-use GI\DOM\Base\Element\ElementInterface;
 
 use GI\DOM\HTML\Element\Input\Factory\FactoryInterface as InputFactoryInterface;
 
@@ -352,7 +350,7 @@ class Factory extends AbstractFactory implements FactoryInterface
      */
     public function __construct()
     {
-        $this->getTemplateClasses()->add(ElementInterface::class);
+        parent::__construct();
 
         $this->set(Comment::class)
             ->set(TextNode::class, null, false)
