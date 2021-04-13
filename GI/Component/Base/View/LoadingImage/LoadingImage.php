@@ -24,7 +24,7 @@ use GI\Component\Base\View\ResourceRenderer\Core\CoreInterface;
 
 class LoadingImage extends Image implements LoadingImageInterface
 {
-    const GI_ID = 'loading-image';
+    const DEFAULT_GI_ID = 'loading-image';
 
 
     /**
@@ -32,13 +32,21 @@ class LoadingImage extends Image implements LoadingImageInterface
      */
     private $resourceRenderer;
 
+    /**
+     * @var string
+     */
+    private $giId = '';
+
 
     /**
      * LoadingImage constructor.
+     * @param string $giId
      * @throws \Exception
      */
-    public function __construct()
+    public function __construct(string $giId = '')
     {
+        $this->giId = $giId;
+
         $this->resourceRenderer = $this->giGetDi(CoreInterface::class, Core::class);
         $src = $this->resourceRenderer->getLoading();
 
@@ -56,10 +64,21 @@ class LoadingImage extends Image implements LoadingImageInterface
     }
 
     /**
+     * @param string $giId
+     * @return static
+     */
+    protected function setGiId(string $giId)
+    {
+        $this->giId = $giId;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getGiId()
     {
-        return static::GI_ID;
+        return empty($this->giId) ? static::DEFAULT_GI_ID : $this->giId;
     }
 }
