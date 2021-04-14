@@ -72,11 +72,11 @@ class Parser extends AbstractPrefix implements ParserInterface
      */
     public function parseBeforeSuffix(string $source, string $suffix, bool $lcFirst = true)
     {
-        $result = strstr($source, $suffix, true);
-
-        if ($result === false) {
+        if (substr($source, strlen($source) - strlen($suffix)) != $suffix) {
             $this->giThrowCommonException('Suffix \'%s\' in source \'%s\' not found', [$suffix, $source]);
         }
+
+        $result = substr($source, 0, strlen($source) - strlen($suffix));
 
         if ($lcFirst) {
             $result = lcfirst($result);

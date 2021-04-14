@@ -177,7 +177,7 @@ abstract class AbstractWidget implements WidgetInterface
         $withJSClass = true;
 
         foreach ($methods as $method) {
-            $giID       = $method->getDescriptor(static::ATTRIBUTE_GI_ID);
+            $giID       = (string)$method->getDescriptor(static::ATTRIBUTE_GI_ID);
             $isRendered = $method->hasDescriptor(static::RENDERING_DESCRIPTOR);
             $element    = $method->execute($this);
 
