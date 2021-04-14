@@ -1,8 +1,9 @@
 <?php
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface;
 /** @var ViewInterface $this */
+$default = $this->getColumn()->isIntPHPType() ? 0 : '\'\'';
 ?>
     /**
      * @var <?php echo $this->getColumn()->getPHPType(), PHP_EOL; ?>
      */
-    private $<?php echo $this->getColumn()->getClassProperty(); ?>;
+    private $<?php echo $this->getColumn()->getClassProperty(); ?> = <?php echo $default; ?>;
