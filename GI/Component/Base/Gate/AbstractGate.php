@@ -110,7 +110,7 @@ abstract class AbstractGate implements GateInterface
                 $response = $this->getCommonErrors()->findByThrowable($throwable);
             }
 
-            $this->getCall()->setResponse($response)->getResponse()->dispatch();
+            $this->getCall()->setResponse($response);
         } catch (\Exception $exception) {
             throw $throwable;
         }
