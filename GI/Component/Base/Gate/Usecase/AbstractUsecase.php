@@ -17,30 +17,13 @@
  */
 namespace GI\Component\Base\Gate\Usecase;
 
-use GI\Identity\Exception\Access as AccessException;
-
 use GI\Component\Base\Gate\AbstractGate;
 
 use GI\Component\Layout\LayoutInterface;
 use GI\Component\Base\ComponentInterface;
-use GI\Application\Call\Web\CallInterface as WebCallInterface;
 
 abstract class AbstractUsecase extends AbstractGate implements UsecaseInterface
 {
-    /**
-     * AbstractUsecase constructor.
-     * @param WebCallInterface $call
-     * @throws \Exception
-     */
-    public function __construct(WebCallInterface $call)
-    {
-        parent::__construct($call);
-
-        $body     = $this->getLayout()->createAccessDenied(static::ACCESS_DENIED_MESSAGE);
-        $response = $this->giGetResponseFactory()->createStatus403($body);
-        $this->getCommonErrors()->create(AccessException::class, $response);
-    }
-
     /**
      * @return LayoutInterface
      */

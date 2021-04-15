@@ -62,12 +62,6 @@ abstract class AbstractGate implements GateInterface
         $this->commonErrors = $this->giGetDi(ErrorsInterface::class, Errors::class);
         $this->ajaxErrors   = $this->giGetDi(ErrorsInterface::class, Errors::class);
 
-        $body     = $this->giGetComponentFactory()->getErrorFactory()->createAccessDenied(
-            static::ACCESS_DENIED_MESSAGE
-        );
-        $response = $this->giGetResponseFactory()->createStatus403($body);
-        $this->commonErrors->create(AccessException::class, $response);
-
         $response = $this->giGetResponseFactory()->createStatus403(static::ACCESS_DENIED_MESSAGE);
         $this->ajaxErrors->create(AccessException::class, $response);
     }
