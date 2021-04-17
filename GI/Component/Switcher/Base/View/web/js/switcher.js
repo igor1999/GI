@@ -19,12 +19,6 @@ giClient.component.switcher.Switcher = function()
     giClient.core.widget.Base.call(this);
 
 
-    let _selectionHolder = null;
-    this.getSelectionHolder = function()
-    {
-        return _selectionHolder;
-    };
-
     let _allowOff = false;
     this.isAllowOff = function()
     {
@@ -50,68 +44,38 @@ giClient.component.switcher.Switcher = function()
     {
         this.setObjectHash(objectHash);
 
-        _selectionHolder = this.getObjectElement('selection-holder');
         _allowOff = (this.getServerData('is-allow-off') === 1);
 
-        let options = this.getObjectElement('container').querySelectorAll('[data-value]');
-        for (let i = 0; i <= options.length - 1; i++) {
-            _options[getOptionValue(options[i])] = options[i];
-            initOption(options[i]);
+        let selectionHolder = this.getObjectElement('selection-holder');
+
+        let elements = this.getObjectElement('container').querySelectorAll('[data-value]');
+        for (let i = 0; i <= elements.length - 1; i++) {
+            let option = new giClient.component.switcher.Option().construct(this, elements[i], selectionHolder);
+
+            _options[option.getValue()] = option;
         }
 
         return this;
     };
 
-    let initOption = function(option)
+    this.unselectAll = function()
     {
-        option.addEventListener(
-            'click',
-            function()
-            {
-                select(option);
-            }
-        );
-    };
+        for (let value in _options) {
+            _options[value].unselect();
+        }
 
-    let getOptionValue = function(option)
-    {
-        return option.getAttribute('data-value');
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
-    let isOptionSelected = function(option)
+    this.onSelect = function(option)
     {
-        return option.getAttribute('data-selected') === 1;
-    };
-
-    let selectOption = function(option, selected)
-    {
-        option.setAttribute('data-selected',  selected ? 1 : 0);
-    };
-
-    let select = function(option)
-    {
-        let selected = (_selectionHolder.value !== getOptionValue(option)) || !_allowOff;
-
-        unselectAll();
-        selectOption(option, selected);
-        _selectionHolder.value = selected ? getOptionValue(option) : '';
+        return this;
     }
 
-    let unselectAll = function()
+    // noinspection JSUnusedLocalSymbols
+    this.onUnselect = function(option)
     {
-        for (let value in _options) {
-            selectOption(_options[value], false);
-        }
-    };
-
-    this.select = function(value)
-    {
-        select(this.getOption(value));
-    };
-
-    this.unselectAll = function()
-    {
-        unselectAll();
-    };
+        return this;
+    }
 }

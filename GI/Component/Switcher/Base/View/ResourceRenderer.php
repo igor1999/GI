@@ -30,6 +30,7 @@ class ResourceRenderer extends Core implements ResourceRendererInterface
 
     const JS_PATHS = [
         'js/switcher.js',
+        'js/option.js',
         'js/factory.js',
     ];
 
