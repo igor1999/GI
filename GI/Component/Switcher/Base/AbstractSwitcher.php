@@ -17,6 +17,7 @@
  */
 namespace GI\Component\Switcher\Base;
 
+use GI\ClientContents\Selection\Single\SingleInterface as SelectionInterface;
 use GI\Component\Base\AbstractComponent;
 use GI\Component\Switcher\Base\View\Widget;
 
@@ -46,6 +47,11 @@ abstract class AbstractSwitcher extends AbstractComponent implements SwitcherInt
 
         $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
     }
+
+    /**
+     * @return SelectionInterface
+     */
+    abstract protected function getSelection();
 
     /**
      * @return WidgetInterface
