@@ -27,13 +27,15 @@ class QueryBuilder implements QueryBuilderInterface
     use ServiceLocatorAwareTrait;
 
 
-    const INSERT_TEMPLATE = 'INSERT INTO %table%(%field-list%) VALUES(%param-list%)';
+    const INSERT_TEMPLATE     = 'INSERT INTO %table%(%field-list%) VALUES(%param-list%)';
 
-    const DELETE_TEMPLATE = 'DELETE FROM %table% WHERE %predicate-list%';
+    const DELETE_TEMPLATE     = 'DELETE FROM %table% WHERE %predicate-list%';
 
-    const UPDATE_TEMPLATE = 'UPDATE %table% SET %assign-list% WHERE %predicate-list%';
+    const UPDATE_TEMPLATE     = 'UPDATE %table% SET %assign-list% WHERE %predicate-list%';
 
-    const SELECT_TEMPLATE = 'SELECT * FROM %table% WHERE %predicate-list% %order%';
+    const SELECT_TEMPLATE     = 'SELECT * FROM %table% WHERE %predicate-list% %order%';
+
+    const SELECT_ALL_TEMPLATE = 'SELECT * FROM %table% %order%';
 
 
     /**
@@ -176,19 +178,22 @@ class QueryBuilder implements QueryBuilderInterface
      * @return string
      * @throws \Exception
      */
-    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null)
+    public function select(array $contents = [], array $order = [], SQLBuilderInterface $builder = null)
     {
         if (!($builder instanceof SQLBuilderInterface)) {
-            $builder = $this->getBuilder()->setTemplate(static::SELECT_TEMPLATE)->addOrder($order);
+            $template = empty($contents) ? static::SELECT_ALL_TEMPLATE : static::SELECT_TEMPLATE;
+            $builder  = $this->getBuilder()->setTemplate($template);
         }
 
         $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
         $builder->setParam('table', $table->toString());
 
-        $predicateList = ($builder instanceof SQLBuilderInterface)
-            ? $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
-            : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
-        $builder->setParam('predicate-list', $predicateList->toString());
+        if (!empty($contents)) {
+            $predicateList = ($builder instanceof SQLBuilderInterface)
+                ? $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
+                : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
+            $builder->setParam('predicate-list', $predicateList->toString());
+        }
 
         $builder->addOrder($order);
 

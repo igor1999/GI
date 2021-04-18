@@ -54,5 +54,5 @@ interface QueryBuilderInterface
      * @return string
      * @throws \Exception
      */
-    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null);
+    public function select(array $contents = [], array $order = [], SQLBuilderInterface $builder = null);
 }

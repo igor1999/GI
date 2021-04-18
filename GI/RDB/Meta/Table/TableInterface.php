@@ -111,7 +111,7 @@ interface TableInterface extends ExtractionInterface
      * @return array[]
      * @throws \Exception
      */
-    public function select(array $contents, array $order = [], SQLBuilderInterface $builder = null);
+    public function select(array $contents = [], array $order = [], SQLBuilderInterface $builder = null);
 
     /**
      * @param array $contents
@@ -120,7 +120,7 @@ interface TableInterface extends ExtractionInterface
      * @return array
      * @throws \Exception
      */
-    public function selectOne(array $contents, array $order = [], SQLBuilderInterface $builder = null);
+    public function selectOne(array $contents = [], array $order = [], SQLBuilderInterface $builder = null);
 
     /**
      * @param mixed $values

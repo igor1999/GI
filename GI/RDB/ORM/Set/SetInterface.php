@@ -118,7 +118,7 @@ interface SetInterface extends  ArrayExchangeInterface
      * @return static
      * @throws \Exception
      */
-    public function select(array $contents, array $order = []);
+    public function select(array $contents = [], array $order = []);
 
     /**
      * @param string $proxyClass
@@ -127,7 +127,7 @@ interface SetInterface extends  ArrayExchangeInterface
      * @return static
      * @throws \Exception
      */
-    public function selectByProxy(string $proxyClass, array $contents, array $order = []);
+    public function selectByProxy(string $proxyClass, array $contents = [], array $order = []);
 
     /**
      * @param SQLBuilderInterface|null $builder
