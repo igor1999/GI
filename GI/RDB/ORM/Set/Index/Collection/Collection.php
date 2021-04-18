@@ -74,7 +74,7 @@ class Collection extends AbstractFactory implements CollectionInterface
     {
         foreach ($this->getItems() as $item) {
             /** @var IndexInterface $index */
-            $index = $item->get([]);
+            $index = $item->get([$this->getSource()]);
 
             $index->refresh();
         }
