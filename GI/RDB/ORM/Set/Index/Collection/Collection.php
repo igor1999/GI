@@ -37,7 +37,7 @@ class Collection extends AbstractFactory implements CollectionInterface
      */
     public function __construct(SetInterface $source)
     {
-        $this->setCached(true)->setPrefixToGet();
+        $this->setCached(function() {return 0;})->setPrefixToGet();
 
         $this->getTemplateClasses()->add(IndexInterface::class);
 
