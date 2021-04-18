@@ -92,6 +92,6 @@ giClient.component.switcher.Option = function()
 
     this.isSelected = function()
     {
-        return _element.getAttribute('data-selected') === 1;
+        return _element.getAttribute('data-selected') === '1';
     };
 }
