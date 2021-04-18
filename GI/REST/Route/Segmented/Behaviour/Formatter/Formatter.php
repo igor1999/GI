@@ -41,7 +41,12 @@ class Formatter implements FormatterInterface
      */
     public function parse(string $source)
     {
-        return array_filter(explode(static::SEPARATOR, $source));
+        $f = function(string $item)
+        {
+            return !empty($item) || ($item === '0');
+        };
+
+        return array_filter(explode(static::SEPARATOR, $source), $f);
     }
 
     /**
