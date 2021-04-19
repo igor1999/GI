@@ -83,7 +83,7 @@ interface SetInterface extends  ArrayExchangeInterface
     public function getLength();
 
     /**
-     * @return int
+     * @return bool
      */
     public function isEmpty();
 

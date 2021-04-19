@@ -220,7 +220,7 @@ abstract class AbstractSet implements SetInterface
     }
 
     /**
-     * @return int
+     * @return bool
      */
     public function isEmpty()
     {
