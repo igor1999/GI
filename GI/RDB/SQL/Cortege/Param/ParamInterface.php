@@ -21,5 +21,8 @@ use GI\RDB\SQL\Cortege\CortegeInterface;
 
 interface ParamInterface extends CortegeInterface
 {
-
+    /**
+     * @return string
+     */
+    public function toString();
 }

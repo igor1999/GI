@@ -17,7 +17,7 @@
  */
 namespace GI\Storage\Collection\ScalarCollection\ArrayList\Immutable;
 
-use GI\Storage\Collection\MixedCollection\CollectionInterface;
+use GI\Storage\Collection\ScalarCollection\CollectionInterface;
 use GI\Storage\Collection\Behaviour\Service\ScalarCollection\ArrayList\ArrayListInterface as ServiceInterface;
 
 interface ImmutableInterface extends CollectionInterface

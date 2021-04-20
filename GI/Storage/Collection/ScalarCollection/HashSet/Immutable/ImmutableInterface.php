@@ -17,7 +17,7 @@
  */
 namespace GI\Storage\Collection\ScalarCollection\HashSet\Immutable;
 
-use GI\Storage\Collection\MixedCollection\CollectionInterface;
+use GI\Storage\Collection\ScalarCollection\CollectionInterface;
 use GI\Storage\Collection\Behaviour\Service\ScalarCollection\HashSet\HashSetInterface as ServiceInterface;
 
 interface ImmutableInterface extends CollectionInterface
