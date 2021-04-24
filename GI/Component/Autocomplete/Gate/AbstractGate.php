@@ -24,38 +24,10 @@ use GI\Component\Autocomplete\AutocompleteInterface as ComponentInterface;
 abstract class AbstractGate extends Base implements GateInterface
 {
     /**
-     * @var ComponentInterface
-     */
-    private $component;
-
-
-    /**
      * @return ComponentInterface
      * @throws \Exception
      */
-    protected function getComponent()
-    {
-        if (!($this->component instanceof ComponentInterface)) {
-            $this->createComponent();
-        }
-
-        return $this->component;
-    }
-
-    /**
-     * @return static
-     * @throws \Exception
-     */
-    protected function createComponent()
-    {
-        try {
-            $this->component = $this->giGetDi(ComponentInterface::class);
-        } catch (\Exception $e) {
-            $this->giThrowDependencyException(ComponentInterface::class);
-        }
-
-        return $this;
-    }
+    abstract protected function getComponent();
 
     /**
      * get list of founded values

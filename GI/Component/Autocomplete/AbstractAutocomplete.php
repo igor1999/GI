@@ -68,16 +68,6 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
     }
 
     /**
-     * @return ContextInterface
-     */
-    abstract protected function getContext();
-
-    /**
-     * @return static
-     */
-    abstract protected function createContext();
-
-    /**
      * @return array
      */
     public function getName()
@@ -99,13 +89,22 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
      */
     public function toString()
     {
-        $this->getContext()->validateProperties();
+        $context = $this->createContext()->validateProperties();
 
         return $this->getView()
             ->setName($this->name)
             ->setValue($this->value)
-            ->setContext($this->getContext())
+            ->setContext($context)
             ->toString();
+    }
+
+    /**
+     * @return ContextInterface
+     * @throws \Exception
+     */
+    protected function createContext()
+    {
+        return $this->giGetDi(ContextInterface::class);
     }
 
     /**
