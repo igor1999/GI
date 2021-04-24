@@ -241,9 +241,9 @@ class Builder implements BuilderInterface
      */
     public function toString()
     {
-        $this->getParams()->build();
         $this->getPredicateList()->build();
         $this->getPartList()->build();
+        $this->getParams()->build();
 
         return $this->getTemplate();
     }
