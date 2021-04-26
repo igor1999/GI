@@ -20,10 +20,15 @@ namespace GI\Component\Base\View\LoadingImage;
 use GI\DOM\HTML\Element\Image\Image;
 use GI\Component\Base\View\ResourceRenderer\Core\Core;
 
+use GI\Component\Base\View\ClientAttributes\GIIdTrait;
+
 use GI\Component\Base\View\ResourceRenderer\Core\CoreInterface;
 
 class LoadingImage extends Image implements LoadingImageInterface
 {
+    use GIIdTrait;
+
+
     const DEFAULT_GI_ID = 'loading-image';
 
 
@@ -32,27 +37,19 @@ class LoadingImage extends Image implements LoadingImageInterface
      */
     private $resourceRenderer;
 
-    /**
-     * @var string
-     */
-    private $giId = '';
-
 
     /**
      * LoadingImage constructor.
-     * @param string $giId
      * @throws \Exception
      */
-    public function __construct(string $giId = '')
+    public function __construct()
     {
-        $this->giId = $giId;
-
         $this->resourceRenderer = $this->giGetDi(CoreInterface::class, Core::class);
         $src = $this->resourceRenderer->getLoading();
 
         parent::__construct($src);
 
-        $this->hide();
+        $this->hide()->addGIId(static::DEFAULT_GI_ID);
     }
 
     /**
@@ -61,24 +58,5 @@ class LoadingImage extends Image implements LoadingImageInterface
     protected function getResourceRenderer()
     {
         return $this->resourceRenderer;
-    }
-
-    /**
-     * @param string $giId
-     * @return static
-     */
-    protected function setGiId(string $giId)
-    {
-        $this->giId = $giId;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getGiId()
-    {
-        return empty($this->giId) ? static::DEFAULT_GI_ID : $this->giId;
     }
 }

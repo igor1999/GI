@@ -18,9 +18,8 @@
 namespace GI\Component\Base\View\LoadingImage;
 
 use GI\DOM\HTML\Element\Image\ImageInterface;
-use GI\Component\Base\View\ClientAttributes\GiIdInterface;
 
-interface LoadingImageInterface extends ImageInterface, GiIdInterface
+interface LoadingImageInterface extends ImageInterface
 {
 
 }

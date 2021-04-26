@@ -71,14 +71,13 @@ trait ClientAttributesTrait
      */
     protected function addClientAttributes(HTMLInterface $element, string $id = '', bool $withJSClass = false)
     {
-        if ($element instanceof GiIdInterface) {
-            $id = $element->getGiId();
-        }
-
         $element->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_CSS, $this->getClientCSS()->toString())
-            ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject())
-            ->setDataAttribute(static::ATTRIBUTE_GI_ID, $id);
+            ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject());
+
+        if (!empty($id)) {
+            $element->getAttributes()->setDataAttribute(static::ATTRIBUTE_GI_ID, $id);
+        }
 
         if ($withJSClass) {
             $element->getAttributes()->setDataAttribute(static::ATTRIBUTE_JS_CLASS, $this->getClientJSClass());
@@ -94,9 +93,8 @@ trait ClientAttributesTrait
      */
     protected function addClientAttributesToSiblings(SiblingsInterface $siblings)
     {
-        foreach ($siblings->extract() as $key => $element) {
-            $elementId = $siblings->getGiId($key);
-            $this->addClientAttributes($element, $elementId);
+        foreach ($siblings->extract() as $element) {
+            $this->addClientAttributes($element);
         }
 
         return $this;

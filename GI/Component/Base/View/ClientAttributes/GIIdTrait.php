@@ -17,10 +17,22 @@
  */
 namespace GI\Component\Base\View\ClientAttributes;
 
-interface GiIdInterface
+use GI\DOM\HTML\Element\HTMLInterface;
+
+trait GIIdTrait
 {
     /**
-     * @return string
+     * @param string $id
+     * @return static
+     * @throws \Exception
      */
-    public function getGiId();
+    protected function addGIId(string $id)
+    {
+        /** @var HTMLInterface $me */
+        $me = $this;
+
+        $me->getAttributes()->setDataAttribute(ClientAttributesInterface::ATTRIBUTE_GI_ID, $id);
+
+        return $this;
+    }
 }

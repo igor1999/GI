@@ -116,12 +116,12 @@ abstract class AbstractWidget implements WidgetInterface
     protected function createLoadingImage(string $giId = '')
     {
         try {
-            $image = $this->giGetDi(LoadingImageInterface::class, null, [$giId]);
+            $image = $this->giGetDi(LoadingImageInterface::class);
         } catch (\Exception $exception) {
-            $image = new LoadingImage($giId);
+            $image = new LoadingImage();
         }
 
-        $this->addClientAttributes($image);
+        $this->addClientAttributes($image, $giId);
 
         return $image;
     }
