@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Base\View\ClientAttributes;
+namespace GI\Component\Base\View\Siblings;
 
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 
