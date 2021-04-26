@@ -18,12 +18,8 @@
 namespace GI\Component\Paging\Base\View\Dropdown;
 
 use GI\Component\Paging\Base\View\Base\WidgetInterface as BaseInterface;
-use GI\DOM\HTML\Element\Select\SelectInterface;
 
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return SelectInterface
-     */
-    public function getPagesSelect();
+
 }

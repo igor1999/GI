@@ -18,9 +18,6 @@
 namespace GI\Component\Authentication\Logout\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
-use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
-use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
 
 /**
  * Interface WidgetInterface
@@ -33,18 +30,5 @@ use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer();
 
-    /**
-     * @return SpanInterface
-     */
-    public function getSalutationSpan();
-
-    /**
-     * @return HyperlinkInterface
-     */
-    public function getLogoutLink();
 }

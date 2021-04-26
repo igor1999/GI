@@ -36,9 +36,9 @@ use GI\Component\Authentication\Logout\I18n\GlossaryInterface;
  */
 class Widget extends AbstractWidget implements WidgetInterface
 {
-    const CLIENT_JS              = 'gi-authentication-logout';
+    const CLIENT_CSS             = 'gi-authentication-logout';
 
-    const CLIENT_CSS             = self::CLIENT_JS;
+    const CLIENT_JS              = self::CLIENT_CSS;
 
     const ATTRIBUTE_CHECK_ACTION = 'check-action';
 
@@ -84,30 +84,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return LayoutInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return SpanInterface
-     */
-    public function getSalutationSpan()
-    {
-        return $this->salutationSpan;
-    }
-
-    /**
-     * @return HyperlinkInterface
-     */
-    public function getLogoutLink()
-    {
-        return $this->logoutLink;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -129,9 +105,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id container
      * @return LayoutInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createLayout();
+        if (!($this->container instanceof LayoutInterface)) {
+            $this->container = $this->giGetDOMFactory()->createLayout();
+        }
 
         return $this->container;
     }
@@ -140,11 +118,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id salutation
      * @return SpanInterface
      */
-    protected function createSalutationSpan()
+    protected function getSalutationSpan()
     {
-        $this->salutationSpan = $this->giGetDOMFactory()->createSpan();
+        if (!($this->salutationSpan instanceof SpanInterface)) {
+            $this->salutationSpan = $this->giGetDOMFactory()->createSpan();
 
-        $this->salutationSpan->getChildNodes()->set($this->getSalutation());
+            $this->salutationSpan->getChildNodes()->set($this->getSalutation());
+        }
 
         return $this->salutationSpan;
     }
@@ -154,13 +134,17 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return HyperlinkInterface
      * @throws \Exception
      */
-    protected function createLogoutLink()
+    protected function getLogoutLink()
     {
-        $this->logoutLink = $this->giGetDOMFactory()->createHyperlink(
-            '', $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign out')
-        )->setHrefToMock();
+        if (!($this->logoutLink instanceof HyperlinkInterface)) {
+            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign out');
 
-        $this->logoutLink->getAttributes()->setDataAttribute(static::ATTRIBUTE_CHECK_ACTION, $this->getLogoutAction());
+            $this->logoutLink = $this->giGetDOMFactory()->createHyperlink('', $title)->setHrefToMock();
+
+            $action = $this->getLogoutAction();
+
+            $this->logoutLink->getAttributes()->setDataAttribute(static::ATTRIBUTE_CHECK_ACTION, $action);
+        }
 
         return $this->logoutLink;
     }

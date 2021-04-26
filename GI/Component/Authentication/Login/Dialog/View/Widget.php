@@ -43,9 +43,6 @@ use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
  */
 class Widget extends AbstractWidget implements WidgetInterface
 {
-    use ContentsTrait;
-
-
     const CLIENT_JS        = 'gi-authentication-login-dialog';
 
     const CLIENT_CSS       = self::CLIENT_JS;
@@ -59,6 +56,36 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @var ResourceRendererInterface
      */
     private $resourceRenderer;
+
+    /**
+     * @var FormLayoutInterface
+     */
+    private $form;
+
+    /**
+     * @var TextInterface
+     */
+    private $loginTextbox;
+
+    /**
+     * @var PasswordInterface
+     */
+    private $passwordTextbox;
+
+    /**
+     * @var CheckboxInterface
+     */
+    private $saveCheckbox;
+
+    /**
+     * @var LabelInterface
+     */
+    private $saveLabel;
+
+    /**
+     * @var SubmitInterface
+     */
+    private $submitButton;
 
 
     /**
@@ -115,11 +142,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id form
      * @return FormLayoutInterface
      */
-    protected function createForm()
+    protected function getForm()
     {
-        $this->form = $this->giGetDOMFactory()->createFormLayout(
-            RequestMethods::POST, $this->getLoginCheckAction()
-        );
+        if (!($this->form instanceof FormLayoutInterface)) {
+            $this->form = $this->giGetDOMFactory()->createFormLayout(
+                RequestMethods::POST, $this->getLoginCheckAction()
+            );
+        }
 
         return $this->form;
     }
@@ -128,15 +157,17 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id login-textbox
      * @return TextInterface
      */
-    protected function createLoginTextbox()
+    protected function getLoginTextbox()
     {
-        $this->loginTextbox = $this->giGetDOMFactory()->getInputFactory()->createText(
-            $this->getViewModel()->getLoginName()
-        );
+        if (!($this->loginTextbox instanceof TextInterface)) {
+            $this->loginTextbox = $this->giGetDOMFactory()->getInputFactory()->createText(
+                $this->getViewModel()->getLoginName()
+            );
 
-        $this->loginTextbox->getAttributes()->setPlaceholder(
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login')
-        );
+            $this->loginTextbox->getAttributes()->setPlaceholder(
+                $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login')
+            );
+        }
 
         return $this->loginTextbox;
     }
@@ -145,15 +176,17 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id password-textbox
      * @return PasswordInterface
      */
-    protected function createPasswordTextbox()
+    protected function getPasswordTextbox()
     {
-        $this->passwordTextbox = $this->giGetDOMFactory()->getInputFactory()->createPassword(
-            $this->getViewModel()->getPasswordName()
-        );
+        if (!($this->passwordTextbox instanceof PasswordInterface)) {
+            $this->passwordTextbox = $this->giGetDOMFactory()->getInputFactory()->createPassword(
+                $this->getViewModel()->getPasswordName()
+            );
 
-        $this->passwordTextbox->getAttributes()->setPlaceholder(
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, 'password')
-        );
+            $this->passwordTextbox->getAttributes()->setPlaceholder(
+                $this->giTranslate(GlossaryInterface::class, Glossary::class, 'password')
+            );
+        }
 
         return $this->passwordTextbox;
     }
@@ -162,13 +195,15 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id save-checkbox
      * @return CheckboxInterface
      */
-    protected function createSaveCheckbox()
+    protected function getSaveCheckbox()
     {
-        $this->saveCheckbox = $this->giGetDOMFactory()->getInputFactory()->createCheckbox(
-            $this->getViewModel()->getSaveName(), 1
-        );
+        if (!($this->saveCheckbox instanceof CheckboxInterface)) {
+            $this->saveCheckbox = $this->giGetDOMFactory()->getInputFactory()->createCheckbox(
+                $this->getViewModel()->getSaveName(), 1
+            );
 
-        $this->addObjectSpecifiedId($this->saveCheckbox, static::SAVE_CHECKBOX_ID);
+            $this->addObjectSpecifiedId($this->saveCheckbox, static::SAVE_CHECKBOX_ID);
+        }
 
         return $this->saveCheckbox;
     }
@@ -177,11 +212,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id save-label
      * @return LabelInterface
      */
-    protected function createSaveLabel()
+    protected function getSaveLabel()
     {
-        $this->saveLabel = $this->giGetDOMFactory()->createLabel(
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, static::SAVE_LABEL)
-        );
+        if (!($this->saveLabel instanceof LabelInterface)) {
+            $this->saveLabel = $this->giGetDOMFactory()->createLabel(
+                $this->giTranslate(GlossaryInterface::class, Glossary::class, static::SAVE_LABEL)
+            );
+        }
 
         return $this->saveLabel;
     }
@@ -190,11 +227,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id submit-button
      * @return SubmitInterface
      */
-    protected function createSubmitButton()
+    protected function getSubmitButton()
     {
-        $this->submitButton = $this->giGetDOMFactory()->getInputFactory()->createSubmit(
-            [], $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login!')
-        );
+        if (!($this->submitButton instanceof SubmitInterface)) {
+            $this->submitButton = $this->giGetDOMFactory()->getInputFactory()->createSubmit(
+                [], $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login!')
+            );
+        }
 
         return $this->submitButton;
     }

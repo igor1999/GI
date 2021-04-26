@@ -25,6 +25,7 @@ use GI\ClientContents\TableHeader\Column\ColumnInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Pattern\ArrayExchange\ExtractionInterface;
 use GI\ClientContents\TableHeader\TableHeaderInterface;
@@ -41,9 +42,6 @@ use GI\RDB\ORM\Set\SetInterface;
  */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
-    use ContentsTrait;
-
-
     const CLIENT_CSS = 'gi-table';
 
     const CLIENT_JS  = self::CLIENT_CSS;
@@ -68,6 +66,32 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
 
     /**
+     * @var TableInterface
+     */
+    private $table;
+
+    /**
+     * @var THInterface[]
+     */
+    private $headerCells = [];
+
+    /**
+     * @var HiddenInterface
+     */
+    private $orderHidden;
+
+    /**
+     * @var HiddenInterface
+     */
+    private $directionHidden;
+
+    /**
+     * @var FormInterface
+     */
+    private $orderForm;
+
+
+    /**
      * @return ResourceRendererInterface
      */
     abstract protected function getResourceRenderer();
@@ -76,6 +100,46 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return TableHeaderInterface
      */
     abstract protected function getHeaderModel();
+
+    /**
+     * @validate
+     * @throws \Exception
+     */
+    protected function validateDataSource()
+    {
+        $isArray                = is_array($this->getDataSource());
+        $isExtractionInterface  = ($this->getDataSource() instanceof ExtractionInterface);
+
+        if (!$isArray && !$isExtractionInterface) {
+            $this->giThrowInvalidTypeException('DataSource', '', 'ExtractionInterface');
+        }
+    }
+
+    /**
+     * @param string $id
+     * @return bool
+     * @throws \Exception
+     */
+    protected function hasHeaderCell(string $id)
+    {
+        $this->getTable();
+
+        return isset($this->headerCells[$id]);
+    }
+
+    /**
+     * @param string $id
+     * @return THInterface
+     * @throws \Exception
+     */
+    protected function getHeaderCell(string $id)
+    {
+        if (!$this->hasHeaderCell($id)) {
+            $this->giThrowNotInScopeException($id);
+        }
+
+        return $this->headerCells[$id];
+    }
 
     /**
      * @param PagingInterface $paging
@@ -104,13 +168,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id order-hidden
      * @return HiddenInterface
      */
-    protected function createOrderHidden()
+    protected function getOrderHidden()
     {
-        $this->orderHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->getViewModel()->getCriteriaName()
-        );
+        if (!($this->orderHidden instanceof HiddenInterface)) {
+            $this->orderHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+                $this->getViewModel()->getCriteriaName()
+            );
 
-        $this->addFormAttribute($this->orderHidden);
+            $this->addFormAttribute($this->orderHidden);
+        }
 
         return $this->orderHidden;
     }
@@ -119,13 +185,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id direction-hidden
      * @return HiddenInterface
      */
-    protected function createDirectionHidden()
+    protected function getDirectionHidden()
     {
-        $this->directionHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->getViewModel()->getDirectionName()
-        );
+        if (!($this->directionHidden instanceof HiddenInterface)) {
+            $this->directionHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+                $this->getViewModel()->getDirectionName()
+            );
 
-        $this->addFormAttribute($this->directionHidden);
+            $this->addFormAttribute($this->directionHidden);
+        }
 
         return $this->directionHidden;
     }
@@ -135,11 +203,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id order-form
      * @return FormInterface
      */
-    protected function createOrderForm()
+    protected function getOrderForm()
     {
-        $this->orderForm = $this->giGetDOMFactory()->createForm();
+        if (!($this->orderForm instanceof FormInterface)) {
+            $this->orderForm = $this->giGetDOMFactory()->createForm();
 
-        $this->addCommonFormId($this->orderForm);
+            $this->addCommonFormId($this->orderForm);
+        }
 
         return $this->orderForm;
     }
@@ -150,26 +220,28 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return TableInterface
      * @throws \Exception
      */
-    protected function createTable()
+    protected function getTable()
     {
-        $this->getHeaderModel()->setOrderAndDirection(
-            $this->getViewModel()->getCriteria(), $this->getViewModel()->getDirection()
-        );
+        if (!($this->table instanceof TableInterface)) {
+            $this->getHeaderModel()->setOrderAndDirection(
+                $this->getViewModel()->getCriteria(), $this->getViewModel()->getDirection()
+            );
 
-        $this->table = $this->giGetDOMFactory()->createTable();
+            $this->table = $this->giGetDOMFactory()->createTable();
 
-        $dataSource = $this->getDataSource();
-        if ($dataSource instanceof SetInterface) {
-            $rowsNumber = $dataSource->getLength();
-        } elseif ($dataSource instanceof ExtractionInterface) {
-            $rowsNumber = count($dataSource->extract());
-        } else {
-            $rowsNumber = count($dataSource);
+            $dataSource = $this->getDataSource();
+            if ($dataSource instanceof SetInterface) {
+                $rowsNumber = $dataSource->getLength();
+            } elseif ($dataSource instanceof ExtractionInterface) {
+                $rowsNumber = count($dataSource->extract());
+            } else {
+                $rowsNumber = count($dataSource);
+            }
+
+            $this->table->build($rowsNumber, $this->getHeaderModel()->getLength(), true);
+
+            $this->buildHeader()->fillTable();
         }
-
-        $this->table->build($rowsNumber, $this->getHeaderModel()->getLength(), true);
-
-        $this->buildHeader()->fillTable();
 
         return $this->table;
     }

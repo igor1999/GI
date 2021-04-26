@@ -19,12 +19,6 @@ namespace GI\Component\Authentication\Login\Dialog\View;
 
 use GI\Component\Dialog\View\WidgetInterface as BaseInterface;
 use GI\Component\Authentication\Login\Dialog\ViewModel\ViewModelInterface;
-use GI\DOM\HTML\Element\Form\Layouts\Form\FormInterface as FormLayoutInterface;
-use GI\DOM\HTML\Element\Input\Text\TextInterface;
-use GI\DOM\HTML\Element\Input\Text\PasswordInterface;
-use GI\DOM\HTML\Element\Input\Logical\CheckboxInterface;
-use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
-use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
 
 /**
  * Interface WidgetInterface
@@ -39,33 +33,5 @@ use GI\DOM\HTML\Element\Input\Button\SubmitInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return FormLayoutInterface
-     */
-    public function getForm();
 
-    /**
-     * @return TextInterface
-     */
-    public function getLoginTextbox();
-
-    /**
-     * @return PasswordInterface
-     */
-    public function getPasswordTextbox();
-
-    /**
-     * @return CheckboxInterface
-     */
-    public function getSaveCheckbox();
-
-    /**
-     * @return LabelInterface
-     */
-    public function getSaveLabel();
-
-    /**
-     * @return SubmitInterface
-     */
-    public function getSubmitButton();
 }

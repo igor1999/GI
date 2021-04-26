@@ -42,7 +42,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     /**
      * @var HyperlinkInterface[]
      */
-    private $nodes = [];
+    private $nodes;
 
 
     /**
@@ -69,10 +69,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     /**
      * @param string $id
      * @return bool
+     * @throws \Exception
      */
-    public function hasNode(string $id)
+    protected function hasNode(string $id)
     {
-        return isset($this->nodes[$id]);
+        return isset($this->getNodes()[$id]);
     }
 
     /**
@@ -80,7 +81,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return HyperlinkInterface
      * @throws \Exception
      */
-    public function getNode(string $id)
+    protected function getNode(string $id)
     {
         if (!$this->hasNode($id)) {
             $this->giThrowNotInScopeException($id);
@@ -90,27 +91,21 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     }
 
     /**
-     * @return HyperlinkInterface[]
-     */
-    public function getNodes()
-    {
-        return $this->nodes;
-    }
-
-    /**
      * @create
-     * @return static
+     * @return HyperlinkInterface[]
      * @throws \Exception
      */
-    protected function createLinks()
+    protected function getNodes()
     {
-        $lastIndex = $this->getBreadCrumbsTrack()->getLength();
+        if (!is_array($this->nodes)) {
+            $lastIndex = $this->getBreadCrumbsTrack()->getLength();
 
-        foreach ($this->getBreadCrumbsTrack()->getNodes() as $index => $item) {
-            $this->nodes[$item->getId()] = $this->createLink($item, ($index == $lastIndex));
+            foreach ($this->getBreadCrumbsTrack()->getNodes() as $index => $item) {
+                $this->nodes[$item->getId()] = $this->createLink($item, ($index == $lastIndex));
+            }
         }
 
-        return $this;
+        return $this->nodes;
     }
 
     /**

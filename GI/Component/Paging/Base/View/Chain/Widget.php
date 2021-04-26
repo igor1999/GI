@@ -71,22 +71,12 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return LayoutInterface
-     */
-    public function getPagesContainer()
-    {
-        return $this->pagesContainer;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
     protected function build()
     {
         parent::build();
-
-        $this->buildPagesContents();
 
         $this->getContainer()->build(1, 6)
             ->set(0, 0, $this->getNaviToFirst())
@@ -101,10 +91,15 @@ class Widget extends AbstractWidget implements WidgetInterface
     /**
      * @gi-id pages-container
      * @return LayoutInterface
+     * @throws \Exception
      */
-    protected function createPagesContainer()
+    protected function getPagesContainer()
     {
-        $this->pagesContainer = $this->giGetDOMFactory()->createLayout();
+        if (!($this->pagesContainer instanceof LayoutInterface)) {
+            $this->pagesContainer = $this->giGetDOMFactory()->createLayout();
+
+            $this->buildPagesContents();
+        }
 
         return $this->pagesContainer;
     }

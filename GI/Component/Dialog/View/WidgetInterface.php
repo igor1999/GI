@@ -17,8 +17,6 @@
  */
 namespace GI\Component\Dialog\View;
 
-use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 
 /**
@@ -32,58 +30,5 @@ use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return DivInterface
-     */
-    public function getContainer();
 
-    /**
-     * @return DivInterface
-     */
-    public function getCover();
-
-    /**
-     * @return DivInterface
-     */
-    public function getFrame();
-
-    /**
-     * @return DivInterface
-     */
-    public function getHeader();
-
-    /**
-     * @return DivInterface
-     */
-    public function getTitle();
-
-    /**
-     * @return DivInterface
-     */
-    public function getCloseButton();
-
-    /**
-     * @return DivInterface
-     */
-    public function getContent();
-
-    /**
-     * @return DivInterface
-     */
-    public function getFooter();
-
-    /**
-     * @return DivInterface
-     */
-    public function getFooterDescription();
-
-    /**
-     * @return DivInterface
-     */
-    public function getResize();
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getModalityHidden();
 }

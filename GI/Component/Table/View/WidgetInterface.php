@@ -20,10 +20,6 @@ namespace GI\Component\Table\View;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Paging\Base\PagingInterface;
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
-use GI\DOM\HTML\Element\Form\FormInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
-use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
-use GI\DOM\HTML\Element\Table\TableInterface;
 
 /**
  * Interface WidgetInterface
@@ -37,42 +33,9 @@ use GI\DOM\HTML\Element\Table\TableInterface;
 interface WidgetInterface extends BaseInterface
 {
     /**
-     * @return TableInterface
-     */
-    public function getTable();
-
-    /**
      * @param PagingInterface $paging
      * @return static
      * @throws \Exception
      */
     public function setPagingRelation(PagingInterface $paging);
-
-    /**
-     * @param string $id
-     * @return bool
-     */
-    public function hasHeaderCell(string $id);
-
-    /**
-     * @param string $id
-     * @return THInterface
-     * @throws \Exception
-     */
-    public function getHeaderCell(string $id);
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getOrderHidden();
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getDirectionHidden();
-
-    /**
-     * @return FormInterface
-     */
-    public function getOrderForm();
 }

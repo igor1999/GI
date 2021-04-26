@@ -19,8 +19,6 @@ namespace GI\Component\Switcher\Base\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\ClientContents\Selection\Single\SingleInterface as SelectionInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
 /**
  * Interface WidgetInterface
@@ -33,13 +31,5 @@ use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer();
 
-    /**
-     * @return HiddenInterface
-     */
-    public function getSelectionHolder();
 }

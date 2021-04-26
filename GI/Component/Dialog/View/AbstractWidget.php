@@ -21,7 +21,6 @@ use GI\Component\Base\View\Widget\AbstractWidget as Base;
 use GI\DOM\HTML\Element\Div\Float\Clear\Clear;
 
 use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
 /**
  * Class AbstractWidget
@@ -40,6 +39,8 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     const CLIENT_CSS        = 'gi-dialog';
 
     const CLASS_COVER_MODAL = 'gi-cover-modal';
+
+    const MODALITY_KEY      = 'modality';
 
 
     /**
@@ -61,7 +62,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function build()
     {
-        $this->container->getChildNodes()->set([$this->modalityHidden, $this->cover]);
+        $this->getServerDataList()->set(static::MODALITY_KEY, $this->isModality() ? 1 : 0);
+
+        $this->container->getChildNodes()->set($this->cover);
         $this->cover->getChildNodes()->set($this->frame);
         $this->frame->getChildNodes()->set([$this->header, $this->content, $this->footer]);
         $this->header->getChildNodes()->set([$this->title, $this->closeButton, new Clear()]);
@@ -75,9 +78,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id container
      * @return DivInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createDiv();
+        if (!($this->container instanceof DivInterface)) {
+            $this->container = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->container;
     }
@@ -87,12 +92,14 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createCover()
+    protected function getCover()
     {
-        $this->cover = $this->giGetDOMFactory()->createDiv();
+        if (!($this->cover instanceof DivInterface)) {
+            $this->cover = $this->giGetDOMFactory()->createDiv();
 
-        if ($this->isModality()) {
-            $this->content->getClasses()->add(static::CLASS_COVER_MODAL);
+            if ($this->isModality()) {
+                $this->cover->getClasses()->add(static::CLASS_COVER_MODAL);
+            }
         }
 
         return $this->cover;
@@ -102,9 +109,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id frame
      * @return DivInterface
      */
-    protected function createFrame()
+    protected function getFrame()
     {
-        $this->frame = $this->giGetDOMFactory()->createDiv();
+        if (!($this->frame instanceof DivInterface)) {
+            $this->frame = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->frame;
     }
@@ -113,9 +122,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id header
      * @return DivInterface
      */
-    protected function createHeader()
+    protected function getHeader()
     {
-        $this->header = $this->giGetDOMFactory()->createDiv();
+        if (!($this->header instanceof DivInterface)) {
+            $this->header = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->header;
     }
@@ -125,12 +136,14 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createTitle()
+    protected function getTitle()
     {
-        $this->title = $this->giGetDOMFactory()->createDiv();
+        if (!($this->title instanceof DivInterface)) {
+            $this->title = $this->giGetDOMFactory()->createDiv();
 
-        $this->title->getAttributes()->setUnselectableToOn();
-        $this->title->getChildNodes()->set($this->getTitleText());
+            $this->title->getAttributes()->setUnselectableToOn();
+            $this->title->getChildNodes()->set($this->getTitleText());
+        }
 
         return $this->title;
     }
@@ -139,9 +152,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id close-button
      * @return DivInterface
      */
-    protected function createCloseButton()
+    protected function getCloseButton()
     {
-        $this->closeButton = $this->giGetDOMFactory()->createDiv();
+        if (!($this->closeButton instanceof DivInterface)) {
+            $this->closeButton = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->closeButton;
     }
@@ -150,9 +165,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id content
      * @return DivInterface
      */
-    protected function createContent()
+    protected function getContent()
     {
-        $this->content = $this->giGetDOMFactory()->createDiv();
+        if (!($this->content instanceof DivInterface)) {
+            $this->content = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->content;
     }
@@ -161,9 +178,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id footer
      * @return DivInterface
      */
-    protected function createFooter()
+    protected function getFooter()
     {
-        $this->footer = $this->giGetDOMFactory()->createDiv();
+        if (!($this->footer instanceof DivInterface)) {
+            $this->footer = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->footer;
     }
@@ -172,9 +191,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id footer-description
      * @return DivInterface
      */
-    protected function createFooterDescription()
+    protected function getFooterDescription()
     {
-        $this->footerDescription = $this->giGetDOMFactory()->createDiv();
+        if (!($this->footerDescription instanceof DivInterface)) {
+            $this->footerDescription = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->footerDescription;
     }
@@ -183,23 +204,12 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id resize
      * @return DivInterface
      */
-    protected function createResize()
+    protected function getResize()
     {
-        $this->resize = $this->giGetDOMFactory()->createDiv();
+        if (!($this->resize instanceof DivInterface)) {
+            $this->resize = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->resize;
-    }
-
-    /**
-     * @gi-id modality
-     * @return HiddenInterface
-     */
-    protected function createModalityHidden()
-    {
-        $this->modalityHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            [], $this->isModality() ? 1 : 0
-        );
-
-        return $this->modalityHidden;
     }
 }

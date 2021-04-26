@@ -36,12 +36,9 @@ use GI\Component\Authentication\Login\I18n\GlossaryInterface;
  */
 class Widget extends AbstractWidget implements WidgetInterface
 {
-    use ContentsTrait;
+    const CLIENT_CSS = 'gi-authentication-login';
 
-
-    const CLIENT_JS  = 'gi-authentication-login';
-
-    const CLIENT_CSS = self::CLIENT_JS;
+    const CLIENT_JS  = self::CLIENT_CSS;
 
 
     const RELATION_NAME_TO_DIALOG = 'dialog';
@@ -51,6 +48,26 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @var ResourceRendererInterface
      */
     private $resourceRenderer;
+
+    /**
+     * @var LayoutInterface
+     */
+    private $container;
+
+    /**
+     * @var HyperlinkInterface
+     */
+    private $loginLink;
+
+    /**
+     * @var HyperlinkInterface
+     */
+    private $registerLink;
+
+    /**
+     * @var HyperlinkInterface
+     */
+    private $restorePasswordLink;
 
 
     /**
@@ -116,9 +133,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id container
      * @return LayoutInterface
      */
-    protected function createLinkContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createLayout();
+        if (!($this->container instanceof LayoutInterface)) {
+            $this->container = $this->giGetDOMFactory()->createLayout();
+        }
 
         return $this->container;
     }
@@ -127,11 +146,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id login-link
      * @return HyperlinkInterface
      */
-    protected function createLoginLink()
+    protected function getLoginLink()
     {
-        $this->loginLink = $this->giGetDOMFactory()->createHyperlink(
-            '', $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign in')
-        )->setHrefToMock();
+        if (!($this->loginLink instanceof HyperlinkInterface)) {
+            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign in');
+
+            $this->loginLink = $this->giGetDOMFactory()->createHyperlink('', $title)->setHrefToMock();
+        }
 
         return $this->loginLink;
     }
@@ -140,12 +161,14 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id register-link
      * @return HyperlinkInterface
      */
-    protected function createRegisterLink()
+    protected function getRegisterLink()
     {
-        $this->registerLink = $this->giGetDOMFactory()->createHyperlink(
-            $this->getRegisterURI(),
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign up')
-        );
+        if (!($this->registerLink instanceof HyperlinkInterface)) {
+            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign up');
+
+            $this->registerLink = $this->giGetDOMFactory()->createHyperlink($this->getRegisterURI(), $title);
+
+        }
 
         return $this->registerLink;
     }
@@ -154,12 +177,16 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id restore-password-link
      * @return HyperlinkInterface
      */
-    protected function createRestorePasswordLink()
+    protected function getRestorePasswordLink()
     {
-        $this->restorePasswordLink = $this->giGetDOMFactory()->createHyperlink(
-            $this->getRestorePasswordURI(),
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, 'forget password?')
-        );
+        if (!($this->restorePasswordLink instanceof HyperlinkInterface)) {
+            $text  = 'forget password?';
+            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, $text);
+
+            $href = $this->getRestorePasswordURI();
+
+            $this->restorePasswordLink = $this->giGetDOMFactory()->createHyperlink($href, $title);
+        }
 
         return $this->restorePasswordLink;
     }

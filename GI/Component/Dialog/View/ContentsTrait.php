@@ -18,7 +18,6 @@
 namespace GI\Component\Dialog\View;
 
 use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 
 trait ContentsTrait
 {
@@ -71,98 +70,4 @@ trait ContentsTrait
      * @var DivInterface
      */
     private $resize;
-
-    /**
-     * @var HiddenInterface
-     */
-    private $modalityHidden;
-
-
-    /**
-     * @return DivInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getCover()
-    {
-        return $this->cover;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getFrame()
-    {
-        return $this->frame;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getHeader()
-    {
-        return $this->header;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getCloseButton()
-    {
-        return $this->closeButton;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getFooter()
-    {
-        return $this->footer;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getFooterDescription()
-    {
-        return $this->footerDescription;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getResize()
-    {
-        return $this->resize;
-    }
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getModalityHidden()
-    {
-        return $this->modalityHidden;
-    }
 }

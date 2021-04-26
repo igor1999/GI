@@ -104,11 +104,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id form
      * @return FormInterface
      */
-    protected function createForm()
+    protected function getForm()
     {
-        $this->form = $this->giGetDOMFactory()->createForm();
+        if (!($this->form instanceof FormInterface)) {
+            $this->form = $this->giGetDOMFactory()->createForm();
 
-        $this->addCommonFormId($this->form);
+            $this->addCommonFormId($this->form);
+        }
 
         return $this->form;
     }
@@ -118,9 +120,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id container
      * @return LayoutInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createLayout();
+        if (!($this->container instanceof LayoutInterface)) {
+            $this->container = $this->giGetDOMFactory()->createLayout();
+        }
 
         return $this->container;
     }
@@ -130,24 +134,28 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return SelectInterface
      * @throws \Exception
      */
-    protected function createSizesSelect()
+    public function getSizesSelect()
     {
-        $template = $this->giTranslate(
-            GlossaryInterface::class, Glossary::class, static::TITLE_FOR_SIZES_SELECT
-        );
-        $f = function($value) use ($template)
-        {
-              return sprintf($template, $value);
-        };
-        $this->sizesSelect = $this->giGetDOMFactory()->createSelect()->buildByValues(
-            $this->getPagingModel()->getContext()->getSizes()->getItems(), $f
-        );
+        if (!($this->sizesSelect instanceof SelectInterface)) {
+            $template = $this->giTranslate(
+                GlossaryInterface::class, Glossary::class, static::TITLE_FOR_SIZES_SELECT
+            );
 
-        $this->sizesSelect->getName()->setItems($this->getViewModel()->getEntriesProPageName());
+            $f = function($value) use ($template)
+            {
+                return sprintf($template, $value);
+            };
 
-        $this->sizesSelect->setValue($this->getPagingModel()->getEntriesProPage());
+            $this->sizesSelect = $this->giGetDOMFactory()->createSelect()->buildByValues(
+                $this->getPagingModel()->getContext()->getSizes()->getItems(), $f
+            );
 
-        $this->addFormAttribute($this->sizesSelect);
+            $this->sizesSelect->getName()->setItems($this->getViewModel()->getEntriesProPageName());
+
+            $this->sizesSelect->setValue($this->getPagingModel()->getEntriesProPage());
+
+            $this->addFormAttribute($this->sizesSelect);
+        }
 
         return $this->sizesSelect;
     }
@@ -156,13 +164,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id selected-page-hidden
      * @return HiddenInterface
      */
-    protected function createSelectedPageHidden()
+    protected function getSelectedPageHidden()
     {
-        $this->selectedPageHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->getViewModel()->getSelectedPageName(), $this->getPagingModel()->getSelectedPage()
-        );
+        if (!($this->selectedPageHidden instanceof HiddenInterface)) {
+            $this->selectedPageHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+                $this->getViewModel()->getSelectedPageName(), $this->getPagingModel()->getSelectedPage()
+            );
 
-        $this->addFormAttribute($this->selectedPageHidden);
+            $this->addFormAttribute($this->selectedPageHidden);
+        }
 
         return $this->selectedPageHidden;
     }
@@ -172,13 +182,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createNaviToFirst()
+    protected function getNaviToFirst()
     {
-        $this->naviToFirst = $this->createNavi(
-            static::TITLE_FOR_FIRST_NAVI,
-            1,
-            $this->getPagingModel()->needNaviFirst()
-        );
+        if (!($this->naviToFirst instanceof DivInterface)) {
+            $this->naviToFirst = $this->createNavi(
+                static::TITLE_FOR_FIRST_NAVI,
+                1,
+                $this->getPagingModel()->needNaviFirst()
+            );
+        }
 
         return $this->naviToFirst;
     }
@@ -188,13 +200,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createNaviToPrev()
+    protected function getNaviToPrev()
     {
-        $this->naviToPrev = $this->createNavi(
-            static::TITLE_FOR_PREV_NAVI,
-            $this->getPagingModel()->getSelectedPage() - 1,
-            $this->getPagingModel()->needNaviPrevious()
-        );
+        if (!($this->naviToPrev instanceof DivInterface)) {
+            $this->naviToPrev = $this->createNavi(
+                static::TITLE_FOR_PREV_NAVI,
+                $this->getPagingModel()->getSelectedPage() - 1,
+                $this->getPagingModel()->needNaviPrevious()
+            );
+        }
 
         return $this->naviToPrev;
     }
@@ -204,13 +218,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createNaviToNext()
+    protected function getNaviToNext()
     {
-        $this->naviToNext = $this->createNavi(
-            static::TITLE_FOR_NEXT_NAVI,
-            $this->getPagingModel()->getSelectedPage() + 1,
-            $this->getPagingModel()->needNaviNext()
-        );
+        if (!($this->naviToNext instanceof DivInterface)) {
+            $this->naviToNext = $this->createNavi(
+                static::TITLE_FOR_NEXT_NAVI,
+                $this->getPagingModel()->getSelectedPage() + 1,
+                $this->getPagingModel()->needNaviNext()
+            );
+        }
 
         return $this->naviToNext;
     }
@@ -220,13 +236,15 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    protected function createNaviToLast()
+    protected function getNaviToLast()
     {
-        $this->naviToLast = $this->createNavi(
-            static::TITLE_FOR_LAST_NAVI,
-            $this->getPagingModel()->getPagesTotal(),
-            $this->getPagingModel()->needNaviLast()
-        );
+        if (!($this->naviToLast instanceof DivInterface)) {
+            $this->naviToLast = $this->createNavi(
+                static::TITLE_FOR_LAST_NAVI,
+                $this->getPagingModel()->getPagesTotal(),
+                $this->getPagingModel()->needNaviLast()
+            );
+        }
 
         return $this->naviToLast;
     }

@@ -19,8 +19,6 @@ namespace GI\Component\Captcha\ImageText\View;
 
 use GI\Component\Captcha\Base\View\WidgetInterface as BaseInterface;
 use GI\Component\Captcha\ImageText\ViewModel\ViewModelInterface;
-use GI\DOM\HTML\Element\Image\ImageInterface;
-use GI\DOM\HTML\Element\Input\Text\TextInterface;
 
 /**
  * Interface WidgetInterface
@@ -33,13 +31,5 @@ use GI\DOM\HTML\Element\Input\Text\TextInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return ImageInterface
-     */
-    public function getCaptchaImage();
 
-    /**
-     * @return TextInterface
-     */
-    public function getValueText();
 }

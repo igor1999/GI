@@ -18,12 +18,8 @@
 namespace GI\Component\BreadCrumbs\Chain\View;
 
 use GI\Component\BreadCrumbs\Base\View\WidgetInterface as BaseInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer();
+
 }

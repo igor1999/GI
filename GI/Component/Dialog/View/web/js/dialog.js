@@ -148,7 +148,7 @@ giClient.component.dialog.Dialog = function()
         _footer            = this.getObjectElement('footer', _container);
         _footerDescription = this.getObjectElement('footer-description', _container);
         _resize            = this.getObjectElement('resize', _container);
-        _modality          = this.getObjectElement('modality', _container).value === '1';
+        _modality          = this.getServerData('modality') === '1';
 
         initDragDrop();
         initResize();

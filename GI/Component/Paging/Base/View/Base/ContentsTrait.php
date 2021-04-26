@@ -17,8 +17,6 @@
  */
 namespace GI\Component\Paging\Base\View\Base;
 
-use GI\Component\Paging\Base\ViewModel\ViewModelInterface;
-use GI\ClientContents\Paging\Base\PagingInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Select\SelectInterface;
@@ -66,91 +64,4 @@ trait ContentsTrait
      * @var DivInterface
      */
     private $naviToLast;
-
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateViewModel()
-    {
-        if (!($this->getViewModel() instanceof ViewModelInterface)) {
-            $this->giThrowInvalidTypeException('View model', '', 'ViewModelInterface');
-        }
-    }
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validatePagingModel()
-    {
-        if (!($this->getPagingModel() instanceof PagingInterface)) {
-            $this->giThrowInvalidTypeException('Paging model', '', 'PagingInterface');
-        }
-    }
-
-    /**
-     * @return FormInterface
-     */
-    public function getForm()
-    {
-        return $this->form;
-    }
-
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return SelectInterface
-     */
-    public function getSizesSelect()
-    {
-        return $this->sizesSelect;
-    }
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getSelectedPageHidden()
-    {
-        return $this->selectedPageHidden;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToFirst()
-    {
-        return $this->naviToFirst;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToPrev()
-    {
-        return $this->naviToPrev;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToNext()
-    {
-        return $this->naviToNext;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToLast()
-    {
-        return $this->naviToLast;
-    }
 }

@@ -74,14 +74,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return DivInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -99,9 +91,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id container
      * @return DivInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createDiv();
+        if (!($this->container instanceof DivInterface)) {
+            $this->container = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->container;
     }

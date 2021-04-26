@@ -19,8 +19,6 @@ namespace GI\Component\Menu\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\ClientContents\Menu\MenuInterface as ModelInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 
 /**
  * Interface WidgetInterface
@@ -33,33 +31,5 @@ use GI\DOM\HTML\Element\Lists\UL\ULInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return ULInterface
-     */
-    public function getTopMenu();
 
-    /**
-     * @return DivInterface[][]
-     */
-    public function getOptions();
-
-    /**
-     * @param string $containerID
-     * @param string $localID
-     * @return DivInterface
-     * @throws \Exception
-     */
-    public function getOption(string $containerID, string $localID);
-
-    /**
-     * @return ULInterface[]
-     */
-    public function getPopups();
-
-    /**
-     * @param string $id
-     * @return ULInterface
-     * @throws \Exception
-     */
-    public function getPopup(string $id);
 }

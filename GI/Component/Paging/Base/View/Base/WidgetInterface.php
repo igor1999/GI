@@ -20,11 +20,7 @@ namespace GI\Component\Paging\Base\View\Base;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Paging\Base\ViewModel\ViewModelInterface;
 use GI\ClientContents\Paging\Base\PagingInterface;
-use GI\DOM\HTML\Element\Form\FormInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 use GI\DOM\HTML\Element\Select\SelectInterface;
-use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
 
 /**
  * Interface WidgetInterface
@@ -38,44 +34,9 @@ use GI\DOM\HTML\Element\Div\DivInterface;
 interface WidgetInterface extends BaseInterface
 {
     /**
-     * @return FormInterface
-     */
-    public function getForm();
-
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer();
-
-    /**
      * @return SelectInterface
      */
     public function getSizesSelect();
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getSelectedPageHidden();
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToFirst();
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToPrev();
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToNext();
-
-    /**
-     * @return DivInterface
-     */
-    public function getNaviToLast();
 
     /**
      * @return string

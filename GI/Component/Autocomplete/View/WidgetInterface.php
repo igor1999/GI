@@ -18,9 +18,6 @@
 namespace GI\Component\Autocomplete\View;
 
 use GI\Component\Autocomplete\Context\ContextInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Input\Text\TextInterface;
-use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 
 /**
@@ -36,18 +33,5 @@ use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return TextInterface
-     */
-    public function getTextbox();
 
-    /**
-     * @return DivInterface
-     */
-    public function getListContainer();
-
-    /**
-     * @return ULInterface
-     */
-    public function getList();
 }

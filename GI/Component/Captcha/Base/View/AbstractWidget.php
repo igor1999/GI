@@ -72,71 +72,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     abstract protected function getResourceRenderer();
 
     /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateId()
-    {
-        if (empty($this->getId())) {
-            $this->giThrowIsEmptyException('Captcha ID');
-        }
-    }
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateRecaptchaURI()
-    {
-        if (empty($this->getRecaptchaURI())) {
-            $this->giThrowIsEmptyException('Recaptcha URI');
-        }
-    }
-
-    /**
-     * @validate
-     * @throws \Exception
-     */
-    protected function validateViewModel()
-    {
-        if (!($this->getViewModel() instanceof ViewModelInterface)) {
-            $this->giThrowInvalidTypeException('View model', '', 'ViewModelInterface');
-        }
-    }
-
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getIdHidden()
-    {
-        return $this->idHidden;
-    }
-
-    /**
-     * @return ButtonInterface
-     */
-    public function getRecaptchaButton()
-    {
-        return $this->recaptchaButton;
-    }
-
-    /**
-     * @return ImageInterface
-     */
-    public function getRecaptchaImage()
-    {
-        return $this->recaptchaImage;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -154,9 +89,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id container
      * @return LayoutInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createLayout();
+        if (!($this->container instanceof LayoutInterface)) {
+            $this->container = $this->giGetDOMFactory()->createLayout();
+        }
 
         return $this->container;
     }
@@ -165,12 +102,14 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id id-hidden
      * @return HiddenInterface
      */
-    protected function createIdHidden()
+    protected function getIdHidden()
     {
-        $this->idHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->getViewModel()->getIdName(),
-            $this->getId()
-        );
+        if (!($this->idHidden instanceof HiddenInterface)) {
+            $this->idHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+                $this->getViewModel()->getIdName(),
+                $this->getId()
+            );
+        }
 
         return $this->idHidden;
     }
@@ -180,9 +119,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return ButtonInterface
      * @throws \Exception
      */
-    protected function createRecaptchaButton()
+    protected function getRecaptchaButton()
     {
-        $this->recaptchaButton = $this->giGetDOMFactory()->createButton();
+        if (!($this->recaptchaButton instanceof ButtonInterface)) {
+            $this->recaptchaButton = $this->giGetDOMFactory()->createButton();
+        }
 
         return $this->recaptchaButton;
     }
@@ -192,12 +133,14 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return ImageInterface
      * @throws \Exception
      */
-    protected function createRecaptchaImage()
+    protected function getRecaptchaImage()
     {
-        $this->recaptchaImage = $this->giGetDOMFactory()->createImage(
-            $this->getResourceRenderer()->getRecaptchaImage(),
-            $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Recaptcha')
-        );
+        if (!($this->recaptchaImage instanceof ImageInterface)) {
+            $src = $this->getResourceRenderer()->getRecaptchaImage();
+            $alt = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Recaptcha');
+
+            $this->recaptchaImage = $this->giGetDOMFactory()->createImage($src, $alt);
+        }
 
         return $this->recaptchaImage;
     }

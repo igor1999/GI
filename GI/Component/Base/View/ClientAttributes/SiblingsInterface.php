@@ -21,9 +21,5 @@ use GI\Pattern\ArrayExchange\ExtractionInterface;
 
 interface SiblingsInterface extends ExtractionInterface
 {
-    /**
-     * @param string $key
-     * @return string
-     */
-    public function getGiId(string $key);
+
 }

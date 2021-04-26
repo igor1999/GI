@@ -114,18 +114,30 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
+     * @render
+     * @gi-id top-menu
      * @return ULInterface
+     * @throws \Exception
      */
-    public function getTopMenu()
+    protected function getTopMenu()
     {
+        if (!($this->topMenu instanceof ULInterface)) {
+            $this->createMenu();
+        }
+
         return $this->topMenu;
     }
 
     /**
      * @return DivInterface[][]
+     * @throws \Exception
      */
-    public function getOptions()
+    protected function getOptions()
     {
+        if (!($this->topMenu instanceof ULInterface)) {
+            $this->createMenu();
+        }
+
         return $this->options;
     }
 
@@ -135,8 +147,12 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return DivInterface
      * @throws \Exception
      */
-    public function getOption(string $containerID, string $localID)
+    protected function getOption(string $containerID, string $localID)
     {
+        if (!($this->topMenu instanceof ULInterface)) {
+            $this->createMenu();
+        }
+
         if (!isset($this->options[$containerID][$localID])) {
             $this->giThrowNotInScopeException($localID);
         }
@@ -146,9 +162,14 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     /**
      * @return ULInterface[]
+     * @throws \Exception
      */
-    public function getPopups()
+    protected function getPopups()
     {
+        if (!($this->topMenu instanceof ULInterface)) {
+            $this->createMenu();
+        }
+
         return $this->popups;
     }
 
@@ -157,8 +178,12 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return ULInterface
      * @throws \Exception
      */
-    public function getPopup(string $id)
+    protected function getPopup(string $id)
     {
+        if (!($this->topMenu instanceof ULInterface)) {
+            $this->createMenu();
+        }
+
         if (!array_key_exists($id, $this->popups)) {
             $this->giThrowNotInScopeException($id);
         }
@@ -167,8 +192,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @render
-     * @gi-id top-menu
      * @param ModelInterface|null $model
      * @param int $level
      * @return ULInterface

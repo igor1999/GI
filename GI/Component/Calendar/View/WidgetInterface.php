@@ -19,12 +19,6 @@ namespace GI\Component\Calendar\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Calendar\ViewModel\ViewModelInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
-use GI\DOM\HTML\Element\Form\Layouts\Form\FormInterface as FormLayoutInterface;
-use GI\DOM\HTML\Element\Input\Button\ButtonInterface;
-use GI\DOM\HTML\Element\Input\DateTime\MonthInterface;
-use GI\DOM\HTML\Element\Table\Row\TRInterface;
-use GI\DOM\HTML\Element\Table\TableInterface;
 
 /**
  * Interface WidgetInterface
@@ -35,33 +29,5 @@ use GI\DOM\HTML\Element\Table\TableInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return DivInterface
-     */
-    public function getContainer();
 
-    /**
-     * @return FormLayoutInterface
-     */
-    public function getNavigationForm();
-
-    /**
-     * @return MonthInterface
-     */
-    public function getNavigationMonth();
-
-    /**
-     * @return ButtonInterface
-     */
-    public function getNavigationSubmitButton();
-
-    /**
-     * @return TableInterface
-     */
-    public function getContentTable();
-
-    /**
-     * @return TRInterface
-     */
-    public function getContentHeadRow();
 }

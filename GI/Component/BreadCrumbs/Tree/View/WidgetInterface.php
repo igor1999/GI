@@ -18,12 +18,8 @@
 namespace GI\Component\BreadCrumbs\Tree\View;
 
 use GI\Component\BreadCrumbs\Base\View\WidgetInterface as BaseInterface;
-use GI\DOM\HTML\Element\Div\DivInterface;
 
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return DivInterface
-     */
-    public function getContainer();
+
 }

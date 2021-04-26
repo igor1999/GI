@@ -18,12 +18,8 @@
 namespace GI\Component\Paging\Base\View\Chain;
 
 use GI\Component\Paging\Base\View\Base\WidgetInterface as BaseInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @return LayoutInterface
-     */
-    public function getPagesContainer();
+
 }

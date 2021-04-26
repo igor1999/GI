@@ -102,22 +102,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return LayoutInterface
-     */
-    public function getContainer()
-    {
-        return $this->container;
-    }
-
-    /**
-     * @return HiddenInterface
-     */
-    public function getSelectionHolder()
-    {
-        return $this->selectionHolder;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -197,9 +181,12 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id container
      * @return LayoutInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createLayout();
+        if (!($this->container instanceof LayoutInterface)) {
+            $this->container = $this->giGetDOMFactory()->createLayout();
+        }
+
 
         return $this->container;
     }
@@ -209,11 +196,13 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id selection-holder
      * @return HiddenInterface
      */
-    protected function createSelectionHolder()
+    protected function getSelectionHolder()
     {
-        $this->selectionHolder = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-            $this->getName(), $this->getSelection()->getSelectedValue()
-        );
+        if (!($this->selectionHolder instanceof HiddenInterface)) {
+            $this->selectionHolder = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+                $this->getName(), $this->getSelection()->getSelectedValue()
+            );
+        }
 
         return $this->selectionHolder;
     }

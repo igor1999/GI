@@ -99,30 +99,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return TextInterface
-     */
-    public function getTextbox()
-    {
-        return $this->textbox;
-    }
-
-    /**
-     * @return DivInterface
-     */
-    public function getListContainer()
-    {
-        return $this->listContainer;
-    }
-
-    /**
-     * @return ULInterface
-     */
-    public function getList()
-    {
-        return $this->list;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -141,15 +117,17 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return TextInterface
      * @throws \Exception
      */
-    protected function createTextbox()
+    protected function getTextbox()
     {
-        $this->textbox = $this->giGetDOMFactory()->getInputFactory()->createText($this->getName(), $this->getValue());
+        if (!($this->textbox instanceof TextInterface)) {
+            $this->textbox = $this->giGetDOMFactory()->getInputFactory()->createText($this->getName(), $this->getValue());
 
-        $this->textbox->getAttributes()->setAutocompleteToOff();
-        $this->textbox->setPlaceholder($this->getContext()->getPlaceholder());
-        $this->textbox->getAttributes()->setDataAttribute(
-            static::ATTRIBUTE_DATA_NAME, $this->getContext()->getDataName()
-        );
+            $this->textbox->getAttributes()->setAutocompleteToOff();
+            $this->textbox->setPlaceholder($this->getContext()->getPlaceholder());
+            $this->textbox->getAttributes()->setDataAttribute(
+                static::ATTRIBUTE_DATA_NAME, $this->getContext()->getDataName()
+            );
+        }
 
         return $this->textbox;
     }
@@ -159,10 +137,12 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id list-container
      * @return DivInterface
      */
-    protected function createListContainer()
+    protected function getListContainer()
     {
-        $this->listContainer = $this->giGetDOMFactory()->createDiv();
-        $this->listContainer->getStyle()->setDisplayToNone()->setPositionToAbsolute();
+        if (!($this->listContainer instanceof DivInterface)) {
+            $this->listContainer = $this->giGetDOMFactory()->createDiv();
+            $this->listContainer->hide()->getStyle()->setPositionToAbsolute();
+        }
 
         return $this->listContainer;
     }
@@ -171,9 +151,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id list
      * @return ULInterface
      */
-    protected function createList()
+    protected function getList()
     {
-        $this->list = $this->giGetDOMFactory()->createUL();
+        if (!($this->list instanceof ULInterface)) {
+            $this->list = $this->giGetDOMFactory()->createUL();
+        }
 
         return $this->list;
     }

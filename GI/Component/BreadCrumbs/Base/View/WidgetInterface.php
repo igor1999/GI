@@ -19,7 +19,6 @@ namespace GI\Component\BreadCrumbs\Base\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\ClientContents\BreadCrumbs\Track\TrackInterface as BreadCrumbsTrackInterface;
-use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
 
 /**
  * Interface WidgetInterface
@@ -30,21 +29,5 @@ use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param string $id
-     * @return bool
-     */
-    public function hasNode(string $id);
 
-    /**
-     * @param string $id
-     * @return HyperlinkInterface
-     * @throws \Exception
-     */
-    public function getNode(string $id);
-
-    /**
-     * @return HyperlinkInterface[]
-     */
-    public function getNodes();
 }

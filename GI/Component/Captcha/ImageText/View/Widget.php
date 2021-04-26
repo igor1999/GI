@@ -77,22 +77,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return ImageInterface
-     */
-    public function getCaptchaImage()
-    {
-        return $this->captchaImage;
-    }
-
-    /**
-     * @return TextInterface
-     */
-    public function getValueText()
-    {
-        return $this->valueText;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -115,12 +99,14 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return ImageInterface
      * @throws \Exception
      */
-    protected function createCaptchaImage()
+    protected function getCaptchaImage()
     {
-        $this->captchaImage = $this->giGetDOMFactory()->createImage(
-            $this->getImageSource(),
-            $this->giTranslate(GlossaryInterface::class, Glossary::class,'Captcha')
-        );
+        if (!($this->captchaImage instanceof ImageInterface)) {
+            $src = $this->getImageSource();
+            $alt = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Captcha');
+
+            $this->captchaImage = $this->giGetDOMFactory()->createImage($src, $alt);
+        }
 
         return $this->captchaImage;
     }
@@ -129,15 +115,16 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @gi-id value-text-image
      * @return TextInterface
      */
-    protected function createValueText()
+    protected function getValueText()
     {
-        $this->valueText = $this->giGetDOMFactory()->getInputFactory()->createText(
-            $this->getViewModel()->getValueName()
-        );
+        if (!($this->valueText instanceof TextInterface)) {
+            $this->valueText = $this->giGetDOMFactory()->getInputFactory()->createText(
+                $this->getViewModel()->getValueName()
+            );
 
-        $this->valueText->getAttributes()->setPlaceholder(
-            $this->giTranslate(GlossaryInterface::class, Glossary::class,'enter captcha')
-        );
+            $text = $this->giTranslate(GlossaryInterface::class, Glossary::class,'enter captcha');
+            $this->valueText->getAttributes()->setPlaceholder($text);
+        }
 
         return $this->valueText;
     }

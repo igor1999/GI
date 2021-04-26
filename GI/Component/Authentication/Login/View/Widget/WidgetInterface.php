@@ -19,8 +19,6 @@ namespace GI\Component\Authentication\Login\View\Widget;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Authentication\Login\Dialog\DialogInterface;
-use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
-use GI\DOM\HTML\Element\Div\FloatingLayout\LayoutInterface;
 
 /**
  * Interface WidgetInterface
@@ -39,24 +37,4 @@ interface WidgetInterface extends BaseInterface
      * @throws \Exception
      */
     public function addDialogRelation(DialogInterface $dialog);
-
-    /**
-     * @return LayoutInterface
-     */
-    public function getContainer();
-
-    /**
-     * @return HyperlinkInterface
-     */
-    public function getLoginLink();
-
-    /**
-     * @return HyperlinkInterface
-     */
-    public function getRegisterLink();
-
-    /**
-     * @return HyperlinkInterface
-     */
-    public function getRestorePasswordLink();
 }

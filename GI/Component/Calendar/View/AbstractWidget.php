@@ -28,6 +28,7 @@ use GI\DOM\HTML\Element\Input\Button\ButtonInterface;
 use GI\DOM\HTML\Element\Input\DateTime\MonthInterface as InputMonthInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 use GI\Calendar\Month\MonthInterface;
+use GI\DOM\HTML\Element\Table\Row\TRInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Component\Calendar\I18n\GlossaryInterface;
 
@@ -40,9 +41,6 @@ use GI\Component\Calendar\I18n\GlossaryInterface;
  */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
-    use ContentsTrait;
-
-
     const CLIENT_CSS = 'gi-calendar';
 
     const CLIENT_JS  = self::CLIENT_CSS;
@@ -55,6 +53,37 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
 
     const RELATION_TO_NAVI = 'navi';
+
+
+    /**
+     * @var DivInterface
+     */
+    private $container;
+
+    /**
+     * @var FormLayoutInterface
+     */
+    private $navigationForm;
+
+    /**
+     * @var MonthInterface
+     */
+    private $navigationMonth;
+
+    /**
+     * @var ButtonInterface
+     */
+    private $navigationSubmitButton;
+
+    /**
+     * @var TableInterface
+     */
+    private $contentTable;
+
+    /**
+     * @var TRInterface
+     */
+    private $contentHeadRow;
 
 
     /**
@@ -82,9 +111,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id container
      * @return DivInterface
      */
-    protected function createContainer()
+    protected function getContainer()
     {
-        $this->container = $this->giGetDOMFactory()->createDiv();
+        if (!($this->container instanceof DivInterface)) {
+            $this->container = $this->giGetDOMFactory()->createDiv();
+        }
 
         return $this->container;
     }
@@ -93,11 +124,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id navigation-form
      * @return FormLayoutInterface
      */
-    protected function createNavigationForm()
+    protected function getNavigationForm()
     {
-        $this->navigationForm = $this->giGetDOMFactory()->createFormLayout();
+        if (!($this->navigationForm instanceof FormLayoutInterface)) {
+            $this->navigationForm = $this->giGetDOMFactory()->createFormLayout();
 
-        $this->addCommonFormId($this->navigationForm);
+            $this->addCommonFormId($this->navigationForm);
+        }
 
         return $this->navigationForm;
     }
@@ -107,14 +140,16 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return InputMonthInterface
      * @throws \Exception
      */
-    protected function createNavigationMonth()
+    protected function getNavigationMonth()
     {
-        $this->navigationMonth = $this->giGetDOMFactory()->getInputFactory()->createMonth(
-            $this->getViewModel()->getMonthName(),
-             $this->getViewModel()->getMonthAsDateTime()->format('Y-m')
-        );
+        if (!($this->navigationMonth instanceof InputMonthInterface)) {
+            $this->navigationMonth = $this->giGetDOMFactory()->getInputFactory()->createMonth(
+                $this->getViewModel()->getMonthName(),
+                $this->getViewModel()->getMonthAsDateTime()->format('Y-m')
+            );
 
-        $this->addFormAttribute($this->navigationMonth);
+            $this->addFormAttribute($this->navigationMonth);
+        }
 
         return $this->navigationMonth;
     }
@@ -123,11 +158,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @gi-id navigation-button
      * @return ButtonInterface
      */
-    protected function createNavigationSubmitButton()
+    protected function getNavigationSubmitButton()
     {
-        $this->navigationSubmitButton = $this->giGetDOMFactory()->getInputFactory()->createButton(
-            [], $this->giTranslate(GlossaryInterface::class, Glossary::class, 'show!')
-        );
+        if (!($this->navigationSubmitButton instanceof ButtonInterface)) {
+            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'show!');
+
+            $this->navigationSubmitButton = $this->giGetDOMFactory()->getInputFactory()->createButton([], $title);
+        }
 
         return $this->navigationSubmitButton;
     }
@@ -137,11 +174,13 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return TableInterface
      * @throws \Exception
      */
-    protected function createContentTable()
+    protected function getContentTable()
     {
-        $this->contentTable = $this->giGetDOMFactory()->createTable();
+        if (!($this->contentTable instanceof TableInterface)) {
+            $this->contentTable = $this->giGetDOMFactory()->createTable();
 
-        $this->createContentHeadRow()->fillContentTable();
+            $this->createContentHeadRow()->fillContentTable();
+        }
 
         return $this->contentTable;
     }

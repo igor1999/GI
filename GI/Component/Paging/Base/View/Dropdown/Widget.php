@@ -64,14 +64,6 @@ class Widget extends AbstractWidget implements WidgetInterface
     }
 
     /**
-     * @return SelectInterface
-     */
-    public function getPagesSelect()
-    {
-        return $this->pagesSelect;
-    }
-
-    /**
      * @return static
      * @throws \Exception
      */
@@ -94,25 +86,26 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return SelectInterface
      * @throws \Exception
      */
-    protected function createPagesSelect()
+    protected function getPagesSelect()
     {
-        $this->pagesSelect = $this->giGetDOMFactory()->createSelect();
+        if (!($this->pagesSelect instanceof SelectInterface)) {
+            $this->pagesSelect = $this->giGetDOMFactory()->createSelect();
 
-        $template = $this->giTranslate(
-            GlossaryInterface::class, Glossary::class,static::ENTRY_TEMPLATE
-        );
-        $f = function($value) use ($template)
-        {
-            return sprintf($template, $value);
-        };
-        $this->pagesSelect->buildSequence(
-            1,
-            $this->getPagingModel()->getPagesTotal(),
-            1,
-            $f
-        );
+            $template = $this->giTranslate(
+                GlossaryInterface::class, Glossary::class,static::ENTRY_TEMPLATE
+            );
 
-        $this->pagesSelect->setValue($this->getPagingModel()->getSelectedPage());
+            $f = function($value) use ($template)
+            {
+                return sprintf($template, $value);
+            };
+
+            $total = $this->getPagingModel()->getPagesTotal();
+
+            $this->pagesSelect->buildSequence(1, $total,1, $f);
+
+            $this->pagesSelect->setValue($this->getPagingModel()->getSelectedPage());
+        }
 
         return $this->pagesSelect;
     }
