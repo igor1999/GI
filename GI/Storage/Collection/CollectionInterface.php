@@ -18,8 +18,9 @@
 namespace GI\Storage\Collection;
 
 use GI\Pattern\ArrayExchange\ExtractionInterface;
+use GI\SessionExchange\BaseInterface\CacheClassInterface;
 
-interface CollectionInterface extends ExtractionInterface
+interface CollectionInterface extends ExtractionInterface, CacheClassInterface
 {
     const DEFAULT_PAIR_GLUE = '=';
 
