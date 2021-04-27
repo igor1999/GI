@@ -26,6 +26,7 @@ use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\Component\Base\ComponentInterface;
+use GI\Component\Base\View\Siblings\SiblingsInterface;
 
 trait ClientAttributesTrait
 {

@@ -26,7 +26,7 @@ use GI\Pattern\Validation\ValidationTrait;
 use GI\Component\Base\View\Relations\RelationsAwareTrait;
 
 use GI\DOM\HTML\Element\HTMLInterface;
-use GI\Component\Base\View\ClientAttributes\SiblingsInterface;
+use GI\Component\Base\View\Siblings\SiblingsInterface;
 use GI\DOM\HTML\Element\ContainerElementInterface;
 use GI\Component\Base\View\ResourceRenderer\ResourceRendererInterface;
 use GI\DOM\HTML\Element\Input\Hidden\CSRFInterface;
