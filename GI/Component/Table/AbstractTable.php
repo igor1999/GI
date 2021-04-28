@@ -22,6 +22,7 @@ use GI\Component\Table\ViewModel\Order as ViewModel;
 
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
 use GI\Component\Table\View\WidgetInterface;
+use GI\Component\Paging\Base\PagingInterface;
 
 abstract class AbstractTable extends AbstractComponent implements TableInterface
 {
@@ -78,6 +79,18 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
     protected function setDataSource($dataSource)
     {
         $this->dataSource = $dataSource;
+
+        return $this;
+    }
+
+    /**
+     * @param PagingInterface $paging
+     * @return static
+     * @throws \Exception
+     */
+    public function setPagingRelation(PagingInterface $paging)
+    {
+        $this->getView()->setPagingRelation($paging);
 
         return $this;
     }
