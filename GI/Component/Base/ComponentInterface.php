@@ -25,4 +25,15 @@ interface ComponentInterface extends NodeInterface
      * @return string
      */
     public function getViewClientJSObject();
+
+    /**
+     * @return string
+     */
+    public function getViewCommonForId();
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     */
+    public function addExternalFormIdToView(ComponentInterface $component);
 }

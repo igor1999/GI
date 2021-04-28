@@ -38,4 +38,23 @@ abstract class AbstractComponent implements ComponentInterface
     {
         return $this->getView()->getClientJSObject();
     }
+
+    /**
+     * @return string
+     */
+    public function getViewCommonForId()
+    {
+        return $this->getView()->createCommonFormId();
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     */
+    public function addExternalFormIdToView(ComponentInterface $component)
+    {
+        $this->getView()->setExternFormId($component->getViewCommonForId());
+
+        return $this;
+    }
 }
