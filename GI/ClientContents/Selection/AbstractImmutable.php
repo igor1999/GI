@@ -66,6 +66,22 @@ abstract class AbstractImmutable implements ImmutableInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getValues()
+    {
+        return array_keys($this->getItems());
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getTexts()
+    {
+        return array_values($this->getItems());
+    }
+
+    /**
      * @return int
      */
     public function getLength()

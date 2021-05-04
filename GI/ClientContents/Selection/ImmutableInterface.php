@@ -45,6 +45,16 @@ interface ImmutableInterface
     public function getItems();
 
     /**
+     * @return string[]
+     */
+    public function getValues();
+
+    /**
+     * @return string[]
+     */
+    public function getTexts();
+
+    /**
      * @return int
      */
     public function getLength();
