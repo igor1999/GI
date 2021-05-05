@@ -60,4 +60,9 @@ interface TableOrderingInterface
      * @return bool
      */
     public function getNextDirection();
+
+    /**
+     * @return string
+     */
+    public function getNextDirectionAsString();
 }

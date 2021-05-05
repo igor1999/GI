@@ -72,7 +72,7 @@ abstract class AbstractOrdered extends TH implements OrderedInterface
 
         $this->hyperlink->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_ORDER_CRITERIA, $this->ordering->getCriteria())
-            ->setDataAttribute(static::ATTRIBUTE_ORDER_DIRECTION, $this->ordering->getNextDirection())//todo to string
+            ->setDataAttribute(static::ATTRIBUTE_ORDER_DIRECTION, $this->ordering->getNextDirectionAsString())
             ->setDataAttribute(ClientAttributesInterface::ATTRIBUTE_GI_ID, static::GI_ID_ORDER_LINK);
     }
 

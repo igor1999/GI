@@ -33,11 +33,6 @@ interface OrderInterface extends BaseInterface
     /**
      * @return string
      */
-    public function getRawCriteria();
-
-    /**
-     * @return string
-     */
     public function getCriteria();
 
     /**
@@ -53,31 +48,14 @@ interface OrderInterface extends BaseInterface
     public function getDirection();
 
     /**
+     * @hydrate
+     * @param int $direction
+     * @return static
+     */
+    public function setDirection(int $direction);
+
+    /**
      * @return bool
      */
     public function getDirectionAsBool();
-
-    /**
-     * @param bool $direction
-     * @return string
-     */
-    public function getDirectionAsString(bool $direction);
-
-    /**
-     * @hydrate
-     * @param string $direction
-     * @return static
-     */
-    public function setDirection(string $direction);
-
-    /**
-     * @return string
-     */
-    public function getDefaultCriteria();
-
-    /**
-     * @param string $defaultCriteria
-     * @return static
-     */
-    public function setDefaultCriteria(string $defaultCriteria);
 }

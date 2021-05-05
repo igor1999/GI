@@ -122,4 +122,12 @@ class TableOrdering implements TableOrderingInterface
     {
         return !$this->bothDirections || !$this->isAscendant();
     }
+
+    /**
+     * @return string
+     */
+    public function getNextDirectionAsString()
+    {
+        return $this->getNextDirection() ? '1' : '0';
+    }
 }

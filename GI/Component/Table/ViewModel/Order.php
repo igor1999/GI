@@ -30,11 +30,6 @@ use GI\ViewModel\AbstractViewModel;
  */
 class Order extends AbstractViewModel implements OrderInterface
 {
-    const DEFAULT_ASCENDANT_DIRECTION  = '1';
-
-    const DEFAULT_DESCENDANT_DIRECTION = '0';
-
-
     /**
      * @var string
      */
@@ -43,12 +38,7 @@ class Order extends AbstractViewModel implements OrderInterface
     /**
      * @var string
      */
-    private $direction = self::DEFAULT_ASCENDANT_DIRECTION;
-
-    /**
-     * @var string
-     */
-    private $defaultCriteria = '';
+    private $direction = 0;
 
 
     /**
@@ -63,20 +53,12 @@ class Order extends AbstractViewModel implements OrderInterface
     }
 
     /**
-     * @return string
-     */
-    public function getRawCriteria()
-    {
-        return $this->criteria;
-    }
-
-    /**
      * @extract
      * @return string
      */
     public function getCriteria()
     {
-        return empty($this->criteria) ? $this->defaultCriteria : $this->criteria;
+        return $this->criteria;
     }
 
     /**
@@ -101,52 +83,22 @@ class Order extends AbstractViewModel implements OrderInterface
     }
 
     /**
+     * @hydrate
+     * @param int $direction
+     * @return static
+     */
+    public function setDirection(int $direction)
+    {
+        $this->direction = (int)$direction;
+
+        return $this;
+    }
+
+    /**
      * @return bool
      */
     public function getDirectionAsBool()
     {
-        return $this->direction == static::DEFAULT_ASCENDANT_DIRECTION;
-    }
-
-    /**
-     * @param bool $direction
-     * @return string
-     */
-    public function getDirectionAsString(bool $direction)
-    {
-        return $direction ? static::DEFAULT_ASCENDANT_DIRECTION : static::DEFAULT_DESCENDANT_DIRECTION;
-    }
-
-    /**
-     * @hydrate
-     * @param string $direction
-     * @return static
-     */
-    public function setDirection(string $direction)
-    {
-        $this->direction = $direction == static::DEFAULT_ASCENDANT_DIRECTION
-            ? $direction
-            : static::DEFAULT_DESCENDANT_DIRECTION;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultCriteria()
-    {
-        return $this->defaultCriteria;
-    }
-
-    /**
-     * @param string $defaultCriteria
-     * @return static
-     */
-    public function setDefaultCriteria(string $defaultCriteria)
-    {
-        $this->defaultCriteria = $defaultCriteria;
-
-        return $this;
+        return (bool)$this->direction;
     }
 }
