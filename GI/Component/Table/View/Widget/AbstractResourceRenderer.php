@@ -15,11 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View;
+namespace GI\Component\Table\View\Widget;
 
-use GI\Component\Base\View\ResourceRenderer\Core\CoreInterface;
+use GI\Component\Base\View\ResourceRenderer\Core\Core;
 
-interface ResourceRendererInterface extends CoreInterface
+abstract class AbstractResourceRenderer extends Core implements ResourceRendererInterface
 {
+    const URL_BASE_DIR = 'GI/Component/Table';
 
+
+    const JS_PATHS = [
+        'js/table.js',
+        'js/factory.js',
+    ];
+
+
+    /**
+     * AbstractResourceRenderer constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->createClassContents(self::class);
+    }
 }
