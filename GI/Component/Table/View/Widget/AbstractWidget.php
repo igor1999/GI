@@ -197,15 +197,18 @@ abstract class AbstractWidget extends Base implements WidgetInterface
 
         $this->createHeader();
 
-        foreach ($this->getDataSource() as $index => $dataItem) {
+        $index = 1;
+        foreach ($this->getDataSource() as $dataItem) {
             $this->table->getChildNodes()->addRow();
-            $row = $this->table->getRow($index + 1);
+            $row = $this->table->getRow($index);
 
             foreach ($this->getTemplate()->getItems() as $id => $cellItem) {
-                $cell = $cellItem->createBodyCell($index + 1, $dataItem);
+                $cell = $cellItem->createBodyCell($index, $dataItem);
 
                 $row->getChildNodes()->addCell($cell);
             }
+
+            $index += 1;
         }
 
         return $this->table;

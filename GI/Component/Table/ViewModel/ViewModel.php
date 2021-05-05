@@ -44,10 +44,10 @@ class ViewModel extends Base implements ViewModelInterface
         parent::__construct();
 
         $this->order = $this->giGetDi(OrderInterface::class, Order::class);
-        $this->order->setViewModelParent($this)->setFilterAndValidatorToParent();
+        $this->order->setViewModelParent($this);
 
         $this->paging = $this->giGetDi(PagingViewModelInterface::class, PagingViewModel::class);
-        $this->paging->setViewModelParent($this)->setFilterAndValidatorToParent();
+        $this->paging->setViewModelParent($this);
     }
 
     /**

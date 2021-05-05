@@ -83,9 +83,10 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
             $dataSource = $dataSource->getItems();
         }
 
-        return $this->getView()->getWidget()
+        $this->getView()->getWidget()
             ->setViewModel($this->getViewModel()->getOrder())
-            ->setDataSource($dataSource)
-            ->toString();
+            ->setDataSource($dataSource);
+
+        return $this->getView()->toString();
     }
 }
