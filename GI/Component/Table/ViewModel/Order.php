@@ -74,6 +74,19 @@ class Order extends AbstractViewModel implements OrderInterface
     }
 
     /**
+     * @param string $criteria
+     * @return static
+     */
+    public function setCriteriaIfEmpty(string $criteria)
+    {
+        if (empty($this->criteria)) {
+            $this->setCriteria($criteria);
+        }
+
+        return $this;
+    }
+
+    /**
      * @extract
      * @return string
      */

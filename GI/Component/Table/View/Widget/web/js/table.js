@@ -47,7 +47,9 @@ giClient.component.table.Table = function()
 
         _orderHidden     = this.getObjectElement('order-hidden');
         _directionHidden = this.getObjectElement('direction-hidden');
-        _orderLinks      = this.getObjectElementList('order-link');
+
+        let selector = 'th[data-column-id] a[data-order-criteria]';
+        _orderLinks  = this.getObjectElement('table').querySelectorAll(selector);
 
         initOrderLinks();
 

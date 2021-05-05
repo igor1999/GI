@@ -42,6 +42,12 @@ interface OrderInterface extends BaseInterface
     public function setCriteria(string $criteria);
 
     /**
+     * @param string $criteria
+     * @return static
+     */
+    public function setCriteriaIfEmpty(string $criteria);
+
+    /**
      * @extract
      * @return string
      */
