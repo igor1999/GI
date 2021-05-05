@@ -31,9 +31,10 @@ interface ColumnInterface
     public function createHeaderCell(string $orderCriteria, bool $orderDirection);
 
     /**
+     * @param int $position
      * @param mixed $value
      * @return TDInterface
      * @throws \Exception
      */
-    public function createBodyCell($value);
+    public function createBodyCell(int $position, $value);
 }

@@ -15,20 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View;
+namespace GI\Component\Table\View\Widget;
 
 use GI\Component\Base\View\Widget\AbstractWidget as Base;
 
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
 use GI\Component\Paging\Base\PagingInterface;
-use GI\ClientContents\TableHeader\Column\ColumnInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
-use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
-use GI\Pattern\ArrayExchange\ExtractionInterface;
-use GI\ClientContents\TableHeader\TableHeaderInterface;
+use GI\Component\Table\View\Widget\Template\Collection\CollectionInterface as TemplateInterface;
 use GI\RDB\ORM\Set\SetInterface;
 
 /**
@@ -37,8 +34,8 @@ use GI\RDB\ORM\Set\SetInterface;
  *
  * @method ViewModelInterface getViewModel()
  * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
- * @method getDataSource()
- * @method WidgetInterface setDataSource($dataSource)
+ * @method array getDataSource()
+ * @method WidgetInterface setDataSource(array $dataSource)
  */
 abstract class AbstractWidget extends Base implements WidgetInterface
 {
@@ -50,19 +47,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     const PAGING_RELATION = 'paging';
 
 
-    const GI_ID_ORDER_LINK = 'order-link';
-
-
-    const CLASS_ASCENDANT  = 'gi-order-ascendant';
-
-    const CLASS_DESCENDANT = 'gi-order-descendant';
-
-
     const ATTRIBUTE_HEADER_COLUMN_ID = 'column-id';
-
-    const ATTRIBUTE_ORDER_CRITERIA   = 'order-criteria';
-
-    const ATTRIBUTE_ORDER_DIRECTION  = 'order-direction';
 
 
     /**
@@ -97,22 +82,19 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     abstract protected function getResourceRenderer();
 
     /**
-     * @return TableHeaderInterface
+     * @return TemplateInterface
      */
-    abstract protected function getHeaderModel();
+    abstract protected function getTemplate();
 
     /**
-     * @validate
-     * @throws \Exception
+     * @param SetInterface $set
+     * @return static
      */
-    protected function validateDataSource()
+    public function setDataSourceFromDataSet(SetInterface $set)
     {
-        $isArray                = is_array($this->getDataSource());
-        $isExtractionInterface  = ($this->getDataSource() instanceof ExtractionInterface);
+        $this->setDataSource($set->getItems());
 
-        if (!$isArray && !$isExtractionInterface) {
-            $this->giThrowInvalidTypeException('DataSource', '', 'ExtractionInterface');
-        }
+        return $this;
     }
 
     /**
@@ -222,25 +204,20 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function getTable()
     {
-        if (!($this->table instanceof TableInterface)) {
-            $this->getHeaderModel()->setOrderAndDirection(
-                $this->getViewModel()->getCriteria(), $this->getViewModel()->getDirection()
-            );
+        $this->table = $this->giGetDOMFactory()->createTable();
+        $this->table->getChildNodes()->addRow();
 
-            $this->table = $this->giGetDOMFactory()->createTable();
+        $this->createHeader();
 
-            $dataSource = $this->getDataSource();
-            if ($dataSource instanceof SetInterface) {
-                $rowsNumber = $dataSource->getLength();
-            } elseif ($dataSource instanceof ExtractionInterface) {
-                $rowsNumber = count($dataSource->extract());
-            } else {
-                $rowsNumber = count($dataSource);
+        foreach ($this->getDataSource() as $index => $dataItem) {
+            $this->table->getChildNodes()->addRow();
+            $row = $this->table->getRow($index + 1);
+
+            foreach ($this->getTemplate()->getItems() as $id => $cellItem) {
+                $cell = $cellItem->createBodyCell($index + 1, $dataItem);
+
+                $row->getChildNodes()->addCell($cell);
             }
-
-            $this->table->build($rowsNumber, $this->getHeaderModel()->getLength(), true);
-
-            $this->buildHeader()->fillTable();
         }
 
         return $this->table;
@@ -250,91 +227,21 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return static
      * @throws \Exception
      */
-    protected function buildHeader()
+    protected function createHeader()
     {
-        $headRow = $this->table->getRow(0);
+        $row = $this->table->getRow(0);
 
-        foreach ($this->getHeaderModel()->getItems() as $index => $column) {
-            $cell = $headRow->getChildNodes()->get($index);
-            $this->buildHeaderCell($cell, $column);
+        foreach ($this->getTemplate()->getItems() as $id => $item) {
+            $criteria  = $this->getViewModel()->getCriteria();
+            $direction = $this->getViewModel()->getDirectionAsBool();
+
+            $cell = $item->createHeaderCell($criteria, $direction);
+
+            $cell->getAttributes()->setDataAttribute(static::ATTRIBUTE_HEADER_COLUMN_ID, $id);
+            $this->headerCells[$id] = $cell;
+
+            $row->getChildNodes()->addCell($cell);
         }
-
-        return $this;
-    }
-
-    /**
-     * @param TDInterface $cell
-     * @param ColumnInterface $column
-     * @return static
-     * @throws \Exception
-     */
-    protected function buildHeaderCell(TDInterface $cell, ColumnInterface $column)
-    {
-        $cell->getAttributes()->set(static::ATTRIBUTE_HEADER_COLUMN_ID, $column->getId());
-
-        try {
-            if ($column->getOrder()->isAscendant()) {
-                $cell->getClasses()->add(static::CLASS_ASCENDANT);
-            } elseif ($column->getOrder()->isDescendant()) {
-                $cell->getClasses()->add(static::CLASS_DESCENDANT);
-            }
-
-            $hyperlink = $this->giGetDOMFactory()->createHyperlink('', $column->getCaption())->setHrefToMock();
-            $hyperlink->getAttributes()->setDataAttribute(
-                static::ATTRIBUTE_ORDER_CRITERIA, $column->getOrder()->getCriteria()
-            );
-            $hyperlink->getAttributes()->setDataAttribute(
-                static::ATTRIBUTE_ORDER_DIRECTION,
-                $this->getViewModel()->getDirectionAsString($column->getOrder()->getNextDirection())
-            );
-            $this->addClientAttributes($hyperlink, static::GI_ID_ORDER_LINK);
-
-            $cell->getChildNodes()->set($hyperlink);
-        } catch (\Exception $e) {
-            $cell->getChildNodes()->set($column->getCaption());
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return static
-     * @throws \Exception
-     */
-    protected function fillTable()
-    {
-        $dataSource = $this->getDataSource();
-        if ($dataSource instanceof SetInterface) {
-            $dataSource = $dataSource->getItems();
-        } elseif ($dataSource instanceof ExtractionInterface) {
-            $dataSource = $dataSource->extract();
-        }
-
-        $rowNumber = 1;
-
-        foreach ($dataSource as $dataRow) {
-            foreach ($this->getHeaderModel()->getItems() as $index => $column) {
-                $this->fillColumn($rowNumber, $dataRow, $index, $column);
-            }
-
-            $rowNumber += 1;
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param int $rowNumber
-     * @param mixed $dataRow
-     * @param int $index
-     * @param ColumnInterface $column
-     * @return static
-     */
-    protected function fillColumn(int $rowNumber, $dataRow, int $index, ColumnInterface $column)
-    {
-        try {
-            $this->table->set($rowNumber, $index, $column->getDataSource()->get($dataRow, $rowNumber));
-        } catch (\Exception $e) {}
 
         return $this;
     }

@@ -23,6 +23,7 @@ use GI\Pattern\Validation\ValidationTrait;
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 use GI\Component\Table\View\Widget\DOM\Header\Ordered\OrderedInterface;
+use GI\Component\Table\View\Widget\DOM\Body\Number\NumberInterface;
 
 class Column implements ColumnInterface
 {
@@ -91,12 +92,15 @@ class Column implements ColumnInterface
     }
 
     /**
+     * @param int $position
      * @param mixed $value
      * @return TDInterface
      * @throws \Exception
      */
-    public function createBodyCell($value)
+    public function createBodyCell(int $position, $value)
     {
-        return $this->giGetClassMeta($this->bodyCellClass)->create();
+        return is_a($this->bodyCellClass, NumberInterface::class, true)
+            ? $this->giGetClassMeta($this->bodyCellClass)->create([$position])
+            : $this->giGetClassMeta($this->bodyCellClass)->create([$value]);
     }
 }

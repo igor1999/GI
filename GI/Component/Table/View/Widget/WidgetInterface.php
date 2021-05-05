@@ -15,11 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View;
+namespace GI\Component\Table\View\Widget;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Paging\Base\PagingInterface;
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
+use GI\RDB\ORM\Set\SetInterface;
 
 /**
  * Interface WidgetInterface
@@ -27,11 +28,17 @@ use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
  *
  * @method ViewModelInterface getViewModel()
  * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
- * @method getDataSource()
- * @method WidgetInterface setDataSource($dataSource)
+ * @method array getDataSource()
+ * @method WidgetInterface setDataSource(array $dataSource)
  */
 interface WidgetInterface extends BaseInterface
 {
+    /**
+     * @param SetInterface $set
+     * @return static
+     */
+    public function setDataSourceFromDataSet(SetInterface $set);
+
     /**
      * @param PagingInterface $paging
      * @return static
