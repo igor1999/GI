@@ -20,7 +20,7 @@ namespace GI\Component\Table\ViewModel;
 use GI\ViewModel\ViewModelInterface as BaseInterface;
 use GI\Component\Paging\Base\ViewModel\ViewModelInterface as PagingViewModelInterface;
 
-interface IntegralInterface extends BaseInterface
+interface ViewModelInterface extends BaseInterface
 {
     /**
      * @return OrderInterface

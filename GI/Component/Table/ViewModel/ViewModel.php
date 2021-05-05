@@ -19,7 +19,7 @@ namespace GI\Component\Table\ViewModel;
 
 use GI\ViewModel\AbstractViewModel as Base;
 
-abstract class AbstractIntegral extends Base implements IntegralInterface
+class ViewModel extends Base implements ViewModelInterface
 {
     /**
      * @var OrderInterface
