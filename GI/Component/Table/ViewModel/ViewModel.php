@@ -18,6 +18,9 @@
 namespace GI\Component\Table\ViewModel;
 
 use GI\ViewModel\AbstractViewModel as Base;
+use GI\Component\Paging\Base\ViewModel\ViewModel as PagingViewModel;
+
+use GI\Component\Paging\Base\ViewModel\ViewModelInterface as PagingViewModelInterface;
 
 class ViewModel extends Base implements ViewModelInterface
 {
@@ -26,9 +29,14 @@ class ViewModel extends Base implements ViewModelInterface
      */
     private $order;
 
+    /**
+     * @var PagingViewModelInterface
+     */
+    private $paging;
+
 
     /**
-     * AbstractIntegral constructor.
+     * ViewModel constructor.
      * @throws \Exception
      */
     public function __construct()
@@ -38,9 +46,8 @@ class ViewModel extends Base implements ViewModelInterface
         $this->order = $this->giGetDi(OrderInterface::class, Order::class);
         $this->order->setViewModelParent($this)->setFilterAndValidatorToParent();
 
-        try {
-            $this->getPaging()->setViewModelParent($this)->setFilterAndValidatorToParent();
-        } catch (\Exception $e) {}
+        $this->paging = $this->giGetDi(PagingViewModelInterface::class, PagingViewModel::class);
+        $this->paging->setViewModelParent($this)->setFilterAndValidatorToParent();
     }
 
     /**
@@ -56,7 +63,6 @@ class ViewModel extends Base implements ViewModelInterface
      * @hydrate
      * @param array $contents
      * @return static
-     * @throws \Exception
      */
     protected function setOrder(array $contents)
     {
@@ -66,24 +72,22 @@ class ViewModel extends Base implements ViewModelInterface
     }
 
     /**
-     * @throws \Exception
+     * @extract
+     * @return PagingViewModelInterface
      */
     public function getPaging()
     {
-        $this->giThrowNotSetException('Paging View Model');
+        return $this->paging;
     }
 
     /**
      * @hydrate
      * @param array $contents
      * @return static
-     * @throws \Exception
      */
     protected function setPaging(array $contents)
     {
-        try {
-            $this->getPaging()->hydrate($contents);
-        } catch (\Exception $e) {}
+        $this->getPaging()->hydrate($contents);
 
         return $this;
     }

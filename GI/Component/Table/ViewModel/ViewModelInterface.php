@@ -29,7 +29,6 @@ interface ViewModelInterface extends BaseInterface
 
     /**
      * @return PagingViewModelInterface
-     * @throws \Exception
      */
     public function getPaging();
 }
