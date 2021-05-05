@@ -39,7 +39,7 @@ abstract class AbstractIntegral extends Base implements IntegralInterface
         $this->order->setViewModelParent($this)->setFilterAndValidatorToParent();
 
         try {
-            $this->createPaging()->getPaging()->setViewModelParent($this)->setFilterAndValidatorToParent();
+            $this->getPaging()->setViewModelParent($this)->setFilterAndValidatorToParent();
         } catch (\Exception $e) {}
     }
 
@@ -72,11 +72,6 @@ abstract class AbstractIntegral extends Base implements IntegralInterface
     {
         $this->giThrowNotSetException('Paging View Model');
     }
-
-    /**
-     * @return static
-     */
-    abstract protected function createPaging();
 
     /**
      * @hydrate
