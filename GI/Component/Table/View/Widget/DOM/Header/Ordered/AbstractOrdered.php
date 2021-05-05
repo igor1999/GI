@@ -20,12 +20,16 @@ namespace GI\Component\Table\View\Widget\DOM\Header\Ordered;
 use GI\DOM\HTML\Element\Table\Cell\TH\TH;
 use GI\ClientContents\TableOrdering\TableOrdering;
 
+use GI\Component\Base\View\ClientAttributes\ElementGIIdTrait;
+
 use GI\ClientContents\TableOrdering\TableOrderingInterface;
 use GI\DOM\HTML\Element\Hyperlink\HyperlinkInterface;
-use GI\Component\Base\View\ClientAttributes\ClientAttributesInterface;
 
 abstract class AbstractOrdered extends TH implements OrderedInterface
 {
+    use ElementGIIdTrait;
+
+
     const GI_ID_ORDER_LINK = 'order-link';
 
 
@@ -72,8 +76,9 @@ abstract class AbstractOrdered extends TH implements OrderedInterface
 
         $this->hyperlink->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_ORDER_CRITERIA, $this->ordering->getCriteria())
-            ->setDataAttribute(static::ATTRIBUTE_ORDER_DIRECTION, $this->ordering->getNextDirectionAsString())
-            ->setDataAttribute(ClientAttributesInterface::ATTRIBUTE_GI_ID, static::GI_ID_ORDER_LINK);
+            ->setDataAttribute(static::ATTRIBUTE_ORDER_DIRECTION, $this->ordering->getNextDirectionAsString());
+
+        $this->addElementGIId($this->hyperlink, static::GI_ID_ORDER_LINK);
     }
 
     /**
