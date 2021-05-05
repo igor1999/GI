@@ -15,51 +15,37 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ClientContents\TableHeader\Column\DataSource;
+namespace GI\Component\Table\View\Widget\Template\Collection;
 
-interface DataSourceInterface
+use GI\Component\Table\View\Widget\Template\ColumnInterface;
+
+interface CollectionInterface
 {
     /**
-     * @return string
-     */
-    public function getDataAttribute();
-
-    /**
-     * @param string $dataAttribute
-     * @return static
-     */
-    public function setDataAttribute(string $dataAttribute);
-
-    /**
-     * @return string
-     */
-    public function getType();
-
-    /**
-     * @return static
-     */
-    public function setTypeToDataAttribute();
-
-    /**
-     * @return static
-     */
-    public function setTypeToRowNumber();
-
-    /**
+     * @param string $id
      * @return bool
      */
-    public function isTypeDataAttribute();
+    public function has(string $id);
 
     /**
-     * @return bool
-     */
-    public function isTypeRowNumber();
-
-    /**
-     * @param mixed $source
-     * @param int $rowNumber
-     * @return mixed
+     * @param string $id
+     * @return ColumnInterface
      * @throws \Exception
      */
-    public function get($source, int $rowNumber);
+    public function get(string $id);
+
+    /**
+     * @return ColumnInterface[]
+     */
+    public function getItems();
+
+    /**
+     * @return int
+     */
+    public function getLength();
+
+    /**
+     * @return bool
+     */
+    public function isEmpty();
 }

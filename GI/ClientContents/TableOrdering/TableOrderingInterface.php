@@ -15,56 +15,49 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ClientContents\TableHeader;
+namespace GI\ClientContents\TableOrdering;
 
-use GI\ClientContents\TableHeader\Column\ColumnInterface;
-
-interface TableHeaderInterface 
+interface TableOrderingInterface
 {
     /**
-     * @param int $index
-     * @return bool
+     * @return string
      */
-    public function has(int $index);
-
-    /**
-     * @param int $index
-     * @return ColumnInterface
-     * @throws \Exception
-     */
-    public function get(int $index);
-
-    /**
-     * @return ColumnInterface[]
-     */
-    public function getItems();
-
-    /**
-     * @return int
-     */
-    public function getLength();
+    public function getCriteria();
 
     /**
      * @return bool
      */
-    public function isEmpty();
+    public function isBothDirections();
 
     /**
-     * @param string $orderAttribute
-     * @return static
+     * @return bool|null
      */
-    public function setOrder(string $orderAttribute);
+    public function getOrdering();
 
     /**
-     * @param bool $direction
+     * @param string $orderCriteria
+     * @param bool $orderDirection
      * @return static
      */
-    public function setDirection(bool $direction);
+    public function setOrdering(string $orderCriteria, bool $orderDirection);
 
     /**
-     * @param string $orderAttribute
-     * @param bool $direction
-     * @return static
+     * @return bool
      */
-    public function setOrderAndDirection(string $orderAttribute, bool $direction);
+    public function isAscendant();
+
+    /**
+     * @return bool
+     */
+    public function isDescendant();
+
+    /**
+     * @return bool
+     */
+    public function isNone();
+
+    /**
+     * @return bool
+     */
+    public function getNextDirection();
 }

@@ -15,64 +15,44 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ClientContents\TableHeader\Column;
+namespace GI\ClientContents\TableOrdering\Collection;
 
-use GI\ClientContents\TableHeader\Column\DataSource\DataSourceInterface;
-use GI\ClientContents\TableHeader\Column\Order\OrderInterface;
+use GI\ClientContents\TableOrdering\TableOrderingInterface;
 
-interface ColumnInterface 
+interface CollectionInterface
 {
     /**
-     * @return string
+     * @param string $id
+     * @return bool
      */
-    public function getId();
+    public function has(string $id);
 
     /**
-     * @return string
+     * @param string $id
+     * @return TableOrderingInterface
+     * @throws \Exception
      */
-    public function getCaption();
+    public function get(string $id);
+
+    /**
+     * @return TableOrderingInterface[]
+     */
+    public function getItems();
+
+    /**
+     * @return int
+     */
+    public function getLength();
 
     /**
      * @return bool
      */
-    public function hasDataSource();
+    public function isEmpty();
 
     /**
-     * @return DataSourceInterface
-     * @throws \Exception
-     */
-    public function getDataSource();
-
-    /**
-     * @return static
-     * @throws \Exception
-     */
-    public function createDataSource();
-
-    /**
+     * @param string $orderCriteria
+     * @param bool $orderDirection
      * @return static
      */
-    public function removeDataSource();
-
-    /**
-     * @return bool
-     */
-    public function hasOrder();
-
-    /**
-     * @return OrderInterface
-     * @throws \Exception
-     */
-    public function getOrder();
-
-    /**
-     * @return static
-     * @throws \Exception
-     */
-    public function createOrder();
-
-    /**
-     * @return static
-     */
-    public function removeOrder();
+    public function setOrdering(string $orderCriteria, bool $orderDirection);
 }
