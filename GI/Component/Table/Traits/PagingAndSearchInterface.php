@@ -15,33 +15,17 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\TableWithSearchAndPaging;
+namespace GI\Component\Table\Traits;
 
-use GI\Component\Table\AbstractTable as Base;
+use GI\Component\Base\ComponentInterface;
+use GI\Component\Paging\Base\PagingInterface;
 
-use GI\Component\Table\Traits\PagingAndSearchAwareTrait;
-
-abstract class AbstractTable extends Base implements TableInterface
+interface PagingAndSearchInterface extends ComponentInterface
 {
-    use PagingAndSearchAwareTrait;
-
-
     /**
-     * @return string
+     * @param PagingInterface $paging
+     * @return static
      * @throws \Exception
      */
-    public function toString()
-    {
-        $this->getSearch()->setPagingRelation($this->getPaging());
-
-        $this->getPaging()->addExternalFormIdToView($this->getSearch());
-
-        $this->getView()->getWidget()
-            ->setExternFormId($this->getSearch())
-            ->setPagingRelation($this->getPaging());
-
-        $this->getView()->setSearch($this->getSearch())->setPaging($this->getPaging());
-
-        return parent::toString();
-    }
+    public function setPagingRelation(PagingInterface $paging);
 }
