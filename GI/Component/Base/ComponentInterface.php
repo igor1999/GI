@@ -29,7 +29,7 @@ interface ComponentInterface extends NodeInterface
     /**
      * @return string
      */
-    public function getViewCommonForId();
+    public function getViewCommonFormId();
 
     /**
      * @param ComponentInterface $component

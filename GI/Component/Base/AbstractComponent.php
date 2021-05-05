@@ -42,7 +42,7 @@ abstract class AbstractComponent implements ComponentInterface
     /**
      * @return string
      */
-    public function getViewCommonForId()
+    public function getViewCommonFormId()
     {
         return $this->getView()->createCommonFormId();
     }
@@ -53,7 +53,7 @@ abstract class AbstractComponent implements ComponentInterface
      */
     public function addExternalFormIdToView(ComponentInterface $component)
     {
-        $this->getView()->setExternFormId($component->getViewCommonForId());
+        $this->getView()->setExternFormId($component->getViewCommonFormId());
 
         return $this;
     }

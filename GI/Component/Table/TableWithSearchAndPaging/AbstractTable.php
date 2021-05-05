@@ -33,6 +33,12 @@ abstract class AbstractTable extends Base implements TableInterface
      */
     public function toString()
     {
+        $this->getPaging()->addExternalFormIdToView($this->getSearch());
+
+        $this->getView()->getWidget()
+            ->setExternFormId($this->getSearch())
+            ->setPagingRelation($this->getPaging());
+
         $this->getView()->setSearch($this->getSearch())->setPaging($this->getPaging());
 
         return parent::toString();

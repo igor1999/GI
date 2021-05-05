@@ -32,6 +32,8 @@ abstract class AbstractTable extends Base implements TableInterface
      */
     public function toString()
     {
+        $this->getView()->getWidget()->setPagingRelation($this->getPaging());
+
         $this->getView()->setPaging($this->getPaging());
 
         return parent::toString();
