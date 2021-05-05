@@ -1,0 +1,37 @@
+<?php
+/*
+ * This file is part of PHP-framework GI.
+ *
+ * PHP-framework GI is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * PHP-framework GI is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
+ */
+namespace GI\Component\Table\View;
+
+use GI\Component\Base\View\AbstractView as Base;
+
+use GI\Component\Paging\Base\PagingInterface;
+use GI\Component\Base\ComponentInterface;
+
+/**
+ * Class AbstractView
+ * @package GI\Component\Table\View
+ *
+ * @method PagingInterface getPaging()
+ * @method ViewInterface setPaging(PagingInterface $paging)
+ * @method ComponentInterface getSearch()
+ * @method ViewInterface setSearch(ComponentInterface $search)
+ */
+abstract class AbstractView extends Base implements ViewInterface
+{
+
+}
