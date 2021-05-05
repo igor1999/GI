@@ -38,7 +38,7 @@ class Order extends AbstractViewModel implements OrderInterface
     /**
      * @var string
      */
-    private $direction = 0;
+    private $direction = 1;
 
 
     /**
