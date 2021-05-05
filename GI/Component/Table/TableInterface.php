@@ -18,23 +18,9 @@
 namespace GI\Component\Table;
 
 use GI\Component\Base\ComponentInterface;
-use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
-use GI\Component\Paging\Base\PagingInterface;
 
 interface TableInterface extends ComponentInterface
 {
-    /**
-     * @return ViewModelInterface
-     */
-    public function getViewModel();
-
-    /**
-     * @param PagingInterface $paging
-     * @return static
-     * @throws \Exception
-     */
-    public function setPagingRelation(PagingInterface $paging);
-
     /**
      * @return string
      * @throws \Exception

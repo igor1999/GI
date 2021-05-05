@@ -18,11 +18,12 @@
 namespace GI\Component\Table;
 
 use GI\Component\Base\AbstractComponent;
-use GI\Component\Table\ViewModel\Order as ViewModel;
+use GI\Component\Table\ViewModel\ViewModel;
 
-use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
-use GI\Component\Table\View\WidgetInterface;
-use GI\Component\Paging\Base\PagingInterface;
+use GI\Component\Table\ViewModel\ViewModelInterface;
+use GI\Component\Table\View\ViewInterface;
+use GI\RDB\ORM\Set\SetInterface;
+use GI\ViewModel\Filter\FilterAwareInterface;
 
 abstract class AbstractTable extends AbstractComponent implements TableInterface
 {
@@ -31,69 +32,45 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
      */
     private $viewModel;
 
-    /**
-     * @var mixed
-     */
-    private $dataSource;
-
 
     /**
      * AbstractTable constructor.
-     * @param mixed|null $dataSource
-     * @param ViewModelInterface|null $viewModel
+     * @param array $contents
      * @throws \Exception
      */
-    public function __construct($dataSource = null, ViewModelInterface $viewModel = null)
+    public function __construct(array $contents)
     {
-        $this->dataSource = $dataSource;
+        $viewModel = $this->getViewModel();
 
-        $this->viewModel = ($viewModel instanceof ViewModelInterface)
-            ? $viewModel
-            : $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+        $viewModel->hydrate($contents);
+
+        if ($viewModel instanceof FilterAwareInterface) {
+            $viewModel->filter();
+        }
     }
+
     /**
-     * @return WidgetInterface
+     * @return ViewInterface
      */
     abstract protected function getView();
 
     /**
      * @return ViewModelInterface
+     * @throws \Exception
      */
-    public function getViewModel()
+    protected function getViewModel()
     {
+        if (!($this->viewModel instanceof ViewModelInterface)) {
+            $this->viewModel = $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+        }
+
         return $this->viewModel;
     }
 
     /**
      * @return mixed
      */
-    protected function getDataSource()
-    {
-        return $this->dataSource;
-    }
-
-    /**
-     * @param mixed $dataSource
-     * @return static
-     */
-    protected function setDataSource($dataSource)
-    {
-        $this->dataSource = $dataSource;
-
-        return $this;
-    }
-
-    /**
-     * @param PagingInterface $paging
-     * @return static
-     * @throws \Exception
-     */
-    public function setPagingRelation(PagingInterface $paging)
-    {
-        $this->getView()->setPagingRelation($paging);
-
-        return $this;
-    }
+    abstract protected function getDataSource();
 
     /**
      * @return string
@@ -101,9 +78,14 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
      */
     public function toString()
     {
-        return $this->getView()
-            ->setViewModel($this->getViewModel())
-            ->setDataSource($this->getDataSource())
+        $dataSource = $this->getDataSource();
+        if ($dataSource instanceof SetInterface) {
+            $dataSource = $dataSource->getItems();
+        }
+
+        return $this->getView()->getWidget()
+            ->setViewModel($this->getViewModel()->getOrder())
+            ->setDataSource($dataSource)
             ->toString();
     }
 }

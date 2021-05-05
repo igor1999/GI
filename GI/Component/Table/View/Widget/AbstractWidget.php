@@ -26,7 +26,6 @@ use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
 use GI\Component\Table\View\Widget\Template\Collection\CollectionInterface as TemplateInterface;
-use GI\RDB\ORM\Set\SetInterface;
 
 /**
  * Class AbstractWidget
@@ -85,17 +84,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      * @return TemplateInterface
      */
     abstract protected function getTemplate();
-
-    /**
-     * @param SetInterface $set
-     * @return static
-     */
-    public function setDataSourceFromDataSet(SetInterface $set)
-    {
-        $this->setDataSource($set->getItems());
-
-        return $this;
-    }
 
     /**
      * @param string $id

@@ -20,7 +20,6 @@ namespace GI\Component\Table\View\Widget;
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\Component\Paging\Base\PagingInterface;
 use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
-use GI\RDB\ORM\Set\SetInterface;
 
 /**
  * Interface WidgetInterface
@@ -33,12 +32,6 @@ use GI\RDB\ORM\Set\SetInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
-    /**
-     * @param SetInterface $set
-     * @return static
-     */
-    public function setDataSourceFromDataSet(SetInterface $set);
-
     /**
      * @param PagingInterface $paging
      * @return static
