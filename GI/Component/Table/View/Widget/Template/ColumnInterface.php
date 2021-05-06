@@ -30,7 +30,6 @@ interface ColumnInterface
     /**
      * @param string $headerCellClass
      * @return static
-     * @throws \Exception
      */
     public function setHeaderCellClass(string $headerCellClass);
 
@@ -42,7 +41,6 @@ interface ColumnInterface
     /**
      * @param string $bodyCellClass
      * @return static
-     * @throws \Exception
      */
     public function setBodyCellClass(string $bodyCellClass);
 

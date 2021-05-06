@@ -44,9 +44,8 @@ class Column implements ColumnInterface
      * Column constructor.
      * @param string $headerCellClass
      * @param string $bodyCellClass
-     * @throws \Exception
      */
-    public function __construct(string $headerCellClass, string $bodyCellClass)
+    public function __construct(string $headerCellClass, string $bodyCellClass = '')
     {
         $this->setHeaderCellClass($headerCellClass)->setBodyCellClass($bodyCellClass);
     }
@@ -62,15 +61,10 @@ class Column implements ColumnInterface
     /**
      * @param string $headerCellClass
      * @return static
-     * @throws \Exception
      */
     public function setHeaderCellClass(string $headerCellClass)
     {
         $this->headerCellClass = $headerCellClass;
-
-        if (!is_a($this->headerCellClass, THInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
-        }
 
         return $this;
     }
@@ -86,15 +80,10 @@ class Column implements ColumnInterface
     /**
      * @param string $bodyCellClass
      * @return static
-     * @throws \Exception
      */
     public function setBodyCellClass(string $bodyCellClass)
     {
         $this->bodyCellClass = $bodyCellClass;
-
-        if (!is_a($this->bodyCellClass, TDInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
-        }
 
         return $this;
     }
@@ -107,6 +96,10 @@ class Column implements ColumnInterface
      */
     public function createHeaderCell(string $orderCriteria, bool $orderDirection)
     {
+        if (!is_a($this->headerCellClass, THInterface::class, true)) {
+            $this->giThrowInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
+        }
+
         $meta = $this->giGetClassMeta($this->headerCellClass);
 
         return is_a($this->headerCellClass, OrderedInterface::class, true)
@@ -122,6 +115,10 @@ class Column implements ColumnInterface
      */
     public function createBodyCell(int $position, $value)
     {
+        if (!is_a($this->bodyCellClass, TDInterface::class, true)) {
+            $this->giThrowInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
+        }
+
         return is_a($this->bodyCellClass, NumberInterface::class, true)
             ? $this->giGetClassMeta($this->bodyCellClass)->create([$position])
             : $this->giGetClassMeta($this->bodyCellClass)->create([$value]);

@@ -105,7 +105,7 @@ abstract class AbstractCollection implements CollectionInterface
      * @return static
      * @throws \Exception
      */
-    protected function set(string $id, string $headerCellClass, string $bodyCellClass)
+    protected function set(string $id, string $headerCellClass, string $bodyCellClass = '')
     {
         $this->items[$id] = $this->createColumn($headerCellClass, $bodyCellClass);
 
@@ -120,7 +120,7 @@ abstract class AbstractCollection implements CollectionInterface
      * @return static
      * @throws \Exception
      */
-    protected function insertBefore(string $id, string $anchor, string $headerCellClass, string $bodyCellClass)
+    protected function insertBefore(string $id, string $anchor, string $headerCellClass, string $bodyCellClass = '')
     {
         $position = array_search($anchor, array_keys($this->items));
 
