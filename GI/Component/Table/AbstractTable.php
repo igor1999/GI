@@ -38,7 +38,7 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
      * @param array $contents
      * @throws \Exception
      */
-    public function __construct(array $contents)
+    public function __construct(array $contents = [])
     {
         $viewModel = $this->getViewModel();
 
