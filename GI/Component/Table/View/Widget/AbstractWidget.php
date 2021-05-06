@@ -203,7 +203,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
             $row = $this->table->getRow($index);
 
             foreach ($this->getTemplate()->getItems() as $id => $cellItem) {
-                $cell = $cellItem->createBodyCell($index, $dataItem);
+                $cell = $cellItem->createBodyCell($this, $index, $dataItem);
 
                 $row->getChildNodes()->addCell($cell);
             }
@@ -226,7 +226,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
             $criteria  = $this->getViewModel()->getCriteria();
             $direction = $this->getViewModel()->getDirectionAsBool();
 
-            $cell = $item->createHeaderCell($criteria, $direction);
+            $cell = $item->createHeaderCell($this, $criteria, $direction);
 
             $cell->getAttributes()->setDataAttribute(static::ATTRIBUTE_HEADER_COLUMN_ID, $id);
             $this->headerCells[$id] = $cell;

@@ -23,6 +23,7 @@ use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 use GI\Component\Table\View\Widget\Template\Cell\Header\Ordered\OrderedInterface;
 use GI\Component\Table\View\Widget\Template\Cell\Body\Number\NumberInterface;
+use GI\Component\Table\View\Widget\WidgetInterface;
 
 class Column implements ColumnInterface
 {
@@ -89,12 +90,13 @@ class Column implements ColumnInterface
     }
 
     /**
+     * @param WidgetInterface $widget
      * @param string $orderCriteria
      * @param bool $orderDirection
      * @return THInterface
      * @throws \Exception
      */
-    public function createHeaderCell(string $orderCriteria, bool $orderDirection)
+    public function createHeaderCell(WidgetInterface $widget, string $orderCriteria, bool $orderDirection)
     {
         if (!is_a($this->headerCellClass, THInterface::class, true)) {
             $this->giThrowInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
@@ -102,25 +104,54 @@ class Column implements ColumnInterface
 
         $meta = $this->giGetClassMeta($this->headerCellClass);
 
-        return is_a($this->headerCellClass, OrderedInterface::class, true)
-            ? $meta->create([$orderCriteria, $orderDirection])
-            : $meta->create();
+        $params = is_a($this->headerCellClass, OrderedInterface::class, true)
+            ? [$orderCriteria, $orderDirection]
+            : [];
+
+        $params = $this->addWidgetToParams($this->headerCellClass, $params, $widget);
+
+        return $meta->create($params);
     }
 
     /**
+     * @param WidgetInterface $widget
      * @param int $position
      * @param mixed $value
      * @return TDInterface
      * @throws \Exception
      */
-    public function createBodyCell(int $position, $value)
+    public function createBodyCell(WidgetInterface $widget, int $position, $value)
     {
         if (!is_a($this->bodyCellClass, TDInterface::class, true)) {
             $this->giThrowInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
         }
 
-        return is_a($this->bodyCellClass, NumberInterface::class, true)
-            ? $this->giGetClassMeta($this->bodyCellClass)->create([$position])
-            : $this->giGetClassMeta($this->bodyCellClass)->create([$value]);
+        $meta = $this->giGetClassMeta($this->bodyCellClass);
+
+        $params = is_a($this->bodyCellClass, NumberInterface::class, true) ? [$position] : [$value];
+
+        $params = $this->addWidgetToParams($this->bodyCellClass, $params, $widget);
+
+        return $meta->create($params);
+    }
+
+    /**
+     * @param string $class
+     * @param array $params
+     * @param WidgetInterface $widget
+     * @return array
+     * @throws \Exception
+     */
+    protected function addWidgetToParams(string $class, array $params, WidgetInterface $widget)
+    {
+        $meta = $this->giGetClassMeta($class);
+
+        $numberOfParams = $meta->getMethods()->get('__construct')->getReflection()->getNumberOfParameters();
+
+        if ($numberOfParams > count($params)) {
+            $params[] = $widget;
+        }
+
+        return $params;
     }
 }

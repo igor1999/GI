@@ -19,6 +19,7 @@ namespace GI\Component\Table\View\Widget\Template\Column;
 
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
+use GI\Component\Table\View\Widget\WidgetInterface;
 
 interface ColumnInterface
 {
@@ -45,18 +46,20 @@ interface ColumnInterface
     public function setBodyCellClass(string $bodyCellClass);
 
     /**
+     * @param WidgetInterface $widget
      * @param string $orderCriteria
      * @param bool $orderDirection
      * @return THInterface
      * @throws \Exception
      */
-    public function createHeaderCell(string $orderCriteria, bool $orderDirection);
+    public function createHeaderCell(WidgetInterface $widget, string $orderCriteria, bool $orderDirection);
 
     /**
+     * @param WidgetInterface $widget
      * @param int $position
      * @param mixed $value
      * @return TDInterface
      * @throws \Exception
      */
-    public function createBodyCell(int $position, $value);
+    public function createBodyCell(WidgetInterface $widget, int $position, $value);
 }
