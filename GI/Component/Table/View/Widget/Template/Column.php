@@ -18,7 +18,6 @@
 namespace GI\Component\Table\View\Widget\Template;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
-use GI\Pattern\Validation\ValidationTrait;
 
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
@@ -27,7 +26,7 @@ use GI\Component\Table\View\Widget\DOM\Body\Number\NumberInterface;
 
 class Column implements ColumnInterface
 {
-    use ServiceLocatorAwareTrait, ValidationTrait;
+    use ServiceLocatorAwareTrait;
 
 
     /**
@@ -45,35 +44,59 @@ class Column implements ColumnInterface
      * Column constructor.
      * @param string $headerCellClass
      * @param string $bodyCellClass
+     * @throws \Exception
      */
     public function __construct(string $headerCellClass, string $bodyCellClass)
     {
-        $this->headerCellClass = $headerCellClass;
-        $this->bodyCellClass   = $bodyCellClass;
-
-        $this->validateProperties();
+        $this->setHeaderCellClass($headerCellClass)->setBodyCellClass($bodyCellClass);
     }
 
     /**
-     * @validate
+     * @return string
+     */
+    public function getHeaderCellClass()
+    {
+        return $this->headerCellClass;
+    }
+
+    /**
+     * @param string $headerCellClass
+     * @return static
      * @throws \Exception
      */
-    protected function validateHeaderCellClass()
+    public function setHeaderCellClass(string $headerCellClass)
     {
+        $this->headerCellClass = $headerCellClass;
+
         if (!is_a($this->headerCellClass, THInterface::class, true)) {
             $this->giThrowInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
         }
+
+        return $this;
     }
 
     /**
-     * @validate
+     * @return string
+     */
+    public function getBodyCellClass()
+    {
+        return $this->bodyCellClass;
+    }
+
+    /**
+     * @param string $bodyCellClass
+     * @return static
      * @throws \Exception
      */
-    protected function validateBodyCellClass()
+    public function setBodyCellClass(string $bodyCellClass)
     {
+        $this->bodyCellClass = $bodyCellClass;
+
         if (!is_a($this->bodyCellClass, TDInterface::class, true)) {
             $this->giThrowInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
         }
+
+        return $this;
     }
 
     /**

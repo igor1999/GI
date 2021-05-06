@@ -23,6 +23,30 @@ use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;
 interface ColumnInterface
 {
     /**
+     * @return string
+     */
+    public function getHeaderCellClass();
+
+    /**
+     * @param string $headerCellClass
+     * @return static
+     * @throws \Exception
+     */
+    public function setHeaderCellClass(string $headerCellClass);
+
+    /**
+     * @return string
+     */
+    public function getBodyCellClass();
+
+    /**
+     * @param string $bodyCellClass
+     * @return static
+     * @throws \Exception
+     */
+    public function setBodyCellClass(string $bodyCellClass);
+
+    /**
      * @param string $orderCriteria
      * @param bool $orderDirection
      * @return THInterface

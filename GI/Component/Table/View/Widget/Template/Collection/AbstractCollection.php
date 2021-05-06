@@ -85,6 +85,7 @@ abstract class AbstractCollection implements CollectionInterface
      * @param string $headerCellClass
      * @param string $bodyCellClass
      * @return ColumnInterface
+     * @throws \Exception
      */
     protected function createColumn(string $headerCellClass, string $bodyCellClass)
     {
@@ -102,6 +103,7 @@ abstract class AbstractCollection implements CollectionInterface
      * @param string $headerCellClass
      * @param string $bodyCellClass
      * @return static
+     * @throws \Exception
      */
     protected function set(string $id, string $headerCellClass, string $bodyCellClass)
     {
@@ -116,6 +118,7 @@ abstract class AbstractCollection implements CollectionInterface
      * @param string $headerCellClass
      * @param string $bodyCellClass
      * @return static
+     * @throws \Exception
      */
     protected function insertBefore(string $id, string $anchor, string $headerCellClass, string $bodyCellClass)
     {
