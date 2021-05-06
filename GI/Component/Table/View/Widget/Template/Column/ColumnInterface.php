@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View\Widget\Template;
+namespace GI\Component\Table\View\Widget\Template\Column;
 
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\Cell\TD\TDInterface;

@@ -15,21 +15,11 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View\Widget\DOM\Header\Number;
+namespace GI\Component\Table\View\Widget\Template\Cell\Header\Number;
 
-use GI\DOM\HTML\Element\Table\Cell\TH\TH;
+use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 
-class Number extends TH implements NumberInterface
+interface NumberInterface extends THInterface
 {
-    const CAPTION = 'No';
 
-
-    /**
-     * Number constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        parent::__construct(static::CAPTION);
-    }
 }

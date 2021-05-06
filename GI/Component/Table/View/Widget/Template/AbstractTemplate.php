@@ -15,15 +15,15 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View\Widget\Template\Collection;
+namespace GI\Component\Table\View\Widget\Template;
 
-use GI\Component\Table\View\Widget\Template\Column;
+use GI\Component\Table\View\Widget\Template\Column\Column;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
-use GI\Component\Table\View\Widget\Template\ColumnInterface;
+use GI\Component\Table\View\Widget\Template\Column\ColumnInterface;
 
-abstract class AbstractCollection implements CollectionInterface
+abstract class AbstractTemplate implements TemplateInterface
 {
     use ServiceLocatorAwareTrait;
 

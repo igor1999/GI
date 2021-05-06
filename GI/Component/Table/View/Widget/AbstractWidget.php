@@ -25,7 +25,7 @@ use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
 use GI\DOM\HTML\Element\Table\TableInterface;
-use GI\Component\Table\View\Widget\Template\Collection\CollectionInterface as TemplateInterface;
+use GI\Component\Table\View\Widget\Template\TemplateInterface;
 
 /**
  * Class AbstractWidget

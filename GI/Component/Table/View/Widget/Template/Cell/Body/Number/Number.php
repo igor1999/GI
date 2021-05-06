@@ -15,11 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View\Widget\DOM\Header\Ordered;
+namespace GI\Component\Table\View\Widget\Template\Cell\Body\Number;
 
-use GI\DOM\HTML\Element\Table\Cell\TH\THInterface;
+use GI\DOM\HTML\Element\Table\Cell\TD\TD;
 
-interface OrderedInterface extends THInterface
+class Number extends TD implements NumberInterface
 {
-
+    /**
+     * Number constructor.
+     * @param int $position
+     * @throws \Exception
+     */
+    public function __construct(int $position)
+    {
+        parent::__construct((string)$position);
+    }
 }
