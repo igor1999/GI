@@ -19,7 +19,7 @@ namespace GI\Component\Table\View\Widget;
 
 use GI\Component\Base\View\Widget\AbstractWidget as Base;
 
-use GI\Component\Table\ViewModel\OrderInterface as ViewModelInterface;
+use GI\Component\Table\ViewModel\Order\OrderInterface as ViewModelInterface;
 use GI\Component\Paging\Base\PagingInterface;
 use GI\DOM\HTML\Element\Form\FormInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
@@ -222,10 +222,10 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         $row = $this->table->getRow(0);
 
-        foreach ($this->getTemplate()->getItems() as $id => $item) {
-            $criteria  = $this->getViewModel()->getCriteria();
-            $direction = $this->getViewModel()->getDirectionAsBool();
+        $criteria  = $this->getViewModel()->getCriteria();
+        $direction = $this->getViewModel()->getDirectionAsBool();
 
+        foreach ($this->getTemplate()->getItems() as $id => $item) {
             $cell = $item->createHeaderCell($this, $criteria, $direction);
 
             $cell->getAttributes()->setDataAttribute(static::ATTRIBUTE_HEADER_COLUMN_ID, $id);

@@ -19,8 +19,11 @@ namespace GI\Component\Table;
 
 use GI\Component\Base\AbstractComponent;
 use GI\Component\Table\ViewModel\ViewModel;
+use GI\Component\Table\ViewModel\Order\Order;
 
 use GI\Component\Table\ViewModel\ViewModelInterface;
+use GI\Component\Table\ViewModel\Order\OrderInterface;
+use GI\Component\Table\ViewModel\Order\OrderAwareInterface;
 use GI\Component\Table\View\ViewInterface;
 use GI\RDB\ORM\Set\SetInterface;
 use GI\ViewModel\Filter\FilterAwareInterface;
@@ -83,9 +86,14 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
             $dataSource = $dataSource->getItems();
         }
 
-        $this->getView()->getWidget()
-            ->setViewModel($this->getViewModel()->getOrder())
-            ->setDataSource($dataSource);
+        $viewModel = $this->getViewModel();
+        if ($viewModel instanceof OrderAwareInterface) {
+            $orderModel = $viewModel->getOrder();
+        } else {
+            $orderModel = $this->giGetDi(OrderInterface::class, Order::class);
+        }
+
+        $this->getView()->getWidget()->setViewModel($orderModel)->setDataSource($dataSource);
 
         return $this->getView()->toString();
     }

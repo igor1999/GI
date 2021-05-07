@@ -15,27 +15,44 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\View\Widget;
+namespace GI\Component\Table\ViewModel\Order;
 
-use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
-use GI\Component\Paging\Base\PagingInterface;
-use GI\Component\Table\ViewModel\Order\OrderInterface as ViewModelInterface;
+use GI\ViewModel\ViewModelInterface;
 
-/**
- * Interface WidgetInterface
- * @package GI\Component\Table\View
- *
- * @method ViewModelInterface getViewModel()
- * @method WidgetInterface setViewModel(ViewModelInterface $viewModel)
- * @method array getDataSource()
- * @method WidgetInterface setDataSource(array $dataSource)
- */
-interface WidgetInterface extends BaseInterface
+trait OrderAwareTrait
 {
     /**
-     * @param PagingInterface $paging
-     * @return static
-     * @throws \Exception
+     * @var OrderInterface
      */
-    public function setPagingRelation(PagingInterface $paging);
+    private $order;
+
+
+    /**
+     * @extract
+     * @return OrderInterface
+     */
+    public function getOrder()
+    {
+        if (!($this->order instanceof OrderInterface)) {
+            $this->order = $this->giGetDi(OrderInterface::class, Order::class);
+
+            /** @var ViewModelInterface $me */
+            $me = $this;
+            $this->order->setViewModelParent($me);
+        }
+
+        return $this->order;
+    }
+
+    /**
+     * @hydrate
+     * @param array $contents
+     * @return static
+     */
+    protected function setOrder(array $contents)
+    {
+        $this->getOrder()->hydrate($contents);
+
+        return $this;
+    }
 }

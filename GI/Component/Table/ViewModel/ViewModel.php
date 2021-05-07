@@ -18,77 +18,11 @@
 namespace GI\Component\Table\ViewModel;
 
 use GI\ViewModel\AbstractViewModel as Base;
-use GI\Component\Paging\Base\ViewModel\ViewModel as PagingViewModel;
 
-use GI\Component\Paging\Base\ViewModel\ViewModelInterface as PagingViewModelInterface;
+use GI\Component\Table\ViewModel\Order\OrderAwareTrait;
+use GI\Component\Table\ViewModel\Paging\PagingAwareTrait;
 
 class ViewModel extends Base implements ViewModelInterface
 {
-    /**
-     * @var OrderInterface
-     */
-    private $order;
-
-    /**
-     * @var PagingViewModelInterface
-     */
-    private $paging;
-
-
-    /**
-     * ViewModel constructor.
-     * @throws \Exception
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->order = $this->giGetDi(OrderInterface::class, Order::class);
-        $this->order->setViewModelParent($this);
-
-        $this->paging = $this->giGetDi(PagingViewModelInterface::class, PagingViewModel::class);
-        $this->paging->setViewModelParent($this);
-    }
-
-    /**
-     * @extract
-     * @return OrderInterface
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * @hydrate
-     * @param array $contents
-     * @return static
-     */
-    protected function setOrder(array $contents)
-    {
-        $this->getOrder()->hydrate($contents);
-
-        return $this;
-    }
-
-    /**
-     * @extract
-     * @return PagingViewModelInterface
-     */
-    public function getPaging()
-    {
-        return $this->paging;
-    }
-
-    /**
-     * @hydrate
-     * @param array $contents
-     * @return static
-     */
-    protected function setPaging(array $contents)
-    {
-        $this->getPaging()->hydrate($contents);
-
-        return $this;
-    }
+    use OrderAwareTrait, PagingAwareTrait;
 }

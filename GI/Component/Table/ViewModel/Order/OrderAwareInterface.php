@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Component\Table\ViewModel;
+namespace GI\Component\Table\ViewModel\Order;
 
-use GI\ViewModel\ViewModelInterface as BaseInterface;
-use GI\Component\Table\ViewModel\Order\OrderAwareInterface;
-use GI\Component\Table\ViewModel\Paging\PagingAwareInterface;
-
-interface ViewModelInterface extends BaseInterface, OrderAwareInterface, PagingAwareInterface
+interface OrderAwareInterface
 {
-
+    /**
+     * @extract
+     * @return OrderInterface
+     */
+    public function getOrder();
 }
