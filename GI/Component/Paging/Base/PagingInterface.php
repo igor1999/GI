@@ -19,6 +19,7 @@ namespace GI\Component\Paging\Base;
 
 use GI\Component\Base\ComponentInterface;
 use GI\ClientContents\Paging\Base\PagingInterface as PagingModelInterface;
+use GI\DOM\HTML\Element\Select\SelectInterface;
 
 interface PagingInterface extends ComponentInterface
 {
@@ -31,6 +32,11 @@ interface PagingInterface extends ComponentInterface
      * @return string
      */
     public function getDescriptionForEntriesTotal();
+
+    /**
+     * @return SelectInterface
+     */
+    public function getSizesSelect();
 
     /**
      * @param array $contents

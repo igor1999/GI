@@ -22,6 +22,7 @@ use GI\Component\Paging\Base\ViewModel\ViewModel;
 
 use GI\Component\Paging\Base\ViewModel\ViewModelInterface;
 use GI\Component\Paging\Base\View\Base\WidgetInterface;
+use GI\DOM\HTML\Element\Select\SelectInterface;
 
 abstract class AbstractPaging extends AbstractComponent implements PagingInterface
 {
@@ -76,6 +77,14 @@ abstract class AbstractPaging extends AbstractComponent implements PagingInterfa
     public function getDescriptionForEntriesTotal()
     {
         return $this->getView()->getDescriptionForEntriesTotal();
+    }
+
+    /**
+     * @return SelectInterface
+     */
+    public function getSizesSelect()
+    {
+        return $this->getView()->getSizesSelect();
     }
 
     /**
