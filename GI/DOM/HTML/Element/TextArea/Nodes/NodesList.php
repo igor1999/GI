@@ -105,7 +105,7 @@ class NodesList extends AbstractImmutable implements NodesListInterface
     public function setText(string $text = '')
     {
         try {
-            $this->set($text)->get(0)->getEscaper()->setOn(false);
+            $this->set($text)->get(0)->getTextProcessor()->setEolToBrOn(false)->getEscaper()->setOn(false);
         } catch (\Exception $e) {}
 
         return $this;
@@ -118,7 +118,8 @@ class NodesList extends AbstractImmutable implements NodesListInterface
     public function addText(string $text = '')
     {
         try {
-            $this->add($text)->getLast()->getEscaper()->setOn(false);
+            $this->add($text)->getLast()
+                ->getTextProcessor()->setEolToBrOn(false)->getEscaper()->setOn(false);
         } catch (\Exception $e) {}
 
         return $this;
@@ -132,7 +133,8 @@ class NodesList extends AbstractImmutable implements NodesListInterface
     public function insertText(int $index, string $text = '')
     {
         try {
-            $this->insert($index, $text)->get($index)->getEscaper()->setOn(false);
+            $this->insert($index, $text)->get($index)
+                ->getTextProcessor()->setEolToBrOn(false)->getEscaper()->setOn(false);
         } catch (\Exception $e) {}
 
         return $this;

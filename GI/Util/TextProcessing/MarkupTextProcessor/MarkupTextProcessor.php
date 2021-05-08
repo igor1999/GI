@@ -36,6 +36,11 @@ class MarkupTextProcessor implements MarkupTextProcessorInterface
      */
     private $escaper;
 
+    /**
+     * @var bool
+     */
+    private $eolToBrOn = true;
+
 
     /**
      * MarkupTextProcessor constructor.
@@ -70,6 +75,25 @@ class MarkupTextProcessor implements MarkupTextProcessorInterface
     public function getEscaper()
     {
         return $this->escaper;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEolToBrOn()
+    {
+        return $this->eolToBrOn;
+    }
+
+    /**
+     * @param bool $eolToBrOn
+     * @return static
+     */
+    public function setEolToBrOn(bool $eolToBrOn)
+    {
+        $this->eolToBrOn = $eolToBrOn;
+
+        return $this;
     }
 
     /**
@@ -146,9 +170,11 @@ class MarkupTextProcessor implements MarkupTextProcessorInterface
      */
     public function replaceEOLWithBr()
     {
-        $text = nl2br($this->text);
+        if ($this->eolToBrOn) {
+            $text = nl2br($this->text);
 
-        $this->setText($text);
+            $this->setText($text);
+        }
 
         return $this;
     }

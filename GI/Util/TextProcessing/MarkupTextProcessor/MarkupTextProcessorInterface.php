@@ -38,6 +38,17 @@ interface MarkupTextProcessorInterface
     public function getEscaper();
 
     /**
+     * @return bool
+     */
+    public function isEolToBrOn();
+
+    /**
+     * @param bool $eolToBr
+     * @return static
+     */
+    public function setEolToBrOn(bool $eolToBr);
+
+    /**
      * @param int $length
      * @param string|null $charList
      * @return static

@@ -133,7 +133,7 @@ class Widget extends AbstractWidget implements WidgetInterface
         $span->getAttributes()->setDataAttribute(static::ATTRIBUTE_NODE_ID, $id);
 
         $text = $this->giGetDOMFactory()->createTextNode($this->getContext()->getSeparator());
-        $text->getEscaper()->setOn(false);
+        $text->getTextProcessor()->getEscaper()->setOn(false);
 
         $span->getChildNodes()->add($text);
 
