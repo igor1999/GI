@@ -37,7 +37,7 @@ abstract class AbstractTable extends Base implements TableInterface
         $this->getPaging()->addExternalFormIdToView($this->getSearch());
 
         $this->getView()->getWidget()
-            ->setExternFormId($this->getSearch())
+            ->setExternFormId($this->getSearch()->getViewCommonFormId())
             ->setPagingRelation($this->getPaging());
 
         $this->getView()->setSearch($this->getSearch())->setPaging($this->getPaging());

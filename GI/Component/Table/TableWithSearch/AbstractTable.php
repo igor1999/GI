@@ -32,7 +32,7 @@ abstract class AbstractTable extends Base implements TableInterface
      */
     public function toString()
     {
-        $this->getView()->getWidget()->setExternFormId($this->getSearch());
+        $this->getView()->getWidget()->setExternFormId($this->getSearch()->getViewCommonFormId());
 
         $this->getView()->setSearch($this->getSearch());
 
