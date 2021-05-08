@@ -30,7 +30,6 @@ trait PagingAwareTrait
 
 
     /**
-     * @extract
      * @return PagingViewModelInterface
      */
     public function getPaging()

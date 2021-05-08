@@ -28,7 +28,6 @@ trait OrderAwareTrait
 
 
     /**
-     * @extract
      * @return OrderInterface
      */
     public function getOrder()
