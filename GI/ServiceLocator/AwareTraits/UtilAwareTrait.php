@@ -43,7 +43,6 @@ use GI\Util\TextProcessing\PSRFormat\Parser\ParserInterface as PSRFormatParserIn
 use GI\Util\TextProcessing\PSRFormat\Builder\BuilderInterface as PSRFormatBuilderInterface;
 use GI\Util\TextProcessing\PSRFormat\CamelCase\CamelCaseInterface as CamelCaseConverterInterface;
 
-use GI\Util\TextProcessing\TextProcessor\TextProcessorInterface;
 use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
@@ -186,14 +185,6 @@ trait UtilAwareTrait
     protected function giGetFromResourceSourceMaker()
     {
         return $this->giGetUtilites()->getFromResource(static::class);
-    }
-
-    /**
-     * @return TextProcessorInterface
-     */
-    protected function giGetTextProcessor()
-    {
-        return $this->giGetUtilites()->getTextProcessor(static::class);
     }
 
     /**

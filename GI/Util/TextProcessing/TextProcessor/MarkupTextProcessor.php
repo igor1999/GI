@@ -17,10 +17,20 @@
  */
 namespace GI\Util\TextProcessing\TextProcessor;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
+
 use GI\Util\TextProcessing\Escaper\HTMLText\EscaperInterface;
 
-class MarkupTextProcessor extends TextProcessor implements MarkupTextProcessorInterface
+class MarkupTextProcessor implements MarkupTextProcessorInterface
 {
+    use ServiceLocatorAwareTrait;
+
+
+    /**
+     * @var string
+     */
+    private $text;
+
     /**
      * @var EscaperInterface
      */
@@ -36,6 +46,25 @@ class MarkupTextProcessor extends TextProcessor implements MarkupTextProcessorIn
     }
 
     /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     * @return static
+     */
+    public function setText(string $text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
      * @return EscaperInterface
      */
     public function getEscaper()
@@ -44,46 +73,84 @@ class MarkupTextProcessor extends TextProcessor implements MarkupTextProcessorIn
     }
 
     /**
-     * @param string $string
      * @param int $length
      * @param string|null $charList
-     * @return string
+     * @return static
      */
-    public function cutAndEscapeString(string $string, int $length, string $charList = null)
+    public function cutAsString(int $length, string $charList = null)
     {
-        return $this->escaper->escape($this->cutString($string, $length, $charList));
-    }
+        if (empty($this->text)) {
+            $text = '';
+        } else {
+            $words = str_word_count($this->text, 2, $charList);
 
-    /**
-     * @param string $text
-     * @param int $linesNumber
-     * @return string
-     */
-    public function cutAndEscapeText(string $text, int $linesNumber = 0)
-    {
-        if (!empty($linesNumber)) {
-            $text = $this->cutText($text, $linesNumber);
+            $maxPosition = 0;
+
+            foreach ($words as $position => $word) {
+                if ($position >= $length) {
+                    $maxPosition = $position;
+                    break;
+                }
+            }
+
+            if ($maxPosition == 0) {
+                $text = $this->text;
+            } else {
+                $text = substr($this->text, 0, $maxPosition);
+                $text = rtrim(trim($text), ',.:;') . '...';
+            }
         }
 
-        return $this->escaper->escape($text);
+        $this->setText($text);
+
+        return $this;
+    }
+
+    /**
+     * @param int $linesNumber
+     * @return static
+     */
+    public function cutAsText(int $linesNumber)
+    {
+        if (!empty($this->text)) {
+            $text = explode(PHP_EOL,  $this->text);
+
+            if (count($text) <= $linesNumber) {
+                $text = implode(PHP_EOL, $text);
+            } else {
+                $text = array_slice($text, 0 , $linesNumber);
+                $text = implode(PHP_EOL, $text);
+                $text = rtrim(trim($text), '.,:;') . '...';
+            }
+
+            $this->setText($text);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function escape()
+    {
+        $text = $this->getEscaper()->escape($this->text);
+
+        $this->setText($text);
+
+        return $this;
     }
 
     /**
      * @param string $text
-     * @return string
+     * @return static
      */
     public function nlToBrText(string $text)
     {
-        return nl2br($text);
-    }
+        $text = nl2br($this->text);
 
-    /**
-     * @param string $text
-     * @param int $linesNumber
-     * @return string
-     */
-    public function prepareText(string $text, int $linesNumber = 0)
-    {
-        return $this->nlToBrText($this->cutAndEscapeText($text, $linesNumber));
+        $this->setText($text);
+
+        return $this;
     }
 }

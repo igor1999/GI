@@ -140,7 +140,7 @@ class View extends AbstractRenderer implements ViewInterface
             $text = print_r($text, true);
 
             if (is_int($this->maxLength) && $this->maxLength > 0) {
-                $text = $this->getMarkupTextProcessor()->cutString($this->text, $this->maxLength);
+                $text = $this->getMarkupTextProcessor()->setText($text)->cutAsString($this->maxLength)->getText();
             }
         }
 

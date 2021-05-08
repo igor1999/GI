@@ -17,18 +17,11 @@
  */
 namespace GI\Util\DI\Interfaces;
 
-use GI\Util\TextProcessing\TextProcessor\TextProcessorInterface as UtilTextProcessorInterface;
 use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
 interface TextProcessorInterface
 {
-    /**
-     * @param string|null $caller
-     * @return UtilTextProcessorInterface
-     */
-    public function getTextProcessor(string $caller = null);
-
     /**
      * @param string|null $caller
      * @return MarkupTextProcessorInterface

@@ -17,52 +17,21 @@
  */
 namespace GI\Util\DI\Traits;
 
-use GI\Util\TextProcessing\TextProcessor\TextProcessor;
 use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessor;
 use GI\Util\TextProcessing\Splitter\Splitter;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
-use GI\Util\TextProcessing\TextProcessor\TextProcessorInterface;
 use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
 trait TextProcessorTrait
 {
     /**
-     * @var TextProcessorInterface
-     */
-    private $textProcessor;
-
-    /**
      * @var SplitterInterface
      */
     private $misc;
 
-
-    /**
-     * @param string|null $caller
-     * @return TextProcessorInterface
-     */
-    public function getTextProcessor(string $caller = null)
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
-                TextProcessorInterface::class, $caller
-            );
-        } catch (\Exception $e) {
-            if (!($this->textProcessor instanceof TextProcessorInterface)) {
-                $this->textProcessor = new TextProcessor();
-            }
-
-            $result = $this->textProcessor;
-        }
-
-        return $result;
-    }
 
     /**
      * @param string|null $caller

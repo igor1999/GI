@@ -19,38 +19,45 @@ namespace GI\Util\TextProcessing\TextProcessor;
 
 use GI\Util\TextProcessing\Escaper\HTMLText\EscaperInterface;
 
-interface MarkupTextProcessorInterface extends TextProcessorInterface
+interface MarkupTextProcessorInterface
 {
+    /**
+     * @return string
+     */
+    public function getText();
+
+    /**
+     * @param string $text
+     * @return static
+     */
+    public function setText(string $text);
+
     /**
      * @return EscaperInterface
      */
     public function getEscaper();
 
     /**
-     * @param string $string
      * @param int $length
      * @param string|null $charList
-     * @return string
+     * @return static
      */
-    public function cutAndEscapeString(string $string, int $length, string $charList = null);
+    public function cutAsString(int $length, string $charList = null);
 
     /**
-     * @param string $text
      * @param int $linesNumber
-     * @return string
+     * @return static
      */
-    public function cutAndEscapeText(string $text, int $linesNumber = 0);
+    public function cutAsText(int $linesNumber);
+
+    /**
+     * @return static
+     */
+    public function escape();
 
     /**
      * @param string $text
-     * @return string
+     * @return static
      */
     public function nlToBrText(string $text);
-
-    /**
-     * @param string $text
-     * @param int $linesNumber
-     * @return string
-     */
-    public function prepareText(string $text, int $linesNumber = 0);
 }
