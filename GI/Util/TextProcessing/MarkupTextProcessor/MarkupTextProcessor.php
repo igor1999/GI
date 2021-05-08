@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Util\TextProcessing\TextProcessor;
+namespace GI\Util\TextProcessing\MarkupTextProcessor;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 

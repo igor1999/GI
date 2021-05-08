@@ -17,12 +17,12 @@
  */
 namespace GI\Util\DI\Traits;
 
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessor;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessor;
 use GI\Util\TextProcessing\Splitter\Splitter;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
 trait TextProcessorTrait

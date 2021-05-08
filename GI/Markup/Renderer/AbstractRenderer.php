@@ -22,7 +22,7 @@ use GI\Pattern\Validation\ValidationTrait;
 
 use GI\FileSystem\FSO\FSOFile\FSOFileInterface;
 use GI\Util\TextProcessing\Escaper\Factory\Container\ContainerInterface as EscaperContainerInterface;
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 use GI\REST\URL\Builder\BuilderInterface as URLBuilderInterface;
 use GI\DOM\Factory\FactoryInterface as DOMFactoryInterface;
 use GI\Storage\Collection\MixedCollection\HashSet\Alterable\AlterableInterface as ParamsInterface;

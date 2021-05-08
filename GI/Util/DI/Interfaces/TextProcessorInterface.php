@@ -17,7 +17,7 @@
  */
 namespace GI\Util\DI\Interfaces;
 
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
 interface TextProcessorInterface

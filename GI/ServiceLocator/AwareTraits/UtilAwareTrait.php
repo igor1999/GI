@@ -43,7 +43,7 @@ use GI\Util\TextProcessing\PSRFormat\Parser\ParserInterface as PSRFormatParserIn
 use GI\Util\TextProcessing\PSRFormat\Builder\BuilderInterface as PSRFormatBuilderInterface;
 use GI\Util\TextProcessing\PSRFormat\CamelCase\CamelCaseInterface as CamelCaseConverterInterface;
 
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 use GI\Util\TextProcessing\Splitter\SplitterInterface;
 
 trait UtilAwareTrait

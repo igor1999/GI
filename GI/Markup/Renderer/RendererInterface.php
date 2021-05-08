@@ -20,7 +20,7 @@ namespace GI\Markup\Renderer;
 use GI\FileSystem\FSO\FSOFile\FSOFileInterface;
 use GI\Pattern\StringConvertable\StringConvertableInterface;
 use GI\Util\TextProcessing\Escaper\Factory\Container\ContainerInterface as EscaperContainerInterface;
-use GI\Util\TextProcessing\TextProcessor\MarkupTextProcessorInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 use GI\DOM\Factory\FactoryInterface as DOMFactoryInterface;
 use GI\Pattern\Validation\ValidationInterface;
 use GI\DOM\HTML\Element\Input\Hidden\CSRFInterface;
