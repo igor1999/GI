@@ -33,7 +33,7 @@ class ViewModel extends Base implements ViewModelInterface
     /**
      * @var int
      */
-    private $entriesProPage;
+    private $entriesProPage = 0;
 
     /**
      * @var int
