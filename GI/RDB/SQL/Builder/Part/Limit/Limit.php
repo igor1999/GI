@@ -17,6 +17,7 @@
  */
 namespace GI\RDB\SQL\Builder\Part\Limit;
 
+use GI\RDB\SQL\Builder\BuilderInterface;
 use GI\RDB\SQL\Builder\Part\AbstractPart;
 
 class Limit extends AbstractPart implements LimitInterface
@@ -25,10 +26,49 @@ class Limit extends AbstractPart implements LimitInterface
 
 
     /**
+     * @var int
+     */
+    private $offset;
+
+
+    /**
+     * Limit constructor.
+     * @param BuilderInterface $builder
+     * @param int $limit
+     * @param int|null $offset
+     * @param string $placeholder
+     */
+    public function __construct(BuilderInterface $builder, int $limit, int $offset = null, string $placeholder = '')
+    {
+        parent::__construct($builder, $limit, $placeholder);
+
+        $this->offset = $offset;
+    }
+
+    /**
+     * @return int
+     */
+    protected function getOffset()
+    {
+        return $this->offset;
+    }
+
+    /**
+     * @param int|null $offset
+     * @return static
+     */
+    protected function setOffset(int $offset = null)
+    {
+        $this->offset = $offset;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     protected function getTemplate()
     {
-        return 'LIMIT %s';
+        return empty($this->offset) ? 'LIMIT %s' : 'LIMIT %s OFFSET ' . $this->offset;
     }
 }

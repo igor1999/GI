@@ -213,25 +213,14 @@ class Builder implements BuilderInterface
     }
 
     /**
-     * @param mixed $value
+     * @param int $limit
+     * @param int|null $offset
      * @param string $placeholder
      * @return static
      */
-    public function addLimit($value, string $placeholder = '')
+    public function addLimit(int $limit, int $offset = null, string $placeholder = '')
     {
-        $this->getPartList()->addLimit($value, $placeholder);
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $value
-     * @param string $placeholder
-     * @return static
-     */
-    public function addOffset($value, string $placeholder = '')
-    {
-        $this->getPartList()->addOffset($value, $placeholder);
+        $this->getPartList()->addLimit($limit, $offset, $placeholder);
 
         return $this;
     }

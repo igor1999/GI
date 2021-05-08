@@ -70,18 +70,12 @@ interface PartListInterface
     public function addGroup(array $value, string $placeholder = '');
 
     /**
-     * @param mixed $value
+     * @param int $limit
+     * @param int|null $offset
      * @param string $placeholder
      * @return static
      */
-    public function addLimit($value, string $placeholder = '');
-
-    /**
-     * @param mixed $value
-     * @param string $placeholder
-     * @return static
-     */
-    public function addOffset($value, string $placeholder = '');
+    public function addLimit(int $limit, int $offset = null, string $placeholder = '');
 
     /**
      * @param string $param

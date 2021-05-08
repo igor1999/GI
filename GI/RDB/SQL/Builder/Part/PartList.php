@@ -19,7 +19,6 @@ namespace GI\RDB\SQL\Builder\Part;
 
 use GI\RDB\SQL\Builder\Part\Group\Group;
 use GI\RDB\SQL\Builder\Part\Limit\Limit;
-use GI\RDB\SQL\Builder\Part\Offset\Offset;
 use GI\RDB\SQL\Builder\Part\Order\Order;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
@@ -28,7 +27,6 @@ use GI\RDB\SQL\Builder\BuilderInterface;
 
 use GI\RDB\SQL\Builder\Part\Group\GroupInterface;
 use GI\RDB\SQL\Builder\Part\Limit\LimitInterface;
-use GI\RDB\SQL\Builder\Part\Offset\OffsetInterface;
 use GI\RDB\SQL\Builder\Part\Order\OrderInterface;
 
 class PartList implements PartListInterface
@@ -187,60 +185,32 @@ class PartList implements PartListInterface
     }
 
     /**
-     * @param mixed $value
+     * @param int $limit
+     * @param int|null $offset
      * @param string $placeholder
      * @return static
      */
-    public function addLimit($value, string $placeholder = '')
+    public function addLimit(int $limit, int $offset = null, string $placeholder = '')
     {
-        $this->add($this->createLimit($value, $placeholder));
+        $this->add($this->createLimit($limit, $offset, $placeholder));
 
         return $this;
     }
 
     /**
-     * @param mixed $value
+     * @param int $limit
+     * @param int|null $offset
      * @param string $placeholder
      * @return LimitInterface
      */
-    protected function createLimit($value, string $placeholder)
+    protected function createLimit(int $limit, int $offset = null, string $placeholder = '')
     {
         try {
             $result = $this->giGetDi(
-                LimitInterface::class, null, [$this->getBuilder(), $value, $placeholder]
+                LimitInterface::class, null, [$this->getBuilder(), $limit, $offset, $placeholder]
             );
         } catch (\Exception $e) {
-            $result = new Limit($this->getBuilder(), $value, $placeholder);
-        }
-
-        return $result;
-    }
-
-    /**
-     * @param mixed $value
-     * @param string $placeholder
-     * @return static
-     */
-    public function addOffset($value, string $placeholder = '')
-    {
-        $this->add($this->createOffset($value, $placeholder));
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $value
-     * @param string $placeholder
-     * @return OffsetInterface
-     */
-    protected function createOffset($value, string $placeholder)
-    {
-        try {
-            $result = $this->giGetDi(
-                OffsetInterface::class, null, [$this->getBuilder(), $value, $placeholder]
-            );
-        } catch (\Exception $e) {
-            $result = new Offset($this->getBuilder(), $value, $placeholder);
+            $result = new Limit($this->getBuilder(), $limit, $offset, $placeholder);
         }
 
         return $result;
