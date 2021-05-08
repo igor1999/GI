@@ -18,14 +18,14 @@
 namespace GI\DOM\Base\TextNode;
 
 use GI\DOM\Base\NodeInterface;
-use GI\Util\TextProcessing\Escaper\HTMLText\EscaperInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 
 interface TextNodeInterface extends NodeInterface
 {
     /**
-     * @return EscaperInterface
+     * @return MarkupTextProcessorInterface
      */
-    public function getEscaper();
+    public function getTextProcessor();
 
     /**
      * @return string

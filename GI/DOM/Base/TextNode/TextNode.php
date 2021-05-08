@@ -19,7 +19,7 @@ namespace GI\DOM\Base\TextNode;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
-use GI\Util\TextProcessing\Escaper\HTMLText\EscaperInterface;
+use GI\Util\TextProcessing\MarkupTextProcessor\MarkupTextProcessorInterface;
 
 class TextNode implements TextNodeInterface
 {
@@ -32,9 +32,9 @@ class TextNode implements TextNodeInterface
     private $text = '';
 
     /**
-     * @var EscaperInterface
+     * @var MarkupTextProcessorInterface
      */
-    private $escaper;
+    private $textProcessor;
 
 
     /**
@@ -44,15 +44,15 @@ class TextNode implements TextNodeInterface
     public function __construct(string $text = '')
     {
         $this->setText($text);
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createHTMLText();
+        $this->textProcessor = $this->giGetUtilites()->createMarkupTextProcessor();
     }
 
     /**
-     * @return EscaperInterface
+     * @return MarkupTextProcessorInterface
      */
-    public function getEscaper()
+    public function getTextProcessor()
     {
-        return $this->escaper;
+        return $this->textProcessor;
     }
 
     /**
@@ -79,6 +79,6 @@ class TextNode implements TextNodeInterface
      */
     public function toString()
     {
-        return $this->getEscaper()->escape($this->text);
+        return $this->getTextProcessor()->setText($this->text)->escapeAndReplaceEOLWithBr()->getText();
     }
 }

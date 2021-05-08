@@ -56,8 +56,12 @@ interface MarkupTextProcessorInterface
     public function escape();
 
     /**
-     * @param string $text
      * @return static
      */
-    public function nlToBrText(string $text);
+    public function replaceEOLWithBr();
+
+    /**
+     * @return static
+     */
+    public function escapeAndReplaceEOLWithBr();
 }

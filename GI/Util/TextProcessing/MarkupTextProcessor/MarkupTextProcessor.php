@@ -142,14 +142,23 @@ class MarkupTextProcessor implements MarkupTextProcessorInterface
     }
 
     /**
-     * @param string $text
      * @return static
      */
-    public function nlToBrText(string $text)
+    public function replaceEOLWithBr()
     {
         $text = nl2br($this->text);
 
         $this->setText($text);
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function escapeAndReplaceEOLWithBr()
+    {
+        $this->escape()->replaceEOLWithBr();
 
         return $this;
     }
