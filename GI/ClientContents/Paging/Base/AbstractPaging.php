@@ -56,7 +56,7 @@ abstract class AbstractPaging implements PagingInterface
      * @param int|null $entriesProPage
      * @throws \Exception
      */
-    public function __construct(int $entriesTotal, int $selectedPage = 1, int $entriesProPage = null)
+    public function __construct(int $entriesTotal, int $selectedPage = 1, int $entriesProPage = 0)
     {
         $this->getContext()->validateProperties();
 
@@ -68,7 +68,7 @@ abstract class AbstractPaging implements PagingInterface
             $this->giThrowInvalidMinimumException('Selected page', $selectedPage, 1);
         }
 
-        if (!is_int($entriesProPage)) {
+        if (empty($entriesProPage)) {
             $entriesProPage = $this->getContext()->getSizes()->getFirst();
         } elseif (!$this->getContext()->getSizes()->contains($entriesProPage)) {
             $this->giThrowCommonException('Items pro page is out of given sizes');
