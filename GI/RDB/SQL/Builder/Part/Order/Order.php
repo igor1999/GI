@@ -42,7 +42,7 @@ class Order extends AbstractPart implements OrderInterface
         $delimitedFields = [];
 
         foreach ($fields as $key => $value) {
-            $delimitedFields[] = $this->delimitField($key, $value);
+            $delimitedFields[] = $this->delimitOrderField($key, $value);
         }
 
         parent::__construct($builder, implode(static::GLUE, $delimitedFields), $placeholder);
@@ -54,15 +54,15 @@ class Order extends AbstractPart implements OrderInterface
      * @return string
      * @throws \Exception
      */
-    protected function delimitField($key, $value)
+    protected function delimitOrderField($key, $value)
     {
         if (is_string($key) && is_bool($value)) {
             $direction = $value ? '' : ' '. Constants::ORDER_DESC_MODIFICATOR;
-            $field     = $this->giGetSqlFactory()->createFieldExpression($key)->toString() . $direction;
+            $field     = $this->delimitField($key) . $direction;
         } elseif (is_string($key) && !is_bool($value)) {
-            $field = $this->giGetSqlFactory()->createFieldExpression($key)->toString();
+            $field = $this->delimitField($key);
         } else {
-            $field = $this->giGetSqlFactory()->createFieldExpression($value)->toString();
+            $field = $this->delimitField($value);
         }
 
         return $field;
