@@ -195,7 +195,9 @@ class QueryBuilder implements QueryBuilderInterface
             $builder->setParam('predicate-list', $predicateList->toString());
         }
 
-        $builder->addOrder($order);
+        if (!empty($order)) {
+            $builder->addOrder($order);
+        }
 
         return $builder->toString();
     }
