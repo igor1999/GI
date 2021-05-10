@@ -27,6 +27,9 @@ class Field implements FieldInterface
     const TEMPLATE = '{{%s}}';
 
 
+    const NON_FIELD_TEMPLATE = '/[^\w.]/';
+
+
     /**
      * @var string
      */
@@ -52,10 +55,18 @@ class Field implements FieldInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isNonField()
+    {
+        return (bool)preg_match('/[^\w.]/', $this->name);
+    }
+
+    /**
      * @return string
      */
     public function toString()
     {
-        return sprintf(static::TEMPLATE, $this->name);
+        return $this->isNonField() ? $this->name : sprintf(static::TEMPLATE, $this->name);
     }
 }

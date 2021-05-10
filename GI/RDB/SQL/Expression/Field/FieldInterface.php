@@ -26,4 +26,9 @@ interface FieldInterface extends StringConvertableInterface, ExpressionInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * @return bool
+     */
+    public function isNonField();
 }

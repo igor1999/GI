@@ -39,7 +39,7 @@ class Group extends AbstractPart implements GroupInterface
     public function __construct(BuilderInterface $builder, array $fields, string $placeholder = '')
     {
         foreach ($fields as &$field) {
-            $field = $this->delimitField($field);
+            $field = $this->giGetSqlFactory()->createFieldExpression($field)->toString();
         }
 
         parent::__construct($builder, implode(static::GLUE, $fields), $placeholder);

@@ -107,20 +107,6 @@ abstract class AbstractPart implements PartInterface
     }
 
     /**
-     * @param string $field
-     * @return string
-     * @throws \Exception
-     */
-    protected function delimitField(string $field)
-    {
-        if (!(bool)preg_match('/[^\w.]/', $field)) {
-            $field = $this->giGetSqlFactory()->createFieldExpression($field)->toString();
-        }
-
-        return $field;
-    }
-
-    /**
      * @return string
      */
     abstract protected function getTemplate();
