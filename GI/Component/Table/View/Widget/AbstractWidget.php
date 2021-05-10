@@ -142,7 +142,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         if (!($this->orderHidden instanceof HiddenInterface)) {
             $this->orderHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-                $this->getViewModel()->getCriteriaName()
+                $this->getViewModel()->getCriteriaName(), $this->getViewModel()->getCriteria()
             );
 
             $this->addFormAttribute($this->orderHidden);
@@ -159,7 +159,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         if (!($this->directionHidden instanceof HiddenInterface)) {
             $this->directionHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
-                $this->getViewModel()->getDirectionName()
+                $this->getViewModel()->getDirectionName(), $this->getViewModel()->getDirection()
             );
 
             $this->addFormAttribute($this->directionHidden);
