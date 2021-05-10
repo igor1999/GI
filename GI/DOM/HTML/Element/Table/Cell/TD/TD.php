@@ -17,7 +17,6 @@
  */
 namespace GI\DOM\HTML\Element\Table\Cell\TD;
 
-use GI\Markup\Constants;
 use GI\DOM\HTML\Element\ContainerElement;
 
 class TD extends ContainerElement implements TDInterface
@@ -25,15 +24,12 @@ class TD extends ContainerElement implements TDInterface
     const TAG = 'td';
 
 
-    const DEFAULT_HTML = Constants::BACKSPACE;
-
-
     /**
      * TD constructor.
      * @param string $text
      * @throws \Exception
      */
-    public function __construct(string $text = self::DEFAULT_HTML)
+    public function __construct(string $text = '')
     {
         parent::__construct(static::TAG);
 
@@ -60,15 +56,5 @@ class TD extends ContainerElement implements TDInterface
         $this->getAttributes()->setRowspan($span);
 
         return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function compileInnerHTML()
-    {
-        $html = parent::compileInnerHTML();
-
-        return strlen($html) == 0 ? static::DEFAULT_HTML : $html;
     }
 }
