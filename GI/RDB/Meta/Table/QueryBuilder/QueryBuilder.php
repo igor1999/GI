@@ -182,7 +182,9 @@ class QueryBuilder implements QueryBuilderInterface
     {
         if (!($builder instanceof SQLBuilderInterface)) {
             $template = empty($contents) ? static::SELECT_ALL_TEMPLATE : static::SELECT_TEMPLATE;
-            $builder  = $this->getBuilder()->setTemplate($template);
+            $builder  = $this->getBuilder()->setTemplate($template)->addOrder($order);
+        } elseif (!empty($order)) {
+            $builder->addOrder($order);
         }
 
         $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
@@ -193,10 +195,6 @@ class QueryBuilder implements QueryBuilderInterface
                 ? $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
                 : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
             $builder->setParam('predicate-list', $predicateList->toString());
-        }
-
-        if (!empty($order)) {
-            $builder->addOrder($order);
         }
 
         return $builder->toString();
