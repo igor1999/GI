@@ -165,7 +165,7 @@ abstract class AbstractRecord implements RecordInterface
     {
         $result = $this->getTable()->insert($this->extractNonIdentityToDB(), $builder);
 
-        if (empty($result)) {
+        if (empty($result) && !$this->isDuplicatedError()) {
             $this->throwORMNotAffectedException();
         }
 

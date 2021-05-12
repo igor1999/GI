@@ -29,7 +29,7 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
     use FetchExceptionAwareTrait, StatementExceptionAwareTrait;
 
 
-    const DUPLICATED_ERROR_CODE = 1062;
+    const DUPLICATED_ERROR_CODE = 23000;
 
 
     /**
