@@ -38,6 +38,8 @@ use GI\RDB\Meta\Table\TableListInterface;
  * @method DriverInterface commit()
  * @method DriverInterface rollBack()
  *
+ * @method bool isDuplicatedError()
+ * @method bool hasDuplicatedKey(string $key)
  * @method int execute(string $sql, array $params = [])
  * @method array fetch(string $sql, array $params = [])
  * @method array fetchAll(string $sql, array $params = [])

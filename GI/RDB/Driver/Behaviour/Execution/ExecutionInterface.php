@@ -22,6 +22,17 @@ use GI\RDB\Driver\Behaviour\BehaviourInterface;
 interface ExecutionInterface extends BehaviourInterface
 {
     /**
+     * @return bool
+     */
+    public function isDuplicatedError();
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasDuplicatedKey(string $key);
+
+    /**
      * @param string $sql
      * @param array $params
      * @return int

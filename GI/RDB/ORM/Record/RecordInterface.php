@@ -60,4 +60,15 @@ interface RecordInterface extends ArrayExchangeInterface, CacheClassInterface
      * @return static
      */
     public function update(SQLBuilderInterface $builder = null);
+
+    /**
+     * @return bool
+     */
+    public function isDuplicatedError();
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasDuplicatedKey(string $key);
 }

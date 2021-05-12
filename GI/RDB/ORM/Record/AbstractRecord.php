@@ -211,6 +211,23 @@ abstract class AbstractRecord implements RecordInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isDuplicatedError()
+    {
+        return $this->getTable()->getDriver()->isDuplicatedError();
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasDuplicatedKey(string $key)
+    {
+        return $this->getTable()->getDriver()->hasDuplicatedKey($key);
+    }
+
+    /**
      * @param string $class
      * @return RecordInterface
      * @throws \Exception

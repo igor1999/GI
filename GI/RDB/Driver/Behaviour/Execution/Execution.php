@@ -29,10 +29,18 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
     use FetchExceptionAwareTrait, StatementExceptionAwareTrait;
 
 
+    const DUPLICATED_ERROR_CODE = 1062;
+
+
     /**
      * @var PlatformInterface
      */
     private $platform;
+
+    /**
+     * @var string
+     */
+    private $duplicatedErrorMessage = '';
 
 
     /**
@@ -56,6 +64,31 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
     }
 
     /**
+     * @return string
+     */
+    protected function getDuplicatedErrorMessage()
+    {
+        return $this->duplicatedErrorMessage;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDuplicatedError()
+    {
+        return !empty($this->duplicatedErrorMessage);
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public function hasDuplicatedKey(string $key)
+    {
+        return strpos($this->duplicatedErrorMessage, $key) !== false;
+    }
+
+    /**
      * @param string $sql
      * @param array $params
      * @return \PDOStatement
@@ -72,7 +105,12 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
         $statement = $this->getPdo()->prepare($sql);
         $statement->execute($params);
 
-        $this->throwPDOStatementExceptionIfExists($statement);
+        if ($statement->errorCode() == static::DUPLICATED_ERROR_CODE) {
+            $this->duplicatedErrorMessage = $statement->errorInfo()[2];
+        } else {
+            $this->duplicatedErrorMessage = '';
+            $this->throwPDOStatementExceptionIfExists($statement);
+        }
 
         return $statement;
     }
