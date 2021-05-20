@@ -112,7 +112,7 @@ use GI\DOM\HTML\Element\Input\Web\URLInterface;
  * @method DateInputInterface createDateInput(array $name = [], $value = '')
  * @method DateTimeLocalInterface createDateTimeLocal(array $name = [], $value = '')
  * @method MonthInterface createMonth(array $name = [], $value = '')
- * @method TimeInputInterface createTimeInput(array $name = [], $value = '')
+ * @method TimeInputInterface createTime(array $name = [], $value = '')
  * @method WeekInterface createWeek(array $name = [], $value = '')
  *
  * @method FileInterface createFile(array $name = [], $value = '')
