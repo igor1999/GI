@@ -292,7 +292,7 @@ abstract class AbstractRecord implements RecordInterface
         }
 
         if (!is_a($proxyClass, SetInterface::class, true)
-                || !is_a($proxyClass, RecordInterface::class, true)) {
+                && !is_a($proxyClass, RecordInterface::class, true)) {
             $this->giThrowInvalidTypeException('Related class', $proxyClass, 'SetInterface or RecordInterface');
         }
 
