@@ -73,7 +73,17 @@ abstract class AbstractRecord implements RecordInterface
      */
     protected function extractToDB()
     {
-        return $this->giGetClassMeta()->extract($this, static::DB_EXTRACTION_DESCRIPTOR);
+        $values = $this->giGetClassMeta()->extract($this, static::DB_EXTRACTION_DESCRIPTOR);
+
+        foreach ($values as $key => &$value) {
+            $column = $this->getTable()->getColumnList()->get($key);
+
+            if ($column->isStringPHPType() && $column->isDatePHPType() && $column->isNull() && empty($value)) {
+                $value = null;
+            }
+        }
+
+        return $values;
     }
 
     /**
