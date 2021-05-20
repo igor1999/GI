@@ -327,6 +327,8 @@ abstract class AbstractRecord implements RecordInterface
             $this->giThrowInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
         }
 
+        array_unshift($cascadeClasses, $firstClass);
+
         $data = $this->giGetClassMeta()->getMethods()->extract($this, $firstClass);
 
         $resultSet->selectByCascade($cascadeClasses, $data, $order);

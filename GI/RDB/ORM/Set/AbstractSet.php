@@ -485,7 +485,8 @@ abstract class AbstractSet implements SetInterface
                 ->setParam('table', $cascadeJoinPredicate->getJoinTable()->getFullName())
                 ->setParam('condition', $cascadeJoinPredicate->toString());
             if ($index == 0) {
-                $assignPredicates = $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable());
+                $assignPredicates = $this->giGetSqlFactory()
+                    ->createAndAssignPredicates($contents, $firstSet->getTable());
                 $builder->setParam('assigns', $assignPredicates->toString());
             }
 
@@ -495,7 +496,8 @@ abstract class AbstractSet implements SetInterface
         $sql .= '%order%';
         $builder->setTemplate($sql);
 
-        $this->fill($contents, $order, $builder);
+        $data = $this->getDriver()->fetchAll($builder->toString(), $contents);
+        $this->hydrateFromDB($data);
 
         return $this;
     }
