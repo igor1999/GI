@@ -27,6 +27,7 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Table\TableInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
 use GI\RDB\ORM\Set\Index\Collection\CollectionInterface as IndexCollectionInterface;
+use GI\RDB\SQL\Cortege\Predicates\Join\JoinInterface;
 
 abstract class AbstractSet implements SetInterface
 {
@@ -409,6 +410,92 @@ abstract class AbstractSet implements SetInterface
     public function selectByProxy(string $proxyClass, array $contents = [], array $order = [])
     {
         $this->fillByProxy($proxyClass, $contents, $order);
+
+        return $this;
+    }
+
+    /**
+     * @param string[] $nextClasses
+     * @return JoinInterface[]
+     * @throws \Exception
+     */
+    public function getCascadeJoinPredicates(array $nextClasses)
+    {
+        if (empty($nextClasses)) {
+            $result = [];
+        } else {
+            $nextClass = array_shift($nextClasses);
+            if (!is_a($nextClass, SetInterface::class, true)) {
+                $this->giThrowInvalidTypeException('Cascade class', $nextClass, 'SetInterface');
+            }
+
+            $joinFields = $this->getProxyJoinFields($nextClass);
+            if (empty($joinFields)) {
+                $this->giThrowNotFoundException('Join fields with proxy class', $nextClass);
+            }
+
+            /** @var SetInterface $nextSet */
+            $nextSet = $this->giGetClassMeta($nextClass)->create();
+
+            $joinPredicates = $this->giGetSqlFactory()->createJoinPredicates(
+                $joinFields, $this->getTable(), $nextSet->getTable()
+            );
+
+            $result = $nextSet->getCascadeJoinPredicates($nextClasses);
+            array_unshift($result, $joinPredicates);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string[] $cascadeClasses
+     * @param array $contents
+     * @param array $order
+     * @return static
+     * @throws \Exception
+     */
+    public function selectByCascade(array $cascadeClasses, array $contents = [], array $order = [])
+    {
+        $firstClass = array_shift($cascadeClasses);
+        if (!is_a($firstClass, SetInterface::class, true)) {
+            $this->giThrowInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
+        }
+
+        /** @var SetInterface $firstSet */
+        $firstSet = $this->giGetClassMeta($firstClass)->create();
+
+        $cascadeClasses[] = static::class;
+        $cascadeJoinPredicates = $firstSet->getCascadeJoinPredicates($cascadeClasses);
+
+        $sql = 'SELECT {{%result-table%}}.*' . PHP_EOL . 'FROM {{%first-table%}}' . PHP_EOL;
+
+        $builder = $this->giGetSqlFactory()->createSQLBuilder()
+            ->setParam('result-table', $this->getTable()->getFullName())
+            ->setParam('first-table', $firstSet->getTable()->getFullName())
+            ->addOrder($order);
+
+        foreach ($cascadeJoinPredicates as $index => $cascadeJoinPredicate) {
+            $joinSql = 'INNER JOIN {{%table%}}' . PHP_EOL . 'ON %condition%' . PHP_EOL;
+            if ($index == 0) {
+                $joinSql .= 'AND %assigns%' . PHP_EOL;
+            }
+
+            $builder->setTemplate($joinSql)
+                ->setParam('table', $cascadeJoinPredicate->getJoinTable()->getFullName())
+                ->setParam('condition', $cascadeJoinPredicate->toString());
+            if ($index == 0) {
+                $assignPredicates = $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable());
+                $builder->setParam('assigns', $assignPredicates->toString());
+            }
+
+            $sql .= $builder->toString();
+        }
+
+        $sql .= '%order%';
+        $builder->setTemplate($sql);
+
+        $this->fill($contents, $order, $builder);
 
         return $this;
     }

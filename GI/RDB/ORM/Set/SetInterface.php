@@ -23,6 +23,7 @@ use GI\RDB\Driver\DriverInterface;
 use GI\RDB\Meta\Table\TableInterface;
 use GI\RDB\ORM\Set\Index\Collection\CollectionInterface as IndexCollectionInterface;
 use GI\RDB\SQL\Builder\BuilderInterface as SQLBuilderInterface;
+use GI\RDB\SQL\Cortege\Predicates\Join\JoinInterface;
 
 interface SetInterface extends  ArrayExchangeInterface
 {
@@ -128,6 +129,22 @@ interface SetInterface extends  ArrayExchangeInterface
      * @throws \Exception
      */
     public function selectByProxy(string $proxyClass, array $contents = [], array $order = []);
+
+    /**
+     * @param string[] $nextClasses
+     * @return JoinInterface[]
+     * @throws \Exception
+     */
+    public function getCascadeJoinPredicates(array $nextClasses);
+
+    /**
+     * @param array $cascadeClasses
+     * @param array $contents
+     * @param array $order
+     * @return static
+     * @throws \Exception
+     */
+    public function selectByCascade(array $cascadeClasses, array $contents = [], array $order = []);
 
     /**
      * @param SQLBuilderInterface|null $builder

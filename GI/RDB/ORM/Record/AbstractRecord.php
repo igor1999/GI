@@ -305,4 +305,32 @@ abstract class AbstractRecord implements RecordInterface
 
         return $result;
     }
+
+    /**
+     * @param string $setClass
+     * @param string[] $cascadeClasses
+     * @param array $order
+     * @return SetInterface
+     * @throws \Exception
+     */
+    protected function getRelatedSetByCascade(string $setClass, array $cascadeClasses, array $order = [])
+    {
+        if (!is_a($setClass, SetInterface::class, true)) {
+            $this->giThrowInvalidTypeException('Cascade class', $setClass, 'SetInterface');
+        }
+
+        /** @var SetInterface $resultSet */
+        $resultSet = $this->giGetClassMeta($setClass)->create();
+
+        $firstClass = array_shift($cascadeClasses);
+        if (!is_a($firstClass, SetInterface::class, true)) {
+            $this->giThrowInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
+        }
+
+        $data = $this->giGetClassMeta()->getMethods()->extract($this, $firstClass);
+
+        $resultSet->selectByCascade($cascadeClasses, $data, $order);
+
+        return $resultSet;
+    }
 }
