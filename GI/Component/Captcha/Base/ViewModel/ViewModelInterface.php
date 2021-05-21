@@ -18,7 +18,6 @@
 namespace GI\Component\Captcha\Base\ViewModel;
 
 use GI\ViewModel\ViewModelInterface as BaseInterface;
-use GI\ViewModel\Validator\ValidatorAwareInterface;
 use GI\Component\Captcha\Base\ViewModel\Validator\ValidatorInterface;
 
 /**
@@ -28,7 +27,7 @@ use GI\Component\Captcha\Base\ViewModel\Validator\ValidatorInterface;
  * @method array getIdName()
  * @method array getValueName()
  */
-interface ViewModelInterface extends BaseInterface, ValidatorAwareInterface
+interface ViewModelInterface extends BaseInterface
 {
     /**
      * @return string

@@ -26,7 +26,6 @@ use GI\Component\Table\ViewModel\Order\OrderInterface;
 use GI\Component\Table\ViewModel\Order\OrderAwareInterface;
 use GI\Component\Table\View\ViewInterface;
 use GI\RDB\ORM\Set\SetInterface;
-use GI\ViewModel\Filter\FilterAwareInterface;
 
 abstract class AbstractTable extends AbstractComponent implements TableInterface
 {
@@ -47,9 +46,7 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
 
         $viewModel->hydrate($contents);
 
-        if ($viewModel instanceof FilterAwareInterface) {
-            $viewModel->filter();
-        }
+        $viewModel->filter();
     }
 
     /**

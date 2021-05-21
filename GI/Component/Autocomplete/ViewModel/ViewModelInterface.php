@@ -18,10 +18,9 @@
 namespace GI\Component\Autocomplete\ViewModel;
 
 use GI\ViewModel\ViewModelInterface as BaseInterface;
-use GI\ViewModel\Validator\ValidatorAwareInterface;
 use GI\Component\Autocomplete\ViewModel\Validator\ValidatorInterface;
 
-interface ViewModelInterface extends BaseInterface, ValidatorAwareInterface
+interface ViewModelInterface extends BaseInterface
 {
     /**
      * @return string

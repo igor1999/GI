@@ -17,7 +17,6 @@
  */
 namespace GI\Component\Calendar\ViewModel;
 
-use GI\ViewModel\Filter\FilterAwareInterface;
 use GI\ViewModel\ViewModelInterface as BaseInterface;
 use GI\Component\Calendar\ViewModel\Filter\FilterInterface;
 
@@ -27,7 +26,7 @@ use GI\Component\Calendar\ViewModel\Filter\FilterInterface;
  *
  * @method array getMonthName()
  */
-interface ViewModelInterface extends BaseInterface, FilterAwareInterface
+interface ViewModelInterface extends BaseInterface
 {
     /**
      * @return \DateTime

@@ -20,15 +20,10 @@ namespace GI\Component\Autocomplete\ViewModel;
 use GI\ViewModel\AbstractViewModel;
 use GI\Component\Autocomplete\ViewModel\Validator\Validator;
 
-use GI\ViewModel\Validator\ValidatorAwareTrait;
-
 use GI\Component\Autocomplete\ViewModel\Validator\ValidatorInterface;
 
 class ViewModel extends AbstractViewModel implements ViewModelInterface
 {
-    use ValidatorAwareTrait;
-
-
     /**
      * @var string
      */

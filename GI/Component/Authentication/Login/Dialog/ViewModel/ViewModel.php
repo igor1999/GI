@@ -20,8 +20,6 @@ namespace GI\Component\Authentication\Login\Dialog\ViewModel;
 use GI\ViewModel\AbstractViewModel;
 use GI\Component\Authentication\Login\Dialog\ViewModel\Validator\Validator;
 
-use GI\ViewModel\Validator\ValidatorAwareTrait;
-
 use GI\Component\Authentication\Login\Dialog\ViewModel\Validator\ValidatorInterface;
 
 /**
@@ -34,9 +32,6 @@ use GI\Component\Authentication\Login\Dialog\ViewModel\Validator\ValidatorInterf
  */
 class ViewModel extends AbstractViewModel implements ViewModelInterface
 {
-    use ValidatorAwareTrait;
-
-
     /**
      * @var string
      */

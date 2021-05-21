@@ -19,8 +19,6 @@ namespace GI\Component\Captcha\Base\ViewModel;
 
 use GI\ViewModel\AbstractViewModel as Base;
 
-use GI\ViewModel\Validator\ValidatorAwareTrait;
-
 /**
  * Class AbstractViewModel
  * @package GI\Component\Captcha\Base\ViewModel
@@ -30,9 +28,6 @@ use GI\ViewModel\Validator\ValidatorAwareTrait;
  */
 abstract class AbstractViewModel extends Base implements ViewModelInterface
 {
-    use ValidatorAwareTrait;
-
-
     /**
      * @var string
      */

@@ -20,8 +20,6 @@ namespace GI\Component\Calendar\ViewModel;
 use GI\ViewModel\AbstractViewModel;
 use GI\Component\Calendar\ViewModel\Filter\Filter;
 
-use GI\ViewModel\Filter\FilterAwareTrait;
-
 use GI\Component\Calendar\ViewModel\Filter\FilterInterface;
 
 /**
@@ -32,9 +30,6 @@ use GI\Component\Calendar\ViewModel\Filter\FilterInterface;
  */
 class ViewModel extends AbstractViewModel implements ViewModelInterface
 {
-    use FilterAwareTrait;
-
-
     /**
      * @var string
      */

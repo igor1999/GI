@@ -18,7 +18,6 @@
 namespace GI\Component\Authentication\Login\Dialog\ViewModel;
 
 use GI\ViewModel\ViewModelInterface as BaseInterface;
-use GI\ViewModel\Validator\ValidatorAwareInterface;
 use GI\Component\Authentication\Login\Dialog\ViewModel\Validator\ValidatorInterface;
 
 /**
@@ -29,7 +28,7 @@ use GI\Component\Authentication\Login\Dialog\ViewModel\Validator\ValidatorInterf
  * @method array getPasswordName()
  * @method array getSaveName()
  */
-interface ViewModelInterface extends BaseInterface, ValidatorAwareInterface
+interface ViewModelInterface extends BaseInterface
 {
     /**
      * @return string
