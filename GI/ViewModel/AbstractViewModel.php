@@ -27,6 +27,7 @@ use GI\Pattern\ArrayExchange\ArrayExchangeTrait;
 use GI\Filter\Container\Recursive\RecursiveInterface as FilterRecursiveInterface;
 use GI\Validator\Container\Recursive\RecursiveInterface as ValidatorRecursiveInterface;
 use GI\DOM\HTML\Attributes\Name\NameInterface;
+use GI\Meta\Method\Collection\ImmutableInterface;
 
 abstract class AbstractViewModel implements ViewModelInterface
 {
@@ -219,6 +220,40 @@ abstract class AbstractViewModel implements ViewModelInterface
         if (!$hasGetter && !$hasBoolGetter) {
             $this->giThrowNotFoundException('Getter or bool getter');
         }
+    }
+
+    /**
+     * @param array $contents
+     * @return static
+     * @throws \Exception
+     */
+    public function hydrate(array $contents)
+    {
+        $descriptor = ImmutableInterface::HYDRATION_DESCRIPTOR;
+
+        foreach ($this->giGetClassMeta()->getMethods()->findByDescriptorName($descriptor) as $method) {
+            $name = $method->getName();
+
+            $key = $method->getDescriptor($descriptor);
+            if (empty($key)) {
+                try {
+                    $key = $this->giGetPSRFormatParser()->parseWithPrefixSet($name);
+                } catch (\Exception $exception) {}
+            }
+
+            if (array_key_exists($key, $contents)) {
+                $value = $contents[$key];
+
+                $isNull = $method->getReflection()->getParameters()[0]->allowsNull();
+                if ($isNull && is_string($value) && (strlen($value) == 0)) {
+                    $value = null;
+                }
+
+                $method->execute($this, [$value]);
+            }
+        }
+
+        return $this;
     }
 
     /**
