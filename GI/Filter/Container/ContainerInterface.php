@@ -19,7 +19,7 @@ namespace GI\Filter\Container;
 
 use GI\Filter\FilterInterface;
 
-interface ContainerInterface
+interface ContainerInterface extends FilterInterface
 {
     /**
      * @return FilterInterface[]

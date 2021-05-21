@@ -18,6 +18,8 @@
 namespace GI\ViewModel;
 
 use GI\Pattern\ArrayExchange\ArrayExchangeInterface;
+use GI\Filter\Container\Recursive\RecursiveInterface as FilterRecursiveInterface;
+use GI\Validator\Container\Recursive\RecursiveInterface as ValidatorRecursiveInterface;
 
 interface ViewModelInterface extends ArrayExchangeInterface
 {
@@ -67,10 +69,31 @@ interface ViewModelInterface extends ArrayExchangeInterface
     public function renderMemberFullName(string $member);
 
     /**
+     * @return FilterRecursiveInterface
+     */
+    public function getFilter();
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    public function filter();
+
+    /**
      * @return static
      * @throws \Exception
      */
     public function setFilterToParent();
+
+    /**
+     * @return ValidatorRecursiveInterface
+     */
+    public function getValidator();
+
+    /**
+     * @return bool
+     */
+    public function validate();
 
     /**
      * @return static

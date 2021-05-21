@@ -18,6 +18,8 @@
 namespace GI\ViewModel;
 
 use GI\DOM\HTML\Attributes\Name\Name;
+use GI\Filter\Container\Recursive\Recursive as FilterRecursive;
+use GI\Validator\Container\Recursive\Recursive as ValidatorRecursive;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Pattern\ArrayExchange\ArrayExchangeTrait;
@@ -25,8 +27,6 @@ use GI\Pattern\ArrayExchange\ArrayExchangeTrait;
 use GI\Filter\Container\Recursive\RecursiveInterface as FilterRecursiveInterface;
 use GI\Validator\Container\Recursive\RecursiveInterface as ValidatorRecursiveInterface;
 use GI\DOM\HTML\Attributes\Name\NameInterface;
-use GI\ViewModel\Filter\FilterAwareInterface;
-use GI\ViewModel\Validator\ValidatorAwareInterface;
 
 abstract class AbstractViewModel implements ViewModelInterface
 {
@@ -51,6 +51,16 @@ abstract class AbstractViewModel implements ViewModelInterface
      */
     private $nameAttributes;
 
+    /**
+     * @var FilterRecursiveInterface
+     */
+    private $filter;
+
+    /**
+     * @var ValidatorRecursiveInterface
+     */
+    private $validator;
+
 
     /**
      * AbstractViewModel constructor.
@@ -59,6 +69,10 @@ abstract class AbstractViewModel implements ViewModelInterface
     public function __construct()
     {
         $this->nameAttributes = $this->giGetDi(NameInterface::class, Name::class);
+        $this->filter         = $this->giGetDi(FilterRecursiveInterface::class, FilterRecursive::class);
+        $this->validator      = $this->giGetDi(
+            ValidatorRecursiveInterface::class, ValidatorRecursive::class
+        );
     }
 
     /**
@@ -208,6 +222,25 @@ abstract class AbstractViewModel implements ViewModelInterface
     }
 
     /**
+     * @return FilterRecursiveInterface
+     */
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @return static
+     * @throws \Exception
+     */
+    public function filter()
+    {
+        $this->getFilter()->setInput($this)->execute();
+
+        return $this;
+    }
+
+    /**
      * @return static
      * @throws \Exception
      */
@@ -217,23 +250,31 @@ abstract class AbstractViewModel implements ViewModelInterface
             $this->giThrowNotSetException('Model name');
         }
 
-        if (!($this instanceof FilterAwareInterface)) {
-            $this->giThrowInvalidTypeException('Model', '', 'FilterAwareInterface');
-        }
+        $parentFilter = $this->getViewModelParent()->getFilter();
 
-        $parent = $this->getViewModelParent();
-        if (!($parent instanceof FilterAwareInterface)) {
-            $this->giThrowInvalidTypeException('Parent model', '', 'FilterAwareInterface');
-        }
-        $parentFilter = $parent->getFilter();
-
-        if (($parentFilter instanceof FilterRecursiveInterface) && ($this instanceof FilterAwareInterface)) {
+        if ($parentFilter instanceof FilterRecursiveInterface) {
             $parentFilter->set($this->_name, $this->getFilter());
         } else {
             $this->giThrowInvalidTypeException('Parent filter', '', 'Recursive filter');
         }
 
         return $this;
+    }
+
+    /**
+     * @return ValidatorRecursiveInterface
+     */
+    public function getValidator()
+    {
+        return $this->validator;
+    }
+
+    /**
+     * @return bool
+     */
+    public function validate()
+    {
+        return $this->getValidator()->validate($this);
     }
 
     /**
@@ -246,19 +287,9 @@ abstract class AbstractViewModel implements ViewModelInterface
             $this->giThrowNotSetException('Model name');
         }
 
-        if (!($this instanceof ValidatorAwareInterface)) {
-            $this->giThrowInvalidTypeException('Model', '', 'ValidatorAwareInterface');
-        }
+        $parentValidator = $this->getViewModelParent()->getValidator();
 
-        $parent = $this->getViewModelParent();
-        if (!($parent instanceof ValidatorAwareInterface)) {
-            $this->giThrowInvalidTypeException('Parent model', '', 'ValidatorAwareInterface');
-        }
-
-        $parentValidator = $parent->getValidator();
-
-        if (($parentValidator instanceof ValidatorRecursiveInterface)
-                && ($this instanceof ValidatorAwareInterface)) {
+        if ($parentValidator instanceof ValidatorRecursiveInterface) {
             $parentValidator->set($this->_name, $this->getValidator());
         } else {
             $this->giThrowInvalidTypeException('Parent validator', '', 'Recursive validator');
