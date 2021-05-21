@@ -235,7 +235,7 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @package GI\DOM\Factory
  *
  * @method CommentInterface createComment(string $text = '')
- * @method TextNodeInterface createTextNode(string $text = '')
+ * @method TextNodeInterface createTextNode(string $text = null)
  *
  * @method XMLSimpleElementInterface createXMLSimpleElement(string $tag = '', string $namespace = '')
  * @method XMLContainerElementInterface createXMLContainerElement(string $tag = '', string $namespace = '')
@@ -255,13 +255,13 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @method ResetInterface createReset()
  * @method SubmitInterface createSubmit()
  *
- * @method BigInterface createBig(string $text = '')
- * @method BoldInterface createBold(string $text = '')
- * @method ItalicInterface createItalic(string $text = '')
- * @method LineThroughInterface createLineThrough(string $text = '')
- * @method SmallInterface createSmall(string $text = '')
- * @method StrongInterface createStrong(string $text = '')
- * @method UnderlineInterface createUnderline(string $text = '')
+ * @method BigInterface createBig(string $text = null)
+ * @method BoldInterface createBold(string $text = null)
+ * @method ItalicInterface createItalic(string $text = null)
+ * @method LineThroughInterface createLineThrough(string $text = null)
+ * @method SmallInterface createSmall(string $text = null)
+ * @method StrongInterface createStrong(string $text = null)
+ * @method UnderlineInterface createUnderline(string $text = null)
  *
  * @method DivInterface createDiv()
  * @method ClearInterface createClear()
@@ -271,8 +271,8 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @method LineInterface createLine()
  *
  * @method DLInterface createDL()
- * @method DTInterface createDT(string $text = '')
- * @method DDInterface createDD(string $text = '')
+ * @method DTInterface createDT(string $text = null)
+ * @method DDInterface createDD(string $text = null)
  *
  * @method BodyInterface createBody()
  * @method DoctypeInterface createDoctype(string $text = '')
@@ -303,7 +303,7 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  *
  * @method OLInterface createOL()
  * @method ULInterface createUL()
- * @method LIInterface createLI(string $text = '')
+ * @method LIInterface createLI(string $text = null)
  * @method TreeInterface createTree(SourceTreeInterface $source, string $parentKey = '')
  * @method LinkedListInterface createLinkedList(array $source)
  *
@@ -315,26 +315,26 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @method InlineInterface createInlineScript(string $text = '')
  *
  * @method OptgroupInterface createOptgroup(string $label = '')
- * @method OptionInterface createOption($value = '', string $text = '', bool $selected = false)
+ * @method OptionInterface createOption($value = '', string $text = null, bool $selected = false)
  * @method SelectInterface createSelect()
  *
  * @method SelectorInterface createSelector(string $selector, array $attributes = [])
  * @method StyleInterface createStyle()
  *
- * @method TDInterface createTD(string $text = '')
- * @method THInterface createTH(string $text = '')
+ * @method TDInterface createTD(string $text = null)
+ * @method THInterface createTH(string $text = null)
  * @method TRInterface createTR()
  * @method TBodyInterface createTBody()
  * @method THeadInterface createTHead()
  * @method TFooterInterface createTFooter()
  * @method TableInterface createTable()
  *
- * @method TextAreaInterface createTextArea(array $name = [], string $text = '')
+ * @method TextAreaInterface createTextArea(array $name = [], string $text = null)
  *
- * @method LabelInterface createLabel(string $text = '')
- * @method ParagraphInterface createParagraph(string $text = '')
- * @method PreInterface createPre(string $text = '')
- * @method SpanInterface createSpan(string $text = '')
+ * @method LabelInterface createLabel(string $text = null)
+ * @method ParagraphInterface createParagraph(string $text = null)
+ * @method PreInterface createPre(string $text = null)
+ * @method SpanInterface createSpan(string $text = null)
  */
 class Factory extends AbstractFactory implements FactoryInterface
 {

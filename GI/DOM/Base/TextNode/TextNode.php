@@ -39,11 +39,12 @@ class TextNode implements TextNodeInterface
 
     /**
      * TextNode constructor.
-     * @param string $text
+     * @param string|null $text
      */
-    public function __construct(string $text = '')
+    public function __construct(string $text = null)
     {
         $this->setText($text);
+
         $this->textProcessor = $this->giGetUtilites()->createMarkupTextProcessor();
     }
 
@@ -64,12 +65,12 @@ class TextNode implements TextNodeInterface
     }
 
     /**
-     * @param string $text
+     * @param string|null $text
      * @return static
      */
-    public function setText(string $text)
+    public function setText(string $text = null)
     {
-        $this->text = $text;
+        $this->text = (string)$text;
 
         return $this;
     }

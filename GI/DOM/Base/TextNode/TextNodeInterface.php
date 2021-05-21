@@ -33,8 +33,8 @@ interface TextNodeInterface extends NodeInterface
     public function getText();
 
     /**
-     * @param string $text
+     * @param string|null $text
      * @return static
      */
-    public function setText(string $text);
+    public function setText(string $text = null);
 }

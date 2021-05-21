@@ -27,10 +27,10 @@ class DT extends ContainerElement implements DTInterface
     /**
      * DT constructor.
      *
-     * @param string $text
+     * @param string|null $text
      * @throws \Exception
      */
-    public function __construct(string $text = '')
+    public function __construct(string $text = null)
     {
         parent::__construct(static::TAG);
 

@@ -27,11 +27,11 @@ class Label extends AbstractTextContainer implements LabelInterface
     /**
      * Label constructor.
      *
-     * @param string $text
+     * @param string|null $text
      * @param string $for
      * @throws \Exception
      */
-    public function __construct(string $text = '', string $for = '')
+    public function __construct(string $text = null, string $for = '')
     {
         parent::__construct($text);
 

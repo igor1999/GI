@@ -42,10 +42,10 @@ class TextArea extends ContainerElement implements TextAreaInterface
      * TextArea constructor.
      *
      * @param array $name
-     * @param string $text
+     * @param string|null $text
      * @throws \Exception
      */
-    public function __construct(array $name = [], string $text = '')
+    public function __construct(array $name = [], string $text = null)
     {
         parent::__construct(static::TAG);
 

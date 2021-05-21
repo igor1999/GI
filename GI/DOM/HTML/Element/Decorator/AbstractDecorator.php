@@ -26,10 +26,10 @@ abstract class AbstractDecorator extends ContainerElement implements DecoratorIn
 
     /**
      * AbstractDecorator constructor.
-     * @param string $text
+     * @param string|null $text
      * @throws \Exception
      */
-    public function __construct(string $text = '')
+    public function __construct(string $text = null)
     {
         parent::__construct(static::TAG);
 

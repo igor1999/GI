@@ -26,10 +26,10 @@ class DD extends ContainerElement implements DDInterface
 
     /**
      * DD constructor.
-     * @param string $text
+     * @param string|null $text
      * @throws \Exception
      */
-    public function __construct(string $text = '')
+    public function __construct(string $text = null)
     {
         parent::__construct(static::TAG);
 

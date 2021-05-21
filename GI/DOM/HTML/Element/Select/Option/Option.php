@@ -27,11 +27,11 @@ class Option extends ContainerElement implements OptionInterface
     /**
      * Option constructor.
      * @param string|int $value
-     * @param string $text
+     * @param string|null $text
      * @param bool $selected
      * @throws \Exception
      */
-    public function __construct($value = '', string $text = '', bool $selected = false)
+    public function __construct($value = '', string $text = null, bool $selected = false)
     {
         parent::__construct(static::TAG);
 
