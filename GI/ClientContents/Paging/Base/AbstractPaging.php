@@ -53,7 +53,7 @@ abstract class AbstractPaging implements PagingInterface
      * AbstractPaging constructor.
      * @param int $entriesTotal
      * @param int $selectedPage
-     * @param int|null $entriesProPage
+     * @param int $entriesProPage
      * @throws \Exception
      */
     public function __construct(int $entriesTotal, int $selectedPage = 1, int $entriesProPage = 0)
