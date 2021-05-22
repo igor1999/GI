@@ -62,23 +62,23 @@ interface NodesListInterface extends ImmutableInterface
     public function getItems();
 
     /**
-     * @param string $text
+     * @param string|null $text
      * @return static
      */
-    public function setText(string $text = '');
+    public function setText(string $text = null);
 
     /**
-     * @param string $text
+     * @param string|null $text
      * @return static
      */
-    public function addText(string $text = '');
+    public function addText(string $text = null);
 
     /**
      * @param int $index
-     * @param string $text
+     * @param string|null $text
      * @return static
      */
-    public function insertText(int $index, string $text = '');
+    public function insertText(int $index, string $text = null);
 
     /**
      * @return static
