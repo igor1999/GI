@@ -4,11 +4,12 @@ use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Getter\ViewInter
 /** @var ViewInterface $this */
 ?>
 <?php
-$column = $this->getColumn();
+$column     = $this->getColumn();
+$nullForArg = $this->getNullForDoc($column);
 ?>
     /**
      * @to-db <?php echo $column->getName(), PHP_EOL; ?>
-     * @return <?php echo $column->getPHPType(), PHP_EOL; ?>
+     * @return <?php echo $column->getPHPType(), $nullForArg, PHP_EOL; ?>
 <?php foreach ($column->getParentReferenceList()->getItems() as $referencedColumn): ?>
 <?php $class = $referencedColumn->getTable()->getPhpNames()->getRecordClass(); ?>
      * @<?php echo $this->getORMNamespace(), '\\', $class; ?> <?php echo $referencedColumn->getName(), PHP_EOL; ?>
