@@ -87,15 +87,6 @@ class View extends Base implements ViewInterface
      * @param ColumnInterface $column
      * @return string
      */
-    public function getNullForDoc(ColumnInterface $column)
-    {
-        return $column->isNull() ? '|null' : '';
-    }
-
-    /**
-     * @param ColumnInterface $column
-     * @return string
-     */
     public function getNullForArg(ColumnInterface $column)
     {
         return $column->isNull() ? ' = null' : '';

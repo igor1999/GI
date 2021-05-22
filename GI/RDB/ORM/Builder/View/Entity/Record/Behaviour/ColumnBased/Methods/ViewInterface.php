@@ -44,11 +44,5 @@ interface ViewInterface extends BaseInterface
      * @param ColumnInterface $column
      * @return string
      */
-    public function getNullForDoc(ColumnInterface $column);
-
-    /**
-     * @param ColumnInterface $column
-     * @return string
-     */
     public function getNullForArg(ColumnInterface $column);
 }

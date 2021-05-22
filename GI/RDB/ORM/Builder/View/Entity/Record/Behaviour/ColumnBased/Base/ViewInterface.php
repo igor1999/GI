@@ -29,5 +29,9 @@ use GI\RDB\Meta\Column\ColumnInterface;
  */
 interface ViewInterface extends BaseInterface
 {
-
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getNullForDoc(ColumnInterface $column);
 }

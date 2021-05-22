@@ -30,5 +30,12 @@ use GI\RDB\Meta\Column\ColumnInterface;
  */
 abstract class AbstractView extends Base implements ViewInterface
 {
-
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getNullForDoc(ColumnInterface $column)
+    {
+        return $column->isNull() ? '|null' : '';
+    }
 }

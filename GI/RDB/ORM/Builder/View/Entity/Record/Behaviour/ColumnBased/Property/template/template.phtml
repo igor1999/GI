@@ -4,8 +4,9 @@ use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInt
 $defaultValue = $this->getColumn()->isIntPHPType() ? 0 : '\'\'';
 $null         = $this->getColumn()->isNull();
 $default      = $null ? '' : ' = ' . $defaultValue;
+$nullForArg   = $this->getNullForDoc($this->getColumn());
 ?>
     /**
-     * @var <?php echo $this->getColumn()->getPHPType(), PHP_EOL; ?>
+     * @var <?php echo $this->getColumn()->getPHPType(), $nullForArg, PHP_EOL; ?>
      */
     private $<?php echo $this->getColumn()->getClassProperty(), $default; ?>;
