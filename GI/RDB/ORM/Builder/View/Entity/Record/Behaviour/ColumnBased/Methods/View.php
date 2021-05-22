@@ -82,13 +82,4 @@ class View extends Base implements ViewInterface
     {
         return $column->isIdentity() ? 'protected' : 'public';
     }
-
-    /**
-     * @param ColumnInterface $column
-     * @return string
-     */
-    public function getNullForArg(ColumnInterface $column)
-    {
-        return $column->isNull() ? ' = null' : '';
-    }
 }

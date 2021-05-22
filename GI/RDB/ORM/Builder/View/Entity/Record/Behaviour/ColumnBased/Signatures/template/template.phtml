@@ -3,21 +3,23 @@ use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Signatures\ViewI
 /** @var ViewInterface $this */
 ?>
 <?php
-$column   = $this->getColumn();
-$type     = $column->getPHPType();
-$property = $column->getClassProperty();
+$column     = $this->getColumn();
+$type       = $column->getPHPType();
+$property   = $column->getClassProperty();
+$nullForDoc = $this->getNullForDoc($column);
+$nullForArg = $this->getNullForArg($column);
 ?>
     /**
-     * @return <?php echo $type, PHP_EOL; ?>
+     * @return <?php echo $type, $nullForDoc, PHP_EOL; ?>
      */
     public function <?php echo $column->getClassGetter(); ?>();
 <?php if (!$column->isIdentity()): ?>
 
     /**
-     * @param <?php echo $type; ?> $<?php echo $property, PHP_EOL; ?>
+     * @param <?php echo $type, $nullForDoc; ?> $<?php echo $property, PHP_EOL; ?>
      * @return static
      */
-    public function <?php echo $column->getClassSetter(); ?>(<?php echo $type; ?> $<?php echo $property; ?>);
+    public function <?php echo $column->getClassSetter(); ?>(<?php echo $type; ?> $<?php echo $property, $nullForArg; ?>);
 <?php endif;?>
 <?php if ($column->isDatePHPType()): ?>
 

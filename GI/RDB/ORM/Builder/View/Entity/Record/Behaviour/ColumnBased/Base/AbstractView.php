@@ -38,4 +38,13 @@ abstract class AbstractView extends Base implements ViewInterface
     {
         return $column->isNull() ? '|null' : '';
     }
+
+    /**
+     * @param ColumnInterface $column
+     * @return string
+     */
+    public function getNullForArg(ColumnInterface $column)
+    {
+        return $column->isNull() ? ' = null' : '';
+    }
 }
