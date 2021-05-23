@@ -24,6 +24,56 @@ use GI\Validator\Simple\DateTime\DateInterface as BaseValidatorInterface;
 abstract class AbstractDateTime extends AbstractFilter implements DateTimeInterface
 {
     /**
+     * @var mixed
+     */
+    private $defaultValue;
+
+
+    /**
+     * @return mixed
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @param mixed $defaultValue
+     * @return static
+     */
+    public function setDefaultValue($defaultValue)
+    {
+        $this->defaultValue = $defaultValue;
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function setDefaultValueToEmpty()
+    {
+        $this->setDefaultValue('');
+
+        return $this;
+    }
+
+    /**
+     * @return static
+     */
+    public function setDefaultValueToNow()
+    {
+        $this->setDefaultValue($this->getNow());
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getNow();
+
+    /**
      * @return string
      */
     public function execute()
@@ -35,9 +85,4 @@ abstract class AbstractDateTime extends AbstractFilter implements DateTimeInterf
      * @return BaseValidatorInterface
      */
     abstract protected function createValidator();
-
-    /**
-     * @return mixed
-     */
-    abstract protected function getDefaultValue();
 }

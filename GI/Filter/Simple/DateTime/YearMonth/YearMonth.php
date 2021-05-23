@@ -15,15 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Filter\Simple\DateTime\DateHourMinute;
+namespace GI\Filter\Simple\DateTime\YearMonth;
 
-class DefaultToday extends AbstractDateHourMinute implements DefaultEmptyInterface
+use GI\Filter\Simple\DateTime\AbstractDateTime;
+
+use GI\Validator\Simple\DateTime\YearMonthInterface as ValidatorInterface;
+
+class YearMonth extends AbstractDateTime implements YearMonthInterface
 {
+    /**
+     * @return ValidatorInterface
+     */
+    protected function createValidator()
+    {
+        return $this->giGetValidatorFactory()->createYearMonth();
+    }
+
     /**
      * @return string
      */
-    protected function getDefaultValue()
+    protected function getNow()
     {
-        return date('Y-m-d H:i:s');
+        return date('Y-m-d');
     }
 }

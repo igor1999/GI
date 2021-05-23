@@ -15,19 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Filter\Simple\DateTime\Date;
+namespace GI\Filter\Simple\DateTime\DateHourMinute;
 
 use GI\Filter\Simple\DateTime\AbstractDateTime;
 
-use GI\Validator\Simple\DateTime\DateInterface as ValidatorInterface;
+use GI\Validator\Simple\DateTime\DateHourMinuteInterface as ValidatorInterface;
 
-abstract class AbstractDate extends AbstractDateTime implements DateInterface
+class DateHourMinute extends AbstractDateTime implements DateHourMinuteInterface
 {
     /**
      * @return ValidatorInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createDate();
+        return $this->giGetValidatorFactory()->createDateHourMinute();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getNow()
+    {
+        return date('Y-m-d H:i:s');
     }
 }

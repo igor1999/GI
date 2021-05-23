@@ -27,7 +27,7 @@ class Filter extends Recursive implements FilterInterface
     protected function getContents()
     {
         return [
-            'month' => $this->giGetFilterFactory()->createYearMonthToday()
+            'month' => $this->giGetFilterFactory()->createYear()->setDefaultValueToNow()
         ];
     }
 }

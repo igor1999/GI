@@ -15,15 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Filter\Simple\DateTime\Date;
+namespace GI\Filter\Simple\DateTime\Time;
 
-class DefaultToday extends AbstractDate implements DefaultEmptyInterface
+use GI\Filter\Simple\DateTime\AbstractDateTime;
+
+use GI\Validator\Simple\DateTime\TimeInterface as ValidatorInterface;
+
+class Time extends AbstractDateTime implements TimeInterface
 {
+    /**
+     * @return ValidatorInterface
+     */
+    protected function createValidator()
+    {
+        return $this->giGetValidatorFactory()->createTime();
+    }
+
     /**
      * @return string
      */
-    protected function getDefaultValue()
+    protected function getNow()
     {
-        return date('Y-m-d');
+        return date('H:i:s');
     }
 }

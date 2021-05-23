@@ -21,5 +21,24 @@ use GI\Filter\FilterInterface;
 
 interface DateTimeInterface extends FilterInterface
 {
+    /**
+     * @return mixed
+     */
+    public function getDefaultValue();
 
+    /**
+     * @param mixed $defaultValue
+     * @return static
+     */
+    public function setDefaultValue($defaultValue);
+
+    /**
+     * @return static
+     */
+    public function setDefaultValueToEmpty();
+
+    /**
+     * @return static
+     */
+    public function setDefaultValueToNow();
 }

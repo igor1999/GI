@@ -19,27 +19,13 @@ namespace GI\Filter\Factory;
 
 use GI\Pattern\Factory\AbstractFactory;
 
-use GI\Filter\Simple\DateTime\Date\DefaultEmpty as DateEmpty;
-use GI\Filter\Simple\DateTime\Date\DefaultToday as DateToday;
-use GI\Filter\Simple\DateTime\Date\DefaultNull as DateNull;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultEmpty as DateHourMinuteEmpty;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultToday as DateHourMinuteToday;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultNull as DateHourMinuteNull;
-use GI\Filter\Simple\DateTime\DateTime\DefaultEmpty as DateTimeEmpty;
-use GI\Filter\Simple\DateTime\DateTime\DefaultToday as DateTimeToday;
-use GI\Filter\Simple\DateTime\DateTime\DefaultNull as DateTimeNull;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultEmpty as HourMinuteEmpty;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultToday as HourMinuteToday;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultNull as HourMinuteNull;
-use GI\Filter\Simple\DateTime\Time\DefaultEmpty as TimeEmpty;
-use GI\Filter\Simple\DateTime\Time\DefaultToday as TimeToday;
-use GI\Filter\Simple\DateTime\Time\DefaultNull as TimeNull;
-use GI\Filter\Simple\DateTime\Year\DefaultEmpty as YearEmpty;
-use GI\Filter\Simple\DateTime\Year\DefaultToday as YearToday;
-use GI\Filter\Simple\DateTime\Year\DefaultNull as YearNull;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultEmpty as YearMonthEmpty;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultToday as YearMonthToday;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultNull as YearMonthNull;
+use GI\Filter\Simple\DateTime\Date\Date;
+use GI\Filter\Simple\DateTime\DateHourMinute\DateHourMinute;
+use GI\Filter\Simple\DateTime\DateTime\DateTime;
+use GI\Filter\Simple\DateTime\HourMinute\HourMinute;
+use GI\Filter\Simple\DateTime\Time\Time;
+use GI\Filter\Simple\DateTime\Year\Year;
+use GI\Filter\Simple\DateTime\YearMonth\YearMonth;
 
 use GI\Filter\Container\Chain\Chain;
 use GI\Filter\Container\Recursive\Recursive;
@@ -47,27 +33,13 @@ use GI\Filter\Container\Recursive\Recursive;
 
 use GI\Filter\FilterInterface;
 
-use GI\Filter\Simple\DateTime\Date\DefaultEmptyInterface as DateEmptyInterface;
-use GI\Filter\Simple\DateTime\Date\DefaultTodayInterface as DateTodayInterface;
-use GI\Filter\Simple\DateTime\Date\DefaultNullInterface as DateNullInterface;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultEmptyInterface as DateHourMinuteEmptyInterface;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultTodayInterface as DateHourMinuteTodayInterface;
-use GI\Filter\Simple\DateTime\DateHourMinute\DefaultNullInterface as DateHourMinuteNullInterface;
-use GI\Filter\Simple\DateTime\DateTime\DefaultEmptyInterface as DateTimeEmptyInterface;
-use GI\Filter\Simple\DateTime\DateTime\DefaultTodayInterface as DateTimeTodayInterface;
-use GI\Filter\Simple\DateTime\DateTime\DefaultNullInterface as DateTimeNullInterface;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultEmptyInterface as HourMinuteEmptyInterface;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultTodayInterface as HourMinuteTodayInterface;
-use GI\Filter\Simple\DateTime\HourMinute\DefaultNullInterface as HourMinuteNullInterface;
-use GI\Filter\Simple\DateTime\Time\DefaultEmptyInterface as TimeEmptyInterface;
-use GI\Filter\Simple\DateTime\Time\DefaultTodayInterface as TimeTodayInterface;
-use GI\Filter\Simple\DateTime\Time\DefaultNullInterface as TimeNullInterface;
-use GI\Filter\Simple\DateTime\Year\DefaultEmptyInterface as YearEmptyInterface;
-use GI\Filter\Simple\DateTime\Year\DefaultTodayInterface as YearTodayInterface;
-use GI\Filter\Simple\DateTime\Year\DefaultNullInterface as YearNullInterface;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultEmptyInterface as YearMonthEmptyInterface;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultTodayInterface as YearMonthTodayInterface;
-use GI\Filter\Simple\DateTime\YearMonth\DefaultNullInterface as YearMonthNullInterface;
+use GI\Filter\Simple\DateTime\Date\DateInterface;
+use GI\Filter\Simple\DateTime\DateHourMinute\DateHourMinuteInterface;
+use GI\Filter\Simple\DateTime\DateTime\DateTimeInterface;
+use GI\Filter\Simple\DateTime\HourMinute\HourMinuteInterface;
+use GI\Filter\Simple\DateTime\Time\TimeInterface;
+use GI\Filter\Simple\DateTime\Year\YearInterface;
+use GI\Filter\Simple\DateTime\YearMonth\YearMonthInterface;
 
 use GI\Filter\Container\Chain\ChainInterface;
 use GI\Filter\Container\Recursive\RecursiveInterface;
@@ -76,27 +48,13 @@ use GI\Filter\Container\Recursive\RecursiveInterface;
  * Class Factory
  * @package GI\Filter\Factory
  *
- * @method DateEmptyInterface createDateEmpty()
- * @method DateTodayInterface createDateToday()
- * @method DateNullInterface createDateNull()
- * @method DateHourMinuteEmptyInterface createDateHourMinuteEmpty()
- * @method DateHourMinuteTodayInterface createDateHourMinuteToday()
- * @method DateHourMinuteNullInterface createDateHourMinuteNull()
- * @method DateTimeEmptyInterface createDateTimeEmpty()
- * @method DateTimeTodayInterface createDateTimeToday()
- * @method DateTimeNullInterface createDateTimeNull()
- * @method HourMinuteEmptyInterface createHourMinuteEmpty()
- * @method HourMinuteTodayInterface createHourMinuteToday()
- * @method HourMinuteNullInterface createHourMinuteNull()
- * @method TimeEmptyInterface createTimeEmpty()
- * @method TimeTodayInterface createTimeToday()
- * @method TimeNullInterface createTimeNull()
- * @method YearEmptyInterface createYearEmpty()
- * @method YearTodayInterface createYearToday()
- * @method YearNullInterface createYearNull()
- * @method YearMonthEmptyInterface createYearMonthEmpty()
- * @method YearMonthTodayInterface createYearMonthToday()
- * @method YearMonthNullInterface createYearMonthNull()
+ * @method DateInterface createDate()
+ * @method DateHourMinuteInterface createDateHourMinute()
+ * @method DateTimeInterface createDateTime()
+ * @method HourMinuteInterface createHourMinute()
+ * @method TimeInterface createTime()
+ * @method YearInterface createYear()
+ * @method YearMonthInterface createYearMonth()
  *
  * @method ChainInterface createChain(array $contents = [])
  * @method RecursiveInterface createRecursive(array $contents = [])
@@ -111,27 +69,13 @@ class Factory extends AbstractFactory implements FactoryInterface
     {
         $this->getTemplateClasses()->add(FilterInterface::class);
 
-        $this->setNamed('DateEmpty', DateEmpty::class)
-            ->setNamed('DateToday', DateToday::class)
-            ->setNamed('DateNull', DateNull::class)
-            ->setNamed('DateHourMinuteEmpty', DateHourMinuteEmpty::class)
-            ->setNamed('DateHourMinuteToday', DateHourMinuteToday::class)
-            ->setNamed('DateHourMinuteNull', DateHourMinuteNull::class)
-            ->setNamed('DateTimeEmpty', DateTimeEmpty::class)
-            ->setNamed('DateTimeToday', DateTimeToday::class)
-            ->setNamed('DateTimeNull', DateTimeNull::class)
-            ->setNamed('HourMinuteEmpty', HourMinuteEmpty::class)
-            ->setNamed('HourMinuteToday', HourMinuteToday::class)
-            ->setNamed('HourMinuteNull', HourMinuteNull::class)
-            ->setNamed('TimeEmpty', TimeEmpty::class)
-            ->setNamed('TimeToday', TimeToday::class)
-            ->setNamed('TimeNull', TimeNull::class)
-            ->setNamed('YearEmpty', YearEmpty::class)
-            ->setNamed('YearToday', YearToday::class)
-            ->setNamed('YearNull', YearNull::class)
-            ->setNamed('YearMonthEmpty', YearMonthEmpty::class)
-            ->setNamed('YearMonthToday', YearMonthToday::class)
-            ->setNamed('YearMonthNull', YearMonthNull::class)
+        $this->set(Date::class)
+            ->set(DateHourMinute::class)
+            ->set(DateTime::class)
+            ->set(HourMinute::class)
+            ->set(Time::class)
+            ->set(Year::class)
+            ->set(YearMonth::class)
 
             ->set(Chain::class)
             ->set(Recursive::class);

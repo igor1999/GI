@@ -15,15 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\Filter\Simple\DateTime\DateTime;
+namespace GI\Filter\Simple\DateTime\Year;
 
-class DefaultNull extends AbstractDateTime implements DefaultNullInterface
+use GI\Filter\Simple\DateTime\AbstractDateTime;
+
+use GI\Validator\Simple\DateTime\YearInterface as ValidatorInterface;
+
+class Year extends AbstractDateTime implements YearInterface
 {
+    /**
+     * @return ValidatorInterface
+     */
+    protected function createValidator()
+    {
+        return $this->giGetValidatorFactory()->createYear();
+    }
+
     /**
      * @return string
      */
-    protected function getDefaultValue()
+    protected function getNow()
     {
-        return null;
+        return date('Y');
     }
 }
