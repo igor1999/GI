@@ -1,7 +1,10 @@
 <?php
 use GI\RDB\ORM\Builder\View\Entity\Record\Behaviour\ColumnBased\Property\ViewInterface;
 /** @var ViewInterface $this */
-$defaultValue = $this->getColumn()->isIntPHPType() ? 0 : '\'\'';
+$defaultValue = $this->getColumn()->getDefault();
+if (empty($defaultValue) || ($defaultValue == 'current_timestamp()')) {
+    $defaultValue = $this->getColumn()->isIntPHPType() ? 0 : '\'\'';
+}
 $null         = $this->getColumn()->isNull();
 $default      = $null ? '' : ' = ' . $defaultValue;
 $nullForDoc   = $this->getNullForDoc($this->getColumn());
