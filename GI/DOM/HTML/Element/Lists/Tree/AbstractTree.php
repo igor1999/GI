@@ -20,10 +20,8 @@ namespace GI\DOM\HTML\Element\Lists\Tree;
 use GI\DOM\HTML\Element\Lists\UL\UL;
 
 use GI\DOM\Base\NodeInterface;
-use GI\Pattern\StringConvertable\StringConvertableInterface;
-use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
 
-class Tree extends UL implements TreeInterface
+abstract class AbstractTree extends UL implements TreeInterface
 {
     const KEY_SEPARATOR = ' ';
 
@@ -34,7 +32,7 @@ class Tree extends UL implements TreeInterface
 
 
     /**
-     * @var SourceTreeInterface
+     * @var array
      */
     private $source;
 
@@ -45,12 +43,12 @@ class Tree extends UL implements TreeInterface
 
 
     /**
-     * Tree constructor.
-     * @param SourceTreeInterface $source
+     * AbstractTree constructor.
+     * @param array $source
      * @param string $parentKey
      * @throws \Exception
      */
-    public function __construct(SourceTreeInterface $source, string $parentKey = '')
+    public function __construct(array $source, string $parentKey = '')
     {
         parent::__construct();
 
@@ -63,7 +61,7 @@ class Tree extends UL implements TreeInterface
     }
 
     /**
-     * @return SourceTreeInterface
+     * @return array
      */
     public function getSource()
     {
@@ -84,29 +82,36 @@ class Tree extends UL implements TreeInterface
      */
     protected function create()
     {
-        foreach ($this->getSource()->getNodes() as $key => $node) {
+        foreach ($this->getSource() as $key => $node) {
 
             $parentKey = empty($this->parentKey) ? $key : $this->parentKey . static::KEY_SEPARATOR . $key;
 
-            if ($node instanceof SourceTreeInterface) {
-                $context = new static($node, $parentKey);
-            } elseif ($node instanceof NodeInterface) {
-                $context = $node;
-            } elseif ($node instanceof StringConvertableInterface) {
-                $context = $node->toString();
-            } elseif (is_object($node)) {
-                $context = null;
-                $this->giThrowInvalidTypeException('Node', $parentKey, 'scalar or string convertable');
-            } else {
-                $context = $node;
-            }
+            $context  = $this->getContext($node);
+            $children = $this->getChildren($node);
 
             $li = $this->giGetDOMFactory()->createLI($context);
-            $li->getAttributes()->setDataAttribute(static::NODE_ATTRIBUTE, $key);
 
+            if (!empty($children)) {
+                $childrenContainer = new static($children, $parentKey);
+                $li->getChildNodes()->add($childrenContainer);
+            }
+
+            $li->getAttributes()->setDataAttribute(static::NODE_ATTRIBUTE, $key);
             $this->getChildNodes()->addItem($li);
         }
 
         return $this;
     }
+
+    /**
+     * @param mixed $node
+     * @return NodeInterface|string
+     */
+    abstract protected function getContext($node);
+
+    /**
+     * @param mixed $node
+     * @return array
+     */
+    abstract protected function getChildren($node);
 }

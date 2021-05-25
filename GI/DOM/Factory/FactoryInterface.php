@@ -91,7 +91,6 @@ use GI\DOM\HTML\Element\Link\Named\Icon\IconInterface;
 use GI\DOM\HTML\Element\Lists\OL\OLInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 use GI\DOM\HTML\Element\Lists\Items\LI\LIInterface;
-use GI\DOM\HTML\Element\Lists\Tree\TreeInterface;
 use GI\DOM\HTML\Element\Lists\LinkedList\LinkedListInterface;
 
 use GI\DOM\HTML\Element\Script\Extern\ExternInterface;
@@ -122,8 +121,6 @@ use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
 use GI\DOM\HTML\Element\TextContainer\Paragraph\ParagraphInterface;
 use GI\DOM\HTML\Element\TextContainer\Pre\PreInterface;
 use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
-
-use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
 
 /**
  * Interface FactoryInterface
@@ -199,7 +196,6 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @method OLInterface createOL()
  * @method ULInterface createUL()
  * @method LIInterface createLI(string $text = null)
- * @method TreeInterface createTree(SourceTreeInterface $source, string $parentKey = '')
  * @method LinkedListInterface createLinkedList(array $source)
  *
  * @method ProgressInterface createProgress()

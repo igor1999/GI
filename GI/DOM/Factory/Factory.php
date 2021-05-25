@@ -91,7 +91,6 @@ use GI\DOM\HTML\Element\Link\Named\Icon\Icon;
 use GI\DOM\HTML\Element\Lists\OL\OL;
 use GI\DOM\HTML\Element\Lists\UL\UL;
 use GI\DOM\HTML\Element\Lists\Items\LI\LI;
-use GI\DOM\HTML\Element\Lists\Tree\Tree;
 use GI\DOM\HTML\Element\Lists\LinkedList\LinkedList;
 
 use GI\DOM\HTML\Element\Script\Extern\Extern;
@@ -196,7 +195,6 @@ use GI\DOM\HTML\Element\Link\Named\Icon\IconInterface;
 use GI\DOM\HTML\Element\Lists\OL\OLInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 use GI\DOM\HTML\Element\Lists\Items\LI\LIInterface;
-use GI\DOM\HTML\Element\Lists\Tree\TreeInterface;
 use GI\DOM\HTML\Element\Lists\LinkedList\LinkedListInterface;
 
 use GI\DOM\HTML\Element\Script\Extern\ExternInterface;
@@ -227,8 +225,6 @@ use GI\DOM\HTML\Element\TextContainer\Label\LabelInterface;
 use GI\DOM\HTML\Element\TextContainer\Paragraph\ParagraphInterface;
 use GI\DOM\HTML\Element\TextContainer\Pre\PreInterface;
 use GI\DOM\HTML\Element\TextContainer\Span\SpanInterface;
-
-use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
 
 /**
  * Class Factory
@@ -304,7 +300,6 @@ use GI\Storage\Tree\TreeInterface as SourceTreeInterface;
  * @method OLInterface createOL()
  * @method ULInterface createUL()
  * @method LIInterface createLI(string $text = null)
- * @method TreeInterface createTree(SourceTreeInterface $source, string $parentKey = '')
  * @method LinkedListInterface createLinkedList(array $source)
  *
  * @method ProgressInterface createProgress()
@@ -422,7 +417,6 @@ class Factory extends AbstractFactory implements FactoryInterface
             ->set(OL::class)
             ->set(UL::class)
             ->set(LI::class)
-            ->set(Tree::class)
             ->set(LinkedList::class)
 
             ->setNamed('ExternScript', Extern::class)
