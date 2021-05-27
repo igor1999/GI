@@ -65,6 +65,12 @@ interface HTMLInterface extends ElementInterface
     public function setVisibility(bool $visible);
 
     /**
+     * @return bool
+     * @throws \Exception
+     */
+    public function hasGIId();
+
+    /**
      * @return string
      * @throws \Exception
      */

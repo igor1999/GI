@@ -20,10 +20,15 @@ namespace GI\DOM\HTML\Element\Div\Float\Left;
 use GI\DOM\HTML\Element\Div\Div;
 use GI\DOM\HTML\Attributes\Style\Style;
 
+use GI\DOM\HTML\Element\Div\FloatingLayout\Cell\CellTrait;
+
 use GI\DOM\HTML\Attributes\Style\StyleInterface;
 
 class Left extends Div implements LeftInterface
 {
+    use CellTrait;
+
+
     /**
      * @var StyleInterface
      */

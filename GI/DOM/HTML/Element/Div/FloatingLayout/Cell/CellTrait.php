@@ -17,23 +17,34 @@
  */
 namespace GI\DOM\HTML\Element\Div\FloatingLayout\Cell;
 
-use GI\DOM\HTML\Element\ContainerElementInterface;
+use GI\DOM\HTML\Element\HTMLInterface;
 
-interface CellInterface extends ContainerElementInterface
+trait CellTrait
 {
-    const CELL_ATTRIBUTE = 'gi-cell';
-
-
     /**
      * @return string
      * @throws \Exception
      */
-    public function getCellAttribute();
+    public function getCellAttribute()
+    {
+        /** @var HTMLInterface $me */
+        $me = $this;
+
+        return $me->getAttributes()->getDataAttribute(static::CELL_ATTRIBUTE);
+    }
 
     /**
      * @param string $value
      * @return static
      * @throws \Exception
      */
-    public function setCellAttribute(string $value);
+    public function setCellAttribute(string $value)
+    {
+        /** @var HTMLInterface $me */
+        $me = $this;
+
+        $me->getAttributes()->setDataAttribute(static::CELL_ATTRIBUTE, $value);
+
+        return $this;
+    }
 }

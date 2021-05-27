@@ -24,6 +24,7 @@ use GI\DOM\Base\NodeInterface;
 use GI\DOM\HTML\Element\Div\Float\Right\RightInterface as FloatRightInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\Cell\CellInterface;
 use GI\DOM\HTML\Element\Div\FloatingLayout\Line\LineListInterface;
+use GI\DOM\HTML\Element\HTMLInterface;
 
 class Layout extends ContainerElement implements LayoutInterface
 {
@@ -102,16 +103,18 @@ class Layout extends ContainerElement implements LayoutInterface
      * @param int $rowIndex
      * @param int $cellIndex
      * @param string|array|NodeInterface $contents
-     * @param string $class
+     * @param string $giId
      * @return static
      * @throws \Exception
      */
-     public function set(int $rowIndex, int $cellIndex, $contents, string $class = '')
+     public function set(int $rowIndex, int $cellIndex, $contents, string $giId = '')
      {
          $this->get($rowIndex, $cellIndex)->getChildNodes()->set($contents);
 
-         if (!empty($class)) {
-             $this->get($rowIndex, $cellIndex)->getClasses()->add($class);
+         if (!empty($giId)) {
+             $this->get($rowIndex, $cellIndex)->setCellAttribute($giId);
+         } elseif (($contents instanceof HTMLInterface) && ($contents->hasGIId())) {
+             $this->get($rowIndex, $cellIndex)->setCellAttribute($contents->getGIId());
          }
 
          return $this;

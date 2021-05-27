@@ -21,9 +21,13 @@ use GI\DOM\HTML\Element\Div\Div;
 use GI\DOM\HTML\Attributes\Style\Style;
 
 use GI\DOM\HTML\Attributes\Style\StyleInterface;
+use GI\DOM\HTML\Element\Div\FloatingLayout\Cell\CellTrait;
 
 class Right extends Div implements RightInterface
 {
+    use CellTrait;
+
+
     /**
      * @var StyleInterface
      */

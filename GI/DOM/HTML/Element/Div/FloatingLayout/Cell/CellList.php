@@ -25,9 +25,6 @@ use GI\DOM\Base\NodeInterface;
 
 class CellList extends AbstractImmutable implements CellListInterface
 {
-    const CELL_ATTRIBUTE = 'gi-cell';
-
-
     /**
      * @param int $index
      * @return CellInterface
@@ -111,7 +108,7 @@ class CellList extends AbstractImmutable implements CellListInterface
     protected function createCell($content = '', bool $left = true)
     {
         $cell = $left ? $this->giGetDOMFactory()->createFloatLeft() : $this->giGetDOMFactory()->createFloatRight();
-        $cell->getAttributes()->setDataAttribute(static::CELL_ATTRIBUTE, '');
+        $cell->setCellAttribute('');
 
         $cell->getChildNodes()->set($content);
 

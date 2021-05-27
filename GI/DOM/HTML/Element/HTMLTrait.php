@@ -172,6 +172,15 @@ trait HTMLTrait
     }
 
     /**
+     * @return bool
+     * @throws \Exception
+     */
+    public function hasGIId()
+    {
+        return $this->getAttributes()->hasDataAttribute(self::ATTRIBUTE_GI_ID);
+    }
+
+    /**
      * @return string
      * @throws \Exception
      */

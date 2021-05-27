@@ -50,11 +50,11 @@ interface LayoutInterface extends DivInterface
      * @param int $rowIndex
      * @param int $cellIndex
      * @param string|array|NodeInterface $contents
-     * @param string $class
+     * @param string $giId
      * @return static
      * @throws \Exception
      */
-    public function set(int $rowIndex, int $cellIndex, $contents, string $class = '');
+    public function set(int $rowIndex, int $cellIndex, $contents, string $giId = '');
 
     /**
      * @param int $rowIndex
