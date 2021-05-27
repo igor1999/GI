@@ -102,12 +102,17 @@ class Layout extends ContainerElement implements LayoutInterface
      * @param int $rowIndex
      * @param int $cellIndex
      * @param string|array|NodeInterface $contents
+     * @param string $class
      * @return static
      * @throws \Exception
      */
-     public function set(int $rowIndex, int $cellIndex, $contents)
+     public function set(int $rowIndex, int $cellIndex, $contents, string $class = '')
      {
          $this->get($rowIndex, $cellIndex)->getChildNodes()->set($contents);
+
+         if (!empty($class)) {
+             $this->get($rowIndex, $cellIndex)->getClasses()->add($class);
+         }
 
          return $this;
      }
