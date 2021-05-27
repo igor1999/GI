@@ -46,9 +46,6 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     const PAGING_RELATION = 'paging';
 
 
-    const ATTRIBUTE_HEADER_COLUMN_ID = 'column-id';
-
-
     /**
      * @var TableInterface
      */
@@ -228,7 +225,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
         foreach ($this->getTemplate()->getItems() as $id => $item) {
             $cell = $item->createHeaderCell($this, $criteria, $direction);
 
-            $cell->getAttributes()->setDataAttribute(static::ATTRIBUTE_HEADER_COLUMN_ID, $id);
+            $cell->setColumnId($id);
             $this->headerCells[$id] = $cell;
 
             $row->getChildNodes()->addCell($cell);

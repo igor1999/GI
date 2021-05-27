@@ -21,6 +21,9 @@ use GI\DOM\HTML\Element\ContainerElementInterface;
 
 interface TDInterface extends ContainerElementInterface
 {
+    const COLUMN_ID_ATTRIBUTE = 'column-id';
+
+
     /**
      * @param int $span
      * @return static
@@ -32,4 +35,17 @@ interface TDInterface extends ContainerElementInterface
      * @return static
      */
     public function setRowspan(int $span);
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getColumnId();
+
+    /**
+     * @param string $value
+     * @return static
+     * @throws \Exception
+     */
+    public function setColumnId(string $value);
 }

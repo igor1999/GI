@@ -57,4 +57,25 @@ class TD extends ContainerElement implements TDInterface
 
         return $this;
     }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getColumnId()
+    {
+        return $this->getAttributes()->getDataAttribute(self::COLUMN_ID_ATTRIBUTE);
+    }
+
+    /**
+     * @param string $value
+     * @return static
+     * @throws \Exception
+     */
+    public function setColumnId(string $value)
+    {
+        $this->getAttributes()->setDataAttribute(self::COLUMN_ID_ATTRIBUTE, $value);
+
+        return $this;
+    }
 }
