@@ -126,6 +126,26 @@ class Attributes extends AbstractAttributes implements AttributesInterface
 
     /**
      * @param string $key
+     * @return bool
+     * @throws \Exception
+     */
+    public function hasDataAttribute(string $key)
+    {
+        return $this->has(self::DATA_ATTRIBUTE_PREFIX . $key);
+    }
+
+    /**
+     * @param string $key
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getDataAttribute(string $key)
+    {
+        return $this->get(self::DATA_ATTRIBUTE_PREFIX . $key);
+    }
+
+    /**
+     * @param string $key
      * @param mixed $value
      * @return static
      * @throws \Exception

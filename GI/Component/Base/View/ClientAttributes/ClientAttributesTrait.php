@@ -77,7 +77,7 @@ trait ClientAttributesTrait
             ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject());
 
         if (!empty($id)) {
-            $element->getAttributes()->setDataAttribute(static::ATTRIBUTE_GI_ID, $id);
+            $element->setGIId($id);
         }
 
         if ($withJSClass) {

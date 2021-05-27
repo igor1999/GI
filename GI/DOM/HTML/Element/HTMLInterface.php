@@ -25,6 +25,9 @@ use GI\DOM\HTML\Attributes\Style\StyleInterface;
 
 interface HTMLInterface extends ElementInterface
 {
+    const ATTRIBUTE_GI_ID = 'gi-id';
+
+
     /**
      * @return AttributesInterface
      */
@@ -60,4 +63,17 @@ interface HTMLInterface extends ElementInterface
      * @return static
      */
     public function setVisibility(bool $visible);
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getGIId();
+
+    /**
+     * @param string $giId
+     * @return static
+     * @throws \Exception
+     */
+    public function setGIId(string $giId);
 }

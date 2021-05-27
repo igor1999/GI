@@ -18,6 +18,7 @@
 namespace GI\Component\Base\View\ClientAttributes;
 
 use GI\Component\Base\View\ClientAttributes\ClientCSS\ClientCSSInterface;
+use GI\DOM\HTML\Element\HTMLInterface;
 use GI\DOM\HTML\Element\Input\Hidden\HiddenInterface;
 use GI\Component\Base\ComponentInterface;
 
@@ -29,7 +30,7 @@ interface ClientAttributesInterface
 
     const ATTRIBUTE_JS_OBJECT = 'gi-js-object';
 
-    const ATTRIBUTE_GI_ID     = 'gi-id';
+    const ATTRIBUTE_GI_ID     = HTMLInterface::ATTRIBUTE_GI_ID;
 
 
     const ATTRIBUTE_RELATION       = 'gi-relation';

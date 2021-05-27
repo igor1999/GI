@@ -20,15 +20,10 @@ namespace GI\Component\Base\View\LoadingImage;
 use GI\DOM\HTML\Element\Image\Image;
 use GI\Component\Base\View\ResourceRenderer\Core\Core;
 
-use GI\Component\Base\View\ClientAttributes\GIIdTrait;
-
 use GI\Component\Base\View\ResourceRenderer\Core\CoreInterface;
 
 class LoadingImage extends Image implements LoadingImageInterface
 {
-    use GIIdTrait;
-
-
     const DEFAULT_GI_ID = 'loading-image';
 
 
@@ -49,7 +44,7 @@ class LoadingImage extends Image implements LoadingImageInterface
 
         parent::__construct($src);
 
-        $this->hide()->addGIId(static::DEFAULT_GI_ID);
+        $this->hide()->setGIId(static::DEFAULT_GI_ID);
     }
 
     /**

@@ -109,6 +109,20 @@ interface AttributesInterface extends BaseInterface
 
     /**
      * @param string $key
+     * @return bool
+     * @throws \Exception
+     */
+    public function hasDataAttribute(string $key);
+
+    /**
+     * @param string $key
+     * @return mixed
+     * @throws \Exception
+     */
+    public function getDataAttribute(string $key);
+
+    /**
+     * @param string $key
      * @param mixed $value
      * @return static
      * @throws \Exception

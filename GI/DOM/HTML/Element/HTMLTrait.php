@@ -170,4 +170,25 @@ trait HTMLTrait
 
         return $this;
     }
+
+    /**
+     * @return string
+     * @throws \Exception
+     */
+    public function getGIId()
+    {
+        return $this->getAttributes()->getDataAttribute(self::ATTRIBUTE_GI_ID);
+    }
+
+    /**
+     * @param string $giId
+     * @return static
+     * @throws \Exception
+     */
+    public function setGIId(string $giId)
+    {
+        $this->getAttributes()->setDataAttribute(self::ATTRIBUTE_GI_ID, $giId);
+
+        return $this;
+    }
 }
