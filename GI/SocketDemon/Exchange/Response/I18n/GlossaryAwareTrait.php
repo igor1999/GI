@@ -25,6 +25,6 @@ trait GlossaryAwareTrait
      */
     protected function translate(string $text)
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class, $text);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, $text);
     }
 }

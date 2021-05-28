@@ -61,11 +61,11 @@ class Builder implements BuilderInterface
      */
     public function __construct()
     {
-        $this->params = $this->giGetDi(ParamsInterface::class, new Params($this), [$this]);
+        $this->params = $this->getGiServiceLocator()->getDependency(ParamsInterface::class, new Params($this), [$this]);
 
-        $this->predicateList = $this->giGetDi(ConditionListInterface::class, new ConditionList($this), [$this]);
+        $this->predicateList = $this->getGiServiceLocator()->getDependency(ConditionListInterface::class, new ConditionList($this), [$this]);
 
-        $this->partList = $this->giGetDi(PartListInterface::class, new PartList($this), [$this]);
+        $this->partList = $this->getGiServiceLocator()->getDependency(PartListInterface::class, new PartList($this), [$this]);
     }
 
     /**

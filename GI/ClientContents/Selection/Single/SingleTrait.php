@@ -42,7 +42,7 @@ trait SingleTrait
         if (empty($items)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowNotFoundException('Selected item');
+            $me->getGiServiceLocator()->throwNotFoundException('Selected item');
         }
 
         return array_shift($items);

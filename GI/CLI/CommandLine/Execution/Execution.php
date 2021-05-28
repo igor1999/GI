@@ -65,7 +65,7 @@ class Execution implements ExecutionInterface
      */
     public function getJSON()
     {
-        return $this->giCreateJsonDecoder()->decode($this->execute());
+        return $this->getGiServiceLocator()->createJsonDecoder()->decode($this->execute());
     }
 
     /**
@@ -73,7 +73,7 @@ class Execution implements ExecutionInterface
      */
     public function startBackgroundProcess()
     {
-        if ($this->giGetServer()->isOSWindows()) {
+        if ($this->getGiServiceLocator()->getServer()->isOSWindows()) {
             $command = sprintf(self::WINDOWS_BACKGROUND_PROCESS_TEMPLATE, $this->getCommandLine()->toString());
 
             pclose(popen($command, 'r'));

@@ -46,9 +46,9 @@ class Locales extends AbstractMenu implements LocalesInterface
     {
         parent::__construct();
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
 
-        $this->menuModel = $this->giGetDi(LocalesModelInterface::class, LocalesModel::class);
+        $this->menuModel = $this->getGiServiceLocator()->getDependency(LocalesModelInterface::class, LocalesModel::class);
     }
 
     /**
@@ -75,9 +75,9 @@ class Locales extends AbstractMenu implements LocalesInterface
     {
         try {
             /** @var UserLocaleContextInterface $translatorContext */
-            $translatorContext = $this->giGetDi(UserLocaleContextInterface::class);
+            $translatorContext = $this->getGiServiceLocator()->getDependency(UserLocaleContextInterface::class);
         } catch (\Exception  $e) {
-            $this->giThrowDependencyException(UserLocaleContextInterface::class);
+            $this->getGiServiceLocator()->throwDependencyException(UserLocaleContextInterface::class);
         }
 
         $this->getView()

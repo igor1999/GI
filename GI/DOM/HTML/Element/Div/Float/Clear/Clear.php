@@ -36,7 +36,7 @@ class Clear extends Div implements ClearInterface
      */
     protected function createStyle()
     {
-        $this->style = $this->giGetDi(StyleInterface::class, Style::class, [['clear' => 'both']]);
+        $this->style = $this->getGiServiceLocator()->getDependency(StyleInterface::class, Style::class, [['clear' => 'both']]);
 
         return $this;
     }

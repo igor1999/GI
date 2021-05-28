@@ -55,7 +55,7 @@ class ArrayList implements ArrayListInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];

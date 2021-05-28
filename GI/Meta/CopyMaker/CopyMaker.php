@@ -136,7 +136,7 @@ class CopyMaker implements CopyMakerInterface
             if (!$this->getContents()->isRegistered()) {
                 $this->getRegistry()->add($source);
 
-                $properties = $this->giGetClassMeta($source)->getProperties();
+                $properties = $this->getGiServiceLocator()->getClassMeta($source)->getProperties();
                 foreach ($properties->getItems() as $name => $property) {
                     $result[$name] = $this->processExpand($property->getValue($source));
                 }
@@ -169,7 +169,7 @@ class CopyMaker implements CopyMakerInterface
     {
         if (is_array($contents) && array_key_exists(self::OBJECT_CONTENTS_ELEMENT, $contents)) {
             if (!is_array($contents[self::OBJECT_CONTENTS_ELEMENT])) {
-                $this->giThrowInvalidTypeException(
+                $this->getGiServiceLocator()->throwInvalidTypeException(
                     'Object contents item', $contents[self::OBJECT_CONTENTS_ELEMENT], 'array'
                 );
             }
@@ -179,7 +179,7 @@ class CopyMaker implements CopyMakerInterface
             if ($this->getContents()->isRegistered()) {
                 $result = $this->getRegistry()->get($this->getContents()->getHash());
             } else {
-                $reflection = $this->giGetClassMeta($this->getContents()->getClass());
+                $reflection = $this->getGiServiceLocator()->getClassMeta($this->getContents()->getClass());
                 $result     = $reflection->getReflection()->newInstanceWithoutConstructor();
                 $this->getRegistry()->set($this->getContents()->getHash(), $result);
                 foreach ($reflection->getProperties()->getItems() as $name => $property) {

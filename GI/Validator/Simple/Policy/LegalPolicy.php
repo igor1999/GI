@@ -30,7 +30,7 @@ class LegalPolicy extends NotEmpty implements LegalPolicyInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::LEGAL_POLICY
         );
     }

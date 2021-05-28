@@ -45,7 +45,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -103,7 +103,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     public function execute()
     {
         if (!is_array($this->getInput()) && !is_object($this->getInput())) {
-            $this->giThrowInvalidTypeException('Filter input', $this->getInput(), 'array or object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Filter input', $this->getInput(), 'array or object');
         }
 
         return is_array($this->getInput()) ? $this->executeForArray() : $this->executeForObject();
@@ -129,7 +129,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
      */
     protected function executeForObject()
     {
-        $methodReflectionList = $this->giGetClassMeta($this->getInput())->getMethods();
+        $methodReflectionList = $this->getGiServiceLocator()->getClassMeta($this->getInput())->getMethods();
 
         foreach ($this->getItems() as $key => $item) {
             if ($methodReflectionList->hasGetter($key)) {

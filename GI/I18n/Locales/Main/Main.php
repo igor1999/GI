@@ -39,7 +39,7 @@ class Main implements MainInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->locales = array_merge($this->getDefault(), $context->get());
         } catch (\Exception $e) {
@@ -102,7 +102,7 @@ class Main implements MainInterface
     public function get(string $locale)
     {
         if (!$this->has($locale)) {
-            $this->giThrowNotInScopeException($locale);
+            $this->getGiServiceLocator()->throwNotInScopeException($locale);
         }
 
         return $this->locales[$this->getLanguage($locale)];

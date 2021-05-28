@@ -51,7 +51,7 @@ abstract class AbstractCollection implements CollectionInterface
     public function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->items[$id];
@@ -90,7 +90,7 @@ abstract class AbstractCollection implements CollectionInterface
     protected function createHeader(string $criteria, bool $bothDirections)
     {
         try {
-            $result = $this->giGetDi(TableOrderingInterface::class, null, [$criteria, $bothDirections]);
+            $result = $this->getGiServiceLocator()->getDependency(TableOrderingInterface::class, null, [$criteria, $bothDirections]);
         } catch (\Exception $e) {
             $result = new TableOrdering($criteria, $bothDirections);
         }

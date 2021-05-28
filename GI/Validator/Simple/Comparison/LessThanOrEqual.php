@@ -37,7 +37,7 @@ class LessThanOrEqual extends LessThan implements LessThanOrEqualInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::LESS_THAN_OR_EQUAL
         );
     }

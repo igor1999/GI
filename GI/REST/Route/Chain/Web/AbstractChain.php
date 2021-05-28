@@ -105,21 +105,21 @@ abstract class AbstractChain extends Base implements ChainInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);
+            $has = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixHas($method);
         } catch (\Exception $exception) {
             try {
-                $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+                $get = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
             } catch (\Exception $exception) {
                 try {
-                    $set = $this->giGetPSRFormatParser()->parseWithPrefixSet($method);
+                    $set = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixSet($method);
                 } catch (\Exception $exception) {
-                    $this->giThrowMagicMethodException($method);
+                    $this->getGiServiceLocator()->throwMagicMethodException($method);
                 }
             }
         }
 
         $result    = null;
-        $constants = $this->giGetClassMeta()->getStaticConstants();
+        $constants = $this->getGiServiceLocator()->getClassMeta()->getStaticConstants();
 
         if (!empty($has)) {
             $param  = $constants->get(strtoupper($has) . static::KEY_CONSTANT_SUFFIX)->getValue();
@@ -129,7 +129,7 @@ abstract class AbstractChain extends Base implements ChainInterface
             $result = $this->get($param);
         } elseif (!empty($set)) {
             if (empty($arguments)) {
-                $this->giThrowNotGivenException('Route for set');
+                $this->getGiServiceLocator()->throwNotGivenException('Route for set');
             }
             $param  = $constants->get(strtoupper($set) . static::KEY_CONSTANT_SUFFIX)->getValue();
             $result = $this->set($param, array_shift($arguments));
@@ -143,7 +143,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setDeleteMethod()
     {
-        $this->setMethod($this->giGetRouteFactory()->createDeleteMethod());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createDeleteMethod());
 
         return $this;
     }
@@ -153,7 +153,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setGetMethod()
     {
-        $this->setMethod($this->giGetRouteFactory()->createGetMethod());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createGetMethod());
 
         return $this;
     }
@@ -163,7 +163,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setPostMethod()
     {
-        $this->setMethod($this->giGetRouteFactory()->createPostMethod());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createPostMethod());
 
         return $this;
     }
@@ -173,7 +173,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setPutMethod()
     {
-        $this->setMethod($this->giGetRouteFactory()->createPutMethod());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createPutMethod());
 
         return $this;
     }
@@ -183,7 +183,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setHTTPProtocol()
     {
-        $this->setMethod($this->giGetRouteFactory()->createHTTPProtocol());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createHTTPProtocol());
 
         return $this;
     }
@@ -193,7 +193,7 @@ abstract class AbstractChain extends Base implements ChainInterface
      */
     public function setHTTPSProtocol()
     {
-        $this->setMethod($this->giGetRouteFactory()->createHTTPSProtocol());
+        $this->setMethod($this->getGiServiceLocator()->getRouteFactory()->createHTTPSProtocol());
 
         return $this;
     }

@@ -41,6 +41,6 @@ class Shell extends CommandLine implements ShellInterface
 
         $response = $this->getExecutionProcessor()->getJSON();
 
-        return $this->giGetSocketDemonFactory()->createResponseCollection()->fill($response);
+        return $this->getGiServiceLocator()->getSocketDemonFactory()->createResponseCollection()->fill($response);
     }
 }

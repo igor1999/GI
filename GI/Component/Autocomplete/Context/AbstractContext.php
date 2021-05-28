@@ -32,7 +32,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateUri()
     {
         if (empty($this->getUri())) {
-            $this->giThrowIsEmptyException('Autocompletion uri');
+            $this->getGiServiceLocator()->throwIsEmptyException('Autocompletion uri');
         }
     }
 }

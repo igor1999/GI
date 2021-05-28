@@ -50,7 +50,7 @@ class Head extends ContainerElement implements HeadInterface
 
         $this->setCharset();
 
-        $this->title = $this->giGetDOMFactory()->createTitle();
+        $this->title = $this->getGiServiceLocator()->getDOMFactory()->createTitle();
     }
 
     /**
@@ -67,7 +67,7 @@ class Head extends ContainerElement implements HeadInterface
      */
     public function setCharset(string $charset = CharsetInterface::DEFAULT_CHARSET)
     {
-        $this->charset = $this->giGetDOMFactory()->createCharset($charset);
+        $this->charset = $this->getGiServiceLocator()->getDOMFactory()->createCharset($charset);
 
         return $this;
     }
@@ -108,7 +108,7 @@ class Head extends ContainerElement implements HeadInterface
      */
     protected function createCSS(string $href)
     {
-        return $this->giGetDOMFactory()->createCSS($href);
+        return $this->getGiServiceLocator()->getDOMFactory()->createCSS($href);
     }
 
     /**
@@ -128,7 +128,7 @@ class Head extends ContainerElement implements HeadInterface
      */
     protected function createExtern(string $src)
     {
-        return $this->giGetDOMFactory()->createExternScript($src);
+        return $this->getGiServiceLocator()->getDOMFactory()->createExternScript($src);
     }
 
     /**

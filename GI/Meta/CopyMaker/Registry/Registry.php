@@ -47,7 +47,7 @@ class Registry implements RegistryInterface
     public function get(string $hash)
     {
         if (!$this->has($hash)) {
-            $this->giThrowNotFoundException('Hash', $hash);
+            $this->getGiServiceLocator()->throwNotFoundException('Hash', $hash);
         }
 
         return $this->items[$hash];
@@ -69,7 +69,7 @@ class Registry implements RegistryInterface
     public function add($item)
     {
         if (!is_object($item)) {
-            $this->giThrowInvalidTypeException('Item', $item, 'object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Item', $item, 'object');
         }
 
         $this->items[spl_object_hash($item)] = $item;
@@ -86,7 +86,7 @@ class Registry implements RegistryInterface
     public function set(string $hash, $item)
     {
         if (!is_object($item)) {
-            $this->giThrowInvalidTypeException('Item', $item, 'object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Item', $item, 'object');
         }
 
         $this->items[$hash] = $item;

@@ -40,7 +40,7 @@ abstract class AbstractAttributeEscaper extends AbstractEscaper implements Attri
      */
     public function escape(string $string)
     {
-        $encoder = $this->giGetEncoder();
+        $encoder = $this->getGiServiceLocator()->getUtilites()->getEncoder();
 
         $result = $encoder->toUTF8($string, $this->getEncoding());
 

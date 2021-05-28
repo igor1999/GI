@@ -76,7 +76,7 @@ class StringLengthMax extends AbstractSimple implements StringLengthMaxInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::STRING_LENGTH_MAX
         );
     }

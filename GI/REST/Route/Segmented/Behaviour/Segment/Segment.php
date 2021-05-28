@@ -46,7 +46,7 @@ class Segment implements SegmentInterface
     public function __construct(string $title)
     {
         try {
-            $this->title   = $this->giGetPSRFormatParser()->parseAfterPrefix($title, self::PARAM_PREFIX);
+            $this->title   = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($title, self::PARAM_PREFIX);
             $this->isParam = true;
         } catch (\Exception $exception) {
             $this->title   = $title;

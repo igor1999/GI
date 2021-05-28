@@ -49,7 +49,7 @@ class Escaper extends AbstractAttributeEscaper implements EscaperInterface
      */
     protected function escapeChar(string $char)
     {
-        $encoder = $this->giGetEncoder();
+        $encoder = $this->getGiServiceLocator()->getUtilites()->getEncoder();
 
         if ($encoder->isCharNotInUTF8($char)) {
             $result = static::UTF8_ERROR_CHAR;

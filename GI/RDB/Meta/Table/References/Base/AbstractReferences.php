@@ -89,7 +89,7 @@ abstract class AbstractReferences implements ReferencesInterface
     public function get(string $name)
     {
         if (!$this->has($name)) {
-            $this->giThrowNotInScopeException($name);
+            $this->getGiServiceLocator()->throwNotInScopeException($name);
         }
 
         return $this->items[$name];

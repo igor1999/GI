@@ -40,7 +40,7 @@ class Fieldset extends ContainerElement implements FieldsetInterface
     {
         parent::__construct(static::TAG);
 
-        $this->legend = $this->giGetDOMFactory()->createLegend($title);
+        $this->legend = $this->getGiServiceLocator()->getDOMFactory()->createLegend($title);
     }
 
     /**

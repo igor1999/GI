@@ -31,6 +31,6 @@ class CSS extends AbstractResource implements CSSInterface
     {
         $url = $this->getUrlHolder()->getUrlWithModificationTime();
 
-        return $this->giGetDOMFactory()->createCSS($url);
+        return $this->getGiServiceLocator()->getDOMFactory()->createCSS($url);
     }
 }

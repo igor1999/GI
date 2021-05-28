@@ -38,7 +38,7 @@ class Gender extends AbstractSet implements GenderInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createGender();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createGender();
     }
 
     /**

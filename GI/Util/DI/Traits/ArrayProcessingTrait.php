@@ -62,7 +62,7 @@ trait ArrayProcessingTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(AssocProcessorInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(AssocProcessorInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->assocProcessor instanceof AssocProcessorInterface)) {
                 $this->assocProcessor = new AssocProcessor();
@@ -84,7 +84,7 @@ trait ArrayProcessingTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(ExtractorInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(ExtractorInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->extractor instanceof ExtractorInterface)) {
                 $this->extractor = new Extractor();
@@ -106,7 +106,7 @@ trait ArrayProcessingTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(FlatCreatorInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(FlatCreatorInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->flatCreator instanceof FlatCreatorInterface)) {
                 $this->flatCreator = new FlatCreator();
@@ -128,7 +128,7 @@ trait ArrayProcessingTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(FlatExtractorInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(FlatExtractorInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->flatExtractor instanceof FlatExtractorInterface)) {
                 $this->flatExtractor = new FlatExtractor();

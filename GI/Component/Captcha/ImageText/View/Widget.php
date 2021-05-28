@@ -63,7 +63,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -103,9 +103,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     {
         if (!($this->captchaImage instanceof ImageInterface)) {
             $src = $this->getImageSource();
-            $alt = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Captcha');
+            $alt = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Captcha');
 
-            $this->captchaImage = $this->giGetDOMFactory()->createImage($src, $alt);
+            $this->captchaImage = $this->getGiServiceLocator()->getDOMFactory()->createImage($src, $alt);
         }
 
         return $this->captchaImage;
@@ -118,11 +118,11 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getValueText()
     {
         if (!($this->valueText instanceof TextInterface)) {
-            $this->valueText = $this->giGetDOMFactory()->getInputFactory()->createText(
+            $this->valueText = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createText(
                 $this->getViewModel()->getValueName()
             );
 
-            $text = $this->giTranslate(GlossaryInterface::class, Glossary::class,'enter captcha');
+            $text = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,'enter captcha');
             $this->valueText->getAttributes()->setPlaceholder($text);
         }
 

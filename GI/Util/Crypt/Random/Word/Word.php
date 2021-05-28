@@ -43,7 +43,7 @@ class Word implements WordInterface
      */
     public function __construct()
     {
-        $this->alphabet = $this->giGetDi(AlphabetInterface::class,Alphabet::class);
+        $this->alphabet = $this->getGiServiceLocator()->getDependency(AlphabetInterface::class,Alphabet::class);
     }
 
     /**
@@ -66,7 +66,7 @@ class Word implements WordInterface
         $alphabet = $this->getAlphabet()->merge();
 
         while (true) {
-            $hash  = $this->giGetRandomHashGenerator()->create(count($alphabet));
+            $hash  = $this->getGiServiceLocator()->getUtilites()->getRandomHashGenerator()->create(count($alphabet));
             $codes = str_split($hash, static::DEFAULT_SPLIT_LENGTH);
 
             foreach ($codes as $code) {

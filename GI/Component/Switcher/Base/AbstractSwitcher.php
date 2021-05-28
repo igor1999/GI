@@ -45,7 +45,7 @@ abstract class AbstractSwitcher extends AbstractComponent implements SwitcherInt
     {
         $this->name  = $name;
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

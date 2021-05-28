@@ -103,7 +103,7 @@ class Item implements ItemInterface
      */
     public function getTmpFile()
     {
-        return $this->giCreateFSOFile($this->tmpName);
+        return $this->getGiServiceLocator()->createFSOFile($this->tmpName);
     }
 
     /**
@@ -179,7 +179,7 @@ class Item implements ItemInterface
         } elseif ($target instanceof FSOFileInterface) {
             $this->getTmpFile()->upload($target);
         } else {
-            $this->giThrowInvalidTypeException('FSO', $target->getPath(), 'file or dir');
+            $this->getGiServiceLocator()->throwInvalidTypeException('FSO', $target->getPath(), 'file or dir');
         }
 
         return $this;
@@ -195,7 +195,7 @@ class Item implements ItemInterface
         $item = $this->createCreator()->create($contents);
 
         if (!($item instanceof ItemInterface)) {
-            $this->giThrowInvalidTypeException('Item', get_class($item), ItemInterface::class);
+            $this->getGiServiceLocator()->throwInvalidTypeException('Item', get_class($item), ItemInterface::class);
         }
 
         $this->name     = $item->getName();

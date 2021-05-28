@@ -41,7 +41,7 @@ trait EncodingTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(EncoderInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(EncoderInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->encoder instanceof EncoderInterface)) {
                 $this->encoder = new Encoder();

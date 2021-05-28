@@ -112,7 +112,7 @@ class Call extends AbstractCall implements CallInterface
     {
         if (!($this->identity instanceof IdentityInterface)) {
             try {
-                $this->identity = $this->giGetDi(IdentityInterface::class);
+                $this->identity = $this->getGiServiceLocator()->getDi(IdentityInterface::class);
             } catch (\Exception $e) {}
         }
 
@@ -147,7 +147,8 @@ class Call extends AbstractCall implements CallInterface
     public function __call(string $method, array $arguments)
     {
         /** @var ResponseInterface $response */
-        $response = $this->giGetResponseFactory()->create($method, $arguments, self::SET_RESPONSE_METHOD_PREFIX);
+        $response = $this->getGiServiceLocator()->getResponseFactory()
+            ->create($method, $arguments, self::SET_RESPONSE_METHOD_PREFIX);
 
         $this->setResponse($response);
 
@@ -193,9 +194,9 @@ class Call extends AbstractCall implements CallInterface
         if ($result) {
             $this->close();
             $this->saveCallAndModuleContents();
-            $this->giGetServiceLocator()->loadSession();
+            $this->getGiServiceLocator()->loadSession();
             $this->saveUserLocale()->createSymlinksDir();
-            $this->giGetServiceLocator()->close();
+            $this->getGiServiceLocator()->close();
 
             $identity = $this->getIdentity();
             if ($identity instanceof IdentityInterface) {
@@ -215,7 +216,7 @@ class Call extends AbstractCall implements CallInterface
                 $this->getResponse()->dispatch();
             }
 
-            $this->giGetServiceLocator()->saveSession();
+            $this->getGiServiceLocator()->saveSession();
         }
 
         return $result;
@@ -228,7 +229,7 @@ class Call extends AbstractCall implements CallInterface
     {
         try {
             /** @var UserLocaleContextInterface $context */
-            $context = $this->giGetDi(UserLocaleContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDi(UserLocaleContextInterface::class);
 
             $cookie = $context->getCookieName();
             $locale = $this->findLocale($context);
@@ -239,7 +240,7 @@ class Call extends AbstractCall implements CallInterface
 
             setlocale(LC_ALL, $locale);
 
-            $this->giGetServiceLocator()->setUserLocale($locale);
+            $this->getGiServiceLocator()->setUserLocale($locale);
         } catch (\Exception $e) {}
 
         return $this;
@@ -281,7 +282,7 @@ class Call extends AbstractCall implements CallInterface
     protected function createSymlinksDir()
     {
         /** @var URLHolderContextInterface $context */
-        $context = $this->giGetDi(URLHolderContextInterface::class, URLHolderContext::class);
+        $context = $this->getGiServiceLocator()->getDi(URLHolderContextInterface::class, URLHolderContext::class);
 
         $context->getWebRoot()->create();
 
@@ -297,11 +298,11 @@ class Call extends AbstractCall implements CallInterface
         if ($this->getRequest()->getServer()->isRequestMethodForChange() && $this->validateCSRFIsOn()) {
             try {
                 $token  = $this->getRequest()->getHeaders()->getCSRFToken();
-                $result = $this->giCreateSecureCSRF()->validate($token);
+                $result = $this->getGiServiceLocator()->createSecureCSRF()->validate($token);
             } catch (\Exception $exception) {
                 try {
                     $token  = $this->getRequest()->getPost()->getCSRFToken();
-                    $result = $this->giCreateSecureCSRF()->validate($token);
+                    $result = $this->getGiServiceLocator()->createSecureCSRF()->validate($token);
                 } catch (\Exception $exception) {
                     $result = false;
                 }

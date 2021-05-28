@@ -66,7 +66,7 @@ class Content implements ContentInterface
      */
     public function buildOptionContent(OptionInterface $model, int $level)
     {
-        $option = $this->giGetDOMFactory()->createDiv();
+        $option = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         $option->getStyle()->setCursorToPointer();
 
         $option->getAttributes()
@@ -92,7 +92,7 @@ class Content implements ContentInterface
             $option->getClasses()->add($class);
         }
 
-        $link = $this->giGetDOMFactory()->createHyperlink($model->getLink(), $model->getTitle());
+        $link = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink($model->getLink(), $model->getTitle());
         if ($model->hasTarget()) {
             $link->setTarget($model->getTarget());
         }

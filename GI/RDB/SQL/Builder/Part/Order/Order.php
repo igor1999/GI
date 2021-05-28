@@ -58,11 +58,11 @@ class Order extends AbstractPart implements OrderInterface
     {
         if (is_string($key) && is_bool($value)) {
             $direction = $value ? '' : ' '. Constants::ORDER_DESC_MODIFICATOR;
-            $field     = $this->giGetSqlFactory()->createFieldExpression($key)->toString() . $direction;
+            $field     = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($key)->toString() . $direction;
         } elseif (is_string($key) && !is_bool($value)) {
-            $field = $this->giGetSqlFactory()->createFieldExpression($key)->toString();
+            $field = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($key)->toString();
         } else {
-            $field = $this->giGetSqlFactory()->createFieldExpression($value)->toString();
+            $field = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($value)->toString();
         }
 
         return $field;

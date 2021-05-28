@@ -36,7 +36,7 @@ class Reader extends AbstractStream implements ReaderInterface
 
             if ($buffer === false) {
                 if (!feof($this->getHandle())) {
-                    $this->giThrowCommonException('Unexpected reading fail');
+                    $this->getGiServiceLocator()->throwCommonException('Unexpected reading fail');
                 }
 
                 break;
@@ -71,13 +71,13 @@ class Reader extends AbstractStream implements ReaderInterface
         $this->validate();
 
         if ($length <= 0) {
-            $this->giThrowInvalidMinimumException('Length', $length, 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Length', $length, 1);
         }
 
         $result = fread($this->getHandle(), $length);
 
         if ($result === false) {
-            $this->giThrowCommonException('Unexpected reading fail');
+            $this->getGiServiceLocator()->throwCommonException('Unexpected reading fail');
         }
 
         $this->close();

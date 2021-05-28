@@ -61,7 +61,7 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
     protected function getViewModel()
     {
         if (!($this->viewModel instanceof ViewModelInterface)) {
-            $this->viewModel = $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+            $this->viewModel = $this->getGiServiceLocator()->getDependency(ViewModelInterface::class, ViewModel::class);
         }
 
         return $this->viewModel;
@@ -87,7 +87,7 @@ abstract class AbstractTable extends AbstractComponent implements TableInterface
         if ($viewModel instanceof OrderAwareInterface) {
             $orderModel = $viewModel->getOrder();
         } else {
-            $orderModel = $this->giGetDi(OrderInterface::class, Order::class);
+            $orderModel = $this->getGiServiceLocator()->getDependency(OrderInterface::class, Order::class);
         }
 
         $this->getView()->getWidget()->setViewModel($orderModel)->setDataSource($dataSource);

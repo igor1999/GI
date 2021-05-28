@@ -79,7 +79,7 @@ class Colorizing implements ColorizingInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->on = $context->isOn();
         } catch (\Exception $e) {}
@@ -157,7 +157,7 @@ class Colorizing implements ColorizingInterface
             try {
                 $background = $this->parseColor($method, false);
             } catch (\Exception $e) {
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
         }
 
@@ -182,16 +182,17 @@ class Colorizing implements ColorizingInterface
         $constPrefix  = $foreground ? self::FOREGROUND_CONST_PREFIX : self::BACKGROUND_CONST_PREFIX;
 
         try {
-            $const = $this->giGetPSRFormatParser()->parseAfterPrefix($method, $setterPrefix);
+            $const = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($method, $setterPrefix);
         } catch (\Exception $exception) {
             $const = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
-        $const = $this->giGetCamelCaseConverter()->convertToUnderlineUpperCase($const);
+        $const = $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()
+            ->convertToUnderlineUpperCase($const);
         $const = $constPrefix . $const;
 
-        return $this->giGetClassMeta(ColorizingInterface::class)->getStaticConstants()->get($const)->getValue();
+        return $this->getGiServiceLocator()->getClassMeta(ColorizingInterface::class)->getStaticConstants()->get($const)->getValue();
     }
 
     /**

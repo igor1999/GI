@@ -39,7 +39,7 @@ class LoadingImage extends Image implements LoadingImageInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(CoreInterface::class, Core::class);
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(CoreInterface::class, Core::class);
         $src = $this->resourceRenderer->getLoading();
 
         parent::__construct($src);

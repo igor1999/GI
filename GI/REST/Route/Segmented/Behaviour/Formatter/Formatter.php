@@ -67,7 +67,7 @@ class Formatter implements FormatterInterface
     public function getTitlesAndRelativePath(array $titles, int $templateLength)
     {
         if (count($titles) < $templateLength) {
-            $this->giThrowCommonException('Too less titles');
+            $this->getGiServiceLocator()->throwCommonException('Too less titles');
         }
 
         if ($this->getDirection()) {

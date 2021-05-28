@@ -65,7 +65,7 @@ abstract class AbstractInput extends SimpleElement implements InputInterface
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(
+        $this->attributes = $this->getGiServiceLocator()->getDependency(
             AttributesInterface::class, Attributes::class, [['type' => static::TYPE]]
         );
 

@@ -47,7 +47,7 @@ trait ClientAttributesTrait
     public function getClientCSS()
     {
         if (!($this->clientCSS instanceof ClientCSSInterface)) {
-            $this->clientCSS = $this->giGetDi(
+            $this->clientCSS = $this->getGiServiceLocator()->getDependency(
                 ClientCSSInterface::class, ClientCSS::class, [static::class]
             );
         }
@@ -147,7 +147,7 @@ trait ClientAttributesTrait
         /** @var ServiceLocatorAwareTrait $me */
         $me = $this;
 
-        $hidden = $me->giGetDOMFactory()->getInputFactory()->createHidden();
+        $hidden = $me->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden();
 
         $hidden->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_JS_OBJECT, $this->getClientJSObject())

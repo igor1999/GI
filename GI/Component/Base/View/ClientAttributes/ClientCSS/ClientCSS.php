@@ -68,7 +68,7 @@ class ClientCSS implements ClientCSSInterface
      */
     protected function create()
     {
-        $parents = $this->giGetClassMeta($this->class)->getParents();
+        $parents = $this->getGiServiceLocator()->getClassMeta($this->class)->getParents();
 
         try {
             $constants = [$parents->getOwner()->getSelfConstants()->get(static::CLIENT_CSS_CONST)->getValue()];

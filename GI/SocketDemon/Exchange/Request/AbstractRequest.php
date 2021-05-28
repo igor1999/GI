@@ -49,7 +49,7 @@ abstract class AbstractRequest implements RequestInterface
     public function __construct()
     {
         try {
-            $this->context = $this->giGetDi(ContextInterface::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $exception) {}
 
         try {
@@ -68,7 +68,7 @@ abstract class AbstractRequest implements RequestInterface
     protected function getContext()
     {
         if (!($this->context instanceof ContextInterface)) {
-            $this->giThrowNotSetException('Context');
+            $this->getGiServiceLocator()->throwNotSetException('Context');
         }
 
         return $this->context;
@@ -122,7 +122,7 @@ abstract class AbstractRequest implements RequestInterface
      */
     public function extract()
     {
-        $result = $this->giGetClassMeta()->extract($this);
+        $result = $this->getGiServiceLocator()->getClassMeta()->extract($this);
         $result[self::CLASS_ARGUMENT_NAME] = static::class;
 
         return $result;

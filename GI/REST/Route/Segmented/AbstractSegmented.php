@@ -83,10 +83,10 @@ abstract class AbstractSegmented extends AbstractRoute implements SegmentedInter
         if ($constraints instanceof ConstraintsInterface) {
             $this->constraints = $constraints;
         } else {
-            $this->constraints = $this->giGetRouteFactory()->createConstraints();
+            $this->constraints = $this->getGiServiceLocator()->getRouteFactory()->createConstraints();
         }
 
-        $this->params = $this->giGetDi(ParamsInterface::class, Params::class);
+        $this->params = $this->getGiServiceLocator()->getDependency(ParamsInterface::class, Params::class);
     }
 
     /**
@@ -108,7 +108,7 @@ abstract class AbstractSegmented extends AbstractRoute implements SegmentedInter
      */
     protected function createFormatter()
     {
-        $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+        $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
 
         return $this;
     }
@@ -129,7 +129,7 @@ abstract class AbstractSegmented extends AbstractRoute implements SegmentedInter
     protected function createSegment(string $title)
     {
         try {
-            $segment = $this->giGetDi(SegmentInterface::class);
+            $segment = $this->getGiServiceLocator()->getDependency(SegmentInterface::class);
         } catch (\Exception $e) {
             $segment = new Segment($title);
         }

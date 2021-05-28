@@ -28,7 +28,7 @@ class YearMonth extends AbstractDateTime implements YearMonthInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createYearMonth();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createYearMonth();
     }
 
     /**

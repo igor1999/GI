@@ -61,7 +61,7 @@ class Cache implements CacheInterface
     public function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotFoundException('Job data', $id);
+            $this->getGiServiceLocator()->throwNotFoundException('Job data', $id);
         }
 
         return $this->items[$id];

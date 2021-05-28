@@ -47,17 +47,17 @@ trait KeyFormatTrait
         if ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_CAMEL_CASE_UCFIRST) {
             $key = ucfirst($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_HYPHEN_UPPER_CASE) {
-            $key = $me->giGetCamelCaseConverter()->convertToHyphenUpperCase($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenUpperCase($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_HYPHEN_LOWER_CASE) {
-            $key = $me->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_HYPHEN_UCFIRST) {
-            $key = $me->giGetCamelCaseConverter()->convertToHyphenUpperFirst($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenUpperFirst($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_UNDERLINE_UPPER_CASE) {
-            $key = $me->giGetCamelCaseConverter()->convertToUnderlineUpperCase($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineUpperCase($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_UNDERLINE_LOWER_CASE) {
-            $key = $me->giGetCamelCaseConverter()->convertToUnderlineLowerCase($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineLowerCase($key);
         } elseif ($this->getKeyFormat() == OptionInterface::KEY_FORMAT_UNDERLINE_UCFIRST) {
-            $key = $me->giGetCamelCaseConverter()->convertToUnderlineUpperFirst($key);
+            $key = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineUpperFirst($key);
         }
 
         return $key;

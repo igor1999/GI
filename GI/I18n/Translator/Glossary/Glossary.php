@@ -55,7 +55,7 @@ class Glossary implements GlossaryInterface
     public function get(FSOFileInterface $source)
     {
         if (!$this->has($source)) {
-            $this->giThrowNotInScopeException($source->getPath());
+            $this->getGiServiceLocator()->throwNotInScopeException($source->getPath());
         }
 
         return $this->readers[$source->getPath()];
@@ -99,7 +99,7 @@ class Glossary implements GlossaryInterface
     protected function createReader(FSOFileInterface $source)
     {
         try {
-            $reader = $this->giGetDi(ReaderInterface::class,null, [$source]);
+            $reader = $this->getGiServiceLocator()->getDependency(ReaderInterface::class,null, [$source]);
         } catch (\Exception $e) {
             $reader = new Reader($source);
         }
@@ -119,7 +119,7 @@ class Glossary implements GlossaryInterface
             $relativePath = static::DEFAULT_RELATIVE_PATH;
         }
 
-        $this->add($this->giCreateClassDirChildFile($class, $relativePath));
+        $this->add($this->getGiServiceLocator()->createClassDirChildFile($class, $relativePath));
 
         return $this;
     }

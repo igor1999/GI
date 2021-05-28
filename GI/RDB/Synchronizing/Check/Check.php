@@ -60,11 +60,11 @@ class Check extends AbstractSynchronizing implements CheckInterface
 
         $this->resultFile = $this->createContext()->getResultFile();
 
-        $this->comparator = $this->giGetDi(ComparatorInterface::class, Comparator::class);
+        $this->comparator = $this->getGiServiceLocator()->getDependency(ComparatorInterface::class, Comparator::class);
 
-        $this->view = $this->giGetDi(CheckViewInterface::class, CheckView::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(CheckViewInterface::class, CheckView::class);
 
-        $this->reader = $this->giGetDi(ReaderInterface::class, Reader::class);
+        $this->reader = $this->getGiServiceLocator()->getDependency(ReaderInterface::class, Reader::class);
     }
 
     /**

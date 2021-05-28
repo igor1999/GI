@@ -55,7 +55,7 @@ class ResourceRenderer extends Base implements ResourceRendererInterface
 
         $this->createClassContents(self::class);
 
-        $this->localeImages = $this->giGetDi(LocaleImagesInterface::class, LocaleImages::class);
+        $this->localeImages = $this->getGiServiceLocator()->getDependency(LocaleImagesInterface::class, LocaleImages::class);
 
         $this->createLocaleImages();
     }
@@ -93,7 +93,7 @@ class ResourceRenderer extends Base implements ResourceRendererInterface
     {
         return [
             [
-                $this->giCreateClassDirChildDir(self::class,'web/img'),
+                $this->getGiServiceLocator()->createClassDirChildDir(self::class,'web/img'),
                 'GI/Component/Locales/img'
             ]
         ];

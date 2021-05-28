@@ -50,9 +50,9 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
 
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -79,7 +79,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function build()
     {
-        $linkedList = $this->giGetDOMFactory()->createLinkedList($this->getNodes());
+        $linkedList = $this->getGiServiceLocator()->getDOMFactory()->createLinkedList($this->getNodes());
 
         $this->container->getChildNodes()->set($linkedList);
 
@@ -94,7 +94,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof DivInterface)) {
-            $this->container = $this->giGetDOMFactory()->createDiv();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->container;

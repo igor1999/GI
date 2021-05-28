@@ -53,7 +53,7 @@ class Charset extends Meta implements CharsetInterface
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(
+        $this->attributes = $this->getGiServiceLocator()->getDependency(
             AttributesInterface::class, Attributes::class, [['charset' => $this->charset]]
         );
 

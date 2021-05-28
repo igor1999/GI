@@ -61,7 +61,7 @@ class Immutable implements ImmutableInterface
     public function get(string $method)
     {
         if (!$this->has($method)) {
-            $this->giThrowNotInScopeException($method);
+            $this->getGiServiceLocator()->throwNotInScopeException($method);
         }
 
         return $this->items[$method];
@@ -145,7 +145,7 @@ class Immutable implements ImmutableInterface
         $items = $this->findByDescriptorName($descriptor);
 
         if (empty($items)) {
-            $this->giThrowNotFoundException('Method with descriptor', [$descriptor]);
+            $this->getGiServiceLocator()->throwNotFoundException('Method with descriptor', [$descriptor]);
         }
 
         return array_shift($items);
@@ -176,7 +176,7 @@ class Immutable implements ImmutableInterface
         $items = $this->findByDescriptorValue($descriptor, $value);
 
         if (empty($items)) {
-            $this->giThrowCommonException('Method with descriptor \'%s\' and value \'%s\' not found', [$descriptor, $value]);
+            $this->getGiServiceLocator()->throwCommonException('Method with descriptor \'%s\' and value \'%s\' not found', [$descriptor, $value]);
         }
 
         return array_shift($items);
@@ -231,7 +231,7 @@ class Immutable implements ImmutableInterface
      */
     protected function hasCommonGetter(string $property)
     {
-        $getter = $this->giGetPSRFormatBuilder()->buildGet($property);
+        $getter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildGet($property);
 
         return $this->has($getter);
     }
@@ -242,7 +242,7 @@ class Immutable implements ImmutableInterface
      */
     protected function hasBoolGetter(string $property)
     {
-        $getter = $this->giGetPSRFormatBuilder()->buildIs($property);
+        $getter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildIs($property);
 
         return $this->has($getter);
     }
@@ -256,15 +256,15 @@ class Immutable implements ImmutableInterface
     public function executeGetter($instance, string $property)
     {
         if ($this->hasCommonGetter($property)) {
-            $method = $this->giGetPSRFormatBuilder()->buildGet($property);
+            $method = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildGet($property);
         } elseif ($this->hasBoolGetter($property)) {
-            $method = $this->giGetPSRFormatBuilder()->buildIs($property);
+            $method = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildIs($property);
         } else {
             $method = null;
         }
 
         if (empty($method)) {
-            $this->giThrowNotFoundException('Getter for property', $property);
+            $this->getGiServiceLocator()->throwNotFoundException('Getter for property', $property);
         }
 
         return $this->get($method)->execute($instance);
@@ -276,7 +276,7 @@ class Immutable implements ImmutableInterface
      */
     public function hasSetter(string $property)
     {
-        $setter = $this->giGetPSRFormatBuilder()->buildSet($property);
+        $setter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildSet($property);
 
         return $this->has($setter);
     }
@@ -290,10 +290,10 @@ class Immutable implements ImmutableInterface
      */
     public function executeSetter($instance, string $property, $value)
     {
-        $method = $this->giGetPSRFormatBuilder()->buildSet($property);
+        $method = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildSet($property);
 
         if (!$this->hasSetter($property)) {
-            $this->giThrowNotFoundException('Setter', $method);
+            $this->getGiServiceLocator()->throwNotFoundException('Setter', $method);
         }
 
         $this->get($method)->execute($instance, [$value]);
@@ -321,7 +321,7 @@ class Immutable implements ImmutableInterface
             $property = $method->getDescriptor($descriptor);
             if (empty($property)) {
                 try {
-                    $property = $this->giGetPSRFormatParser()->parseWithPrefixesGetAndIs($name);
+                    $property = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixesGetAndIs($name);
                 } catch (\Exception $exception) {
                     $property = $name;
                 }
@@ -356,7 +356,7 @@ class Immutable implements ImmutableInterface
             $key = $method->getDescriptor($descriptor);
             if (empty($key)) {
                 try {
-                    $key = $this->giGetPSRFormatParser()->parseWithPrefixSet($name);
+                    $key = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixSet($name);
                 } catch (\Exception $exception) {}
             }
 

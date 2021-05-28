@@ -72,13 +72,16 @@ abstract class AbstractContainer extends AbstractFilter implements ContainerInte
         foreach ($contents as $key => $value) {
             if (is_object($value) && ($value instanceof FilterInterface)) {
                 $filter = $value;
-            } elseif (is_array($value) && $this->giGetAssocProcessor()->isAssoc($value)) {
-                $filter =$this->giGetFilterFactory()->createRecursive($value);
+            } elseif (is_array($value) && $this->getGiServiceLocator()->getUtilites()->getAssocProcessor()
+                    ->isAssoc($value)) {
+                $filter =$this->getGiServiceLocator()->getFilterFactory()->createRecursive($value);
             } elseif (is_array($value)) {
-                $filter =$this->giGetFilterFactory()->createChain($value);
+                $filter =$this->getGiServiceLocator()->getFilterFactory()->createChain($value);
             } else {
                 $filter = null;
-                $this->giThrowInvalidFormatException('Filter format with key', $key, 'filter contents');
+                $this->getGiServiceLocator()->throwInvalidFormatException(
+                    'Filter format with key', $key, 'filter contents'
+                );
             }
 
             $this->_set($key, $filter);
@@ -96,17 +99,17 @@ abstract class AbstractContainer extends AbstractFilter implements ContainerInte
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $keys = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+            $keys = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
         } catch (\Exception $exception) {
             $keys = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $keys = array_filter(explode(static::KEY_SEPARATOR, $keys));
 
         $f = function($key)
         {
-            return $this->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+            return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
         };
         $keys = array_map($f, $keys);
 
@@ -121,7 +124,7 @@ abstract class AbstractContainer extends AbstractFilter implements ContainerInte
     public function findNodeRecursive(array $keys)
     {
         if (empty($keys)) {
-            $this->giThrowIsEmptyException('Keys for recursive search');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys for recursive search');
         }
 
         $localKey = array_shift($keys);
@@ -132,7 +135,7 @@ abstract class AbstractContainer extends AbstractFilter implements ContainerInte
             if ($result instanceof ContainerInterface) {
                 $result = $result->findNodeRecursive($keys);
             } else {
-                $this->giThrowNotFoundException('Node in recursive search');
+                $this->getGiServiceLocator()->throwNotFoundException('Node in recursive search');
             }
         }
 

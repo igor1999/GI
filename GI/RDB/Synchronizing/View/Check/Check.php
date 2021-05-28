@@ -49,7 +49,7 @@ class Check extends AbstractRenderer implements CheckInterface
     {
         parent::__construct();
 
-        $this->tablesRenderer = $this->giGetDi(TablesInterface::class, Tables::class);
+        $this->tablesRenderer = $this->getGiServiceLocator()->getDependency(TablesInterface::class, Tables::class);
     }
 
     /**

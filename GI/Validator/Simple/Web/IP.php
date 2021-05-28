@@ -80,6 +80,6 @@ class IP extends AbstractSimple implements IPInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::IP);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::IP);
     }
 }

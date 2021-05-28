@@ -55,7 +55,7 @@ class Common extends AbstractSingle implements CommonInterface
     protected function validateData()
     {
         if (empty($this->data) || !is_scalar($this->data)) {
-            $this->giThrowNotSetException('Request data');
+            $this->getGiServiceLocator()->throwNotSetException('Request data');
         }
     }
 }

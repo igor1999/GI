@@ -37,7 +37,7 @@ class Radio extends AbstractSet implements RadioInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createAlterableSingle();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createAlterableSingle();
 
         $this->options->setMany($options);
     }

@@ -53,7 +53,7 @@ trait FloatBoundsTrait
         $min = $this->getMin();
 
         if (is_float($min) && ($item < $min)) {
-            $this->giThrowInvalidMinimumException('Item', $item, $min);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Item', $item, $min);
         }
 
         return $this;
@@ -69,7 +69,7 @@ trait FloatBoundsTrait
         $max = $this->getMax();
 
         if (is_float($max) && ($item > $max)) {
-            $this->giThrowInvalidMaximumException('Item', $item, $max);
+            $this->getGiServiceLocator()->throwInvalidMaximumException('Item', $item, $max);
         }
 
         return $this;

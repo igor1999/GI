@@ -15,24 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\Util\DI\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
-
-trait DIAwareTrait
+interface DecoratorAwareInterface
 {
     /**
-     * @param string $interface
-     * @param mixed|null $default
-     * @param array $params
-     * @return mixed
-     * @throws \Exception
+     * @return DecoratorInterface
      */
-    protected function giGetDi(string $interface, $default = null, array $params = [])
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getDi()->find($interface, static::class, $default, $params);
-    }
+    public function getUtilites();
 }

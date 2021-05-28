@@ -41,7 +41,7 @@ abstract class AbstractProcessor implements ProcessorInterface
      */
     public function __construct()
     {
-        $this->createRequest()->getRequest()->hydrate($this->giGetCommandLine()->extract());
+        $this->createRequest()->getRequest()->hydrate($this->getGiServiceLocator()->getCommandLine()->extract());
 
         $this->createResponseCollection();
     }
@@ -62,7 +62,7 @@ abstract class AbstractProcessor implements ProcessorInterface
      */
     protected function createResponseCollection()
     {
-        $this->responseCollection = $this->giGetDi(
+        $this->responseCollection = $this->getGiServiceLocator()->getDependency(
             ResponseCollectionInterface::class, ResponseCollection::class
         );
 

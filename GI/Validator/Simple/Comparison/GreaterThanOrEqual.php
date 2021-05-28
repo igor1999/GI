@@ -37,7 +37,7 @@ class GreaterThanOrEqual extends GreaterThan implements GreaterThanOrEqualInterf
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::GREATER_THAN_OR_EQUAL
         );
     }

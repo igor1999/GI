@@ -45,9 +45,9 @@ class YesNo extends AbstractSwitcher implements YesNoInterface
     {
         parent::__construct($name);
 
-        $this->selection = $this->giGetClientSelectionFactory()->createYesNo();
+        $this->selection = $this->getGiServiceLocator()->getClientSelectionFactory()->createYesNo();
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

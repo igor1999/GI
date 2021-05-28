@@ -175,7 +175,7 @@ class Contents implements ContentsInterface
     public function getClassEncoder()
     {
         if (!($this->classEncoder instanceof \Closure)) {
-            $this->giThrowNotSetException('Class encoder');
+            $this->getGiServiceLocator()->throwNotSetException('Class encoder');
         }
 
         return $this->classEncoder;
@@ -199,7 +199,7 @@ class Contents implements ContentsInterface
     public function getClassDecoder()
     {
         if (!($this->classDecoder instanceof \Closure)) {
-            $this->giThrowNotSetException('Class decoder');
+            $this->getGiServiceLocator()->throwNotSetException('Class decoder');
         }
 
         return $this->classDecoder;
@@ -224,7 +224,7 @@ class Contents implements ContentsInterface
     public function fill($object)
     {
         if (!is_object($object)) {
-            $this->giThrowInvalidTypeException('Argument', $object, 'object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Argument', $object, 'object');
         }
 
         $this->setClass(get_class($object))
@@ -247,6 +247,7 @@ class Contents implements ContentsInterface
     /**
      * @param array $contents
      * @return static
+     * @throws \Exception
      */
     public function resetAndHydrate(array $contents)
     {
@@ -262,7 +263,7 @@ class Contents implements ContentsInterface
     protected function validateClass()
     {
         if (empty($this->class)) {
-            $this->giThrowIsEmptyException('Class');
+            $this->getGiServiceLocator()->throwIsEmptyException('Class');
         }
     }
 
@@ -273,7 +274,7 @@ class Contents implements ContentsInterface
     protected function validateHash()
     {
         if (empty($this->hash)) {
-            $this->giThrowIsEmptyException('Hash');
+            $this->getGiServiceLocator()->throwIsEmptyException('Hash');
         }
     }
 
@@ -284,15 +285,15 @@ class Contents implements ContentsInterface
     protected function validateRegistered()
     {
         if ($this->registered && !$this->getRegistry()->has($this->hash)) {
-            $this->giThrowCommonException('Registered is true, but no registered object found');
+            $this->getGiServiceLocator()->throwCommonException('Registered is true, but no registered object found');
         }
 
         if (!$this->registered && $this->getRegistry()->has($this->hash)) {
-            $this->giThrowCommonException('Registered is false, but registered object exists');
+            $this->getGiServiceLocator()->throwCommonException('Registered is false, but registered object exists');
         }
 
         if ($this->registered && !$this->getRegistry()->validateClass($this->hash, $this->class)) {
-            $this->giThrowCommonException('Given and registered classes are not equal');
+            $this->getGiServiceLocator()->throwCommonException('Given and registered classes are not equal');
         }
     }
 }

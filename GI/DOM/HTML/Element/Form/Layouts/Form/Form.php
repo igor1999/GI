@@ -36,7 +36,7 @@ class Form extends BaseForm implements FormInterface
     {
         parent::__construct($method, $action);
 
-        $this->layout = $this->giGetDOMFactory()->createLayout();
+        $this->layout = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
     }
 
     /**

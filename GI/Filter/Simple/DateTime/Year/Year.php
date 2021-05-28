@@ -28,7 +28,7 @@ class Year extends AbstractDateTime implements YearInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createYear();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createYear();
     }
 
     /**

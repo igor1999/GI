@@ -156,7 +156,7 @@ class SelectorList extends AbstractImmutable implements SelectorListInterface
     protected function createSelector(string $selector, array $style)
     {
         try {
-            $result = $this->giGetDi(SelectorInterface::class, null, [$selector, $style]);
+            $result = $this->getGiServiceLocator()->getDependency(SelectorInterface::class, null, [$selector, $style]);
         } catch (\Exception $e) {
             $result = new Selector($selector, $style);
         }

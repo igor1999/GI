@@ -29,7 +29,7 @@ class CloseDelimiter implements CloseDelimiterInterface
      */
     public function toString()
     {
-        return $this->giGetDOMFactory()->createXMLCDATA(']]')->toString()
-            . $this->giGetDOMFactory()->createXMLCDATA('>')->toString();
+        return $this->getGiServiceLocator()->getDOMFactory()->createXMLCDATA(']]')->toString()
+            . $this->getGiServiceLocator()->getDOMFactory()->createXMLCDATA('>')->toString();
     }
 }

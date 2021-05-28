@@ -60,7 +60,7 @@ class Immutable implements ImmutableInterface
     public function get(string $property)
     {
         if (!$this->has($property)) {
-            $this->giThrowNotInScopeException($property);
+            $this->getGiServiceLocator()->throwNotInScopeException($property);
         }
 
         return $this->items[$property];
@@ -145,7 +145,7 @@ class Immutable implements ImmutableInterface
         $items = $this->findByDescriptorName($descriptor);
 
         if (empty($items)) {
-            $this->giThrowNotFoundException('Property with descriptor', [$descriptor]);
+            $this->getGiServiceLocator()->throwNotFoundException('Property with descriptor', [$descriptor]);
         }
 
         return array_shift($items);
@@ -177,7 +177,7 @@ class Immutable implements ImmutableInterface
         $items = $this->findByDescriptorValue($descriptor, $value);
 
         if (empty($items)) {
-            $this->giThrowCommonException(
+            $this->getGiServiceLocator()->throwCommonException(
                 'Property with descriptor \'%s\' and value \'%s\' not found', [$descriptor, $value]
             );
         }

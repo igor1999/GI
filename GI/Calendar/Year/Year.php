@@ -70,13 +70,13 @@ class Year implements YearInterface
     public function getPrevious(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->firstDate;
         $date->sub(new \DateInterval('P' . (int)$interval . 'Y'));
 
-        return $this->giGetCalendarFactory()->getYear($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getYear($date);
     }
 
     /**
@@ -87,13 +87,13 @@ class Year implements YearInterface
     public function getNext(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->firstDate;
         $date->add(new \DateInterval('P' . (int)$interval . 'Y'));
 
-        return $this->giGetCalendarFactory()->getYear($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getYear($date);
     }
 
     /**
@@ -101,7 +101,7 @@ class Year implements YearInterface
      */
     public function getWeeks()
     {
-        return $this->giGetCalendarFactory()->getWeekCollection($this->firstDate, $this->lastDate);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getWeekCollection($this->firstDate, $this->lastDate);
     }
 
     /**
@@ -109,6 +109,6 @@ class Year implements YearInterface
      */
     public function getMonths()
     {
-        return $this->giGetCalendarFactory()->getMonthCollection($this->firstDate, $this->lastDate);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getMonthCollection($this->firstDate, $this->lastDate);
     }
 }

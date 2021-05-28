@@ -38,7 +38,7 @@ class IsScalar extends AbstractSimple implements IsScalarInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_SCALAR
         );
     }

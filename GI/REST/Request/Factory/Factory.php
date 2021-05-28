@@ -87,7 +87,7 @@ class Factory extends AbstractFactory implements FactoryInterface
     public function createUpload(string $caller = null)
     {
         try {
-            $result = $this->giGetServiceLocator()->getDi()->find(
+            $result = $this->getGiServiceLocator()->getDi()->find(
                 UploadCollectionInterface::class, $caller
             );
         } catch (\Exception $e) {

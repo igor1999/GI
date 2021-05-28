@@ -73,7 +73,7 @@ abstract class AbstractRecord implements RecordInterface
      */
     protected function extractToDB()
     {
-        return $this->giGetClassMeta()->extract($this, static::DB_EXTRACTION_DESCRIPTOR);
+        return $this->getGiServiceLocator()->getClassMeta()->extract($this, static::DB_EXTRACTION_DESCRIPTOR);
     }
 
     /**
@@ -110,7 +110,7 @@ abstract class AbstractRecord implements RecordInterface
      */
     protected function hydrateFromDB(array $data)
     {
-        $this->giGetClassMeta()->hydrate($this, $data, static::DB_HYDRATION_DESCRIPTOR);
+        $this->getGiServiceLocator()->getClassMeta()->hydrate($this, $data, static::DB_HYDRATION_DESCRIPTOR);
 
         return $this;
     }
@@ -235,13 +235,13 @@ abstract class AbstractRecord implements RecordInterface
     protected function getRelatedRecord(string $class)
     {
         if (!is_a($class, RecordInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Related class', $class, 'RecordInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Related class', $class, 'RecordInterface');
         }
 
-        $data = $this->giGetClassMeta()->getMethods()->extract($this, $class);
+        $data = $this->getGiServiceLocator()->getClassMeta()->getMethods()->extract($this, $class);
 
         /** @var RecordInterface $result */
-        $result = $this->giGetClassMeta($class)->create([$data]);
+        $result = $this->getGiServiceLocator()->getClassMeta($class)->create([$data]);
 
         return $result;
     }
@@ -255,13 +255,13 @@ abstract class AbstractRecord implements RecordInterface
     protected function getRelatedSet(string $class, array $order = [])
     {
         if (!is_a($class, SetInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Related class', $class, 'SetInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Related class', $class, 'SetInterface');
         }
 
         /** @var SetInterface $result */
-        $result = $this->giGetClassMeta($class)->create();
+        $result = $this->getGiServiceLocator()->getClassMeta($class)->create();
 
-        $data = $this->giGetClassMeta()->getMethods()->extract($this, $class);
+        $data = $this->getGiServiceLocator()->getClassMeta()->getMethods()->extract($this, $class);
 
         $result->select($data, $order);
 
@@ -278,18 +278,18 @@ abstract class AbstractRecord implements RecordInterface
     protected function getRelatedSetByProxy(string $setClass, string $proxyClass, array $order = [])
     {
         if (!is_a($setClass, SetInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Related class', $setClass, 'SetInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Related class', $setClass, 'SetInterface');
         }
 
         if (!is_a($proxyClass, SetInterface::class, true)
                 && !is_a($proxyClass, RecordInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Related class', $proxyClass, 'SetInterface or RecordInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Related class', $proxyClass, 'SetInterface or RecordInterface');
         }
 
         /** @var SetInterface $result */
-        $result = $this->giGetClassMeta($setClass)->create();
+        $result = $this->getGiServiceLocator()->getClassMeta($setClass)->create();
 
-        $data = $this->giGetClassMeta()->getMethods()->extract($this, $proxyClass);
+        $data = $this->getGiServiceLocator()->getClassMeta()->getMethods()->extract($this, $proxyClass);
 
         $result->selectByProxy($proxyClass, $data, $order);
 
@@ -306,20 +306,20 @@ abstract class AbstractRecord implements RecordInterface
     protected function getRelatedSetByCascade(string $setClass, array $cascadeClasses, array $order = [])
     {
         if (!is_a($setClass, SetInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Cascade class', $setClass, 'SetInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Cascade class', $setClass, 'SetInterface');
         }
 
         /** @var SetInterface $resultSet */
-        $resultSet = $this->giGetClassMeta($setClass)->create();
+        $resultSet = $this->getGiServiceLocator()->getClassMeta($setClass)->create();
 
         $firstClass = array_shift($cascadeClasses);
         if (!is_a($firstClass, SetInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
         }
 
         array_unshift($cascadeClasses, $firstClass);
 
-        $data = $this->giGetClassMeta()->getMethods()->extract($this, $firstClass);
+        $data = $this->getGiServiceLocator()->getClassMeta()->getMethods()->extract($this, $firstClass);
 
         $resultSet->selectByCascade($cascadeClasses, $data, $order);
 

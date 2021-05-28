@@ -67,7 +67,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->setExpirationTime($context->getExpirationTime());
         } catch (\Exception $e) {
             $this->setExpirationTime(static::DEFAULT_EXPIRATION_TIME);
@@ -130,7 +130,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
     protected function setExpirationTime(int $expirationTime)
     {
         if ($expirationTime <= 0) {
-            $this->giThrowInvalidMinimumException('Captcha expiration time', $expirationTime, 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Captcha expiration time', $expirationTime, 1);
         }
 
         $this->expirationTime = $expirationTime;
@@ -161,7 +161,7 @@ abstract class AbstractCaptcha implements CaptchaInterface
      */
     protected function generateId()
     {
-        $this->id = $this->giGetRandomHashGenerator()->create();
+        $this->id = $this->getGiServiceLocator()->getUtilites()->getRandomHashGenerator()->create();
 
         return $this;
     }

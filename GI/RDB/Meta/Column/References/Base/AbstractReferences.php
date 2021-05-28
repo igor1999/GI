@@ -88,7 +88,7 @@ abstract class AbstractReferences implements ReferencesInterface
         $columns = array_filter($this->items, $f);
 
         if (empty($columns)) {
-            $this->giThrowNotInScopeException("$table.$column");
+            $this->getGiServiceLocator()->throwNotInScopeException("$table.$column");
         }
 
         return array_shift($columns);

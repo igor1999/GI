@@ -36,11 +36,11 @@ abstract class AbstractPrefix implements PrefixInterface
         } else {
             $constantName = self::PREFIX_OF_PREFIX_CONSTANTS . strtoupper($prefix);
 
-            $exists = $this->giGetClassMeta(PrefixInterface::class)->getStaticConstants()->has($constantName);
+            $exists = $this->getGiServiceLocator()->getClassMeta(PrefixInterface::class)->getStaticConstants()->has($constantName);
         }
 
         if (empty($exists)) {
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
     }
 }

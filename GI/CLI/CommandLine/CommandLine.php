@@ -76,7 +76,7 @@ class CommandLine implements CommandLineInterface
      */
     public function __construct(array $items = [], FSOFileInterface $script = null, string $command = '')
     {
-        $this->executionProcessor = $this->giGetDi(ExecutionInterface::class, Execution::class, [$this]);
+        $this->executionProcessor = $this->getGiServiceLocator()->getDependency(ExecutionInterface::class, Execution::class, [$this]);
 
         foreach ($items as $item) {
             $this->add($item);
@@ -118,7 +118,7 @@ class CommandLine implements CommandLineInterface
     protected function createContext()
     {
         /** @var ContextInterface $context */
-        $context = $this->giGetDi(ContextInterface::class);
+        $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
         return $context;
     }
@@ -154,7 +154,7 @@ class CommandLine implements CommandLineInterface
     public function get(int $position)
     {
         if (!$this->has($position)) {
-            $this->giThrowNotInScopeException($position);
+            $this->getGiServiceLocator()->throwNotInScopeException($position);
         }
 
         return $this->items[$position];
@@ -277,7 +277,7 @@ class CommandLine implements CommandLineInterface
         $items = $this->filterNames($name);
 
         if ($items->isEmpty()) {
-            $this->giThrowNotFoundException('CLI argument', $name);
+            $this->getGiServiceLocator()->throwNotFoundException('CLI argument', $name);
         }
 
         return $items->get(0);
@@ -373,7 +373,7 @@ class CommandLine implements CommandLineInterface
      */
     protected function createItem(string $raw = '')
     {
-        return $this->giGetCLIFactory()->createArgumentsItem($raw);
+        return $this->getGiServiceLocator()->getCLIFactory()->createArgumentsItem($raw);
     }
 
     /**
@@ -556,7 +556,7 @@ class CommandLine implements CommandLineInterface
      */
     public function addCurrentSession(bool $base64 = false)
     {
-        $this->addSession($this->giGetServiceLocator()->getSessionID(), $base64);
+        $this->addSession($this->getGiServiceLocator()->getSessionID(), $base64);
 
         return $this;
     }
@@ -703,7 +703,7 @@ class CommandLine implements CommandLineInterface
 
         if (!empty($arguments)) {
             $path = array_shift($arguments);
-            $file = $this->giCreateFSOFile($path);
+            $file = $this->getGiServiceLocator()->createFSOFile($path);
             $this->setScript($file);
         }
 
@@ -749,7 +749,7 @@ class CommandLine implements CommandLineInterface
     public function getScript()
     {
         if (!$this->hasScript()) {
-            $this->giThrowNotSetException('CLI Script');
+            $this->getGiServiceLocator()->throwNotSetException('CLI Script');
         }
 
         return $this->script;

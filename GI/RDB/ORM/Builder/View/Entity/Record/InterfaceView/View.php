@@ -55,15 +55,15 @@ class View extends Base implements ViewInterface
     {
         parent::__construct();
 
-        $this->columnSignaturesView = $this->giGetDi(
+        $this->columnSignaturesView = $this->getGiServiceLocator()->getDependency(
             ColumnSignaturesViewInterface::class, ColumnSignaturesView::class
         );
 
-        $this->recordSignatureView = $this->giGetDi(
+        $this->recordSignatureView = $this->getGiServiceLocator()->getDependency(
             RecordSignatureViewInterface::class, RecordSignatureView::class
         );
 
-        $this->setSignatureView = $this->giGetDi(
+        $this->setSignatureView = $this->getGiServiceLocator()->getDependency(
             SetSignatureViewInterface::class, SetSignatureView::class
         );
     }

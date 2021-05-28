@@ -69,9 +69,11 @@ abstract class AbstractViewModel implements ViewModelInterface
      */
     public function __construct()
     {
-        $this->nameAttributes = $this->giGetDi(NameInterface::class, Name::class);
-        $this->filter         = $this->giGetDi(FilterRecursiveInterface::class, FilterRecursive::class);
-        $this->validator      = $this->giGetDi(
+        $this->nameAttributes = $this->getGiServiceLocator()->getDependency(NameInterface::class, Name::class);
+        $this->filter         = $this->getGiServiceLocator()->getDependency(
+            FilterRecursiveInterface::class, FilterRecursive::class
+        );
+        $this->validator      = $this->getGiServiceLocator()->getDependency(
             ValidatorRecursiveInterface::class, ValidatorRecursive::class
         );
     }
@@ -99,7 +101,7 @@ abstract class AbstractViewModel implements ViewModelInterface
     public function getViewModelParent()
     {
         if (!$this->hasViewModelParent()) {
-            $this->giThrowNotSetException('Parent view model');
+            $this->getGiServiceLocator()->throwNotSetException('Parent view model');
         }
 
         return $this->_parent;
@@ -183,12 +185,14 @@ abstract class AbstractViewModel implements ViewModelInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $getter = $this->giGetPSRFormatParser()->parseWithPrefixGet($method, static::SUFFIX_FOR_NAME);
+            $getter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()
+                ->parseWithPrefixGet($method, static::SUFFIX_FOR_NAME);
         } catch (\Exception $exception) {
             try {
-                $render = $this->giGetPSRFormatParser()->parseWithPrefixRender($method, static::SUFFIX_FOR_NAME);
+                $render = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()
+                    ->parseWithPrefixRender($method, static::SUFFIX_FOR_NAME);
             } catch (\Exception $exception) {
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
         }
 
@@ -211,14 +215,14 @@ abstract class AbstractViewModel implements ViewModelInterface
      */
     protected function validateGetter(string $property)
     {
-        $getter     = $this->giGetPSRFormatBuilder()->buildGet($property);
-        $boolGetter = $this->giGetPSRFormatBuilder()->buildIs($property);
+        $getter     = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildGet($property);
+        $boolGetter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildIs($property);
 
-        $hasGetter     = $this->giGetClassMeta()->getMethods()->has($getter);
-        $hasBoolGetter = $this->giGetClassMeta()->getMethods()->has($boolGetter);
+        $hasGetter     = $this->getGiServiceLocator()->getClassMeta()->getMethods()->has($getter);
+        $hasBoolGetter = $this->getGiServiceLocator()->getClassMeta()->getMethods()->has($boolGetter);
 
         if (!$hasGetter && !$hasBoolGetter) {
-            $this->giThrowNotFoundException('Getter or bool getter');
+            $this->getGiServiceLocator()->throwNotFoundException('Getter or bool getter');
         }
     }
 
@@ -231,13 +235,13 @@ abstract class AbstractViewModel implements ViewModelInterface
     {
         $descriptor = ImmutableInterface::HYDRATION_DESCRIPTOR;
 
-        foreach ($this->giGetClassMeta()->getMethods()->findByDescriptorName($descriptor) as $method) {
+        foreach ($this->getGiServiceLocator()->getClassMeta()->getMethods()->findByDescriptorName($descriptor) as $method) {
             $name = $method->getName();
 
             $key = $method->getDescriptor($descriptor);
             if (empty($key)) {
                 try {
-                    $key = $this->giGetPSRFormatParser()->parseWithPrefixSet($name);
+                    $key = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixSet($name);
                 } catch (\Exception $exception) {}
             }
 
@@ -282,7 +286,7 @@ abstract class AbstractViewModel implements ViewModelInterface
     public function setFilterToParent()
     {
         if (empty($this->_name)) {
-            $this->giThrowNotSetException('Model name');
+            $this->getGiServiceLocator()->throwNotSetException('Model name');
         }
 
         $parentFilter = $this->getViewModelParent()->getFilter();
@@ -290,7 +294,7 @@ abstract class AbstractViewModel implements ViewModelInterface
         if ($parentFilter instanceof FilterRecursiveInterface) {
             $parentFilter->set($this->_name, $this->getFilter());
         } else {
-            $this->giThrowInvalidTypeException('Parent filter', '', 'Recursive filter');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Parent filter', '', 'Recursive filter');
         }
 
         return $this;
@@ -319,7 +323,7 @@ abstract class AbstractViewModel implements ViewModelInterface
     public function setValidatorToParent()
     {
         if (empty($this->_name)) {
-            $this->giThrowNotSetException('Model name');
+            $this->getGiServiceLocator()->throwNotSetException('Model name');
         }
 
         $parentValidator = $this->getViewModelParent()->getValidator();
@@ -327,7 +331,7 @@ abstract class AbstractViewModel implements ViewModelInterface
         if ($parentValidator instanceof ValidatorRecursiveInterface) {
             $parentValidator->set($this->_name, $this->getValidator());
         } else {
-            $this->giThrowInvalidTypeException('Parent validator', '', 'Recursive validator');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Parent validator', '', 'Recursive validator');
         }
 
         return $this;

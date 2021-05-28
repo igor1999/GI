@@ -79,7 +79,7 @@ class Menu implements MenuInterface
     public function getOpener()
     {
         if (!$this->hasOwner()) {
-            $this->giThrowNotSetException('Opener');
+            $this->getGiServiceLocator()->throwNotSetException('Opener');
         }
 
         return $this->opener;
@@ -106,7 +106,7 @@ class Menu implements MenuInterface
     protected function createOption(string $localID)
     {
         try {
-            $option = $this->giGetDi(OptionInterface::class, null, [$this, $localID]);
+            $option = $this->getGiServiceLocator()->getDependency(OptionInterface::class, null, [$this, $localID]);
         } catch (\Exception $e) {
             $option = new Option($this, $localID);
         }
@@ -123,7 +123,7 @@ class Menu implements MenuInterface
     protected function createPopup(OptionInterface $owner, array $contents = [])
     {
         try {
-            $popup = $this->giGetDi(MenuInterface::class, null, [$owner, $contents]);
+            $popup = $this->getGiServiceLocator()->getDependency(MenuInterface::class, null, [$owner, $contents]);
         } catch (\Exception $e) {
             $popup = new Menu($owner, $contents);
         }
@@ -165,7 +165,7 @@ class Menu implements MenuInterface
                 $option->setPopup($popup);
                 $this->set($option);
             } else {
-                $this->giThrowInvalidFormatException('Option', $key, 'string/array/MenuInterface');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Option', $key, 'string/array/MenuInterface');
             }
         }
 
@@ -180,7 +180,7 @@ class Menu implements MenuInterface
     public function getRecursive(array $keys)
     {
         if (empty($keys)) {
-            $this->giThrowIsEmptyException('Keys');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys');
         }
 
         $key    = array_shift($keys);
@@ -202,16 +202,16 @@ class Menu implements MenuInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $keys  = $this->giGetPSRFormatParser()->parseWithPrefixGet($method, static::POPUP_PREFIX);
+            $keys  = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method, static::POPUP_PREFIX);
             $popup = true;
         } catch (\Exception $exception) {
             try {
-                $keys = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+                $keys = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
                 $popup = false;
             } catch (\Exception $exception) {
                 $keys = null;
                 $popup = null;
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
         }
 
@@ -219,7 +219,7 @@ class Menu implements MenuInterface
 
         $f = function($key)
         {
-            return $this->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+            return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
         };
         $keys = array_map($f, $keys);
 
@@ -245,7 +245,7 @@ class Menu implements MenuInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->options[$key];
@@ -309,7 +309,7 @@ class Menu implements MenuInterface
      */
     protected function insertBefore(string $anchor, OptionInterface $option)
     {
-        $this->options = $this->giGetStorageFactory()
+        $this->options = $this->getGiServiceLocator()->getStorageFactory()
             ->createMixedHashSetAlterable($this->options)
             ->insertBefore($anchor, $option->getLocalID(), $option)
             ->getItems();

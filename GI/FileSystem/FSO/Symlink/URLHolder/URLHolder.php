@@ -63,7 +63,7 @@ class URLHolder implements URLHolderInterface
     public function __construct(FSOInterface $target, string $path, string $webRoot = '', string $rootURL = '')
     {
         /** @var ContextInterface $context */
-        $context       = $this->giGetDi(ContextInterface::class, Context::class);
+        $context       = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
         $this->webRoot = empty($webRoot) ? $context->getWebRoot() : $webRoot;
         $this->rootURL = empty($rootURL) ? $context->getRootURL() : $rootURL;
 

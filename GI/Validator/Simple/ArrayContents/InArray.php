@@ -87,7 +87,7 @@ class InArray extends AbstractSimple implements InArrayInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_IN_ARRAY
         );
     }

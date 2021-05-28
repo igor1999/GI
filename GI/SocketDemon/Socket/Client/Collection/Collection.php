@@ -70,18 +70,18 @@ class Collection implements CollectionInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->limit     = $context->getLimit();
             $this->pushCalls = $context->allowPushCalls();
         } catch (\Exception $e) {}
 
-        $this->pushCallRequest = $this->giGetSocketDemonFactory()->createPushCallRequest();
+        $this->pushCallRequest = $this->getGiServiceLocator()->getSocketDemonFactory()->createPushCallRequest();
 
-        $this->shell = $this->giGetSocketDemonFactory()->createShell();
+        $this->shell = $this->getGiServiceLocator()->getSocketDemonFactory()->createShell();
 
         try {
-            $this->logger = $this->giCreateLogger();
+            $this->logger = $this->getGiServiceLocator()->createLogger();
         } catch (\Exception $exception) {}
     }
 
@@ -102,7 +102,7 @@ class Collection implements CollectionInterface
     protected function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->items[$id];
@@ -155,7 +155,7 @@ class Collection implements CollectionInterface
     protected function getLogger()
     {
         if (!($this->logger instanceof LoggerInterface)) {
-            $this->giThrowNotSetException('Logger');
+            $this->getGiServiceLocator()->throwNotSetException('Logger');
         }
 
         return $this->logger;
@@ -187,7 +187,7 @@ class Collection implements CollectionInterface
     protected function accept()
     {
         if (empty($this->limit) || (count($this->items) < $this->limit)) {
-            $clientSocket = $this->giGetSocketDemonFactory()->createClientSocket();
+            $clientSocket = $this->getGiServiceLocator()->getSocketDemonFactory()->createClientSocket();
 
             if ($clientSocket->accept()) {
                 $this->items[$clientSocket->getId()] = $clientSocket;

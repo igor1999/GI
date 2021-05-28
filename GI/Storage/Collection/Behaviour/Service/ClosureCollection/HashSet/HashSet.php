@@ -43,7 +43,7 @@ class HashSet extends AbstractService implements HashSetInterface
      */
     protected function createDefaultOption()
     {
-        return $this->giGetStorageFactory()->getOptionFactory()->createClosureHashSet();
+        return $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createClosureHashSet();
     }
 
     /**

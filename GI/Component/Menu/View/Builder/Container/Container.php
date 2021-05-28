@@ -56,11 +56,11 @@ class Container implements ContainerInterface
      */
     public function __construct(WidgetInterface $widget)
     {
-        $this->menuBuilder = $this->giGetDi(MenuInterface::class, Menu::class);
+        $this->menuBuilder = $this->getGiServiceLocator()->getDependency(MenuInterface::class, Menu::class);
 
-        $this->optionBuilder = $this->giGetDi(OptionInterface::class, new Option($widget), [$widget]);
+        $this->optionBuilder = $this->getGiServiceLocator()->getDependency(OptionInterface::class, new Option($widget), [$widget]);
 
-        $this->optionContentBuilder = $this->giGetDi(
+        $this->optionContentBuilder = $this->getGiServiceLocator()->getDependency(
             OptionContentInterface::class, new OptionContent($widget), [$widget]
         );
     }

@@ -106,7 +106,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateDelimiter()
     {
         if (strlen($this->delimiter) != 1 ) {
-            $this->giThrowInvalidValueException('Delimiter length', $this->delimiter, 1);
+            $this->getGiServiceLocator()->throwInvalidValueException('Delimiter length', $this->delimiter, 1);
         }
 
         return $this;
@@ -120,7 +120,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateEnclosure()
     {
         if (strlen($this->enclosure) != 1 ) {
-            $this->giThrowInvalidValueException('Enclosure length', $this->enclosure, 1);
+            $this->getGiServiceLocator()->throwInvalidValueException('Enclosure length', $this->enclosure, 1);
         }
 
         return $this;
@@ -134,7 +134,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateEscape()
     {
         if (strlen($this->escape) != 1 ) {
-            $this->giThrowInvalidValueException('Escape length', $this->escape, 1);
+            $this->getGiServiceLocator()->throwInvalidValueException('Escape length', $this->escape, 1);
         }
 
         return $this;

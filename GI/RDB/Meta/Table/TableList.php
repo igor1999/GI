@@ -75,11 +75,11 @@ class TableList implements TableListInterface
     public function get(string $name)
     {
         if (!$this->has($name)) {
-            $this->giThrowNotInScopeException($name);
+            $this->getGiServiceLocator()->throwNotInScopeException($name);
         }
 
         if (!($this->items[$name]) instanceof TableInterface) {
-            $this->items[$name] = $this->giGetDi(
+            $this->items[$name] = $this->getGiServiceLocator()->getDependency(
                 TableInterface::class, new Table($this->getDriver(), $name), [$this->getDriver(), $name]
             );
         }
@@ -96,17 +96,17 @@ class TableList implements TableListInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $name = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+            $name = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
         } catch (\Exception $exception) {
             $name = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $entityPointer   = PlatformInterface::ENTITY_POINTER;
         $getterSeparator = Table::ALIAS_SEPARATOR;
 
         $name = str_replace($getterSeparator, $entityPointer, $name);
-        $name = $this->giGetCamelCaseConverter()->convertToUnderlineLowerCase($name);
+        $name = $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineLowerCase($name);
         $name = str_replace($entityPointer . $getterSeparator, $entityPointer, $name);
 
         return $this->get($name);

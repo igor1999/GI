@@ -73,7 +73,7 @@ abstract class AbstractWidget implements WidgetInterface
     protected function getRenderingContainer()
     {
         if (!($this->renderingContainer instanceof ContainerElementInterface)) {
-            $this->renderingContainer = $this->giGetDOMFactory()->createContainerElement();
+            $this->renderingContainer = $this->getGiServiceLocator()->getDOMFactory()->createContainerElement();
         }
 
         return $this->renderingContainer;
@@ -92,7 +92,7 @@ abstract class AbstractWidget implements WidgetInterface
     protected function getCsrf()
     {
         if (!($this->csrf instanceof CSRFInterface)) {
-            $this->giThrowNotSetException('CSRF');
+            $this->getGiServiceLocator()->throwNotSetException('CSRF');
         }
 
         return $this->csrf;
@@ -103,7 +103,7 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected function createCsrf()
     {
-        $this->csrf = $this->giGetDOMFactory()->getInputFactory()->createCSRF();
+        $this->csrf = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createCSRF();
 
         return $this;
     }
@@ -116,7 +116,7 @@ abstract class AbstractWidget implements WidgetInterface
     protected function createLoadingImage(string $giId = '')
     {
         try {
-            $image = $this->giGetDi(LoadingImageInterface::class);
+            $image = $this->getGiServiceLocator()->getDependency(LoadingImageInterface::class);
         } catch (\Exception $exception) {
             $image = new LoadingImage();
         }
@@ -132,7 +132,7 @@ abstract class AbstractWidget implements WidgetInterface
     protected function getParams()
     {
         if (!($this->params instanceof ParamsInterface)) {
-            $this->params = $this->giGetStorageFactory()->createMixedHashSetAlterable();
+            $this->params = $this->getGiServiceLocator()->getStorageFactory()->createMixedHashSetAlterable();
         }
 
         return $this->params;
@@ -172,7 +172,7 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected function createWithAttributes()
     {
-        $methods = $this->giGetClassMeta()->getMethods()->findByDescriptorName(static::ATTRIBUTE_GI_ID);
+        $methods = $this->getGiServiceLocator()->getClassMeta()->getMethods()->findByDescriptorName(static::ATTRIBUTE_GI_ID);
 
         $withJSClass = true;
 
@@ -193,7 +193,7 @@ abstract class AbstractWidget implements WidgetInterface
                 $this->addClientAttributesToSiblings($element);
             } else {
                 $type = HTMLInterface::class . '|' . SiblingsInterface::class;
-                $this->giThrowInvalidTypeException('Result of method', $method->getName(), $type);
+                $this->getGiServiceLocator()->throwInvalidTypeException('Result of method', $method->getName(), $type);
             }
         }
 
@@ -206,7 +206,7 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected function createSimple()
     {
-        $methods = $this->giGetClassMeta()->getMethods()->findByDescriptorName(static::CREATING_DESCRIPTOR);
+        $methods = $this->getGiServiceLocator()->getClassMeta()->getMethods()->findByDescriptorName(static::CREATING_DESCRIPTOR);
 
         foreach ($methods as $method) {
             $method->execute($this);

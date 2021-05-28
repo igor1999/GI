@@ -52,7 +52,7 @@ class Inline extends ContainerElement implements InlineInterface
 
         $this->getChildNodes()->setScript($text);
 
-        $this->params = $this->giGetDi(ParamsInterface::class, Params::class);
+        $this->params = $this->getGiServiceLocator()->getDependency(ParamsInterface::class, Params::class);
     }
 
     /**
@@ -77,7 +77,7 @@ class Inline extends ContainerElement implements InlineInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(NodeListInterface::class, ScriptNode::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(NodeListInterface::class, ScriptNode::class);
 
         return $this;
     }

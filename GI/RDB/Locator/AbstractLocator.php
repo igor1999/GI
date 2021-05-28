@@ -29,6 +29,6 @@ abstract class AbstractLocator implements LocatorInterface
      */
     public function getOrmFactory()
     {
-        $this->giThrowNotSetException('ORM-Factory');
+        $this->getGiServiceLocator()->throwNotSetException('ORM-Factory');
     }
 }

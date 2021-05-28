@@ -75,27 +75,27 @@ class View extends Base implements ViewInterface
     {
         parent::__construct();
 
-        $this->columnPropertyView = $this->giGetDi(
+        $this->columnPropertyView = $this->getGiServiceLocator()->getDependency(
             ColumnPropertyViewInterface::class, ColumnPropertyView::class
         );
 
-        $this->columnMethodsView = $this->giGetDi(
+        $this->columnMethodsView = $this->getGiServiceLocator()->getDependency(
             ColumnMethodsViewInterface::class, ColumnMethodsView::class
         );
 
-        $this->recordPropertyView = $this->giGetDi(
+        $this->recordPropertyView = $this->getGiServiceLocator()->getDependency(
             RecordPropertyViewInterface::class, RecordPropertyView::class
         );
 
-        $this->setPropertyView = $this->giGetDi(
+        $this->setPropertyView = $this->getGiServiceLocator()->getDependency(
             SetPropertyViewInterface::class, SetPropertyView::class
         );
 
-        $this->recordGetterView = $this->giGetDi(
+        $this->recordGetterView = $this->getGiServiceLocator()->getDependency(
             RecordGetterViewInterface::class, RecordGetterView::class
         );
 
-        $this->setGetterView = $this->giGetDi(
+        $this->setGetterView = $this->getGiServiceLocator()->getDependency(
             SetGetterViewInterface::class, SetGetterView::class
         );
     }

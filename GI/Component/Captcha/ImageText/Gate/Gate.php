@@ -26,7 +26,7 @@ class Gate extends AbstractGate implements GateInterface
      */
     public function getRecaptchaContents()
     {
-        $contents = $this->giGetComponentFactory()
+        $contents = $this->getGiServiceLocator()->getComponentFactory()
             ->getCaptchaFactory()
             ->createImageText()
             ->getRecaptchaContents();

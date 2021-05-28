@@ -32,7 +32,7 @@ class Context implements ContextInterface
      */
     public function getWebRoot()
     {
-        return $this->giGetServer()->getDocumentRoot()->createChildDir($this->getDir());
+        return $this->getGiServiceLocator()->getServer()->getDocumentRoot()->createChildDir($this->getDir());
     }
 
     /**

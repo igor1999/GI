@@ -37,7 +37,7 @@ class IsNotIdentical extends IsIdentical implements IsNotIdenticalInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_NOT_IDENTICAL
         );
     }

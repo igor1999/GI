@@ -100,7 +100,7 @@ class Container implements ContainerInterface
      */
     protected function create(array $arguments)
     {
-        return $this->giGetClassMeta($this->class)->create($arguments);
+        return $this->getGiServiceLocator()->getClassMeta($this->class)->create($arguments);
     }
 
     /**
@@ -109,6 +109,6 @@ class Container implements ContainerInterface
      */
     public function getShortName()
     {
-        return $this->giGetClassMeta($this->class)->getShortName();
+        return $this->getGiServiceLocator()->getClassMeta($this->class)->getShortName();
     }
 }

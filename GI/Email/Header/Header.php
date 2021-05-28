@@ -101,13 +101,15 @@ class Header implements HeaderInterface
      */
     public function __construct()
     {
-        $this->remail        = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->returnPath    = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->replayTo      = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->to            = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->cc            = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->bcc           = $this->giGetDi(AddressListInterface::class, AddressList::class);
-        $this->customHeaders = $this->giGetResponseFactory()->getHeaderFactory()->createCollection();
+        $this->remail     = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+        $this->returnPath = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+        $this->replayTo   = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+        $this->to         = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+        $this->cc         = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+        $this->bcc        = $this->getGiServiceLocator()->getDependency(AddressListInterface::class, AddressList::class);
+
+        $this->customHeaders = $this->getGiServiceLocator()->getResponseFactory()->getHeaderFactory()
+            ->createCollection();
     }
 
     /**
@@ -164,7 +166,7 @@ class Header implements HeaderInterface
     public function getFrom()
     {
         if (!($this->from instanceof AddressInterface)) {
-            $this->giThrowNotSetException('From address');
+            $this->getGiServiceLocator()->throwNotSetException('From address');
         }
 
         return $this->from;
@@ -178,7 +180,7 @@ class Header implements HeaderInterface
      */
     public function setFrom(string $email, string $name = '')
     {
-        $this->from = $this->giGetDi(AddressInterface::class, Address::class, [$email, $name]);
+        $this->from = $this->getGiServiceLocator()->getDependency(AddressInterface::class, Address::class, [$email, $name]);
 
         return $this;
     }

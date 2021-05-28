@@ -108,7 +108,7 @@ class Column implements ColumnInterface
     {
         $this->table = $table;
 
-        $this->giGetClassMeta()->getMethods()->hydrate($this, $contents)->validate($this);
+        $this->getGiServiceLocator()->getClassMeta()->getMethods()->hydrate($this, $contents)->validate($this);
     }
 
     /**
@@ -147,7 +147,7 @@ class Column implements ColumnInterface
     protected function validateIndex()
     {
         if ($this->index < 0) {
-            $this->giThrowInvalidMinimumException('Column index', $this->index, 'not negative number');
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Column index', $this->index, 'not negative number');
         }
     }
 
@@ -189,7 +189,7 @@ class Column implements ColumnInterface
     protected function validateName()
     {
         if (empty($this->name)) {
-            $this->giThrowIsEmptyException('Column name');
+            $this->getGiServiceLocator()->throwIsEmptyException('Column name');
         }
     }
 
@@ -221,7 +221,7 @@ class Column implements ColumnInterface
     protected function validateType()
     {
         if (empty($this->type)) {
-            $this->giThrowIsEmptyException('Column type');
+            $this->getGiServiceLocator()->throwIsEmptyException('Column type');
         }
     }
 
@@ -253,7 +253,7 @@ class Column implements ColumnInterface
     protected function validateLength()
     {
         if (!is_int($this->length)) {
-            $this->giThrowInvalidTypeException('Column length', $this->length, 'int');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Column length', $this->length, 'int');
         }
     }
 
@@ -415,7 +415,7 @@ class Column implements ColumnInterface
      */
     public function getClassProperty()
     {
-        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseLowerFirst($this->name);
+        return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertUnderlineToCamelCaseLowerFirst($this->name);
     }
 
     /**
@@ -423,7 +423,7 @@ class Column implements ColumnInterface
      */
     public function getClassGetter()
     {
-        return $this->giGetPSRFormatBuilder()->buildGet($this->getClassProperty());
+        return $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildGet($this->getClassProperty());
     }
 
     /**
@@ -447,7 +447,7 @@ class Column implements ColumnInterface
      */
     public function getClassSetter()
     {
-        return $this->giGetPSRFormatBuilder()->buildSet($this->getClassProperty());
+        return $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildSet($this->getClassProperty());
     }
 
     /**
@@ -457,7 +457,7 @@ class Column implements ColumnInterface
     public function getParentReferenceList()
     {
         if (!($this->parentReferenceList instanceof ParentReferencesInterface)) {
-            $this->parentReferenceList = $this->giGetDi(
+            $this->parentReferenceList = $this->getGiServiceLocator()->getDependency(
                 ParentReferencesInterface::class, ParentReferences::class, [$this]
             );
         }
@@ -472,7 +472,7 @@ class Column implements ColumnInterface
     public function getChildReferenceList()
     {
         if (!($this->childReferenceList instanceof ChildReferencesInterface)) {
-            $this->childReferenceList = $this->giGetDi(
+            $this->childReferenceList = $this->getGiServiceLocator()->getDependency(
                 ChildReferencesInterface::class, ChildReferences::class, [$this]
             );
         }

@@ -52,7 +52,7 @@ class AbstractParser implements ParserInterface
     {
         $this->reader = $reader;
 
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createHTMLText();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createHTMLText();
     }
 
     /**
@@ -181,7 +181,7 @@ class AbstractParser implements ParserInterface
                 break;
             default:
                 $result = null;
-                $this->giThrowNotFoundException('Parse mode');
+                $this->getGiServiceLocator()->throwNotFoundException('Parse mode');
         }
 
         return $result;

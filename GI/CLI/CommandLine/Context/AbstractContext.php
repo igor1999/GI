@@ -29,6 +29,6 @@ abstract class AbstractContext implements ContextInterface
      */
     public function getCommand()
     {
-        $this->giThrowNotSetException('Command');
+        $this->getGiServiceLocator()->throwNotSetException('Command');
     }
 }

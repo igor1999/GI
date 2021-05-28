@@ -77,11 +77,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
 
-        $this->builderContainer = $this->giGetDi(
+        $this->builderContainer = $this->getGiServiceLocator()->getDependency(
             BuilderContainerInterface::class, new BuilderContainer($this), [$this]
         );
     }
@@ -93,7 +93,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function validateModel()
     {
         if (!($this->getModel() instanceof ModelInterface)) {
-            $this->giThrowInvalidTypeException('Model', '', 'MenuInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Model', '', 'MenuInterface');
         }
     }
 
@@ -154,7 +154,7 @@ class Widget extends AbstractWidget implements WidgetInterface
         }
 
         if (!isset($this->options[$containerID][$localID])) {
-            $this->giThrowNotInScopeException($localID);
+            $this->getGiServiceLocator()->throwNotInScopeException($localID);
         }
 
         return $this->options[$containerID][$localID];
@@ -185,7 +185,7 @@ class Widget extends AbstractWidget implements WidgetInterface
         }
 
         if (!array_key_exists($id, $this->popups)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->popups[$id];

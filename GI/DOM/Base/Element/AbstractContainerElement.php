@@ -47,7 +47,7 @@ abstract class AbstractContainerElement extends AbstractAttributedElement implem
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(AlterableInterface::class, Alterable::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(AlterableInterface::class, Alterable::class);
 
         return $this;
     }

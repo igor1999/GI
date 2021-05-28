@@ -45,9 +45,9 @@ class OnOff extends AbstractSwitcher implements OnOffInterface
     {
         parent::__construct($name);
 
-        $this->selection = $this->giGetClientSelectionFactory()->createOnOff();
+        $this->selection = $this->getGiServiceLocator()->getClientSelectionFactory()->createOnOff();
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

@@ -102,7 +102,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getHeaderCell(string $id)
     {
         if (!$this->hasHeaderCell($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->headerCells[$id];
@@ -138,7 +138,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getOrderHidden()
     {
         if (!($this->orderHidden instanceof HiddenInterface)) {
-            $this->orderHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+            $this->orderHidden = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden(
                 $this->getViewModel()->getCriteriaName(), $this->getViewModel()->getCriteria()
             );
 
@@ -155,7 +155,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getDirectionHidden()
     {
         if (!($this->directionHidden instanceof HiddenInterface)) {
-            $this->directionHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+            $this->directionHidden = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden(
                 $this->getViewModel()->getDirectionName(), $this->getViewModel()->getDirection()
             );
 
@@ -173,7 +173,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getOrderForm()
     {
         if (!($this->orderForm instanceof FormInterface)) {
-            $this->orderForm = $this->giGetDOMFactory()->createForm();
+            $this->orderForm = $this->getGiServiceLocator()->getDOMFactory()->createForm();
 
             $this->addCommonFormId($this->orderForm);
         }
@@ -189,7 +189,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function getTable()
     {
-        $this->table = $this->giGetDOMFactory()->createTable();
+        $this->table = $this->getGiServiceLocator()->getDOMFactory()->createTable();
         $this->table->getChildNodes()->addRow();
 
         $this->createHeader();

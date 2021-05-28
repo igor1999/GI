@@ -45,7 +45,7 @@ abstract class AbstractIdentity implements IdentityInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->cookieName = $context->getCookieName();
             $this->expires    = $context->getExpires();
         } catch (\Exception $e) {}
@@ -108,7 +108,7 @@ abstract class AbstractIdentity implements IdentityInterface
     {
         if (!$this->isAuthenticated() && $this->hasCookie()) {
             try {
-                $id = $this->giGetRequest()->getCookie()->get($this->cookieName);
+                $id = $this->getGiServiceLocator()->getRequest()->getCookie()->get($this->cookieName);
                 $this->set($this->createByUserID($id));
             } catch (\Exception $e) {}
         }
@@ -152,7 +152,7 @@ abstract class AbstractIdentity implements IdentityInterface
     {
         $this->cleanCache();
 
-        if ($this->hasCookie() && $this->giGetRequest()->getCookie()->has($this->cookieName)) {
+        if ($this->hasCookie() && $this->getGiServiceLocator()->getRequest()->getCookie()->has($this->cookieName)) {
             setcookie($this->cookieName);
         }
 

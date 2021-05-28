@@ -62,9 +62,9 @@ class Dialog extends AbstractComponent implements DialogInterface
      */
     public function __construct()
     {
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
 
-        $this->viewModel = $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+        $this->viewModel = $this->getGiServiceLocator()->getDependency(ViewModelInterface::class, ViewModel::class);
 
         $this->createContext()->createIdentity();
     }
@@ -108,9 +108,9 @@ class Dialog extends AbstractComponent implements DialogInterface
     protected function createContext()
     {
         try {
-            $this->context = $this->giGetDi(ContextInterface::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Login dialog contents');
+            $this->getGiServiceLocator()->throwDependencyException('Login dialog contents');
         }
 
         return $this;
@@ -124,9 +124,9 @@ class Dialog extends AbstractComponent implements DialogInterface
     {
         try {
             /** @var IdentityInterface $identity */
-            $this->identity = $this->giGetDi(IdentityInterface::class);
+            $this->identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Identity');
+            $this->getGiServiceLocator()->throwDependencyException('Identity');
         }
 
         return $this;
@@ -176,7 +176,7 @@ class Dialog extends AbstractComponent implements DialogInterface
             } else {
                 $response = [
                     'success' => 0,
-                    'message' => $this->giTranslate(
+                    'message' => $this->getGiServiceLocator()->translate(
                         GlossaryInterface::class, Glossary::class, 'Either login or password failed'
                     )
                 ];

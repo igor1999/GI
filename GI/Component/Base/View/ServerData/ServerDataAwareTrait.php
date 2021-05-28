@@ -31,7 +31,7 @@ trait ServerDataAwareTrait
     protected function getServerDataList()
     {
         if (!($this->serverDataList instanceof ServerDataInterface)) {
-            $this->serverDataList = $this->giGetDi(
+            $this->serverDataList = $this->getGiServiceLocator()->getDependency(
                 ServerDataInterface::class, ServerData::class, [$this]
             );
         }

@@ -28,7 +28,7 @@ class DateTime extends Base implements DateTimeInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createDateTime();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createDateTime();
     }
 
     /**

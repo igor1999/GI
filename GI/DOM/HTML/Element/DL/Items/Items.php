@@ -197,7 +197,7 @@ class Items extends AbstractImmutable implements ItemsInterface
      */
     protected function createDT(string $text)
     {
-        return $this->giGetDOMFactory()->createDT($text);
+        return $this->getGiServiceLocator()->getDOMFactory()->createDT($text);
     }
 
     /**
@@ -206,7 +206,7 @@ class Items extends AbstractImmutable implements ItemsInterface
      */
     protected function createDD(string $text)
     {
-        return $this->giGetDOMFactory()->createDD($text);
+        return $this->getGiServiceLocator()->getDOMFactory()->createDD($text);
     }
 
     /**

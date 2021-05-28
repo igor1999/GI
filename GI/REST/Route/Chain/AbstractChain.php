@@ -61,7 +61,7 @@ abstract class AbstractChain extends AbstractRoute implements ChainInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -151,7 +151,7 @@ abstract class AbstractChain extends AbstractRoute implements ChainInterface
             if ($result instanceof ChainInterface) {
                 $result = $result->findChainRecursive($keys);
             } else {
-                $this->giThrowNotFoundException('Chain', $key);
+                $this->getGiServiceLocator()->throwNotFoundException('Chain', $key);
             }
         }
 

@@ -40,7 +40,7 @@ class Right extends Div implements RightInterface
      */
     protected function createStyle()
     {
-        $this->style = $this->giGetDi(StyleInterface::class, Style::class, [['float' => 'right']]);
+        $this->style = $this->getGiServiceLocator()->getDependency(StyleInterface::class, Style::class, [['float' => 'right']]);
 
         return $this;
     }

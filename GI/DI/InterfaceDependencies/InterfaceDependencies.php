@@ -201,7 +201,7 @@ class InterfaceDependencies implements InterfaceDependenciesInterface
         };
         $callers = array_keys(array_filter($this->getItems(), $f));
 
-        $ancestors = $this->giGetClassMeta($caller)->getParents()->getOrderedAncestors($callers);
+        $ancestors = $this->getGiServiceLocator()->getClassMeta($caller)->getParents()->getOrderedAncestors($callers);
 
         return $ancestors->getFirst()->getName();
     }

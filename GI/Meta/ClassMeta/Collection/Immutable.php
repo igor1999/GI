@@ -67,7 +67,7 @@ class Immutable implements ImmutableInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];

@@ -34,7 +34,7 @@ abstract class AbstractSimpleElement extends AbstractAttributedElement implement
     public function toString()
     {
         if (!$this->hasTag()) {
-            $this->giThrowNotSetException('Element tag');
+            $this->getGiServiceLocator()->throwNotSetException('Element tag');
         }
 
         return parent::toString();

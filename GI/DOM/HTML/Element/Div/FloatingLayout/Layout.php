@@ -63,7 +63,7 @@ class Layout extends ContainerElement implements LayoutInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(LineListInterface::class, LineList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(LineListInterface::class, LineList::class);
 
         return $this;
     }

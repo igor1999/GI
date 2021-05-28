@@ -74,7 +74,7 @@ class JSON extends AbstractResponse implements JSONInterface
      */
     public function dispatchBody()
     {
-        echo $this->giCreateJsonEncoder()
+        echo $this->getGiServiceLocator()->createJsonEncoder()
             ->setFlagJsonHexTag(true)
             ->setFlagJsonHexAmp(true)
             ->setFlagJsonHexApos(true)

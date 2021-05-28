@@ -168,7 +168,7 @@ class Context extends AbstractContext implements ContextInterface
      */
     public function getTtfFile()
     {
-        return $this->giCreateClassDirChildFile(self::class, static::PATH_TO_TTF_FILE);
+        return $this->getGiServiceLocator()->createClassDirChildFile(self::class, static::PATH_TO_TTF_FILE);
     }
 
     /**
@@ -178,7 +178,7 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateTTFFile()
     {
         if (!($this->getTtfFile() instanceof FSOFileInterface)) {
-            $this->giThrowNotSetException('Captcha TTF-file');
+            $this->getGiServiceLocator()->throwNotSetException('Captcha TTF-file');
         }
 
         $this->getTtfFile()->fireInexistence();
@@ -189,6 +189,6 @@ class Context extends AbstractContext implements ContextInterface
      */
     public function getBaseImage()
     {
-        return $this->giCreateClassDirChildFile(self::class, static::PATH_TO_BASE_IMAGE);
+        return $this->getGiServiceLocator()->createClassDirChildFile(self::class, static::PATH_TO_BASE_IMAGE);
     }
 }

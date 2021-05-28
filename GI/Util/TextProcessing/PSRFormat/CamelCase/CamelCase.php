@@ -46,7 +46,7 @@ class CamelCase implements CamelCaseInterface
                 $words = ucwords($words);
                 break;
             default:
-                $this->giThrowNotFoundException('Conversion mode');
+                $this->getGiServiceLocator()->throwNotFoundException('Conversion mode');
        }
 
         $words = explode(' ', trim($words));

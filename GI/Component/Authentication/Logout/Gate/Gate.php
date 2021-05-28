@@ -27,7 +27,7 @@ class Gate extends AbstractGate implements GateInterface
     public function logout()
     {
         try {
-            $response = $this->giGetComponentFactory()->createLogout()->logout();
+            $response = $this->getGiServiceLocator()->getComponentFactory()->createLogout()->logout();
 
             $this->getCall()->setResponseToSimple($response);
         } catch (\Exception $e) {

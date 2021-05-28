@@ -46,7 +46,7 @@ trait UploadTrait
     protected function createCreator()
     {
         try {
-            $result = $this->giGetDi(CreatorInterface::class,Creator::class);
+            $result = $this->getGiServiceLocator()->getDependency(CreatorInterface::class,Creator::class);
         } catch (\Exception $e) {
             $result = new Creator();
         }

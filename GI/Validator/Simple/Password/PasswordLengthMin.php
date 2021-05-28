@@ -30,7 +30,7 @@ class PasswordLengthMin extends StringLengthMin implements PasswordLengthMinInte
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::PASSWORD_LENGTH_MIN
         );
     }

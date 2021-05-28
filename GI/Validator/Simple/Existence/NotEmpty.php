@@ -49,7 +49,7 @@ class NotEmpty extends AbstractSimple implements NotEmptyInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::NOT_EMPTY
         );
     }

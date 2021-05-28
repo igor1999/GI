@@ -57,7 +57,7 @@ trait CryptTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 PasswordEncriptorInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -81,7 +81,7 @@ trait CryptTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 PasswordVerifierInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -105,7 +105,7 @@ trait CryptTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 RandomHashGeneratorInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -129,7 +129,7 @@ trait CryptTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 RandomWordGeneratorInterface::class, $caller
             );
         } catch (\Exception $e) {

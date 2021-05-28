@@ -45,7 +45,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -118,7 +118,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
     protected function doValidation()
     {
         if (!is_array($this->getSource()) && !is_object($this->getSource())) {
-            $this->giThrowInvalidTypeException('Validator source', $this->getSource(), 'array or object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Validator source', $this->getSource(), 'array or object');
         }
 
         $result = true;
@@ -164,7 +164,7 @@ class Recursive extends AbstractContainer implements RecursiveInterface
      */
     protected function validateItemByArrayObject(string $key, ValidatorInterface $item)
     {
-        $methodReflectionList = $this->giGetClassMeta($this->getSource())->getMethods();
+        $methodReflectionList = $this->getGiServiceLocator()->getClassMeta($this->getSource())->getMethods();
 
         return $methodReflectionList->hasGetter($key)
             ? $item->validate($methodReflectionList->executeGetter($this->getSource(), $key))

@@ -38,7 +38,7 @@ class Dump extends AbstractSynchronizing implements DumpInterface
     {
         parent::__construct();
 
-        $this->view = $this->giGetDi(DumpViewInterface::class, DumpView::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(DumpViewInterface::class, DumpView::class);
     }
 
     /**

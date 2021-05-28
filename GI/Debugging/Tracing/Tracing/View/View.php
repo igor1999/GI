@@ -36,6 +36,6 @@ class View extends Base implements ViewInterface
      */
     public function createLinkedList()
     {
-        return $this->giGetDOMFactory()->createLinkedList($this->getOptions());
+        return $this->getGiServiceLocator()->getDOMFactory()->createLinkedList($this->getOptions());
     }
 }

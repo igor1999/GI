@@ -45,9 +45,9 @@ class Gender extends AbstractSwitcher implements GenderInterface
     {
         parent::__construct($name);
 
-        $this->selection = $this->giGetClientSelectionFactory()->createGender();
+        $this->selection = $this->getGiServiceLocator()->getClientSelectionFactory()->createGender();
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

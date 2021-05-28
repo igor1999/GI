@@ -99,17 +99,17 @@ abstract class AbstractDriver implements DriverInterface
 
         $this->throwPDOExceptionIfExists($this->pdo);
 
-        $this->platform = $this->giGetRDBPlatform($this->pdo);
+        $this->platform = $this->getGiServiceLocator()->getRdbDi()->getPlatform($this->pdo);
 
-        $this->transactionHandler = $this->giGetDi(
+        $this->transactionHandler = $this->getGiServiceLocator()->getDependency(
             TransactionInterface::class, Transaction::class, [$this->pdo]
         );
 
-        $this->executionHandler = $this->giGetDi(
+        $this->executionHandler = $this->getGiServiceLocator()->getDependency(
             ExecutionInterface::class, Execution::class, [$this->pdo]
         );
 
-        $this->tableList = $this->giGetDi(TableListInterface::class, new TableList($this), [$this]);
+        $this->tableList = $this->getGiServiceLocator()->getDependency(TableListInterface::class, new TableList($this), [$this]);
     }
 
     /**
@@ -190,13 +190,13 @@ abstract class AbstractDriver implements DriverInterface
             }
         } else {
             try {
-                $table = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+                $table = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
             } catch (\Exception $e) {
                 $table = null;
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
 
-            $table  = $this->giGetCamelCaseConverter()->convertToUnderlineLowerCase($table);
+            $table  = $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineLowerCase($table);
             $result = $this->getTableList()->get($table);
         }
 

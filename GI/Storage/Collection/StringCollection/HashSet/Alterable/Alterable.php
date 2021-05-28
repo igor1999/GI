@@ -185,13 +185,13 @@ class Alterable extends Immutable implements AlterableInterface
         $result = null;
 
         try {
-            list($set, $value) = $this->giGetPSRFormatParser()->parseSetterWithValue($method);
+            list($set, $value) = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseSetterWithValue($method);
         } catch (\Exception $exception) {
             try {
-                $set = $this->giGetPSRFormatParser()->parseWithPrefixSet($method);
+                $set = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixSet($method);
             } catch (\Exception $exception) {
                 try {
-                    $remove = $this->giGetPSRFormatParser()->parseWithPrefixRemove($method);
+                    $remove = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixRemove($method);
                 } catch (\Exception $exception) {
                     $result = parent::__call($method, $arguments);
                 }
@@ -204,7 +204,7 @@ class Alterable extends Immutable implements AlterableInterface
             $result = $this->set($set, $value);
         } elseif (!empty($set)) {
             if (empty($arguments)) {
-                $this->giThrowNotGivenException('Argument for set');
+                $this->getGiServiceLocator()->throwNotGivenException('Argument for set');
             }
             $set = $this->getService()->formatKey($set);
             $result = $this->set($set, array_shift($arguments));

@@ -52,7 +52,7 @@ abstract class AbstractImmutable implements ImmutableInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];
@@ -149,7 +149,9 @@ abstract class AbstractImmutable implements ImmutableInterface
     protected function prepare($contents)
     {
         /** @var array $contents */
-        $contents = is_array($contents) ? $this->giGetFlatCreator()->create($contents) : [$contents];
+        $contents = is_array($contents)
+            ? $this->getGiServiceLocator()->getUtilites()->getFlatCreator()->create($contents)
+            : [$contents];
 
         $f = function($child)
         {
@@ -173,7 +175,7 @@ abstract class AbstractImmutable implements ImmutableInterface
     protected function prepareScalar($node)
     {
         try {
-            $result = $this->giGetDi(TextNodeInterface::class, TextNode::class, [$node]);
+            $result = $this->getGiServiceLocator()->getDependency(TextNodeInterface::class, TextNode::class, [$node]);
         } catch (\Exception $e) {
             $result = new TextNode($node);
         }

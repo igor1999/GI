@@ -225,7 +225,7 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     protected function getNoExistenceMessage()
     {
-        $message = $this->giTranslate(
+        $message = $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::EXISTENCE
         );
 
@@ -239,7 +239,7 @@ abstract class AbstractValidator implements ValidatorInterface
      */
     protected function insertParamsInMessage(string $message)
     {
-        return  $this->giGetClassMeta()->getMethods()->parse(
+        return  $this->getGiServiceLocator()->getClassMeta()->getMethods()->parse(
             $this,
             $message,
             static::PARSE_MESSAGE_DESCRIPTOR,
@@ -253,7 +253,7 @@ abstract class AbstractValidator implements ValidatorInterface
     public function getMessagesFlat()
     {
         return is_array($this->getMessages())
-            ? $this->giGetFlatCreator()->create($this->getMessages())
+            ? $this->getGiServiceLocator()->getUtilites()->getFlatCreator()->create($this->getMessages())
             : [$this->getMessages()];
     }
 
@@ -276,7 +276,8 @@ abstract class AbstractValidator implements ValidatorInterface
         if (is_array($this->getMessages())) {
             $messages = [];
 
-            $flatArray = $this->giGetFlatCreator()->createWithKeySeparatorPoint($this->getMessages());
+            $flatArray = $this->getGiServiceLocator()->getUtilites()->getFlatCreator()
+                ->createWithKeySeparatorPoint($this->getMessages());
 
             foreach ($flatArray as $key => $message) {
                 $param = $this->createParamName($key);
@@ -294,7 +295,7 @@ abstract class AbstractValidator implements ValidatorInterface
             $messages = [$this->getMessages()];
         } else {
             $messages = null;
-            $this->giThrowInvalidTypeException('Messages', '[validator messages]', 'array or string');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Messages', '[validator messages]', 'array or string');
         }
 
         return $messages;

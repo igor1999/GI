@@ -44,7 +44,7 @@ class Manager implements ManagerInterface
         $this->validateClosing();
 
         if (!$this->has($event)) {
-            $this->events[$event] = $this->giGetStorageFactory()->createClosureArrayListClosable();
+            $this->events[$event] = $this->getGiServiceLocator()->getStorageFactory()->createClosureArrayListClosable();
         }
 
         $this->events[$event]->add($handler);
@@ -85,7 +85,7 @@ class Manager implements ManagerInterface
     public function get(string $event)
     {
         if (!$this->has($event)) {
-            $this->giThrowNotInScopeException($event);
+            $this->getGiServiceLocator()->throwNotInScopeException($event);
         }
 
         return $this->events[$event];

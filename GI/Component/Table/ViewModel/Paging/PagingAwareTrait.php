@@ -35,7 +35,7 @@ trait PagingAwareTrait
     public function getPaging()
     {
         if (!($this->paging instanceof PagingViewModelInterface)) {
-            $this->paging = $this->giGetDi(PagingViewModelInterface::class, PagingViewModel::class);
+            $this->paging = $this->getGiServiceLocator()->getDependency(PagingViewModelInterface::class, PagingViewModel::class);
 
             /** @var ViewModelInterface $me */
             $me = $this;

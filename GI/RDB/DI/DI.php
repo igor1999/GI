@@ -51,7 +51,7 @@ class DI implements DIInterface
     public function getPlatform(\PDO $pdo, string $caller = null)
     {
         try {
-            $factory = $this->giGetServiceLocator()->getDi()->find(
+            $factory = $this->getGiServiceLocator()->getDi()->find(
                 PlatformFactoryInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -73,7 +73,7 @@ class DI implements DIInterface
     public function getSqlFactory(string $caller = null)
     {
         try {
-            $result = $this->giGetServiceLocator()->getDi()->find(SQLFactoryInterface::class, $caller);
+            $result = $this->getGiServiceLocator()->getDi()->find(SQLFactoryInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->sqlFactory instanceof SQLFactoryInterface)) {
                 $this->sqlFactory = new SQLFactory();

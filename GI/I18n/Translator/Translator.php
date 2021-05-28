@@ -60,7 +60,7 @@ class Translator implements TranslatorInterface
      */
     public function __construct()
     {
-        $this->glossary = $this->giGetDi(GlossaryInterface::class, Glossary::class);
+        $this->glossary = $this->getGiServiceLocator()->getDependency(GlossaryInterface::class, Glossary::class);
 
         $this->setSourceLocaleToDefault()->setTargetLocaleToDefault();
     }
@@ -137,7 +137,7 @@ class Translator implements TranslatorInterface
      */
     public function setTargetLocaleToDefault()
     {
-        $this->targetLocale = $this->giGetServiceLocator()->getUserLocale();
+        $this->targetLocale = $this->getGiServiceLocator()->getUserLocale();
 
         return $this;
     }

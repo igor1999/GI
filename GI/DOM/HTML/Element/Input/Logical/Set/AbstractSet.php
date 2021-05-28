@@ -164,7 +164,7 @@ abstract class AbstractSet extends Layout implements SetInterface
      */
     protected function createMultiControl(OptionsItemInterface $item)
     {
-        return $this->giGetDOMFactory()->getInputFactory()->createCheckbox([], $item->getValue(), $item->isSelected());
+        return $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createCheckbox([], $item->getValue(), $item->isSelected());
     }
 
     /**
@@ -173,7 +173,7 @@ abstract class AbstractSet extends Layout implements SetInterface
      */
     protected function createSingleControl(OptionsItemInterface $item)
     {
-        return $this->giGetDOMFactory()->getInputFactory()->createRadio([], $item->getValue(), $item->isSelected());
+        return $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createRadio([], $item->getValue(), $item->isSelected());
     }
 
     /**
@@ -196,6 +196,6 @@ abstract class AbstractSet extends Layout implements SetInterface
      */
     protected function createLabel(OptionsItemInterface $item)
     {
-        return $this->giGetDOMFactory()->createLabel($item->getText());
+        return $this->getGiServiceLocator()->getDOMFactory()->createLabel($item->getText());
     }
 }

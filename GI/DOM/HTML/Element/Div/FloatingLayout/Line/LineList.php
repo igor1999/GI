@@ -130,7 +130,7 @@ class LineList extends AbstractImmutable implements LineListInterface
      */
     protected function createLine()
     {
-        return $this->giGetDOMFactory()->createLine();
+        return $this->getGiServiceLocator()->getDOMFactory()->createLine();
     }
 
     /**

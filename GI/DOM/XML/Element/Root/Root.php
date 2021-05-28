@@ -39,7 +39,7 @@ class Root extends ContainerElement implements RootInterface
     {
         parent::__construct($tag, $namespace);
 
-        $this->declaration = $this->giGetDOMFactory()->createXMLDeclaration();
+        $this->declaration = $this->getGiServiceLocator()->getDOMFactory()->createXMLDeclaration();
     }
 
     /**

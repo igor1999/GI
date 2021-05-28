@@ -99,11 +99,11 @@ class Table implements TableInterface
         $this->driver = $driver;
         $this->name   = $name;
 
-        $this->columnList = $this->giGetDi(ColumnListInterface::class, new ColumnList($this),  [$this]);
+        $this->columnList = $this->getGiServiceLocator()->getDependency(ColumnListInterface::class, new ColumnList($this),  [$this]);
 
-        $this->queryBuilder = $this->giGetDi(QueryBuilderInterface::class, new QueryBuilder($this),  [$this]);
+        $this->queryBuilder = $this->getGiServiceLocator()->getDependency(QueryBuilderInterface::class, new QueryBuilder($this),  [$this]);
 
-        $this->phpNames = $this->giGetDi(PHPNamesInterface::class, new PHPNames($this),  [$this]);
+        $this->phpNames = $this->getGiServiceLocator()->getDependency(PHPNamesInterface::class, new PHPNames($this),  [$this]);
     }
 
     /**
@@ -331,7 +331,7 @@ class Table implements TableInterface
     public function getParentReferencedTables()
     {
         if (!($this->parentReferencedTables instanceof ParentReferencesInterface)) {
-            $this->parentReferencedTables = $this->giGetDi(
+            $this->parentReferencedTables = $this->getGiServiceLocator()->getDependency(
                 ParentReferencesInterface::class, ParentReferences::class, [$this]
             );
         }
@@ -346,7 +346,7 @@ class Table implements TableInterface
     public function getChildReferencedTables()
     {
         if (!($this->childReferencedTables instanceof ChildReferencesInterface)) {
-            $this->childReferencedTables = $this->giGetDi(
+            $this->childReferencedTables = $this->getGiServiceLocator()->getDependency(
                 ChildReferencesInterface::class, ChildReferences::class, [$this]
             );
         }

@@ -15,34 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\ServiceLocator\Decorator\GI;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
-
-use GI\JSON\Encoder\EncoderInterface as JsonEncoderInterface;
-use GI\JSON\Decoder\DecoderInterface as JsonDecoderInterface;
-
-trait JsonAwareTrait
+interface DecoratorAwareInterface
 {
     /**
-     * @return JsonEncoderInterface
+     * @return DecoratorInterface
      */
-    protected function giCreateJsonEncoder()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->createJsonEncoder(static::class);
-    }
-
-    /**
-     * @return JsonDecoderInterface
-     */
-    protected function giCreateJsonDecoder()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->createJsonDecoder(static::class);
-    }
+    public function getGiServiceLocator();
 }

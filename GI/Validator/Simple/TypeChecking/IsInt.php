@@ -40,6 +40,6 @@ class IsInt extends AbstractSimple implements IsIntInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::IS_INT);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::IS_INT);
     }
 }

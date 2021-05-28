@@ -73,7 +73,7 @@ class Handler implements HandlerInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->target = $context->getFile();
         } catch (\Exception $exception) {}
     }
@@ -85,7 +85,7 @@ class Handler implements HandlerInterface
     protected function getView()
     {
         if (!($this->view instanceof ViewInterface)) {
-            $this->view = $this->giGetDi(ViewInterface::class, View::class);
+            $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
         }
 
         return $this->view;
@@ -98,7 +98,7 @@ class Handler implements HandlerInterface
     protected function createMockView()
     {
         try {
-            $result = $this->giGetDi(MockViewInterface::class);
+            $result = $this->getGiServiceLocator()->getDependency(MockViewInterface::class);
         } catch (\Exception $e) {
             $result = new MockView();
         }
@@ -113,7 +113,7 @@ class Handler implements HandlerInterface
     protected function getEventManager()
     {
         if (!($this->eventManager instanceof EventManagerInterface)) {
-            $this->eventManager = $this->giGetDi(EventManagerInterface::class, EventManager::class);
+            $this->eventManager = $this->getGiServiceLocator()->getDependency(EventManagerInterface::class, EventManager::class);
         }
 
         return $this->eventManager;
@@ -135,7 +135,7 @@ class Handler implements HandlerInterface
     protected function createTracing(array $contents)
     {
         try {
-            $result = $this->giGetDi(TracingInterface::class, null, [$contents]);
+            $result = $this->getGiServiceLocator()->getDependency(TracingInterface::class, null, [$contents]);
         } catch (\Exception $e) {
             $result = new Tracing($contents);
         }
@@ -168,7 +168,7 @@ class Handler implements HandlerInterface
             $this->getView()->save($target);
 
             $mock = $this->createMockView()->toString();
-            $this->giGetResponseFactory()->createStatus500($mock)->dispatch();
+            $this->getGiServiceLocator()->getResponseFactory()->createStatus500($mock)->dispatch();
         } else {
             echo $this->getView()->toString();
         }

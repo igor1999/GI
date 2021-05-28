@@ -56,7 +56,7 @@ class Collection implements CollectionInterface
     public function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->items[$id];
@@ -228,7 +228,7 @@ class Collection implements CollectionInterface
     protected function createItem()
     {
         try {
-            $item = $this->giGetDi(ItemInterface::class);
+            $item = $this->getGiServiceLocator()->getDependency(ItemInterface::class);
         } catch (\Exception $e) {
             $item = new Item();
         }
@@ -257,6 +257,6 @@ class Collection implements CollectionInterface
      */
     public function getJSON()
     {
-        return $this->giCreateJsonEncoder()->extractAndEncode($this);
+        return $this->getGiServiceLocator()->createJsonEncoder()->extractAndEncode($this);
     }
 }

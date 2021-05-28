@@ -83,7 +83,7 @@ class ConditionList implements ConditionListInterface
      */
     public function setParams(array $params)
     {
-        $this->params = $this->giGetStorageFactory()->createScalarHashSetAlterable($params);
+        $this->params = $this->getGiServiceLocator()->getStorageFactory()->createScalarHashSetAlterable($params);
 
         return $this;
     }
@@ -124,7 +124,7 @@ class ConditionList implements ConditionListInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -190,7 +190,7 @@ class ConditionList implements ConditionListInterface
     protected function createCondition(string $placeholder, string $predicate, \Closure $validator = null, bool $alt = null)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 ConditionInterface::class, null, [$this, $placeholder, $predicate, $validator, $alt]
             );
         } catch (\Exception $e) {
@@ -225,7 +225,7 @@ class ConditionList implements ConditionListInterface
     protected function createCortegeCondition(string $placeholder, PredicatesInterface $predicates, bool $alt = null)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 CortegeConditionInterface::class, null, [$this, $placeholder, $predicates, $alt]
             );
         } catch (\Exception $e) {

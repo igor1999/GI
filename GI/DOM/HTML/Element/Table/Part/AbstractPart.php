@@ -56,7 +56,7 @@ abstract class AbstractPart extends ContainerElement implements PartInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(RowListInterface::class, RowList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(RowListInterface::class, RowList::class);
 
         return $this;
     }

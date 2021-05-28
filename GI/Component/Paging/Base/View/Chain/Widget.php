@@ -57,7 +57,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -96,7 +96,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getPagesContainer()
     {
         if (!($this->pagesContainer instanceof LayoutInterface)) {
-            $this->pagesContainer = $this->giGetDOMFactory()->createLayout();
+            $this->pagesContainer = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
 
             $this->buildPagesContents();
         }
@@ -117,16 +117,16 @@ class Widget extends AbstractWidget implements WidgetInterface
 
         for ($i = $showedPages->getFirstPage(); $i <= $showedPages->getLastPage(); $i++) {
             if ($i == $this->getViewModel()->getSelectedPage()) {
-                $content = $this->giGetDOMFactory()->createSpan($i);
+                $content = $this->getGiServiceLocator()->getDOMFactory()->createSpan($i);
                 $class   = static::CLASS_SELECTED_ITEM;
             } else {
-                $content = $this->giGetDOMFactory()->createHyperlink('', $i)->setHrefToMock();
+                $content = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink('', $i)->setHrefToMock();
                 $this->addClientAttributes($content, '');
                 $content->getAttributes()->setDataAttribute(static::NAVI_TARGET_PAGE_ATTRIBUTE, $i);
                 $class = '';
             }
 
-            $cell = $this->giGetDOMFactory()->createFloatLeft();
+            $cell = $this->getGiServiceLocator()->getDOMFactory()->createFloatLeft();
             $this->addClientAttributes($cell, static::GI_ID_ITEM);
             $cell->getChildNodes()->set($content);
             $cell->getClasses()->add($class);
@@ -135,9 +135,9 @@ class Widget extends AbstractWidget implements WidgetInterface
 
         $next = $showedPages->getNext();
         if ($next instanceof ShowedPagesInterface) {
-            $content = $this->giGetDOMFactory()->createSpan(static::SEPARATOR);
+            $content = $this->getGiServiceLocator()->getDOMFactory()->createSpan(static::SEPARATOR);
 
-            $cell = $this->giGetDOMFactory()->createFloatLeft();
+            $cell = $this->getGiServiceLocator()->getDOMFactory()->createFloatLeft();
             $this->addClientAttributes($cell, static::GI_ID_SEPARATOR);
             $cell->getChildNodes()->set($content);
             $this->pagesContainer->getChildNodes()->addCell(0, $cell);

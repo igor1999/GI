@@ -54,7 +54,7 @@ class AbstractStream implements StreamInterface
     public function validate()
     {
         if (!is_resource($this->handle)) {
-            $this->giThrowInvalidTypeException('Handle', $this->handle, 'resource');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Handle', $this->handle, 'resource');
         }
 
         return $this;

@@ -87,7 +87,7 @@ class Collection implements CollectionInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -122,7 +122,7 @@ class Collection implements CollectionInterface
      */
     protected function getFactory()
     {
-        return $this->giGetResponseFactory()->getHeaderFactory();
+        return $this->getGiServiceLocator()->getResponseFactory()->getHeaderFactory();
     }
 
     /**
@@ -228,15 +228,15 @@ class Collection implements CollectionInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method, '', false);
+            $get = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method, '', false);
         } catch (\Exception $exception) {
             try {
-                $add = $this->giGetPSRFormatParser()->parseWithPrefixAdd($method, '', false);
+                $add = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixAdd($method, '', false);
             } catch (\Exception $exception) {
                 try {
-                    $remove = $this->giGetPSRFormatParser()->parseWithPrefixRemove($method, '', false);
+                    $remove = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixRemove($method, '', false);
                 } catch (\Exception $exception) {
-                    $this->giThrowMagicMethodException($method);
+                    $this->getGiServiceLocator()->throwMagicMethodException($method);
                 }
             }
         }

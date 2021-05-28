@@ -54,7 +54,7 @@ abstract class AbstractButton extends ContainerElement implements ButtonInterfac
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(
+        $this->attributes = $this->getGiServiceLocator()->getDependency(
             AttributesInterface::class, Attributes::class, [['type' => static::TYPE]]
         );
 

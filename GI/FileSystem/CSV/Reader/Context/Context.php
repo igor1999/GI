@@ -37,7 +37,7 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateLength()
     {
         if ($this->getLength() < 0) {
-            $this->giThrowInvalidMinimumException('Length', $this->getLength(), 0);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Length', $this->getLength(), 0);
         }
 
         return $this;

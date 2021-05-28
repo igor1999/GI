@@ -47,7 +47,7 @@ class MarkupTextProcessor implements MarkupTextProcessorInterface
      */
     public function __construct()
     {
-        $this->escaper = $this->giGetEscaperFactory()->createHTMLText();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createHTMLText();
     }
 
     /**

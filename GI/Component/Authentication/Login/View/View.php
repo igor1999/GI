@@ -46,7 +46,7 @@ class View extends Base implements ViewInterface
     {
         parent::__construct();
 
-        $this->widget = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->widget = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**
@@ -64,7 +64,7 @@ class View extends Base implements ViewInterface
     protected function validateDialog()
     {
         if (!($this->getDialog() instanceof DialogInterface)) {
-            $this->giThrowInvalidTypeException('Dialog', '', 'DialogInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Dialog', '', 'DialogInterface');
         }
     }
 

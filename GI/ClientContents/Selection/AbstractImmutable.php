@@ -51,7 +51,7 @@ abstract class AbstractImmutable implements ImmutableInterface
     public function get(string $value)
     {
         if (!$this->has($value)) {
-            $this->giThrowNotInScopeException($value);
+            $this->getGiServiceLocator()->throwNotInScopeException($value);
         }
 
         return $this->items[$value];
@@ -134,7 +134,7 @@ abstract class AbstractImmutable implements ImmutableInterface
      */
     protected function insertBefore(string $anchor, string $value, string $text, bool $selected = false)
     {
-        $this->items = $this->giGetStorageFactory()
+        $this->items = $this->getGiServiceLocator()->getStorageFactory()
             ->createMixedHashSetAlterable($this->items)
             ->insertBefore($anchor, $value, $this->createItem($value, $text, $selected))
             ->getItems();
@@ -166,7 +166,7 @@ abstract class AbstractImmutable implements ImmutableInterface
     protected function createItem(string $value, string $text, bool $selected)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 ItemInterface::class, Item::class, [$this, $value, $text, $selected]
             );
         } catch (\Exception $e) {

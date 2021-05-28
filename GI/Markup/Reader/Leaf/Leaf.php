@@ -53,7 +53,7 @@ class Leaf implements LeafInterface
     public function getValueParser()
     {
         if (!($this->valueParser instanceof ValueParserInterface)) {
-            $this->valueParser = $this->giGetDi(
+            $this->valueParser = $this->getGiServiceLocator()->getDependency(
                 ValueParserInterface::class, ValueParser::class, [$this->getReader()]
             );
         }

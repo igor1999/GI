@@ -43,7 +43,7 @@ trait EscaperTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 EscaperFactoryInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -67,7 +67,7 @@ trait EscaperTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 EscaperContainerInterface::class, $caller
             );
         } catch (\Exception $e) {

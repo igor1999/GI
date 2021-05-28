@@ -66,13 +66,13 @@ class Call extends AbstractCall implements CallInterface
         if ($result) {
             $this->close();
             $this->saveCallAndModuleContents();
-            $this->giGetServiceLocator()->loadSession();
+            $this->getGIServiceLocator()->loadSession();
             $this->saveUserLocale();
-            $this->giGetServiceLocator()->close();
+            $this->getGIServiceLocator()->close();
 
             $this->getHandlers()->executeSequentially([$this]);
 
-            $this->giGetServiceLocator()->saveSession();
+            $this->getGIServiceLocator()->saveSession();
         }
 
         return $result;
@@ -85,13 +85,13 @@ class Call extends AbstractCall implements CallInterface
     {
         try {
             /** @var UserLocaleContextInterface $context */
-            $context = $this->giGetDi(UserLocaleContextInterface::class);
+            $context = $this->getGIServiceLocator()->getDi(UserLocaleContextInterface::class);
 
             $locale = $this->findLocale($context);
 
             setlocale(LC_ALL, $locale);
 
-            $this->giGetServiceLocator()->setUserLocale($locale);
+            $this->getGIServiceLocator()->setUserLocale($locale);
         } catch (\Exception $e) {}
 
         return $this;

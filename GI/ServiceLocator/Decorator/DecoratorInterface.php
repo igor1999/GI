@@ -15,22 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\ServiceLocator\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
-
-use GI\CLI\Factory\FactoryInterface as CLIFactoryInterface;
-
-trait CLIAwareTrait
+interface DecoratorInterface
 {
     /**
-     * @return CLIFactoryInterface
+     * @return string
      */
-    protected function giGetCLIFactory()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getCLIFactory(static::class);
-    }
+    public function getCaller();
 }

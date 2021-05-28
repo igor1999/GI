@@ -43,7 +43,7 @@ class LinkedList extends UL implements LinkedListInterface
         parent::__construct();
 
         if (empty($source)) {
-            $this->giThrowIsEmptyException('List source');
+            $this->getGiServiceLocator()->throwIsEmptyException('List source');
         }
 
         $this->source = $source;
@@ -78,12 +78,12 @@ class LinkedList extends UL implements LinkedListInterface
             $context = $option->toString();
         } elseif (is_object($option) || is_array($option)) {
             $context = null;
-            $this->giThrowInvalidTypeException('Option', $key, 'scalar or string convertable');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Option', $key, 'scalar or string convertable');
         } else {
             $context = $option;
         }
 
-        $li = $this->giGetDOMFactory()->createLI();
+        $li = $this->getGiServiceLocator()->getDOMFactory()->createLI();
         $li->getChildNodes()->set($context);
 
         try {

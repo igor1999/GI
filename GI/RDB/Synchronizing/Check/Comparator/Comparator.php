@@ -74,8 +74,8 @@ class Comparator implements ComparatorInterface
     {
         $this->dumpOnly = $this->databaseOnly = $this->unequals = [];
 
-        $creator   = $this->giGetFlatCreator();
-        $extractor = $this->giGetFlatExtractor();
+        $creator   = $this->getGiServiceLocator()->getUtilites()->getFlatCreator();
+        $extractor = $this->getGiServiceLocator()->getUtilites()->getFlatExtractor();
 
         $dumpFlat     = $creator->createWithKeySeparatorPoint($dumpContents);
         $databaseFlat = $creator->createWithKeySeparatorPoint($databaseContents);

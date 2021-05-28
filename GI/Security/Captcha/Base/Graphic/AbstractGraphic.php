@@ -100,7 +100,7 @@ abstract class AbstractGraphic implements GraphicInterface
     public function getImageResource()
     {
         if (!is_resource($this->imageResource)) {
-            $this->giThrowNotSetException('Image resource');
+            $this->getGiServiceLocator()->throwNotSetException('Image resource');
         }
 
         return $this->imageResource;
@@ -121,7 +121,8 @@ abstract class AbstractGraphic implements GraphicInterface
      */
     public function getBase64EncodedImage()
     {
-        return $this->giGetFromResourceSourceMaker()->create($this->imageResource, $this->getMimeType());
+        return $this->getGiServiceLocator()->getUtilites()->getFromResource()
+            ->create($this->imageResource, $this->getMimeType());
     }
 
     /**
@@ -146,7 +147,7 @@ abstract class AbstractGraphic implements GraphicInterface
                 break;
             default:
                 $result = null;
-                $this->giThrowInvalidTypeException('Captcha image MIME-type', $mimeType, 'png/jpg/jpeg/gif');
+                $this->getGiServiceLocator()->throwInvalidTypeException('Captcha image MIME-type', $mimeType, 'png/jpg/jpeg/gif');
         }
 
         return $result;

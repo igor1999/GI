@@ -80,7 +80,7 @@ trait EncodingTrait
         if (!in_array(strtolower($encoding), $this->encodings)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowCommonException('Encoding \'%s\' is not supported', [$encoding]);
+            $me->getGiServiceLocator()->throwCommonException('Encoding \'%s\' is not supported', [$encoding]);
         }
 
         $this->encoding = $encoding;
@@ -96,7 +96,7 @@ trait EncodingTrait
     {
         try {
             /** @var ContextInterface $context */
-            $context  = $this->giGetDi(ContextInterface::class);
+            $context  = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->encodings = array_unique(array_merge($this->encodings, $context->getEncodings()));
 

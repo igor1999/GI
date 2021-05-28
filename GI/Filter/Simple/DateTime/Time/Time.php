@@ -28,7 +28,7 @@ class Time extends AbstractDateTime implements TimeInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createTime();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createTime();
     }
 
     /**

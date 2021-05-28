@@ -34,13 +34,13 @@ class Creator implements CreatorInterface
     public function create(array $contents)
     {
         if (!isset($contents[RequestInterface::CLASS_ARGUMENT_NAME])) {
-            $this->giThrowNotFoundException('Argument "request"');
+            $this->getGiServiceLocator()->throwNotFoundException('Argument "request"');
         }
 
         $class = $contents[RequestInterface::CLASS_ARGUMENT_NAME];
 
         if (!is_a($class, RequestInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Socket request', $class, 'Socket request class');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Socket request', $class, 'Socket request class');
         }
 
         /** @var RequestInterface $request */

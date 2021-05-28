@@ -92,7 +92,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
         return $this->container;
@@ -105,7 +105,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getIdHidden()
     {
         if (!($this->idHidden instanceof HiddenInterface)) {
-            $this->idHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+            $this->idHidden = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden(
                 $this->getViewModel()->getIdName(),
                 $this->getId()
             );
@@ -122,7 +122,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getRecaptchaButton()
     {
         if (!($this->recaptchaButton instanceof ButtonInterface)) {
-            $this->recaptchaButton = $this->giGetDOMFactory()->createButton();
+            $this->recaptchaButton = $this->getGiServiceLocator()->getDOMFactory()->createButton();
         }
 
         return $this->recaptchaButton;
@@ -137,9 +137,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         if (!($this->recaptchaImage instanceof ImageInterface)) {
             $src = $this->getResourceRenderer()->getRecaptchaImage();
-            $alt = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Recaptcha');
+            $alt = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Recaptcha');
 
-            $this->recaptchaImage = $this->giGetDOMFactory()->createImage($src, $alt);
+            $this->recaptchaImage = $this->getGiServiceLocator()->getDOMFactory()->createImage($src, $alt);
         }
 
         return $this->recaptchaImage;

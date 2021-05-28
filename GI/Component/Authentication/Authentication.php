@@ -52,8 +52,8 @@ class Authentication implements AuthenticationInterface
     {
         $this->createIdentity();
 
-        $this->login  = $this->giGetComponentFactory()->createLogin();
-        $this->logout = $this->giGetComponentFactory()->createLogout();
+        $this->login  = $this->getGiServiceLocator()->getComponentFactory()->createLogin();
+        $this->logout = $this->getGiServiceLocator()->getComponentFactory()->createLogout();
     }
 
     /**
@@ -71,9 +71,9 @@ class Authentication implements AuthenticationInterface
     protected function createIdentity()
     {
         try {
-            $this->identity = $this->giGetDi(IdentityInterface::class);
+            $this->identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Identity');
+            $this->getGiServiceLocator()->throwDependencyException('Identity');
         }
 
         return $this;

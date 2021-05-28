@@ -173,7 +173,7 @@ class Items extends AbstractImmutable implements ItemsInterface
      */
     protected function createOptgroup(string $label = '')
     {
-        return $this->giGetDOMFactory()->createOptgroup($label);
+        return $this->getGiServiceLocator()->getDOMFactory()->createOptgroup($label);
     }
 
     /**
@@ -238,7 +238,7 @@ class Items extends AbstractImmutable implements ItemsInterface
      */
     protected function createOption(string $value = '', string $text = '', bool $selected = false)
     {
-        return $this->giGetDOMFactory()->createOption($value, $text, $selected);
+        return $this->getGiServiceLocator()->getDOMFactory()->createOption($value, $text, $selected);
     }
 
     /**

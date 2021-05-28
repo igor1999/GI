@@ -75,7 +75,7 @@ class Body implements BodyInterface
     protected function validateRaw()
     {
         if (empty($this->raw)) {
-            $this->giThrowIsEmptyException('Raw request body');
+            $this->getGiServiceLocator()->throwIsEmptyException('Raw request body');
         }
 
         return $this;
@@ -89,9 +89,9 @@ class Body implements BodyInterface
     {
         $this->validateRaw();
 
-        if ($this->giGetRequest()->getHeaders()->isURLEncoded()) {
+        if ($this->getGiServiceLocator()->getRequest()->getHeaders()->isURLEncoded()) {
             try {
-                $query = $this->giGetDi(QueryInterface::class);
+                $query = $this->getGiServiceLocator()->getDependency(QueryInterface::class);
             } catch (\Exception $exception) {
                 $query = new Query();
             }
@@ -99,7 +99,7 @@ class Body implements BodyInterface
             $query->read($this->raw);
         } else {
             $query = null;
-            $this->giThrowInvalidTypeException('Request headers content type', '', 'url encoded');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Request headers content type', '', 'url encoded');
         }
 
         return $query;
@@ -113,12 +113,12 @@ class Body implements BodyInterface
     {
         $this->validateRaw();
 
-        if ($this->giGetRequest()->getHeaders()->isJSONEncoded()) {
-            $items  = $this->giCreateJsonDecoder()->decode($this->raw);
+        if ($this->getGiServiceLocator()->getRequest()->getHeaders()->isJSONEncoded()) {
+            $items  = $this->giServiceLocator->createJsonDecoder()->decode($this->raw);
             $result = $this->createTree($items);
         } else {
             $result = null;
-            $this->giThrowInvalidTypeException('Request headers content type', '', 'JSON encoded');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Request headers content type', '', 'JSON encoded');
         }
 
         return $result;
@@ -132,10 +132,10 @@ class Body implements BodyInterface
     {
         $this->validateRaw();
 
-        if ($this->giGetRequest()->getHeaders()->isXMLEncoded()) {
+        if ($this->getGiServiceLocator()->getRequest()->getHeaders()->isXMLEncoded()) {
             try {
                 /** @var XMLReaderInterface $reader */
-                $reader = $this->giGetDi(XMLReaderInterface::class);
+                $reader = $this->getGiServiceLocator()->getDependency(XMLReaderInterface::class);
                 $items  = $reader->readString($this->raw);
                 $result = $this->createTree($items);
             } catch (\Exception $exception) {
@@ -143,7 +143,7 @@ class Body implements BodyInterface
             }
         } else {
             $result = null;
-            $this->giThrowInvalidTypeException('Request headers content type', '', 'XML encoded');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Request headers content type', '', 'XML encoded');
         }
 
         return $result;
@@ -157,7 +157,7 @@ class Body implements BodyInterface
     protected function createTree(array $items = [])
     {
         try {
-            $tree = $this->giGetDi(TreeInterface::class, null, [$items]);
+            $tree = $this->getGiServiceLocator()->getDependency(TreeInterface::class, null, [$items]);
         } catch (\Exception $exception) {
             $tree = new Tree($items);
         }

@@ -45,7 +45,7 @@ abstract class AbstractCalendar extends AbstractComponent implements CalendarInt
     {
         $this->viewModel = ($viewModel instanceof ViewModelInterface)
             ? $viewModel
-            : $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+            : $this->getGiServiceLocator()->getDependency(ViewModelInterface::class, ViewModel::class);
     }
 
     /**

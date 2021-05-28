@@ -52,9 +52,9 @@ class Document extends ContainerElement implements DocumentInterface
     {
         parent::__construct(static::TAG);
 
-        $this->doctype = $this->giGetDOMFactory()->createDoctype();
-        $this->head    = $this->giGetDOMFactory()->createHead();
-        $this->body    = $this->giGetDOMFactory()->createBody();
+        $this->doctype = $this->getGiServiceLocator()->getDOMFactory()->createDoctype();
+        $this->head    = $this->getGiServiceLocator()->getDOMFactory()->createHead();
+        $this->body    = $this->getGiServiceLocator()->getDOMFactory()->createBody();
     }
 
     /**

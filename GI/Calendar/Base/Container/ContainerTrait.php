@@ -56,7 +56,7 @@ trait ContainerTrait
      */
     protected function createDay(\DateTime $date)
     {
-        return $this->giGetCalendarFactory()->getDay($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getDay($date);
     }
 
     /**
@@ -160,6 +160,6 @@ trait ContainerTrait
      */
     public function getDays()
     {
-        return $this->giGetCalendarFactory()->getDayCollection($this->firstDate, $this->lastDate);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getDayCollection($this->firstDate, $this->lastDate);
     }
 }

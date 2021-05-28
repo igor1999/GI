@@ -66,7 +66,7 @@ class Node implements NodeInterface
     protected function getParent()
     {
         if (!$this->hasParent()) {
-            $this->giThrowNotSetException('Parent');
+            $this->getGiServiceLocator()->throwNotSetException('Parent');
         }
 
         return $this->parent;
@@ -106,7 +106,7 @@ class Node implements NodeInterface
     protected function createBreadCrumbs()
     {
         try {
-            $result = $this->giGetDi(TrackInterface::class);
+            $result = $this->getGiServiceLocator()->getDependency(TrackInterface::class);
         } catch (\Exception $e) {
             $result = new Track();
         }

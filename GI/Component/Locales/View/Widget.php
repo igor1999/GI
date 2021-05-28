@@ -53,7 +53,7 @@ class Widget extends Base implements WidgetInterface
     {
         parent::__construct();
 
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -93,7 +93,7 @@ class Widget extends Base implements WidgetInterface
             foreach ($menuOptions as $locale => $option) {
                 $backgroundLocale = $this->getResourceRenderer()->getLocaleImages()->has($locale)
                     ? $locale
-                    : $this->giGetServiceLocator()->getUserLocale();
+                    : $this->getGiServiceLocator()->getUserLocale();
 
                 $url = $this->getResourceRenderer()->getLocaleImages()->get($backgroundLocale);
 

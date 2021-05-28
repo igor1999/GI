@@ -81,7 +81,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof DivInterface)) {
-            $this->container = $this->giGetDOMFactory()->createDiv();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->container;
@@ -95,7 +95,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getCover()
     {
         if (!($this->cover instanceof DivInterface)) {
-            $this->cover = $this->giGetDOMFactory()->createDiv();
+            $this->cover = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
 
             if ($this->isModality()) {
                 $this->cover->getClasses()->add(static::CLASS_COVER_MODAL);
@@ -112,7 +112,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getFrame()
     {
         if (!($this->frame instanceof DivInterface)) {
-            $this->frame = $this->giGetDOMFactory()->createDiv();
+            $this->frame = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->frame;
@@ -125,7 +125,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getHeader()
     {
         if (!($this->header instanceof DivInterface)) {
-            $this->header = $this->giGetDOMFactory()->createDiv();
+            $this->header = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->header;
@@ -139,7 +139,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getTitle()
     {
         if (!($this->title instanceof DivInterface)) {
-            $this->title = $this->giGetDOMFactory()->createDiv();
+            $this->title = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
 
             $this->title->getAttributes()->setUnselectableToOn();
             $this->title->getChildNodes()->set($this->getTitleText());
@@ -155,7 +155,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getCloseButton()
     {
         if (!($this->closeButton instanceof DivInterface)) {
-            $this->closeButton = $this->giGetDOMFactory()->createDiv();
+            $this->closeButton = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->closeButton;
@@ -168,7 +168,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContent()
     {
         if (!($this->content instanceof DivInterface)) {
-            $this->content = $this->giGetDOMFactory()->createDiv();
+            $this->content = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->content;
@@ -181,7 +181,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getFooter()
     {
         if (!($this->footer instanceof DivInterface)) {
-            $this->footer = $this->giGetDOMFactory()->createDiv();
+            $this->footer = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->footer;
@@ -194,7 +194,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getFooterDescription()
     {
         if (!($this->footerDescription instanceof DivInterface)) {
-            $this->footerDescription = $this->giGetDOMFactory()->createDiv();
+            $this->footerDescription = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->footerDescription;
@@ -207,7 +207,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getResize()
     {
         if (!($this->resize instanceof DivInterface)) {
-            $this->resize = $this->giGetDOMFactory()->createDiv();
+            $this->resize = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->resize;

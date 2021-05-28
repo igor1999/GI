@@ -38,7 +38,9 @@ class Locales extends Menu implements LocalesInterface
     {
         parent::__construct();
 
-        $this->getSelected()->setTitle($this->giCreateSounding()->getTargetLocaleSounding())->setLinkToMock();
+        $this->getSelected()
+            ->setTitle($this->getGiServiceLocator()->createSounding()->getTargetLocaleSounding())
+            ->setLinkToMock();
     }
 
     /**

@@ -56,12 +56,12 @@ class ShowedPages implements ShowedPagesInterface
     public function __construct(int $firstPage, int $lastPage, int $selectedPage = 1)
     {
         if ($firstPage <= 0) {
-            $this->giThrowInvalidTypeException('First page', $firstPage, 'positive');
+            $this->getGiServiceLocator()->throwInvalidTypeException('First page', $firstPage, 'positive');
         }
         $this->firstPage = $firstPage;
 
         if ($lastPage < $this->firstPage) {
-            $this->giThrowInvalidMinimumException('Last page', $lastPage, $this->firstPage);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Last page', $lastPage, $this->firstPage);
         }
         $this->lastPage = $lastPage;
 

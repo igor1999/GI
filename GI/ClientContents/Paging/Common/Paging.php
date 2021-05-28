@@ -37,7 +37,7 @@ class Paging extends AbstractPaging implements PagingInterface
     public function getContext()
     {
         if (!$this->context instanceof ContextInterface) {
-            $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
         }
 
         return $this->context;

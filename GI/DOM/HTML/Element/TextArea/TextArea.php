@@ -68,7 +68,7 @@ class TextArea extends ContainerElement implements TextAreaInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(NodesListInterface::class, NodesList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(NodesListInterface::class, NodesList::class);
 
         return $this;
     }

@@ -77,18 +77,18 @@ abstract class AbstractJson implements JsonInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $flag = $this->giGetPSRFormatParser()->parseAfterPrefix($method, static::FLAG_SETTER_PREFIX);
+            $flag = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($method, static::FLAG_SETTER_PREFIX);
         } catch (\Exception $exception) {
             $flag = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
-        $flagSetter = $this->giGetPSRFormatBuilder()->buildSet($flag);
+        $flagSetter = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildSet($flag);
 
         try {
             call_user_func_array([$this->getFlags(), $flagSetter], $arguments);
         } catch (\Exception $exception) {
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         return $this;

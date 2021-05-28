@@ -74,7 +74,7 @@ class Week implements WeekInterface
     public function getPrevious(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $interval = $interval * 7;
@@ -82,7 +82,7 @@ class Week implements WeekInterface
         $date = clone $this->firstDate;
         $date->sub(new \DateInterval('P' . (int)$interval . 'D'));
 
-        return $this->giGetCalendarFactory()->getWeek($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getWeek($date);
     }
 
     /**
@@ -93,7 +93,7 @@ class Week implements WeekInterface
     public function getNext(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $interval = $interval * 7;
@@ -101,6 +101,6 @@ class Week implements WeekInterface
         $date = clone $this->firstDate;
         $date->add(new \DateInterval('P' . (int)$interval . 'D'));
 
-        return $this->giGetCalendarFactory()->getWeek($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getWeek($date);
     }
 }

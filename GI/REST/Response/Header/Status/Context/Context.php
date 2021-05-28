@@ -30,6 +30,6 @@ class Context implements ContextInterface
      */
     public function getServerProtocol()
     {
-        return $this->giGetServer()->getServerProtocol();
+        return $this->getGiServiceLocator()->getServer()->getServerProtocol();
     }
 }

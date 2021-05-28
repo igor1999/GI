@@ -57,7 +57,7 @@ abstract class AbstractSynchronizing implements SynchronizingInterface
 
         $this->dumpFile = $this->createContext()->getDumpFile();
 
-        $this->resultMessageCreator = $this->giGetDi(
+        $this->resultMessageCreator = $this->getGiServiceLocator()->getDependency(
             ResultMessageCreatorInterface::class, ResultMessageCreator::class
         );
     }
@@ -77,9 +77,9 @@ abstract class AbstractSynchronizing implements SynchronizingInterface
     protected function createDriver()
     {
         try {
-            $this->driver = $this->giGetDi(DriverInterface::class);
+            $this->driver = $this->getGiServiceLocator()->getDependency(DriverInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('RDB Driver');
+            $this->getGiServiceLocator()->throwDependencyException('RDB Driver');
         }
 
         return $this;
@@ -93,10 +93,10 @@ abstract class AbstractSynchronizing implements SynchronizingInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $e) {
             $context = null;
-            $this->giThrowDependencyException('Context');
+            $this->getGiServiceLocator()->throwDependencyException('Context');
         }
 
         return $context;

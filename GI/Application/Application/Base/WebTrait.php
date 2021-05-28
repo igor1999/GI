@@ -33,7 +33,7 @@ trait WebTrait
         /** @var ServiceLocatorAwareTrait $me */
         $me = $this;
 
-        $me->giGetResponseFactory()->createStatus404($this->createNotFoundView())->dispatch();
+        $me->getGiServiceLocator()->getResponseFactory()->createStatus404($this->createNotFoundView())->dispatch();
 
         return $this;
     }

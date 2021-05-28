@@ -55,7 +55,7 @@ trait PSRFormatTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 PSRFormatParserInterface::class, $caller
             );
         } catch (\Exception $exception) {
@@ -79,7 +79,7 @@ trait PSRFormatTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 PSRFormatBuilderInterface::class, $caller
             );
         } catch (\Exception $exception) {
@@ -103,7 +103,7 @@ trait PSRFormatTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 CamelCaseConverterInterface::class, $caller
             );
         } catch (\Exception $e) {

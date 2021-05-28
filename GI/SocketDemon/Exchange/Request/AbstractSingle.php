@@ -84,11 +84,11 @@ abstract class AbstractSingle extends AbstractRequest implements SingleInterface
     protected function validateID()
     {
         if (empty($this->id)) {
-            $this->giThrowNotSetException('Request ID');
+            $this->getGiServiceLocator()->throwNotSetException('Request ID');
         }
 
         if (empty($this->session)) {
-            $this->giThrowNotSetException('Request session hash');
+            $this->getGiServiceLocator()->throwNotSetException('Request session hash');
         }
     }
 }

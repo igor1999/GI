@@ -40,7 +40,7 @@ trait BoolStrictTrait
     public function validateStrict(bool $item = null)
     {
         if ($this->isStrict() && !is_bool($item)) {
-            $this->giThrowInvalidTypeException('Item', $item, 'bool');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Item', $item, 'bool');
         }
 
         return $this;

@@ -66,7 +66,7 @@ class Map extends AbstractValidator implements MapInterface
     protected function doValidation()
     {
         if (!is_array($this->getSource())) {
-            $this->giThrowInvalidTypeException('Validator source', $this->getSource(), 'array');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Validator source', $this->getSource(), 'array');
         }
 
         $result = true;

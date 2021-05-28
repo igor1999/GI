@@ -54,7 +54,7 @@ class ImageText extends AbstractCaptcha implements ImageTextInterface
     {
         parent::__construct();
 
-        $this->randomWordGenerator = $this->giCreateRandomWordGenerator();
+        $this->randomWordGenerator = $this->getGiServiceLocator()->getUtilites()->createRandomWordGenerator();
 
         $this->randomWordGenerator->getAlphabet()
             ->setAll(false)
@@ -63,13 +63,13 @@ class ImageText extends AbstractCaptcha implements ImageTextInterface
 
         try {
             /** @var ContextInterface $context */
-            $context      = $this->giGetDi(ContextInterface::class);
+            $context      = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->length = $context->getLength();
         } catch (\Exception $e) {
             $this->length = static::DEFAULT_LENGTH;
         }
 
-        $this->graphic = $this->giGetDi(GraphicInterface::class, Graphic::class);
+        $this->graphic = $this->getGiServiceLocator()->getDependency(GraphicInterface::class, Graphic::class);
     }
 
     /**

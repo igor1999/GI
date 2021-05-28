@@ -30,7 +30,7 @@ class PasswordLengthMax extends StringLengthMax implements PasswordLengthMaxInte
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::PASSWORD_LENGTH_MAX
         );
     }

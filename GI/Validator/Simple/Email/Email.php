@@ -38,6 +38,6 @@ class Email extends AbstractSimple implements EmailInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::EMAIL);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::EMAIL);
     }
 }

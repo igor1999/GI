@@ -31,7 +31,7 @@ class Escaper extends AbstractAttributeEscaper implements EscaperInterface
      */
     protected function escapeChar(string $char)
     {
-        $encoder = $this->giGetEncoder();
+        $encoder = $this->getGiServiceLocator()->getUtilites()->getEncoder();
 
         if (strlen($char) == 1) {
             $ord = ord($char);

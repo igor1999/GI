@@ -38,7 +38,7 @@ class IsNumber extends AbstractSimple implements IsNumberInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_NUMBER
         );
     }

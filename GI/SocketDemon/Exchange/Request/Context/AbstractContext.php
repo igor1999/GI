@@ -52,7 +52,7 @@ abstract class AbstractContext implements ContextInterface
                 break;
             default:
                 $route = null;
-                $this->giThrowNotFoundException('Request class', get_class($request));
+                $this->getGiServiceLocator()->throwNotFoundException('Request class', get_class($request));
         }
 
         return $route;
@@ -78,6 +78,6 @@ abstract class AbstractContext implements ContextInterface
      */
     protected function getRouteForPushCallRequest()
     {
-        $this->giThrowNotSetException('PushCall Request class');
+        $this->getGiServiceLocator()->throwNotSetException('PushCall Request class');
     }
 }

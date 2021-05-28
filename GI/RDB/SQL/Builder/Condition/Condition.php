@@ -100,7 +100,7 @@ class Condition implements ConditionInterface
     protected function getValidator()
     {
         if (!($this->validator instanceof \Closure)) {
-            $this->giThrowNotSetException('Predicate validator function');
+            $this->getGiServiceLocator()->throwNotSetException('Predicate validator function');
         }
 
         return $this->validator;
@@ -120,7 +120,7 @@ class Condition implements ConditionInterface
      */
     public function build()
     {
-        $placeholder = $this->giGetSqlFactory()->createPlaceholderExpression($this->placeholder);
+        $placeholder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createPlaceholderExpression($this->placeholder);
 
         try {
             $exists = call_user_func($this->getValidator());

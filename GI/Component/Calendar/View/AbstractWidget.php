@@ -114,7 +114,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof DivInterface)) {
-            $this->container = $this->giGetDOMFactory()->createDiv();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
         }
 
         return $this->container;
@@ -127,7 +127,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getNavigationForm()
     {
         if (!($this->navigationForm instanceof FormLayoutInterface)) {
-            $this->navigationForm = $this->giGetDOMFactory()->createFormLayout();
+            $this->navigationForm = $this->getGiServiceLocator()->getDOMFactory()->createFormLayout();
 
             $this->addCommonFormId($this->navigationForm);
         }
@@ -143,7 +143,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getNavigationMonth()
     {
         if (!($this->navigationMonth instanceof InputMonthInterface)) {
-            $this->navigationMonth = $this->giGetDOMFactory()->getInputFactory()->createMonth(
+            $this->navigationMonth = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createMonth(
                 $this->getViewModel()->getMonthName(),
                 $this->getViewModel()->getMonthAsDateTime()->format('Y-m')
             );
@@ -161,9 +161,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getNavigationSubmitButton()
     {
         if (!($this->navigationSubmitButton instanceof ButtonInterface)) {
-            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'show!');
+            $title = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'show!');
 
-            $this->navigationSubmitButton = $this->giGetDOMFactory()->getInputFactory()->createButton([], $title);
+            $this->navigationSubmitButton = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createButton([], $title);
         }
 
         return $this->navigationSubmitButton;
@@ -177,7 +177,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContentTable()
     {
         if (!($this->contentTable instanceof TableInterface)) {
-            $this->contentTable = $this->giGetDOMFactory()->createTable();
+            $this->contentTable = $this->getGiServiceLocator()->getDOMFactory()->createTable();
 
             $this->createContentHeadRow()->fillContentTable();
         }
@@ -190,9 +190,9 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function createContentHeadRow()
     {
-        $this->contentHeadRow = $this->giGetDOMFactory()->createTR();
+        $this->contentHeadRow = $this->getGiServiceLocator()->getDOMFactory()->createTR();
 
-        foreach ($this->giGetCalendarFactory()->getWeek()->getDays()->getItems() as $day) {
+        foreach ($this->getGiServiceLocator()->getCalendarFactory()->getWeek()->getDays()->getItems() as $day) {
             $this->contentHeadRow->getChildNodes()->addCell($this->createContentHeadCell($day));
         }
 
@@ -205,7 +205,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function createContentHeadCell(DayInterface $day)
     {
-        return $this->giGetDOMFactory()->createTD($day->getShortNameInWeek());
+        return $this->getGiServiceLocator()->getDOMFactory()->createTD($day->getShortNameInWeek());
     }
 
     /**
@@ -216,10 +216,11 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     {
         $this->contentTable->getChildNodes()->clean()->addRow($this->contentHeadRow);
 
-        $month = $this->giGetCalendarFactory()->getMonth($this->getViewModel()->getMonthAsDateTime());
+        $month = $this->getGiServiceLocator()->getCalendarFactory()
+            ->getMonth($this->getViewModel()->getMonthAsDateTime());
 
         foreach ($month->getWeeks()->getItems() as $week) {
-            $row = $this->giGetDOMFactory()->createTR();
+            $row = $this->getGiServiceLocator()->getDOMFactory()->createTR();
             $this->contentTable->getChildNodes()->addRow($row);
             foreach ($week->getDays()->getItems() as $day) {
                 $row->getChildNodes()->addCell($this->createContentCell($month, $day));
@@ -239,7 +240,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function createContentCell(MonthInterface $navigationMonth, DayInterface $day)
     {
-        $cell = $this->giGetDOMFactory()->createTD($day->getNumberInMonth());
+        $cell = $this->getGiServiceLocator()->getDOMFactory()->createTD($day->getNumberInMonth());
         $cell->getAttributes()->setDataAttribute('date', $day->getDate()->format('Y-m-d'));
 
         if ($day->getMonth()->getNumber() != $navigationMonth->getNumber()) {

@@ -120,7 +120,7 @@ class Dependency implements DependencyInterface
     protected function create(array $params = [])
     {
         if (is_string($this->source)) {
-            $result = $this->giGetClassMeta($this->source)->create($params);
+            $result = $this->getGiServiceLocator()->getClassMeta($this->source)->create($params);
         } else {
             $result = $this->source;
         }

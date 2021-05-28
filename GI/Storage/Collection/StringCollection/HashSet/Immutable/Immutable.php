@@ -44,7 +44,7 @@ class Immutable implements ImmutableInterface
      */
     public function __construct(array $items = [], OptionInterface $option = null)
     {
-        $this->service = $this->giGetDi(ServiceInterface::class, Service::class, [$option]);
+        $this->service = $this->getGiServiceLocator()->getDependency(ServiceInterface::class, Service::class, [$option]);
 
         $this->setItems($items);
     }
@@ -74,7 +74,7 @@ class Immutable implements ImmutableInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -113,7 +113,7 @@ class Immutable implements ImmutableInterface
     public function getKeyByPosition(int $position)
     {
         if (!$this->hasPosition($position)) {
-            $this->giThrowNotInScopeException($position);
+            $this->getGiServiceLocator()->throwNotInScopeException($position);
         }
 
         $content = array_slice($this->items, $position, 1, true);
@@ -130,7 +130,7 @@ class Immutable implements ImmutableInterface
     public function getByPosition(int $position)
     {
         if (!$this->hasPosition($position)) {
-            $this->giThrowNotInScopeException($position);
+            $this->getGiServiceLocator()->throwNotInScopeException($position);
         }
 
         $content = array_slice($this->items, $position, 1, true);
@@ -155,7 +155,7 @@ class Immutable implements ImmutableInterface
     public function findPositionOfKey(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         $keys = array_keys($this->items);
@@ -290,11 +290,12 @@ class Immutable implements ImmutableInterface
      */
     protected function read(string $source, string $itemGlue, string $pairGlue = self::DEFAULT_PAIR_GLUE)
     {
-        $pairs = $this->giGetSplitter()->split($source, $itemGlue);
+        $pairs = $this->getGiServiceLocator()->getUtilites()->getSplitter()->split($source, $itemGlue);
 
         $items = [];
         foreach ($pairs as $pair) {
-            list($key, $value) = $this->giGetSplitter()->split($pair, $pairGlue, 2);
+            list($key, $value) = $this->getGiServiceLocator()->getUtilites()->getSplitter()
+                ->split($pair, $pairGlue, 2);
 
             $items[$key] = $value;
         }
@@ -367,18 +368,18 @@ class Immutable implements ImmutableInterface
         $result = null;
 
         try {
-            $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);
+            $has = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixHas($method);
         } catch (\Exception $exception) {
             try {
-                $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+                $get = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
             } catch (\Exception $exception) {
                 try {
-                    list($is, $value) = $this->giGetPSRFormatParser()->parseBoolGetterWithValue($method);
+                    list($is, $value) = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseBoolGetterWithValue($method);
                 } catch (\Exception $exception) {
                     try {
-                        $is = $this->giGetPSRFormatParser()->parseWithPrefixIs($method);
+                        $is = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixIs($method);
                     } catch (\Exception $exception) {
-                        $this->giThrowMagicMethodException($method);
+                        $this->getGiServiceLocator()->throwMagicMethodException($method);
                     }
                 }
             }

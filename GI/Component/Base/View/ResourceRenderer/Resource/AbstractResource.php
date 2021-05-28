@@ -54,7 +54,7 @@ abstract class AbstractResource implements ResourceInterface
      */
     public function __construct(FSOFileInterface $target, string $relativeURL)
     {
-        $this->urlHolder = $this->giGetFileSystemFactory()->createURLHolder($target, $relativeURL);
+        $this->urlHolder = $this->getGiServiceLocator()->getFileSystemFactory()->createURLHolder($target, $relativeURL);
     }
 
     /**
@@ -100,7 +100,7 @@ abstract class AbstractResource implements ResourceInterface
         if (isset(self::$cache[$url])) {
             if ($this->commentAsReplacement) {
                 $comment = sprintf(static::COMMENT_TEMPLATE, $url);
-                $result  = $this->giGetDOMFactory()->createComment($comment)->toString();
+                $result  = $this->getGiServiceLocator()->getDOMFactory()->createComment($comment)->toString();
             } else {
                 $result = '';
             }

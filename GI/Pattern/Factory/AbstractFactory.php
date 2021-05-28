@@ -100,7 +100,7 @@ abstract class AbstractFactory implements FactoryInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -232,10 +232,10 @@ abstract class AbstractFactory implements FactoryInterface
         }
 
         try {
-            $key = $this->giGetPSRFormatParser()->parseAfterPrefix($method, $prefix, false);
+            $key = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($method, $prefix, false);
         } catch (\Exception $exception) {
             $key = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         return $this->get($key)->get($arguments);

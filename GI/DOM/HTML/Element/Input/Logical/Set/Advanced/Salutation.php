@@ -38,7 +38,7 @@ class Salutation extends AbstractSet implements SalutationInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createSalutation();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createSalutation();
     }
 
     /**

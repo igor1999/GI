@@ -51,9 +51,9 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
 
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -116,7 +116,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
         return $this->container;
@@ -129,10 +129,10 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createSeparator(string $id)
     {
-        $span = $this->giGetDOMFactory()->createSpan();
+        $span = $this->getGiServiceLocator()->getDOMFactory()->createSpan();
         $span->getAttributes()->setDataAttribute(static::ATTRIBUTE_NODE_ID, $id);
 
-        $text = $this->giGetDOMFactory()->createTextNode($this->getContext()->getSeparator());
+        $text = $this->getGiServiceLocator()->getDOMFactory()->createTextNode($this->getContext()->getSeparator());
         $text->getTextProcessor()->getEscaper()->setOn(false);
 
         $span->getChildNodes()->add($text);

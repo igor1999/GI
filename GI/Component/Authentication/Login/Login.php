@@ -48,11 +48,11 @@ class Login extends AbstractComponent implements LoginInterface
      */
     public function __construct()
     {
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
 
         $this->createContext();
 
-        $this->dialog = $this->giGetComponentFactory()->createLoginDialog();
+        $this->dialog = $this->getGiServiceLocator()->getComponentFactory()->createLoginDialog();
     }
 
     /**
@@ -70,7 +70,7 @@ class Login extends AbstractComponent implements LoginInterface
     protected function getContext()
     {
         if (!($this->context instanceof ContextInterface)) {
-            $this->giThrowNotSetException('Login context');
+            $this->getGiServiceLocator()->throwNotSetException('Login context');
         }
 
         return $this->context;
@@ -83,7 +83,7 @@ class Login extends AbstractComponent implements LoginInterface
     protected function createContext()
     {
         try {
-            $this->context = $this->giGetDi(ContextInterface::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $e) {}
 
         return $this;

@@ -104,13 +104,13 @@ class Day implements DayInterface
     public function getPrevious(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->date;
         $date->sub(new \DateInterval('P' . (int)$interval . 'D'));
 
-        return $this->giGetCalendarFactory()->getDay($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getDay($date);
     }
 
     /**
@@ -121,13 +121,13 @@ class Day implements DayInterface
     public function getNext(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->date;
         $date->add(new \DateInterval('P' . (int)$interval . 'D'));
 
-        return $this->giGetCalendarFactory()->getDay($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getDay($date);
     }
 
     /**
@@ -135,7 +135,7 @@ class Day implements DayInterface
      */
     public function getWeek()
     {
-        return $this->giGetCalendarFactory()->getWeek($this->getDate());
+        return $this->getGiServiceLocator()->getCalendarFactory()->getWeek($this->getDate());
     }
 
     /**
@@ -143,7 +143,7 @@ class Day implements DayInterface
      */
     public function getMonth()
     {
-        return $this->giGetCalendarFactory()->getMonth($this->getDate());
+        return $this->getGiServiceLocator()->getCalendarFactory()->getMonth($this->getDate());
     }
 
     /**
@@ -151,7 +151,7 @@ class Day implements DayInterface
      */
     public function getYear()
     {
-        return $this->giGetCalendarFactory()->getYear($this->getDate());
+        return $this->getGiServiceLocator()->getCalendarFactory()->getYear($this->getDate());
     }
 
     /**

@@ -54,7 +54,7 @@ class ArgumentList implements ArgumentListInterface
         };
         $this->items = array_map($f, $values);
 
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
     }
 
     /**
@@ -65,7 +65,7 @@ class ArgumentList implements ArgumentListInterface
     protected function createItem($value)
     {
         try {
-            $result = $this->giGetDi(ArgumentInterface::class, null, [$value]);
+            $result = $this->getGiServiceLocator()->getDependency(ArgumentInterface::class, null, [$value]);
         } catch (\Exception $exception) {
             $result = new Argument($value);
         }

@@ -41,10 +41,11 @@ abstract class AbstractContext implements ContextInterface
      */
     public function __construct()
     {
-        $option = $this->giGetStorageFactory()->getOptionFactory()->createIntArrayList();
+        $option = $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createIntArrayList();
         $option->setOrdered(true)->setUnique(true)->setMin(10);
 
-        $this->sizes = $this->giGetStorageFactory()->createIntArrayListAlterable(static::DEFAULT_SIZES, $option);
+        $this->sizes = $this->getGiServiceLocator()->getStorageFactory()
+            ->createIntArrayListAlterable(static::DEFAULT_SIZES, $option);
     }
 
     /**

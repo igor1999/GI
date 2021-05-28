@@ -30,7 +30,7 @@ abstract class AbstractUneditable extends Immutable implements UneditableInterfa
     protected function edit(string $key, string $item)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         $this->set($key, $item);
@@ -49,10 +49,10 @@ abstract class AbstractUneditable extends Immutable implements UneditableInterfa
         $result = null;
 
         try {
-            list($set, $value) = $this->giGetPSRFormatParser()->parseSetterWithValue($method);
+            list($set, $value) = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseSetterWithValue($method);
         } catch (\Exception $exception) {
             try {
-                $set = $this->giGetPSRFormatParser()->parseWithPrefixSet($method);
+                $set = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixSet($method);
             } catch (\Exception $exception) {
                 $result = parent::__call($method, $arguments);
             }
@@ -64,7 +64,7 @@ abstract class AbstractUneditable extends Immutable implements UneditableInterfa
             $result = $this->edit($set, $value);
         } elseif (!empty($set)) {
             if (empty($arguments)) {
-                $this->giThrowNotGivenException('Argument for set');
+                $this->getGiServiceLocator()->throwNotGivenException('Argument for set');
             }
             $set = $this->getService()->formatKey($set);
             $result = $this->edit($set, array_shift($arguments));

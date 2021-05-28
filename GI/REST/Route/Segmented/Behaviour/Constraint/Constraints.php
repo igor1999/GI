@@ -45,7 +45,8 @@ class Constraints extends Closable implements ConstraintsInterface
      */
     protected function validateConstraint($constraint)
     {
-        $reExp   = is_string($constraint) && $this->giGetSplitter()->isRegExp($constraint);
+        $reExp   = is_string($constraint) && $this->getGiServiceLocator()->getUtilites()->getSplitter()
+                ->isRegExp($constraint);
         $closure = ($constraint instanceof \Closure);
 
         return $reExp || $closure;

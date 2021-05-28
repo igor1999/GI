@@ -58,7 +58,7 @@ class Select extends ContainerElement implements SelectInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(ItemsInterface::class, Items::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(ItemsInterface::class, Items::class);
 
         return $this;
     }
@@ -189,7 +189,7 @@ class Select extends ContainerElement implements SelectInterface
         $this->getChildNodes()->clean();
 
         if ($step <= 0) {
-            $this->giThrowInvalidMinimumException('Step', $step, 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Step', $step, 1);
         }
 
         for ($value = (int)$first; $value <= (int)$last; $value += $step) {

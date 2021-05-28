@@ -49,7 +49,7 @@ abstract class AbstractNamed extends Link implements NamedInterface
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(
+        $this->attributes = $this->getGiServiceLocator()->getDependency(
             AttributesInterface::class,
             Attributes::class,
             [['type' => static::TYPE, 'rel' => static::REL]]

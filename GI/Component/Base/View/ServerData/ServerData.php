@@ -51,7 +51,7 @@ class ServerData extends Alterable implements ServerDataInterface
 
         $this->owner = $owner;
 
-        $this->escaper = $this->giGetEscaperFactory()->createHTMLAttribute();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createHTMLAttribute();
     }
 
     /**
@@ -76,7 +76,7 @@ class ServerData extends Alterable implements ServerDataInterface
      */
     public function addSessionId()
     {
-        $this->set(static::SESSION_KEY, $this->giGetServiceLocator()->getSessionID());
+        $this->set(static::SESSION_KEY, $this->getGiServiceLocator()->getSessionID());
 
         return $this;
     }
@@ -102,7 +102,7 @@ class ServerData extends Alterable implements ServerDataInterface
      */
     protected function createDataHidden($value, string $key)
     {
-        $hidden = $this->giGetDOMFactory()->getInputFactory()->createHidden([], $value);
+        $hidden = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden([], $value);
 
         $hidden->getAttributes()
             ->setDataAttribute(ClientAttributesInterface::ATTRIBUTE_JS_OBJECT, $this->getOwner()->getClientJSObject())

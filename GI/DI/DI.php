@@ -102,7 +102,7 @@ class DI implements DIInterface
             } elseif (is_object($default)) {
                 $result = $default;
             } elseif (is_string($default)) {
-                $result = $this->giGetClassMeta($default)->create($params);
+                $result = $this->getGiServiceLocator()->getClassMeta($default)->create($params);
             } else {
                 trigger_error('Default param should be a class name or instance', E_USER_ERROR);
             }

@@ -117,7 +117,7 @@ abstract class AbstractPart implements PartInterface
      */
     public function build()
     {
-        $placeholder = $this->giGetSqlFactory()->createPlaceholderExpression($this->placeholder);
+        $placeholder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createPlaceholderExpression($this->placeholder);
 
         $value = $this->validate() ? $this->compile() : static::DEFAULT_EMPTY_VALUE;
 

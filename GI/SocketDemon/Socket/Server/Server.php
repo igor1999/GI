@@ -46,7 +46,7 @@ class Server implements ServerInterface
         }
 
         /** @var ContextInterface $context */
-        $context = $this->giGetDi(ContextInterface::class);
+        $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
         if (!socket_bind($this->socket, $context->getAddress(), $context->getPort())) {
             $this->throwSocketException();

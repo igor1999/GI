@@ -36,7 +36,7 @@ class Menu implements MenuInterface
      */
     public function buildMenu(string $id)
     {
-        $menu = $this->giGetDOMFactory()->createUL();
+        $menu = $this->getGiServiceLocator()->getDOMFactory()->createUL();
 
         $menu->getAttributes()->setDataAttribute(static::SUBMENU_ATTRIBUTE, $id);
         $menu->getStyle()->setPadding(0)->setMargin(0);

@@ -50,10 +50,10 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $result  = $context->isHTML();
         } catch (\Exception $exception) {
-            $result = !$this->giGetServiceLocator()->isCLI();
+            $result = !$this->getGiServiceLocator()->isCLI();
         }
 
         return $result;

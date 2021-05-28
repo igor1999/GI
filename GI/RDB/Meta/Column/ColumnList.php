@@ -89,7 +89,7 @@ class ColumnList implements ColumnListInterface
     protected function createColumn(array $content)
     {
         try {
-            $column = $this->giGetDi(
+            $column = $this->getGiServiceLocator()->getDependency(
                 ColumnInterface::class, new Column($this->getTable(), $content), [$this->getTable(), $content]
             );
         } catch (\Exception $e) {
@@ -116,7 +116,7 @@ class ColumnList implements ColumnListInterface
     public function get(string $name)
     {
         if (!$this->has($name)) {
-            $this->giThrowNotInScopeException($name);
+            $this->getGiServiceLocator()->throwNotInScopeException($name);
         }
 
         return $this->items[$name];
@@ -163,7 +163,7 @@ class ColumnList implements ColumnListInterface
     public function getPrimaryAttribute(string $name)
     {
         if (!$this->hasPrimaryAttribute($name)) {
-            $this->giThrowNotInScopeException($name);
+            $this->getGiServiceLocator()->throwNotInScopeException($name);
         }
 
         return $this->primary[$name];

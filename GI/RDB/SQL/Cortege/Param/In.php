@@ -51,7 +51,7 @@ class In extends Param implements InInterface
      */
     public function __construct(array $rawSource, string $prefix = null, string $alt = null)
     {
-        $this->rawSource = $this->giGetStorageFactory()->createStringArrayListImmutable($rawSource);
+        $this->rawSource = $this->getGiServiceLocator()->getStorageFactory()->createStringArrayListImmutable($rawSource);
         $this->prefix    = empty($prefix) ? static::DEFAULT_PREFIX : $prefix;
         $this->alt       = empty($alt) ? static::DEFAULT_ALT : $alt;
 

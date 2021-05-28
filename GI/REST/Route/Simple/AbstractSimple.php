@@ -36,6 +36,6 @@ abstract class AbstractSimple extends AbstractRoute implements SimpleInterface
      */
     public function getParam(string $param)
     {
-        $this->giThrowNotSetException('Params for this type of route');
+        $this->getGiServiceLocator()->throwNotSetException('Params for this type of route');
     }
 }

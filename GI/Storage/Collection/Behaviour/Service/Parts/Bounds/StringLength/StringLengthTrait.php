@@ -53,7 +53,7 @@ trait StringLengthTrait
         $length = $this->getMinLength();
 
         if (($length > 0) && (strlen($item) < $length)) {
-            $this->giThrowInvalidMinimumException('Length of', $item, $length);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Length of', $item, $length);
         }
 
         return $this;
@@ -69,7 +69,7 @@ trait StringLengthTrait
         $length = $this->getMaxLength();
 
         if (($length > 0) && (strlen($item) > $length)) {
-            $this->giThrowInvalidMaximumException('Length of', $item, $length);
+            $this->getGiServiceLocator()->throwInvalidMaximumException('Length of', $item, $length);
         }
 
         return $this;

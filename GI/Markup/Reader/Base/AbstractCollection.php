@@ -75,7 +75,7 @@ abstract class AbstractCollection implements CollectionInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -154,10 +154,10 @@ abstract class AbstractCollection implements CollectionInterface
     {
         foreach ($contents as $key => $value) {
             if (is_int($key) && is_string($value)) {
-                $item = $this->giGetDi(LeafInterface::class, Leaf::class, [$this->getReader()]);
+                $item = $this->getGiServiceLocator()->getDependency(LeafInterface::class, Leaf::class, [$this->getReader()]);
                 $this->set($value, $item);
             } elseif (is_string($key) && is_array($value)) {
-                $item = $this->giGetDi(
+                $item = $this->getGiServiceLocator()->getDependency(
                     BranchInterface::class, Branch::class, [$this->getReader(), $value]
                 );
                 $this->set($key, $item);
@@ -170,7 +170,7 @@ abstract class AbstractCollection implements CollectionInterface
             } elseif (is_string($key) && is_a($value, LeafInterface::class)) {
                 $this->set($key, $value);
             } else {
-                $this->giThrowInvalidFormatException('Item', $key, 'XML reader branch or leaf');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'XML reader branch or leaf');
             }
         }
 
@@ -186,17 +186,17 @@ abstract class AbstractCollection implements CollectionInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $keys = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+            $keys = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
         } catch (\Exception $exception) {
             $keys = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $keys = array_filter(explode(static::KEY_SEPARATOR, $keys));
 
         $f = function($key)
         {
-            return $this->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+            return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
         };
         $keys = array_map($f, $keys);
 
@@ -211,7 +211,7 @@ abstract class AbstractCollection implements CollectionInterface
     public function findNodeRecursive(array $keys)
     {
         if (empty($keys)) {
-            $this->giThrowIsEmptyException('Keys for recursive search');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys for recursive search');
         }
 
         $localKey = array_shift($keys);
@@ -222,7 +222,7 @@ abstract class AbstractCollection implements CollectionInterface
             if ($result instanceof BranchInterface) {
                 $result = $result->findNodeRecursive($keys);
             } else {
-                $this->giThrowNotFoundException('Node in recursive search');
+                $this->getGiServiceLocator()->throwNotFoundException('Node in recursive search');
             }
         }
 

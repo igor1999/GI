@@ -50,7 +50,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -89,9 +89,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getPagesSelect()
     {
         if (!($this->pagesSelect instanceof SelectInterface)) {
-            $this->pagesSelect = $this->giGetDOMFactory()->createSelect();
+            $this->pagesSelect = $this->getGiServiceLocator()->getDOMFactory()->createSelect();
 
-            $template = $this->giTranslate(
+            $template = $this->getGiServiceLocator()->translate(
                 GlossaryInterface::class, Glossary::class,static::ENTRY_TEMPLATE
             );
 

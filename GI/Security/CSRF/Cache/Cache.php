@@ -47,7 +47,7 @@ class Cache implements CacheInterface
     public function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->items[$id];
@@ -72,7 +72,7 @@ class Cache implements CacheInterface
     protected function createItem(int $expires = 0)
     {
         try {
-            $result = $this->giGetDi(ItemInterface::class,null, [$expires]);
+            $result = $this->getGiServiceLocator()->getDependency(ItemInterface::class,null, [$expires]);
         } catch (\Exception $e) {
             $result = new Item($expires);
         }

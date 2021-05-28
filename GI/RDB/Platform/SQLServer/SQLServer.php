@@ -35,7 +35,7 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
      */
     public function getColumnListQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -70,7 +70,7 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
      */
     public function getTableParentReferencesQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -78,6 +78,6 @@ class SQLServer extends AbstractPlatform implements SQLServerInterface
      */
     public function getTableChildReferencesQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 }

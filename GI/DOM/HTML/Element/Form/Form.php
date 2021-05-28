@@ -146,7 +146,7 @@ class Form extends ContainerElement implements FormInterface
     public function toString()
     {
         if ($this->getAttributes()->isMethodEqualPost()) {
-            $this->getChildNodes()->insert(0, $this->giGetDOMFactory()->getInputFactory()->createCSRF());
+            $this->getChildNodes()->insert(0, $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createCSRF());
         }
 
         return parent::toString();

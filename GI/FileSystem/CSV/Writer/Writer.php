@@ -38,7 +38,7 @@ class Writer extends AbstractCSV implements WriterInterface
      */
     public function __construct(FSOFileInterface $file)
     {
-        $this->context = $this->giGetDi(ContextInterface::class,Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class,Context::class);
         $this->context->validateProperties();
 
         parent::__construct($file);

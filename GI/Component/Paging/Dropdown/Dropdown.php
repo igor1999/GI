@@ -48,7 +48,7 @@ class Dropdown extends AbstractPaging implements DropdownInterface
     {
         parent::__construct($viewModel, $entriesTotal);
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
 
@@ -69,7 +69,7 @@ class Dropdown extends AbstractPaging implements DropdownInterface
      */
     protected function createPagingModel(int $entriesTotal, int $selectedPage = 1, int $entriesProPage = null)
     {
-        $this->pagingModel = $this->giGetDi(
+        $this->pagingModel = $this->getGiServiceLocator()->getDependency(
             PagingModelInterface::class,
             PagingModel::class,
             [$entriesTotal, $selectedPage, $entriesProPage]

@@ -80,7 +80,7 @@ class Creator implements CreatorInterface
     protected function createItem(string $name, string $mimeType, string $tmpName, int $size, int $error)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
             ItemInterface::class,null, [$name, $mimeType, $tmpName, $size, $error]
             );
         } catch (\Exception $e) {
@@ -111,7 +111,7 @@ class Creator implements CreatorInterface
     protected function createCollection(array $items)
     {
         try {
-            $result = $this->giGetDi(CollectionInterface::class,null, [$items]);
+            $result = $this->getGiServiceLocator()->getDependency(CollectionInterface::class,null, [$items]);
         } catch (\Exception $e) {
             $result = new Collection($items);
         }

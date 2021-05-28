@@ -17,15 +17,21 @@
  */
 namespace GI\Pattern\ArrayExchange;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
+
 trait HydrationTrait
 {
     /**
      * @param array $data
      * @return static
+     * @throws \Exception
      */
     public function hydrate(array $data)
     {
-        $this->giHydrate($data);
+        /** @var ServiceLocatorAwareTrait $me */
+        $me = $this;
+
+        $me->getGiServiceLocator()->hydrate($data);
 
         return $this;
     }

@@ -63,7 +63,7 @@ class Core extends AbstractResourceRenderer implements CoreInterface
     {
         $this->createClassContents(self::class);
 
-        $urlBase = $this->giCreateFSODir(self::URL_BASE_DIR);
+        $urlBase = $this->getGiServiceLocator()->createFSODir(self::URL_BASE_DIR);
         foreach (self::JS_PATHS as $js) {
             $key = $urlBase->createChildFile($js)->getPath();
             $this->get($key)->setCommentAsReplacement(false);

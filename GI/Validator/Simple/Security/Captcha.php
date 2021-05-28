@@ -104,7 +104,7 @@ class Captcha extends AbstractSimple implements CaptchaInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::CAPTCHA
         );
     }

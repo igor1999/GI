@@ -40,7 +40,7 @@ class AbstractController implements ControllerInterface
      */
     public function __construct()
     {
-        $this->email = $this->giGetDi(EmailInterface::class, Email::class);
+        $this->email = $this->getGiServiceLocator()->getDependency(EmailInterface::class, Email::class);
     }
 
     /**

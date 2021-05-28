@@ -43,10 +43,10 @@ class Demon implements DemonInterface
      */
     public function __construct()
     {
-        $this->clientList = $this->giGetSocketDemonFactory()->createClientSocketCollection();
+        $this->clientList = $this->getGiServiceLocator()->getSocketDemonFactory()->createClientSocketCollection();
 
         try {
-            $this->context = $this->giGetDi(ContextInterface::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $exception) {}
     }
 
@@ -65,7 +65,7 @@ class Demon implements DemonInterface
     protected function getContext()
     {
         if (!($this->context instanceof ContextInterface)) {
-            $this->giThrowNotSetException('Context');
+            $this->getGiServiceLocator()->throwNotSetException('Context');
         }
 
         return $this->context;

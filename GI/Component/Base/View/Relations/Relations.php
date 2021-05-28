@@ -72,7 +72,7 @@ class Relations implements RelationsInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -145,7 +145,7 @@ class Relations implements RelationsInterface
      */
     public function toString()
     {
-        $container = $this->giGetDOMFactory()->createContainerElement();
+        $container = $this->getGiServiceLocator()->getDOMFactory()->createContainerElement();
 
         foreach ($this->getItems() as $key => $item) {
             $hidden = $this->getOwner()->createRelationHidden($key, $item);

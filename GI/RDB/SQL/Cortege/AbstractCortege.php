@@ -67,7 +67,7 @@ abstract class AbstractCortege extends Alterable implements CortegeInterface
     public function getTable()
     {
         if (!$this->hasTable()) {
-            $this->giThrowNotSetException('Basic table');
+            $this->getGiServiceLocator()->throwNotSetException('Basic table');
         }
 
         return $this->table;
@@ -88,7 +88,7 @@ abstract class AbstractCortege extends Alterable implements CortegeInterface
     public function getJoinTable()
     {
         if (!$this->hasJoinTable()) {
-            $this->giThrowNotSetException('Join table');
+            $this->getGiServiceLocator()->throwNotSetException('Join table');
         }
 
         return $this->joinTable;
@@ -122,7 +122,7 @@ abstract class AbstractCortege extends Alterable implements CortegeInterface
                 $field = $forKeys ? $key : $item;
             }
 
-            return $this->giGetSqlFactory()->createFieldExpression($field)->toString();
+            return $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($field)->toString();
         };
 
         return $this->getPairsWithClosure($f);
@@ -137,7 +137,7 @@ abstract class AbstractCortege extends Alterable implements CortegeInterface
         {
             unset($item);
 
-            return $this->giGetSqlFactory()->createParamExpression($key)->toString();
+            return $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createParamExpression($key)->toString();
         };
 
         return $this->getPairsWithClosure($f);

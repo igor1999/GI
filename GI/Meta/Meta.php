@@ -128,7 +128,7 @@ class Meta implements MetaInterface
     public function getCopyMaker(string $caller = null)
     {
         try {
-            $result = $this->giGetServiceLocator()->getDi()->find(CopyMakerInterface::class, $caller);
+            $result = $this->getGiServiceLocator()->getDi()->find(CopyMakerInterface::class, $caller);
         } catch (\Exception $exception) {
             if (!($this->copyMaker instanceof CopyMakerInterface)) {
                 $this->copyMaker = new CopyMaker();

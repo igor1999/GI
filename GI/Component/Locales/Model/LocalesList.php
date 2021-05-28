@@ -41,7 +41,7 @@ class LocalesList extends Menu implements LocalesListInterface
      */
     protected function create()
     {
-        foreach ($this->giCreateSounding()->getUsedLocalesSoundingList() as $locale => $sounding) {
+        foreach ($this->getGiServiceLocator()->createSounding()->getUsedLocalesSoundingList() as $locale => $sounding) {
             $option = $this->createOption($locale)->setTitle($sounding)->setLinkToMock();
             $this->set($option);
         }

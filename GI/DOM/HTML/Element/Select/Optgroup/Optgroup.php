@@ -71,7 +71,7 @@ class Optgroup extends ContainerElement implements OptgroupInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(OptionListInterface::class, OptionList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(OptionListInterface::class, OptionList::class);
 
         return $this;
     }

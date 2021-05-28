@@ -42,7 +42,7 @@ trait NodeTrait
     public function getXPath()
     {
         if (!($this->xPath instanceof XPathInterface)) {
-            $this->xPath = $this->giGetDi(
+            $this->xPath = $this->getGiServiceLocator()->getDependency(
                 XPathInterface::class, XPath::class, [$this->getReader()]
             );
         }
@@ -56,7 +56,7 @@ trait NodeTrait
     public function getKeyParser()
     {
         if (!($this->keyParser instanceof KeyParserInterface)) {
-            $this->keyParser = $this->giGetDi(
+            $this->keyParser = $this->getGiServiceLocator()->getDependency(
                 KeyParserInterface::class, KeyParser::class, [$this->getReader()]
             );
         }

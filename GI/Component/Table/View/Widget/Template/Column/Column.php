@@ -99,10 +99,10 @@ class Column implements ColumnInterface
     public function createHeaderCell(WidgetInterface $widget, string $orderCriteria, bool $orderDirection)
     {
         if (!is_a($this->headerCellClass, THInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
+            $this->getGiServiceLocator()->throwInvalidTypeException('Header cell class', $this->headerCellClass, THInterface::class);
         }
 
-        $meta = $this->giGetClassMeta($this->headerCellClass);
+        $meta = $this->getGiServiceLocator()->getClassMeta($this->headerCellClass);
 
         $params = is_a($this->headerCellClass, OrderedInterface::class, true)
             ? [$orderCriteria, $orderDirection]
@@ -123,10 +123,10 @@ class Column implements ColumnInterface
     public function createBodyCell(WidgetInterface $widget, int $position, $value)
     {
         if (!is_a($this->bodyCellClass, TDInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
+            $this->getGiServiceLocator()->throwInvalidTypeException('Body cell class', $this->bodyCellClass, TDInterface::class);
         }
 
-        $meta = $this->giGetClassMeta($this->bodyCellClass);
+        $meta = $this->getGiServiceLocator()->getClassMeta($this->bodyCellClass);
 
         $params = is_a($this->bodyCellClass, NumberInterface::class, true) ? [$position] : [$value];
 
@@ -144,7 +144,7 @@ class Column implements ColumnInterface
      */
     protected function addWidgetToParams(string $class, array $params, WidgetInterface $widget)
     {
-        $meta = $this->giGetClassMeta($class);
+        $meta = $this->getGiServiceLocator()->getClassMeta($class);
 
         $numberOfParams = $meta->getMethods()->get('__construct')->getReflection()->getNumberOfParameters();
 

@@ -79,7 +79,7 @@ class PartList implements PartListInterface
     public function get(string $param)
     {
         if (!$this->has($param)) {
-            $this->giThrowNotInScopeException($param);
+            $this->getGiServiceLocator()->throwNotInScopeException($param);
         }
 
         return $this->items[$param];
@@ -142,7 +142,7 @@ class PartList implements PartListInterface
     protected function createOrder(array $value, string $placeholder)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 OrderInterface::class, null, [$this->getBuilder(), $value, $placeholder]
             );
         } catch (\Exception $e) {
@@ -174,7 +174,7 @@ class PartList implements PartListInterface
     protected function createGroup(array $value, string $placeholder)
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 GroupInterface::class, null, [$this->getBuilder(), $value, $placeholder]
             );
         } catch (\Exception $e) {
@@ -206,7 +206,7 @@ class PartList implements PartListInterface
     protected function createLimit(int $limit, int $offset = null, string $placeholder = '')
     {
         try {
-            $result = $this->giGetDi(
+            $result = $this->getGiServiceLocator()->getDependency(
                 LimitInterface::class, null, [$this->getBuilder(), $limit, $offset, $placeholder]
             );
         } catch (\Exception $e) {

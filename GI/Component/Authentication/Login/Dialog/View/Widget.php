@@ -96,11 +96,11 @@ class Widget extends AbstractWidget implements WidgetInterface
     {
         parent::__construct();
 
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
 
-        $this->setTitleText($this->giTranslate(GlossaryInterface::class, Glossary::class, 'Login'))
+        $this->setTitleText($this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Login'))
             ->setModality(false);
     }
 
@@ -145,7 +145,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getForm()
     {
         if (!($this->form instanceof FormLayoutInterface)) {
-            $this->form = $this->giGetDOMFactory()->createFormLayout(
+            $this->form = $this->getGiServiceLocator()->getDOMFactory()->createFormLayout(
                 RequestMethods::POST, $this->getLoginCheckAction()
             );
         }
@@ -160,12 +160,12 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getLoginTextbox()
     {
         if (!($this->loginTextbox instanceof TextInterface)) {
-            $this->loginTextbox = $this->giGetDOMFactory()->getInputFactory()->createText(
+            $this->loginTextbox = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createText(
                 $this->getViewModel()->getLoginName()
             );
 
             $this->loginTextbox->getAttributes()->setPlaceholder(
-                $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login')
+                $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'login')
             );
         }
 
@@ -179,12 +179,12 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getPasswordTextbox()
     {
         if (!($this->passwordTextbox instanceof PasswordInterface)) {
-            $this->passwordTextbox = $this->giGetDOMFactory()->getInputFactory()->createPassword(
+            $this->passwordTextbox = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createPassword(
                 $this->getViewModel()->getPasswordName()
             );
 
             $this->passwordTextbox->getAttributes()->setPlaceholder(
-                $this->giTranslate(GlossaryInterface::class, Glossary::class, 'password')
+                $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'password')
             );
         }
 
@@ -198,7 +198,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getSaveCheckbox()
     {
         if (!($this->saveCheckbox instanceof CheckboxInterface)) {
-            $this->saveCheckbox = $this->giGetDOMFactory()->getInputFactory()->createCheckbox(
+            $this->saveCheckbox = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createCheckbox(
                 $this->getViewModel()->getSaveName(), 1
             );
 
@@ -215,8 +215,8 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getSaveLabel()
     {
         if (!($this->saveLabel instanceof LabelInterface)) {
-            $this->saveLabel = $this->giGetDOMFactory()->createLabel(
-                $this->giTranslate(GlossaryInterface::class, Glossary::class, static::SAVE_LABEL)
+            $this->saveLabel = $this->getGiServiceLocator()->getDOMFactory()->createLabel(
+                $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, static::SAVE_LABEL)
             );
         }
 
@@ -230,8 +230,8 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getSubmitButton()
     {
         if (!($this->submitButton instanceof SubmitInterface)) {
-            $this->submitButton = $this->giGetDOMFactory()->getInputFactory()->createSubmit(
-                [], $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login!')
+            $this->submitButton = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createSubmit(
+                [], $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'login!')
             );
         }
 

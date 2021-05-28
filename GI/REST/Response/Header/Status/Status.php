@@ -46,12 +46,12 @@ class Status extends AbstractHeader implements StatusInterface
         $this->code = $code;
 
         if (!isset($this->getStatuses()[$this->code])) {
-            $this->giThrowNotFoundException('Header status', $this->code);
+            $this->getGiServiceLocator()->throwNotFoundException('Header status', $this->code);
         }
 
         if (empty($protocol)) {
             /** @var ContextInterface $context */
-            $context  = $this->giGetDi(ContextInterface::class, Context::class);
+            $context  = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
             $protocol = $context->getServerProtocol();
         }
 

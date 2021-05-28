@@ -43,7 +43,7 @@ class Context extends Base implements ContextInterface
     protected function validateSeparator()
     {
         if (empty($this->getSeparator())) {
-            $this->giThrowIsEmptyException('Separator');
+            $this->getGiServiceLocator()->throwIsEmptyException('Separator');
         }
     }
 }

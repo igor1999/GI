@@ -51,7 +51,7 @@ class Parser extends AbstractPrefix implements ParserInterface
     public function parseAfterPrefix(string $source, string $prefix, bool $lcFirst = true)
     {
         if (strpos($source, $prefix) !== 0) {
-            $this->giThrowCommonException('Prefix \'%s\' in source \'%s\' not found', [$prefix, $source]);
+            $this->getGiServiceLocator()->throwCommonException('Prefix \'%s\' in source \'%s\' not found', [$prefix, $source]);
         }
 
         $result = substr($source, strlen($prefix));
@@ -73,7 +73,7 @@ class Parser extends AbstractPrefix implements ParserInterface
     public function parseBeforeSuffix(string $source, string $suffix, bool $lcFirst = true)
     {
         if (substr($source, strlen($source) - strlen($suffix)) != $suffix) {
-            $this->giThrowCommonException('Suffix \'%s\' in source \'%s\' not found', [$suffix, $source]);
+            $this->getGiServiceLocator()->throwCommonException('Suffix \'%s\' in source \'%s\' not found', [$suffix, $source]);
         }
 
         $result = substr($source, 0, strlen($source) - strlen($suffix));
@@ -113,7 +113,7 @@ class Parser extends AbstractPrefix implements ParserInterface
         $this->validatePrefix($prefix, $method);
 
         if (empty($arguments)) {
-            $this->giThrowNotGivenException('Source for parsing');
+            $this->getGiServiceLocator()->throwNotGivenException('Source for parsing');
         }
 
         $source  = array_shift($arguments);
@@ -182,7 +182,7 @@ class Parser extends AbstractPrefix implements ParserInterface
         );
 
         if (empty($property) || empty($value)) {
-            $this->giThrowInvalidFormatException('Bool getter with value', $source, 'isPropertyEqualValue');
+            $this->getGiServiceLocator()->throwInvalidFormatException('Bool getter with value', $source, 'isPropertyEqualValue');
         }
 
         return [$property, lcfirst($value)];
@@ -200,7 +200,7 @@ class Parser extends AbstractPrefix implements ParserInterface
         list($property, $value) = $this->getSeparatedParts($propertyAndValue, self::SETTER_VALUE_SEPARATOR);
 
         if (empty($property) || empty($value)) {
-            $this->giThrowInvalidFormatException('Setter with value', $source, 'setPropertyToValue');
+            $this->getGiServiceLocator()->throwInvalidFormatException('Setter with value', $source, 'setPropertyToValue');
         }
 
         return [$property, lcfirst($value)];
@@ -221,7 +221,7 @@ class Parser extends AbstractPrefix implements ParserInterface
         );
 
         if (empty($property) || empty($argumentList)) {
-            $this->giThrowInvalidFormatException(
+            $this->getGiServiceLocator()->throwInvalidFormatException(
                 'Argument list', $source, '[prefix]PropertyWithValue1AndValue2...'
             );
         }

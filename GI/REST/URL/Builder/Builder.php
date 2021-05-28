@@ -96,9 +96,9 @@ class Builder implements BuilderInterface
      */
     public function __construct()
     {
-        $this->query = $this->giGetDi(QueryInterface::class,Query::class);
+        $this->query = $this->getGiServiceLocator()->getDependency(QueryInterface::class,Query::class);
 
-        $this->escaper = $this->giGetEscaperFactory()->createURL();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createURL();
     }
 
     /**
@@ -140,10 +140,10 @@ class Builder implements BuilderInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $schema = $this->giGetPSRFormatParser()->parseAfterPrefix($method, static::SCHEMA_SETTER_PREFIX);
+            $schema = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($method, static::SCHEMA_SETTER_PREFIX);
         } catch (\Exception $exception) {
             $schema = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $this->setSchema($schema);

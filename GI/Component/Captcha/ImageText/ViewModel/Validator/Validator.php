@@ -13,6 +13,6 @@ class Validator extends AbstractValidator implements ValidatorInterface
      */
     protected function getSecureCaptcha()
     {
-        return $this->giGetCaptchaFactory()->createImageText();
+        return $this->getGiServiceLocator()->getCaptchaFactory()->createImageText();
     }
 }

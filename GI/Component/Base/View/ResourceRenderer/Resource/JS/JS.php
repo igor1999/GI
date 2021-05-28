@@ -31,6 +31,6 @@ class JS extends AbstractResource implements JSInterface
     {
         $url = $this->getUrlHolder()->getUrlWithModificationTime();
 
-        return $this->giGetDOMFactory()->createExternScript($url);
+        return $this->getGiServiceLocator()->getDOMFactory()->createExternScript($url);
     }
 }

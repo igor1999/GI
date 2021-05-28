@@ -57,7 +57,7 @@ abstract class AbstractContainer implements ContainerInterface
     protected function getLocalDI()
     {
         if (!($this->localDI instanceof DIInterface)) {
-            $this->giThrowNotSetException('Local DI');
+            $this->getGiServiceLocator()->throwNotSetException('Local DI');
         }
 
         return $this->localDI;
@@ -81,7 +81,7 @@ abstract class AbstractContainer implements ContainerInterface
     protected function getRecursiveDI()
     {
         if (!($this->recursiveDI instanceof DIInterface)) {
-            $this->giThrowNotSetException('Recursive DI');
+            $this->getGiServiceLocator()->throwNotSetException('Recursive DI');
         }
 
         return $this->recursiveDI;
@@ -105,7 +105,7 @@ abstract class AbstractContainer implements ContainerInterface
     protected function getLocalEventManager()
     {
         if (!($this->localEventManager instanceof EventManagerInterface)) {
-            $this->giThrowNotSetException('Local Event Manager');
+            $this->getGiServiceLocator()->throwNotSetException('Local Event Manager');
         }
 
         return $this->localEventManager;
@@ -129,7 +129,7 @@ abstract class AbstractContainer implements ContainerInterface
     protected function getRecursiveEventManager()
     {
         if (!($this->recursiveEventManager instanceof EventManagerInterface)) {
-            $this->giThrowNotSetException('Recursive Event Manager');
+            $this->getGiServiceLocator()->throwNotSetException('Recursive Event Manager');
         }
 
         return $this->recursiveEventManager;
@@ -161,7 +161,7 @@ abstract class AbstractContainer implements ContainerInterface
 
         foreach ($calls as $key => $call) {
             if (!$this->validate($call)) {
-                $this->giThrowInvalidTypeException('Call', $key, 'Web or CLI');
+                $this->getGiServiceLocator()->throwInvalidTypeException('Call', $key, 'Web or CLI');
             }
         }
 

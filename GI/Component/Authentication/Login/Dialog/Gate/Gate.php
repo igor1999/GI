@@ -29,7 +29,7 @@ class Gate extends AbstractGate implements GateInterface
         try {
             $data = $this->getCall()->getRequest()->getPost()->extract();
 
-            $response = $this->giGetComponentFactory()->createLoginDialog()->login($data);
+            $response = $this->getGiServiceLocator()->getComponentFactory()->createLoginDialog()->login($data);
 
             $this->getCall()->setResponseToJSON($response);
         } catch (\Exception $e) {

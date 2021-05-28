@@ -50,7 +50,7 @@ class FromResource extends AbstractSourceMaker implements FromResourceInterface
         $binary = ob_get_clean();
 
         if (empty($binary)) {
-            $this->giThrowNotFoundException('MIME-type', $contentType);
+            $this->getGiServiceLocator()->throwNotFoundException('MIME-type', $contentType);
         }
 
         return $binary;

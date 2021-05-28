@@ -57,7 +57,7 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
     protected function createEmptyRecord()
     {
         try {
-           $record = $this->giGetDi(EmptyRecordInterface::class);
+           $record = $this->getGiServiceLocator()->getDependency(EmptyRecordInterface::class);
         } catch (\Exception $exception) {
             $record = new EmptyRecord();
         }

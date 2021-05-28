@@ -38,7 +38,7 @@ class Reader extends AbstractCSV implements ReaderInterface
      */
     public function __construct(FSOFileInterface $file)
     {
-        $this->context = $this->giGetDi(ContextInterface::class,Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class,Context::class);
         $this->context->validateProperties();
 
         parent::__construct($file);

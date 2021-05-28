@@ -29,7 +29,7 @@ abstract class AbstractApplication implements ApplicationInterface
      */
     public function __construct()
     {
-        $this->giGetServiceLocator();
+        $this->getGiServiceLocator()->getInstance();
     }
 
     /**

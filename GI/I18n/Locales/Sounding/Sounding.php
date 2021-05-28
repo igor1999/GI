@@ -52,7 +52,8 @@ class Sounding implements SoundingInterface
     {
         $this->setUsedLocalesToDefault();
 
-        $this->translator = $this->giCreateDefaultTranslator(GlossaryInterface::class, Glossary::class);
+        $this->translator = $this->getGiServiceLocator()
+            ->createDefaultTranslator(GlossaryInterface::class, Glossary::class);
 
         $this->translator->setSourceLocale(static::DUMMY_SOURCE_LOCALE);
     }
@@ -83,7 +84,7 @@ class Sounding implements SoundingInterface
     {
         try {
             /** @var UserLocaleContextInterface $context */
-            $context = $this->giGetDi(UserLocaleContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(UserLocaleContextInterface::class);
             $this->setUsedLocales($context->getUsedLocales());
         } catch (\Exception $e) {
             $this->setUsedLocales([]);

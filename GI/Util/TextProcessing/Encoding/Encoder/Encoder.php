@@ -63,7 +63,7 @@ class Encoder implements EncoderInterface
             $result = mb_convert_encoding($string, $to, $from);
         } else {
             $result = null;
-            $this->giThrowNotFoundException('iconv/mb_convert_encoding');
+            $this->getGiServiceLocator()->throwNotFoundException('iconv/mb_convert_encoding');
         }
 
         return $result;
@@ -92,7 +92,7 @@ class Encoder implements EncoderInterface
         }
 
         if (!$this->isStringInUTF8($string)) {
-            $this->giThrowCommonException('Converted string \'%s\' is not valid UTF-8', [$string]);
+            $this->getGiServiceLocator()->throwCommonException('Converted string \'%s\' is not valid UTF-8', [$string]);
         }
 
         return $string;
@@ -107,7 +107,7 @@ class Encoder implements EncoderInterface
     public function fromUTF8(string $string, string $encoding)
     {
         if (!$this->isStringInUTF8($string)) {
-            $this->giThrowCommonException('Converted string \'%s\' is not valid UTF-8', [$string]);
+            $this->getGiServiceLocator()->throwCommonException('Converted string \'%s\' is not valid UTF-8', [$string]);
         }
 
         if (strtoupper($encoding) !== self::UTF_8_ENCODING) {

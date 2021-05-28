@@ -146,7 +146,7 @@ class Item implements ItemInterface
     protected function validateID()
     {
         if (empty($this->id)) {
-            $this->giThrowNotSetException('Response item ID');
+            $this->getGiServiceLocator()->throwNotSetException('Response item ID');
         }
     }
 
@@ -157,7 +157,7 @@ class Item implements ItemInterface
     protected function validateData()
     {
         if (empty($this->data)) {
-            $this->giThrowNotSetException('Response item data');
+            $this->getGiServiceLocator()->throwNotSetException('Response item data');
         }
     }
 }

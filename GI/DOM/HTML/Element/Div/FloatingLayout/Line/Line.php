@@ -48,7 +48,7 @@ class Line extends Div implements LineInterface
     {
         parent::__construct();
 
-        $this->clear = $this->giGetDi(ClearInterface::class, Clear::class);
+        $this->clear = $this->getGiServiceLocator()->getDependency(ClearInterface::class, Clear::class);
     }
 
     /**
@@ -73,7 +73,7 @@ class Line extends Div implements LineInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(CellListInterface::class, CellList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(CellListInterface::class, CellList::class);
 
         return $this;
     }

@@ -33,7 +33,7 @@ trait OrderAwareTrait
     public function getOrder()
     {
         if (!($this->order instanceof OrderInterface)) {
-            $this->order = $this->giGetDi(OrderInterface::class, Order::class);
+            $this->order = $this->getGiServiceLocator()->getDependency(OrderInterface::class, Order::class);
 
             /** @var ViewModelInterface $me */
             $me = $this;

@@ -138,27 +138,27 @@ class Argument implements ArgumentInterface
 
         try {
             $prefix = static::NAMED_ARGUMENT_PREFIX . static::BASE_64_MARK;
-            $nameAndValue64 = $this->giGetPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
+            $nameAndValue64 = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
         } catch (\Exception $exception) {
             try {
                 $prefix = static::NAMED_ARGUMENT_PREFIX;
-                $nameAndValue = $this->giGetPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
+                $nameAndValue = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
             } catch (\Exception $exception) {
                 try {
                     $prefix = static::BASE_64_MARK;
-                    $value64 = $this->giGetPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
+                    $value64 = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseAfterPrefix($raw, $prefix, false);
                 } catch (\Exception $exception) {}
             }
         }
 
         if (!empty($nameAndValue64)) {
-            list($this->name, $this->value) = $this->giGetPSRFormatParser()->getSeparatedParts(
+            list($this->name, $this->value) = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->getSeparatedParts(
                 $nameAndValue64, static::NAMED_ARGUMENT_SEPARATOR, $nameAndValue64, ''
             );
 
             $this->base64 = true;
         } elseif (!empty($nameAndValue)) {
-            list($this->name, $this->value) = $this->giGetPSRFormatParser()->getSeparatedParts(
+            list($this->name, $this->value) = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->getSeparatedParts(
                 $nameAndValue, static::NAMED_ARGUMENT_SEPARATOR, $nameAndValue, ''
             );
         } elseif (!empty($value64)) {

@@ -38,6 +38,6 @@ class Alpha extends AbstractSimple implements AlphaInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::ALPHA);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::ALPHA);
     }
 }

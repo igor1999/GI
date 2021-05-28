@@ -15,34 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\RDB\DI\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
 
-use GI\DOM\Factory\FactoryInterface as DOMFactoryInterface;
-use GI\Component\Factory\FactoryInterface as ComponentFactoryInterface;
-
-trait ViewAwareTrait
+trait DecoratorAwareTrait
 {
     /**
-     * @return DOMFactoryInterface
+     * @var DecoratorInterface
      */
-    protected function giGetDOMFactory()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
+    private $rdbDi;
 
-        return $me->giGetServiceLocator()->getDOMFactory(static::class);
-    }
 
     /**
-     * @return ComponentFactoryInterface
+     * @return DecoratorInterface
      */
-    protected function giGetComponentFactory()
+    public function getRdbDi()
     {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
+        if (!($this->rdbDi instanceof DecoratorInterface)) {
+            /** @var BaseInterface $me */
+            $me = $this;
 
-        return $me->giGetServiceLocator()->getComponentFactory(static::class);
+            $this->rdbDi = new Decorator($me->getCaller());
+        }
+
+        return $this->rdbDi;
     }
 }

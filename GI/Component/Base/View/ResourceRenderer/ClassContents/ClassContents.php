@@ -64,7 +64,7 @@ class ClassContents implements ClassContentsInterface
     {
         $this->targetClass = $targetClass;
 
-        $constants = $this->giGetClassMeta($this->targetClass)->getSelfConstants();
+        $constants = $this->getGiServiceLocator()->getClassMeta($this->targetClass)->getSelfConstants();
 
         try {
             $this->targetRelativeDir = $constants->get('TARGET_RELATIVE_DIR')->getValue();
@@ -142,7 +142,7 @@ class ClassContents implements ClassContentsInterface
     public function validate()
     {
         if (empty($this->urlBaseDir)) {
-            $this->giThrowIsEmptyException('URl Dir');
+            $this->getGiServiceLocator()->throwIsEmptyException('URl Dir');
         }
 
         return $this;

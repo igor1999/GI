@@ -58,7 +58,7 @@ class QueryBuilder implements QueryBuilderInterface
     {
         $this->table = $table;
 
-        $this->builder = $this->giGetSqlFactory()->createSQLBuilder();
+        $this->builder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createSQLBuilder();
     }
 
     /**
@@ -86,22 +86,22 @@ class QueryBuilder implements QueryBuilderInterface
     public function insert(array $contents, SQLBuilderInterface $builder = null)
     {
         if (empty($contents)) {
-            $this->giThrowIsEmptyException('Insert contents');
+            $this->getGiServiceLocator()->throwIsEmptyException('Insert contents');
         }
 
         if (!($builder instanceof SQLBuilderInterface)) {
             $builder = $this->getBuilder()->setTemplate(static::INSERT_TEMPLATE);
         }
 
-        $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
+        $table = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($this->getTable()->getFullName());
         $builder->setParam('table', $table->toString());
 
         $fieldList = ($builder instanceof SQLBuilderInterface)
-            ? $this->giGetSqlFactory()->createFieldCortege($contents, $this->getTable())
-            : $this->giGetSqlFactory()->createFieldCortege($contents);
+            ? $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldCortege($contents, $this->getTable())
+            : $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldCortege($contents);
         $builder->setParam('field-list', $fieldList->toString());
 
-        $paramList = $this->giGetSqlFactory()->createParamCortege($contents);
+        $paramList = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createParamCortege($contents);
         $builder->setParam('param-list', $paramList->toString());
 
         return $builder->toString();
@@ -116,19 +116,19 @@ class QueryBuilder implements QueryBuilderInterface
     public function delete(array $contents, SQLBuilderInterface $builder = null)
     {
         if (empty($contents)) {
-            $this->giThrowIsEmptyException('Delete contents');
+            $this->getGiServiceLocator()->throwIsEmptyException('Delete contents');
         }
 
         if (!($builder instanceof SQLBuilderInterface)) {
             $builder = $this->getBuilder()->setTemplate(static::DELETE_TEMPLATE);
         }
 
-        $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
+        $table = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($this->getTable()->getFullName());
         $builder->setParam('table', $table->toString());
 
         $predicateList = ($builder instanceof SQLBuilderInterface)
-            ? $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
-            : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
+            ? $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
+            : $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($contents);
         $builder->setParam('predicate-list', $predicateList->toString());
 
         return $builder->toString();
@@ -144,28 +144,28 @@ class QueryBuilder implements QueryBuilderInterface
     public function update(array $values, array $conditions, SQLBuilderInterface $builder = null)
     {
         if (empty($values)) {
-            $this->giThrowIsEmptyException('Assigned values');
+            $this->getGiServiceLocator()->throwIsEmptyException('Assigned values');
         }
 
         if (empty($conditions)) {
-            $this->giThrowIsEmptyException('Search conditions');
+            $this->getGiServiceLocator()->throwIsEmptyException('Search conditions');
         }
 
         if (!($builder instanceof SQLBuilderInterface)) {
             $builder = $this->getBuilder()->setTemplate(static::UPDATE_TEMPLATE);
         }
 
-        $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
+        $table = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($this->getTable()->getFullName());
         $builder->setParam('table', $table->toString());
 
         $assignList = ($builder instanceof SQLBuilderInterface)
-            ? $this->giGetSqlFactory()->createAssignCortege($values, $this->getTable())
-            : $this->giGetSqlFactory()->createAssignCortege($values);
+            ? $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAssignCortege($values, $this->getTable())
+            : $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAssignCortege($values);
         $builder->setParam('assign-list', $assignList->toString());
 
         $predicateList = ($builder instanceof SQLBuilderInterface)
-            ? $this->giGetSqlFactory()->createAndAssignPredicates($conditions, $this->getTable())
-            : $this->giGetSqlFactory()->createAndAssignPredicates($conditions);
+            ? $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($conditions, $this->getTable())
+            : $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($conditions);
         $builder->setParam('predicate-list', $predicateList->toString());
 
         return $builder->toString();
@@ -187,13 +187,13 @@ class QueryBuilder implements QueryBuilderInterface
             $builder->addOrder($order);
         }
 
-        $table = $this->giGetSqlFactory()->createFieldExpression($this->getTable()->getFullName());
+        $table = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($this->getTable()->getFullName());
         $builder->setParam('table', $table->toString());
 
         if (!empty($contents)) {
             $predicateList = ($builder instanceof SQLBuilderInterface)
-                ? $this->giGetSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
-                : $this->giGetSqlFactory()->createAndAssignPredicates($contents);
+                ? $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($contents, $this->getTable())
+                : $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($contents);
             $builder->setParam('predicate-list', $predicateList->toString());
         }
 

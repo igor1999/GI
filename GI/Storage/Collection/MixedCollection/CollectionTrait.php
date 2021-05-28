@@ -101,7 +101,7 @@ trait CollectionTrait
         if (empty($found)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowNotFoundException('Element of collection');
+            $me->getGiServiceLocator()->throwNotFoundException('Element of collection');
         }
 
         return array_shift($found);
@@ -137,7 +137,7 @@ trait CollectionTrait
         if (empty($found)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowNotFoundException('Element of collection');
+            $me->getGiServiceLocator()->throwNotFoundException('Element of collection');
         }
 
         return array_shift($found);
@@ -233,7 +233,7 @@ trait CollectionTrait
                 $valueAsString = $value->toString();
             } else {
                 $valueAsString = null;
-                $this->giThrowInvalidFormatException('Item', $key, 'string convertable');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'string convertable');
             }
 
             return $key . $pairGlue . $valueAsString;
@@ -276,7 +276,7 @@ trait CollectionTrait
                 $valueAsString = $value->toString();
             } else {
                 $valueAsString = null;
-                $this->giThrowInvalidFormatException('Item', $key, 'string convertable');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'string convertable');
             }
 
             return $valueAsString;
@@ -316,7 +316,7 @@ trait CollectionTrait
         $items = [];
         foreach ($this->items as $key => $item) {
             if (is_array($item) || is_object($item)) {
-                $this->giThrowInvalidFormatException('Item', $key, 'float convertable');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'float convertable');
             }
 
             $items[$key] = (float)$item;
@@ -333,7 +333,7 @@ trait CollectionTrait
         $items = [];
         foreach ($this->items as $key => $item) {
             if (is_array($item) || is_object($item)) {
-                $this->giThrowInvalidFormatException('Item', $key, 'float convertable');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'float convertable');
             }
 
             $items[$key] = (int)$item;
@@ -352,7 +352,7 @@ trait CollectionTrait
             if ($item instanceof StringConvertableInterface) {
                 $items[$key] = $item->toString();
             } elseif (is_array($item) || is_object($item)) {
-                $this->giThrowInvalidFormatException('Item', $key, 'float convertable');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Item', $key, 'float convertable');
             } else {
                 $items[$key] = (string)$item;
             }

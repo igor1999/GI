@@ -155,8 +155,8 @@ class CellList extends AbstractImmutable implements CellListInterface
     protected function createCell($content = '', bool $header = false)
     {
         return $header
-            ? $this->giGetDOMFactory()->createTH($content)
-            : $this->giGetDOMFactory()->createTD($content);
+            ? $this->getGiServiceLocator()->getDOMFactory()->createTH($content)
+            : $this->getGiServiceLocator()->getDOMFactory()->createTD($content);
     }
 
     /**

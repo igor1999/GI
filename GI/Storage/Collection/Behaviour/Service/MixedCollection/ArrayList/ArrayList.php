@@ -43,7 +43,7 @@ class ArrayList extends AbstractService implements ArrayListInterface
      */
     protected function createDefaultOption()
     {
-        return $this->giGetStorageFactory()->getOptionFactory()->createMixedArrayList();
+        return $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createMixedArrayList();
     }
 
     /**

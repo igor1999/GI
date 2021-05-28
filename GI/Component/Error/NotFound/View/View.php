@@ -38,7 +38,7 @@ class View extends Base implements ViewInterface
     {
         parent::__construct();
 
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }

@@ -55,7 +55,7 @@ abstract class AbstractTree extends Base implements TreeInterface
     protected function getFormatter()
     {
         if (!($this->formatter instanceof FormatterInterface)) {
-            $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+            $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
         }
 
         return $this->formatter;
@@ -69,7 +69,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createUriPath(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createUriPath(
+        return $this->getGiServiceLocator()->getRouteFactory()->createUriPath(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -82,7 +82,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createUriPathWithMethodDelete(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createUriPathWithMethodDelete(
+        return $this->getGiServiceLocator()->getRouteFactory()->createUriPathWithMethodDelete(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -95,7 +95,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createUriPathWithMethodGet(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createUriPathWithMethodGet(
+        return $this->getGiServiceLocator()->getRouteFactory()->createUriPathWithMethodGet(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -108,7 +108,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createUriPathWithMethodPost(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createUriPathWithMethodPost(
+        return $this->getGiServiceLocator()->getRouteFactory()->createUriPathWithMethodPost(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -121,7 +121,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createUriPathWithMethodPut(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createUriPathWithMethodPut(
+        return $this->getGiServiceLocator()->getRouteFactory()->createUriPathWithMethodPut(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }

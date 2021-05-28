@@ -17,14 +17,20 @@
  */
 namespace GI\Pattern\Validation;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
+
 trait ValidationTrait
 {
     /**
      * @return static
+     * @throws \Exception
      */
     public function validateProperties()
     {
-        $this->giValidate();
+        /** @var ServiceLocatorAwareTrait $me */
+        $me = $this;
+
+        $me->getGiServiceLocator()->validate();
 
         return $this;
     }

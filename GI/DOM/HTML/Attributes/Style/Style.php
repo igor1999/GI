@@ -146,7 +146,7 @@ class Style extends AbstractAttributes implements StyleInterface
      */
     protected function createEscaper()
     {
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createCSS();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createCSS();
 
         return $this;
     }

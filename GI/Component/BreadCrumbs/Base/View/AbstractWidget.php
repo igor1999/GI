@@ -57,7 +57,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function validateBreadCrumbsTrack()
     {
         if (!($this->getBreadCrumbsTrack() instanceof BreadCrumbsTrackInterface)) {
-            $this->giThrowNotSetException('Bread crumbs track');
+            $this->getGiServiceLocator()->throwNotSetException('Bread crumbs track');
         }
     }
 
@@ -84,7 +84,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getNode(string $id)
     {
         if (!$this->hasNode($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->nodes[$id];
@@ -116,7 +116,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function createLink(BreadCrumbsNodeInterface $item, bool $last)
     {
-        $link = $this->giGetDOMFactory()->createHyperlink($item->getLink(), $item->getTitle());
+        $link = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink($item->getLink(), $item->getTitle());
 
         if ($last && !$this->getContext()->isLastItemIsLink()) {
             $link->setHrefToMock();

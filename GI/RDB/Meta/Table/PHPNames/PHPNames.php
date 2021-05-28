@@ -64,7 +64,7 @@ class PHPNames implements PHPNamesInterface
      */
     public function getSchemaNamespace()
     {
-        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst($this->getTable()->getSchema());
+        return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst($this->getTable()->getSchema());
     }
 
     /**
@@ -72,7 +72,7 @@ class PHPNames implements PHPNamesInterface
      */
     public function getLocalNamespace()
     {
-        return $this->giGetCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst(
+        return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertUnderlineToCamelCaseUpperFirst(
             $this->getTable()->getLocalName()
         );
     }
@@ -196,7 +196,7 @@ class PHPNames implements PHPNamesInterface
     {
         $getter = $this->getAlias();
 
-        return $this->giGetPSRFormatBuilder()->buildGet($getter);
+        return $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildGet($getter);
     }
 
     /**
@@ -206,7 +206,7 @@ class PHPNames implements PHPNamesInterface
     {
         $creator = $this->getAlias();
 
-        return $this->giGetPSRFormatBuilder()->buildCreate($creator);
+        return $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder()->buildCreate($creator);
     }
 
     /**

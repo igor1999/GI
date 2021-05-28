@@ -39,7 +39,7 @@ class View extends Base implements ViewInterface
     {
         parent::__construct();
 
-        $this->getterView = $this->giGetDi(GetterViewInterface::class, GetterView::class);
+        $this->getterView = $this->getGiServiceLocator()->getDependency(GetterViewInterface::class, GetterView::class);
     }
 
     /**

@@ -51,7 +51,7 @@ abstract class AbstractTemplate implements TemplateInterface
     public function get(string $id)
     {
         if (!$this->has($id)) {
-            $this->giThrowNotInScopeException($id);
+            $this->getGiServiceLocator()->throwNotInScopeException($id);
         }
 
         return $this->items[$id];
@@ -90,7 +90,7 @@ abstract class AbstractTemplate implements TemplateInterface
     protected function createColumn(string $headerCellClass, string $bodyCellClass)
     {
         try {
-            $result = $this->giGetDi(ColumnInterface::class, null, [$headerCellClass, $bodyCellClass]);
+            $result = $this->getGiServiceLocator()->getDependency(ColumnInterface::class, null, [$headerCellClass, $bodyCellClass]);
         } catch (\Exception $exception) {
             $result = new Column($headerCellClass, $bodyCellClass);
         }

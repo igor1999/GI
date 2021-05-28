@@ -75,7 +75,7 @@ class PasswordsIdentical extends AbstractSimple implements PasswordsIdenticalInt
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_PASSWORDS_IDENTICAL
         );
     }

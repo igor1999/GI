@@ -60,16 +60,16 @@ class Builder extends AbstractPrefix implements BuilderInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $prefix = $this->giGetPSRFormatParser()->parseWithPrefixBuild($method);
+            $prefix = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixBuild($method);
         } catch (\Exception $exception) {
             $prefix = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $this->validatePrefix($prefix, $method);
 
         if (empty($arguments)) {
-            $this->giThrowNotGivenException('Source for building');
+            $this->getGiServiceLocator()->throwNotGivenException('Source for building');
         }
         
         return $this->build(array_shift($arguments), lcfirst($prefix));

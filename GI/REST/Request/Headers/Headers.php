@@ -51,10 +51,10 @@ class Headers extends Closable implements HeadersInterface
     public function __construct(array $items = null)
     {
         if (!is_array($items)) {
-            $items = $this->giGetServiceLocator()->isCLI() ? [] : getallheaders();
+            $items = $this->getGiServiceLocator()->isCLI() ? [] : getallheaders();
         }
 
-        $option = $this->giGetStorageFactory()
+        $option = $this->getGiServiceLocator()->getStorageFactory()
             ->getOptionFactory()
             ->createStringHashSet()
             ->setKeyFormatToHyphenUcFirst();

@@ -93,15 +93,15 @@ class Builder implements BuilderInterface
         $this->ormNamespace  = $ormNamespace;
         $this->baseNamespace = $baseNamespace;
 
-        $this->recordClassView = $this->giGetDi(RecordClassViewInterface::class, RecordClassView::class);
+        $this->recordClassView = $this->getGiServiceLocator()->getDependency(RecordClassViewInterface::class, RecordClassView::class);
 
-        $this->recordInterfaceView = $this->giGetDi(
+        $this->recordInterfaceView = $this->getGiServiceLocator()->getDependency(
             RecordInterfaceViewInterface::class, RecordInterfaceView::class
         );
 
-        $this->setClassView = $this->giGetDi(SetClassViewInterface::class, SetClassView::class);
+        $this->setClassView = $this->getGiServiceLocator()->getDependency(SetClassViewInterface::class, SetClassView::class);
 
-        $this->setInterfaceView = $this->giGetDi(
+        $this->setInterfaceView = $this->getGiServiceLocator()->getDependency(
             SetInterfaceViewInterface::class, SetInterfaceView::class
         );
     }

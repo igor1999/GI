@@ -85,7 +85,7 @@ class Option implements OptionInterface
 
         $this->hydrate($contents);
 
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
     }
 
     /**
@@ -212,7 +212,7 @@ class Option implements OptionInterface
     protected function createArguments(array $arguments = [])
     {
         try {
-            $result = $this->giGetDi(ArgumentListInterface::class, null, [$arguments]);
+            $result = $this->getGiServiceLocator()->getDependency(ArgumentListInterface::class, null, [$arguments]);
         } catch (\Exception $exception) {
             $result = new ArgumentList($arguments);
         }

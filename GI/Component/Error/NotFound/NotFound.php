@@ -39,7 +39,7 @@ class NotFound extends AbstractError implements NotFoundInterface
     {
         parent::__construct($message);
 
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
     }
 
     /**

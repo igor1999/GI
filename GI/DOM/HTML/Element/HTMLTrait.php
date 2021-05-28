@@ -63,7 +63,7 @@ trait HTMLTrait
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(AttributesInterface::class, Attributes::class);
+        $this->attributes = $this->getGiServiceLocator()->getDependency(AttributesInterface::class, Attributes::class);
 
         return $this;
     }
@@ -81,7 +81,7 @@ trait HTMLTrait
      */
     protected function createName()
     {
-        $this->name = $this->giGetDi(NameInterface::class, Name::class);
+        $this->name = $this->getGiServiceLocator()->getDependency(NameInterface::class, Name::class);
 
         return $this;
     }
@@ -99,7 +99,7 @@ trait HTMLTrait
      */
     protected function createClasses()
     {
-        $this->classes = $this->giGetDi(ClassesInterface::class, Classes::class);
+        $this->classes = $this->getGiServiceLocator()->getDependency(ClassesInterface::class, Classes::class);
 
         return $this;
     }
@@ -117,7 +117,7 @@ trait HTMLTrait
      */
     protected function createStyle()
     {
-        $this->style = $this->giGetDi(StyleInterface::class, Style::class);
+        $this->style = $this->getGiServiceLocator()->getDependency(StyleInterface::class, Style::class);
 
         return $this;
     }

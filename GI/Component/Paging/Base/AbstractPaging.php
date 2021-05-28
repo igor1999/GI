@@ -43,7 +43,7 @@ abstract class AbstractPaging extends AbstractComponent implements PagingInterfa
         if ($viewModel instanceof ViewModelInterface) {
             $this->viewModel = $viewModel;
         } else {
-            $this->viewModel = $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+            $this->viewModel = $this->getGiServiceLocator()->getDependency(ViewModelInterface::class, ViewModel::class);
         }
 
         $this->createPagingModel(

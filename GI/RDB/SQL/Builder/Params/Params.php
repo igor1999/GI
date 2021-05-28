@@ -72,7 +72,7 @@ class Params extends Alterable implements ParamsInterface
         $template = $this->getBuilder()->getTemplate();
 
         foreach ($this->getItems() as $param => $value) {
-            $placeholder = $this->giGetSqlFactory()->createPlaceholderExpression($param);
+            $placeholder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createPlaceholderExpression($param);
 
             $template = str_replace($placeholder->toString(), $value, $template);
         }

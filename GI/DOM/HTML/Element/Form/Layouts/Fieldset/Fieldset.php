@@ -35,7 +35,7 @@ class Fieldset extends BaseFieldset implements FieldsetInterface
     {
         parent::__construct($title);
 
-        $this->layout = $this->giGetDOMFactory()->createLayout();
+        $this->layout = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
     }
 
     /**

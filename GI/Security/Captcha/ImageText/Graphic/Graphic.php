@@ -36,7 +36,7 @@ class Graphic extends AbstractGraphic implements GraphicInterface
      */
     protected function createContext()
     {
-        $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
 
         return $this;
     }

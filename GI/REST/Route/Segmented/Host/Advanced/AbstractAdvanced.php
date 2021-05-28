@@ -41,7 +41,7 @@ abstract class AbstractAdvanced extends Host implements AdvancedInterface
     {
         parent::__construct($template, $constraints);
 
-        $this->chain = $this->giGetRouteFactory()->createWebAndChain();
+        $this->chain = $this->getGiServiceLocator()->getRouteFactory()->createWebAndChain();
     }
 
     /**

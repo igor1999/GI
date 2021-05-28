@@ -54,7 +54,7 @@ class Errors implements ErrorsInterface
     public function get(string $throwable)
     {
         if (!$this->has($throwable)) {
-            $this->giThrowNotInScopeException($throwable);
+            $this->getGiServiceLocator()->throwNotInScopeException($throwable);
         }
 
         return $this->items[$throwable];
@@ -137,7 +137,7 @@ class Errors implements ErrorsInterface
     protected function createThrowableErrors(string $throwable)
     {
         try {
-            $result = $this->giGetDi(ThrowableErrorsInterface::class, null, [$throwable]);
+            $result = $this->getGiServiceLocator()->getDependency(ThrowableErrorsInterface::class, null, [$throwable]);
         } catch (\Exception $exception) {
             $result = new ThrowableErrors($throwable);
         }

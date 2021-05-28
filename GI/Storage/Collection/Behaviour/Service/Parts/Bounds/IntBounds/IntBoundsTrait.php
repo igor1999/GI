@@ -53,7 +53,7 @@ trait IntBoundsTrait
         $min = $this->getMin();
 
         if (is_int($min) && ($item < $min)) {
-            $this->giThrowInvalidMinimumException('Item', $item, $min);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Item', $item, $min);
         }
 
         return $this;
@@ -69,7 +69,7 @@ trait IntBoundsTrait
         $max = $this->getMax();
 
         if (is_int($max) && ($item > $max)) {
-            $this->giThrowInvalidMaximumException('Item', $item, $max);
+            $this->getGiServiceLocator()->throwInvalidMaximumException('Item', $item, $max);
         }
 
         return $this;

@@ -38,7 +38,7 @@ abstract class AbstractView extends Base implements ViewInterface
     protected function validateMessage()
     {
         if (empty($this->getMessage())) {
-            $this->giThrowIsEmptyException('Error message');
+            $this->getGiServiceLocator()->throwIsEmptyException('Error message');
         }
     }
 }

@@ -17,13 +17,19 @@
  */
 namespace GI\Pattern\ArrayExchange;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
+
 trait ExtractionTrait
 {
     /**
      * @return array
+     * @throws \Exception
      */
     public function extract()
     {
-        return $this->giExtract();
+        /** @var ServiceLocatorAwareTrait $me */
+        $me = $this;
+
+        return $me->getGiServiceLocator()->extract();
     }
 }

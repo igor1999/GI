@@ -78,11 +78,11 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
 
-        $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
     }
 
     /**
@@ -165,7 +165,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function createOption(SelectionItemInterface $item)
     {
-        $option = $this->giGetDOMFactory()->createDiv();
+        $option = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
 
         $option->getChildNodes()->set($item->getText());
 
@@ -184,7 +184,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
 
@@ -199,7 +199,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getSelectionHolder()
     {
         if (!($this->selectionHolder instanceof HiddenInterface)) {
-            $this->selectionHolder = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+            $this->selectionHolder = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden(
                 $this->getName(), $this->getSelection()->getSelectedValue()
             );
         }

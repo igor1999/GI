@@ -47,8 +47,8 @@ abstract class AbstractJob implements JobInterface
      */
     public function __construct(string $id = '')
     {
-        if ($this->giGetServiceLocator()->isCLI()) {
-            $this->id = empty($id) ? $this->giGetCommandLine()->getJob() : $id;
+        if ($this->getGiServiceLocator()->isCLI()) {
+            $this->id = empty($id) ? $this->getGiServiceLocator()->getCommandLine()->getJob() : $id;
 
             try {
                 $this->getDataContainer();
@@ -59,7 +59,7 @@ abstract class AbstractJob implements JobInterface
             $this->start();
         } else {
             if (empty($id)) {
-                $this->giThrowIsEmptyException('Job id');
+                $this->getGiServiceLocator()->throwIsEmptyException('Job id');
             }
 
             $this->id = $id;
@@ -116,7 +116,7 @@ abstract class AbstractJob implements JobInterface
      */
     protected function save()
     {
-        $this->giGetServiceLocator()->saveSession();
+        $this->getGiServiceLocator()->saveSession();
 
         return $this;
     }
@@ -126,7 +126,7 @@ abstract class AbstractJob implements JobInterface
      */
     protected function restart()
     {
-        $this->giGetServiceLocator()->getCommandLine()->getExecutionProcessor()->startBackgroundProcess();
+        $this->getGiServiceLocator()->getCommandLine()->getExecutionProcessor()->startBackgroundProcess();
 
         return $this;
     }

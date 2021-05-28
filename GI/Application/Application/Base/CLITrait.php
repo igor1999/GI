@@ -17,6 +17,8 @@
  */
 namespace GI\Application\Application\Base;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
+
 use GI\CLI\Colorizing\ColorizingInterface;
 
 trait CLITrait
@@ -26,7 +28,10 @@ trait CLITrait
      */
     protected function handleDefault()
     {
-        echo $this->giGetCLIFactory()->createColorizing()->colorize(
+        /** @var ServiceLocatorAwareTrait $me */
+        $me = $this;
+
+        echo $me->getGiServiceLocator()->getCLIFactory()->createColorizing()->colorize(
             $this->getCLIDefaultMessage(),
             $this->getCLIForegroundColor(),
             $this->getCLIBackgroundColor()

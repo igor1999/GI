@@ -34,15 +34,15 @@ abstract class AbstractCollectionFilter extends AbstractFilter implements Collec
     protected function validateInput()
     {
         if (!is_object($this->getInput())) {
-            $this->giThrowInvalidTypeException('Filter collection input', $this->getInput(), 'object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Filter collection input', $this->getInput(), 'object');
         }
 
         if (!$this->getInputMethodsMeta()->has(static::ITEMS_GETTER)) {
-            $this->giThrowNotFoundException('Filter collection items getter', static::ITEMS_GETTER);
+            $this->getGiServiceLocator()->throwNotFoundException('Filter collection items getter', static::ITEMS_GETTER);
         }
 
         if (!is_array($this->getItems())) {
-            $this->giThrowInvalidTypeException('Filter collection items', $this->getItems(), 'array');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Filter collection items', $this->getItems(), 'array');
         }
 
         return $this;
@@ -54,7 +54,7 @@ abstract class AbstractCollectionFilter extends AbstractFilter implements Collec
      */
     protected function getInputMethodsMeta()
     {
-        return $this->giGetClassMeta($this->getInput())->getMethods();
+        return $this->getGiServiceLocator()->getClassMeta($this->getInput())->getMethods();
     }
 
     /**

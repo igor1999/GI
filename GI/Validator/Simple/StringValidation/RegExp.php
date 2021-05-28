@@ -76,6 +76,6 @@ class RegExp extends AbstractSimple implements RegExpInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::REGEXP);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::REGEXP);
     }
 }

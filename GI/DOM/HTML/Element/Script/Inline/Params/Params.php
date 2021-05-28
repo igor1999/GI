@@ -40,7 +40,7 @@ class Params extends Alterable implements ParamsInterface
     {
         parent::__construct();
 
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createJS();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createJS();
     }
 
     /**

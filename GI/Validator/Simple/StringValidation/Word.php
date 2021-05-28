@@ -41,6 +41,6 @@ class Word extends AbstractSimple implements WordInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::WORD);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::WORD);
     }
 }

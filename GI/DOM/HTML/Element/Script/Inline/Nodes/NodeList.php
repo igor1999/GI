@@ -171,7 +171,7 @@ class NodeList extends AbstractImmutable implements NodeListInterface
     protected function createNode(string $node)
     {
         try {
-            $result = $this->giGetDi(NodeInterface::class, null, [$node]);
+            $result = $this->getGiServiceLocator()->getDependency(NodeInterface::class, null, [$node]);
         } catch (\Exception $e) {
             $result = new ScriptNode($node);
         }

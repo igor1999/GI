@@ -61,7 +61,7 @@ class CSRF implements CSRFInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->setExpirationTime($context->getExpirationTime());
         } catch (\Exception $e) {
             $this->setExpirationTime(static::DEFAULT_EXPIRATION_TIME);
@@ -116,7 +116,7 @@ class CSRF implements CSRFInterface
     protected function setExpirationTime(int $expirationTime)
     {
         if ($expirationTime <= 0) {
-            $this->giThrowInvalidMinimumException('Token expiration time', $expirationTime, '1');
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Token expiration time', $expirationTime, '1');
         }
 
         $this->expirationTime = $expirationTime;
@@ -143,7 +143,7 @@ class CSRF implements CSRFInterface
      */
     protected function generateId()
     {
-        $this->token = $this->giGetRandomHashGenerator()->create();
+        $this->token = $this->getGiServiceLocator()->getUtilites()->getRandomHashGenerator()->create();
 
         return $this;
     }

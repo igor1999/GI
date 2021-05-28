@@ -150,7 +150,7 @@ class Items extends AbstractImmutable implements ItemsInterface
      */
     protected function createItem(string $text)
     {
-        return $this->giGetDOMFactory()->createLI($text);
+        return $this->getGiServiceLocator()->getDOMFactory()->createLI($text);
     }
 
     /**

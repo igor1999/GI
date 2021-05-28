@@ -70,13 +70,13 @@ abstract class AbstractRenderer implements RendererInterface
     {
         $this->setTemplateByClass(static::class);
 
-        $this->escaperContainer = $this->giCreateEscaperContainer();
+        $this->escaperContainer = $this->getGiServiceLocator()->getUtilites()->createEscaperContainer();
 
-        $this->markupTextProcessor = $this->giCreateMarkupTextProcessor();
+        $this->markupTextProcessor = $this->getGiServiceLocator()->getUtilites()->createMarkupTextProcessor();
 
-        $this->urlBuilder = $this->giCreateURLBuilder();
+        $this->urlBuilder = $this->getGiServiceLocator()->createURLBuilder();
 
-        $this->params = $this->giGetStorageFactory()->createMixedHashSetAlterable();
+        $this->params = $this->getGiServiceLocator()->getStorageFactory()->createMixedHashSetAlterable();
     }
 
     /**
@@ -109,7 +109,7 @@ abstract class AbstractRenderer implements RendererInterface
             $relativePath = static::DEFAULT_RELATIVE_PATH;
         }
 
-        $this->setTemplate($this->giCreateClassDirChildFile($class, $relativePath));
+        $this->setTemplate($this->getGiServiceLocator()->createClassDirChildFile($class, $relativePath));
 
         return $this;
     }
@@ -135,7 +135,7 @@ abstract class AbstractRenderer implements RendererInterface
      */
     public function getDOMFactory()
     {
-        return $this->giGetDOMFactory();
+        return $this->getGiServiceLocator()->getDOMFactory();
     }
 
     /**
@@ -190,7 +190,7 @@ abstract class AbstractRenderer implements RendererInterface
         $this->getTemplate()->fireInexistence();
 
         if (!$this->getTemplate()->isFile()) {
-            $this->giThrowInvalidTypeException('View template', $this->getTemplate()->getPath(), 'file');
+            $this->getGiServiceLocator()->throwInvalidTypeException('View template', $this->getTemplate()->getPath(), 'file');
         }
 
         ob_start();

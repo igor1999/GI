@@ -68,7 +68,7 @@ abstract class AbstractInput implements InputInterface
     public function setPrompt($prompt = '')
     {
         if (!is_string($prompt) && !($prompt instanceof \Closure)) {
-            $this->giThrowInvalidTypeException('Prompt', gettype($prompt), 'string or Closure');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Prompt', gettype($prompt), 'string or Closure');
         }
 
         $this->prompt = $prompt;
@@ -201,7 +201,7 @@ abstract class AbstractInput implements InputInterface
                 $this->incAttempt()->read();
             } else {
                 $this->resetAttempt();
-                $this->giThrowCommonException($this->getValidator()->getFirstMessage());
+                $this->getGiServiceLocator()->throwCommonException($this->getValidator()->getFirstMessage());
             }
         } else {
             $this->resetAttempt();

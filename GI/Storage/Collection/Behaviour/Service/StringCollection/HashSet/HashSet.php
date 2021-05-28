@@ -46,7 +46,7 @@ class HashSet extends AbstractService implements HashSetInterface
      */
     protected function createDefaultOption()
     {
-        return $this->giGetStorageFactory()->getOptionFactory()->createStringHashSet();
+        return $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createStringHashSet();
     }
 
     /**

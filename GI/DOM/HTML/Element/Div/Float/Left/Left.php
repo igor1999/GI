@@ -41,7 +41,7 @@ class Left extends Div implements LeftInterface
      */
     protected function createStyle()
     {
-        $this->style = $this->giGetDi(StyleInterface::class, Style::class, [['float' => 'left']]);
+        $this->style = $this->getGiServiceLocator()->getDependency(StyleInterface::class, Style::class, [['float' => 'left']]);
 
         return $this;
     }

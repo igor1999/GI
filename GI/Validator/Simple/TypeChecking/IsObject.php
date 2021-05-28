@@ -38,7 +38,7 @@ class IsObject extends AbstractSimple implements IsObjectInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_OBJECT
         );
     }

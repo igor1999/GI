@@ -35,7 +35,7 @@ class DB2 extends AbstractPlatform implements DB2Interface
      */
     public function getColumnListQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -43,7 +43,7 @@ class DB2 extends AbstractPlatform implements DB2Interface
      */
     public function getTableListQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -51,7 +51,7 @@ class DB2 extends AbstractPlatform implements DB2Interface
      */
     public function getTableDetailQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -59,7 +59,7 @@ class DB2 extends AbstractPlatform implements DB2Interface
      */
     public function getTableParentReferencesQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 
     /**
@@ -67,6 +67,6 @@ class DB2 extends AbstractPlatform implements DB2Interface
      */
     public function getTableChildReferencesQuery()
     {
-        $this->giThrowCommonException('Option is not available');
+        $this->getGiServiceLocator()->throwCommonException('Option is not available');
     }
 }

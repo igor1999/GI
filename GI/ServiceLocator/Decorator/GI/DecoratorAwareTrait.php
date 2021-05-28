@@ -15,34 +15,30 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\ServiceLocator\Decorator\GI;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
 
-use GI\Security\CSRF\CSRFInterface;
-use GI\Security\Captcha\Factory\FactoryInterface as CaptchaFactoryInterface;
-
-trait SecurityAwareTrait
+trait DecoratorAwareTrait
 {
     /**
-     * @return CaptchaFactoryInterface
+     * @var DecoratorInterface
      */
-    protected function giGetCaptchaFactory()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
+    private $giServiceLocator;
 
-        return $me->giGetServiceLocator()->getCaptchaFactory(static::class);
-    }
 
     /**
-     * @return CSRFInterface
+     * @return DecoratorInterface
      */
-    protected function giCreateSecureCSRF()
+    public function getGiServiceLocator()
     {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
+        if (!($this->giServiceLocator instanceof DecoratorInterface)) {
+            /** @var BaseInterface $me */
+            $me = $this;
 
-        return $me->giGetServiceLocator()->createSecureCSRF(static::class);
+            $this->giServiceLocator = new Decorator($me->getCaller());
+        }
+
+        return $this->giServiceLocator;
     }
 }

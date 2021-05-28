@@ -42,7 +42,7 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
      */
     public function __construct()
     {
-       $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+       $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**
@@ -86,7 +86,7 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
     public function __call(string $method, array $arguments = [])
     {
         if (!method_exists($this->getMenuModel(), $method)) {
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         call_user_func_array([$this->getMenuModel(), $method], $arguments);

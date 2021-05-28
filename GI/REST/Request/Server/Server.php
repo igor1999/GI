@@ -62,7 +62,7 @@ class Server extends ClosableHashSet implements ServerInterface
             $contents = $_SERVER;
         }
 
-        $option = $this->giGetStorageFactory()
+        $option = $this->getGiServiceLocator()->getStorageFactory()
             ->getOptionFactory()
             ->createMixedHashSet()
             ->setKeyFormatToUnderlineUpperCase();
@@ -231,7 +231,7 @@ class Server extends ClosableHashSet implements ServerInterface
     */
     public function getDocumentRoot()
     {
-        return $this->giCreateFSODir($this->get('DOCUMENT_ROOT'));
+        return $this->getGiServiceLocator()->createFSODir($this->get('DOCUMENT_ROOT'));
     }
 
     /**

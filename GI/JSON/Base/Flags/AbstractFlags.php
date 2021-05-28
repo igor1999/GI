@@ -27,7 +27,7 @@ abstract class AbstractFlags extends AbstractUneditable implements FlagsInterfac
      */
     public function __construct()
     {
-        $option = $this->giGetStorageFactory()
+        $option = $this->getGiServiceLocator()->getStorageFactory()
             ->getOptionFactory()
             ->createBoolHashSet()
             ->setKeyFormatToUnderlineUpperCase();

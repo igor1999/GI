@@ -36,7 +36,7 @@ abstract class AbstractBreadCrumbs extends Base implements BreadCrumbsInterface
      */
     public function __construct()
     {
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

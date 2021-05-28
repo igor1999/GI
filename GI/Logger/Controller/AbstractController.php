@@ -45,7 +45,7 @@ abstract class AbstractController implements ControllerInterface
      */
     protected function createLogger()
     {
-        $this->logger = $this->giCreateLogger();
+        $this->logger = $this->getGiServiceLocator()->createLogger();
 
         return $this;
     }

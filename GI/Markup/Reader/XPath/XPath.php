@@ -48,7 +48,7 @@ class XPath implements XPathInterface
     {
         $this->reader = $reader;
 
-        $this->namespaces = $this->giGetStorageFactory()->createStringHashSetAlterable();
+        $this->namespaces = $this->getGiServiceLocator()->getStorageFactory()->createStringHashSetAlterable();
     }
 
     /**
@@ -106,7 +106,7 @@ class XPath implements XPathInterface
         $nodes = $xpath->query($this->query);
 
         if (!($nodes instanceof \DOMNodeList)) {
-            $this->giThrowInvalidFormatException('XPath Query', $this->query, 'valid XPath query');
+            $this->getGiServiceLocator()->throwInvalidFormatException('XPath Query', $this->query, 'valid XPath query');
         }
 
         return  $nodes;

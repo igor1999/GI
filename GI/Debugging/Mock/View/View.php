@@ -33,9 +33,9 @@ class View extends Base implements ViewInterface
      */
     public function createImageSource()
     {
-        $source = $this->giCreateClassDirChildFile(static::class, static::PATH_TO_IMAGE);
+        $source = $this->getGiServiceLocator()->createClassDirChildFile(static::class, static::PATH_TO_IMAGE);
 
-        return $this->giGetFromFileSourceMaker()->create($source);
+        return $this->getGiServiceLocator()->getUtilites()->getFromFile()->create($source);
     }
 
     /**

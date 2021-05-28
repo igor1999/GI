@@ -38,7 +38,7 @@ class YesNo extends AbstractSet implements YesNoInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createYesNo();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createYesNo();
     }
 
     /**

@@ -50,7 +50,7 @@ abstract class AbstractTree extends Base implements TreeInterface
     protected function getFormatter()
     {
         if (!($this->formatter instanceof FormatterInterface)) {
-            $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+            $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
         }
 
         return $this->formatter;
@@ -64,7 +64,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createCLI(string $template, ConstraintsInterface $constraints = null)
     {
-        return $this->giGetRouteFactory()->createCLI(
+        return $this->getGiServiceLocator()->getRouteFactory()->createCLI(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }

@@ -46,7 +46,7 @@ class Logger implements LoggerInterface
      */
     public function __construct()
     {
-        $this->view = $this->giGetDi(ViewInterface::class,View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class,View::class);
 
         $this->createLogFiles();
     }
@@ -74,9 +74,9 @@ class Logger implements LoggerInterface
     protected function createLogFiles()
     {
         try {
-            $this->logFiles = $this->giGetDi(LogFilesHashSetInterface::class);
+            $this->logFiles = $this->getGiServiceLocator()->getDependency(LogFilesHashSetInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Log files');
+            $this->getGiServiceLocator()->throwDependencyException('Log files');
         }
 
         return $this;

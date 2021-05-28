@@ -51,7 +51,7 @@ abstract class AbstractContainer implements ContainerInterface
     protected function createNode(string $id, NodeInterface $parent = null)
     {
         try {
-            $result = $this->giGetDi(NodeInterface::class, null, [$id, $parent]);
+            $result = $this->getGiServiceLocator()->getDependency(NodeInterface::class, null, [$id, $parent]);
         } catch (\Exception $e) {
             $result = new Node($id, $parent);
         }
@@ -88,7 +88,7 @@ abstract class AbstractContainer implements ContainerInterface
                 $this->set($node);
                 $this->createContents($node, $value);
             } else {
-                $this->giThrowInvalidFormatException('Node', $key, 'string/array');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Node', $key, 'string/array');
             }
         }
 
@@ -104,13 +104,13 @@ abstract class AbstractContainer implements ContainerInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $key = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+            $key = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
         } catch (\Exception $exception) {
             $key = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
-        $key = $this->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+        $key = $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
 
         return $this->get($key);
     }
@@ -132,7 +132,7 @@ abstract class AbstractContainer implements ContainerInterface
     public function get(string $key)
     {
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->nodes[$key];

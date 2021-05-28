@@ -37,7 +37,7 @@ class Checkbox extends AbstractSet implements CheckboxInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createAlterableMulti();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createAlterableMulti();
 
         $this->options->setMany($options);
     }

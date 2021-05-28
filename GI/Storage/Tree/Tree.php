@@ -56,7 +56,7 @@ class Tree implements TreeInterface
         }
 
         if (empty($key)) {
-            $this->giThrowIsEmptyException('Keys array');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys array');
         }
 
         return $key;
@@ -77,7 +77,7 @@ class Tree implements TreeInterface
             $node = $this->getLocally($localKey);
 
             if (!($node instanceof TreeInterface)) {
-                $this->giThrowNotInScopeException(implode(static::KEY_SEPARATOR, $keys));
+                $this->getGiServiceLocator()->throwNotInScopeException(implode(static::KEY_SEPARATOR, $keys));
             }
 
             $result = $node->findNodeRecursive($keys);
@@ -123,7 +123,7 @@ class Tree implements TreeInterface
     public function getLocally($key)
     {
         if (!$this->hasLocally($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->nodes[$key];

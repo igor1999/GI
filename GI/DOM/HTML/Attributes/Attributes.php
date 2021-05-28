@@ -111,7 +111,7 @@ class Attributes extends AbstractAttributes implements AttributesInterface
      */
     protected function createEscaper()
     {
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createHTMLAttribute();
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createHTMLAttribute();
 
         return $this;
     }

@@ -53,7 +53,7 @@ class ClassDir extends FSODir implements ClassDirInterface
      */
     protected function createDir(string $class)
     {
-        return dirname($this->giGetClassMeta($class)->getReflection()->getFileName());
+        return dirname($this->getGiServiceLocator()->getClassMeta($class)->getReflection()->getFileName());
     }
 
     /**

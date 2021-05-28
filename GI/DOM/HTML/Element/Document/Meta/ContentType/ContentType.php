@@ -53,7 +53,7 @@ class ContentType extends Meta implements ContentTypeInterface
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(
+        $this->attributes = $this->getGiServiceLocator()->getDependency(
             AttributesInterface::class,
             Attributes::class,
             [['http-equiv' => 'content-type', 'content' => $this->contentType]]

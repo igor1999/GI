@@ -159,7 +159,7 @@ class OptionList extends AbstractImmutable implements OptionListInterface
      */
     protected function createOption(string $value = '', string $text = '', bool $selected = false)
     {
-        return $this->giGetDOMFactory()->createOption($value, $text, $selected);
+        return $this->getGiServiceLocator()->getDOMFactory()->createOption($value, $text, $selected);
     }
 
     /**

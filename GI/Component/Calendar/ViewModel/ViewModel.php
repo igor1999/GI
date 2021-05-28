@@ -49,7 +49,7 @@ class ViewModel extends AbstractViewModel implements ViewModelInterface
     {
         parent::__construct();
 
-        $this->filter = $this->giGetDi(FilterInterface::class, Filter::class);
+        $this->filter = $this->getGiServiceLocator()->getDependency(FilterInterface::class, Filter::class);
 
         $this->setViewModelName('calendar');
 

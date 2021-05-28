@@ -52,7 +52,7 @@ abstract class AbstractTree extends Base implements TreeInterface
     protected function getFormatter()
     {
         if (!($this->formatter instanceof FormatterInterface)) {
-            $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+            $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
         }
 
         return $this->formatter;
@@ -66,7 +66,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createHost(string $template, ConstraintsInterface $constraints)
     {
-        return $this->giGetRouteFactory()->createHost(
+        return $this->getGiServiceLocator()->getRouteFactory()->createHost(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -79,7 +79,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createHostWithHTTP(string $template, ConstraintsInterface $constraints)
     {
-        return $this->giGetRouteFactory()->createHostWithHTTP(
+        return $this->getGiServiceLocator()->getRouteFactory()->createHostWithHTTP(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }
@@ -92,7 +92,7 @@ abstract class AbstractTree extends Base implements TreeInterface
      */
     protected function createHostWithHTTPS(string $template, ConstraintsInterface $constraints)
     {
-        return $this->giGetRouteFactory()->createHostWithHTTPS(
+        return $this->getGiServiceLocator()->getRouteFactory()->createHostWithHTTPS(
             $this->createRouteTemplate($template), $this->createRouteConstraints($constraints)
         );
     }

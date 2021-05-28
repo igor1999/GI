@@ -78,7 +78,7 @@ abstract class AbstractSet implements SetInterface
     public function getIndexList()
     {
         if (!($this->indexList instanceof IndexCollectionInterface)) {
-            $this->indexList = $this->giGetDi(
+            $this->indexList = $this->getGiServiceLocator()->getDependency(
                 IndexCollectionInterface::class, IndexCollection::class, [$this]
             );
         }
@@ -119,7 +119,7 @@ abstract class AbstractSet implements SetInterface
     {
         $this->clean();
 
-        $methodReflection = $this->giGetClassMeta($this->getItemClass())->getMethods()->get(__FUNCTION__);
+        $methodReflection = $this->getGiServiceLocator()->getClassMeta($this->getItemClass())->getMethods()->get(__FUNCTION__);
 
         foreach ($contents as $itemContent) {
             $methodReflection->execute($this->add(), [$itemContent]);
@@ -180,7 +180,7 @@ abstract class AbstractSet implements SetInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];
@@ -322,28 +322,28 @@ abstract class AbstractSet implements SetInterface
     {
         if (!is_a($proxyClass, SetInterface::class, true)
                 && !is_a($proxyClass, RecordInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Proxy class', $proxyClass, 'SetInterface or RecordInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Proxy class', $proxyClass, 'SetInterface or RecordInterface');
         }
 
         $joinFields = $this->getProxyJoinFields($proxyClass);
 
         if (empty($joinFields)) {
-            $this->giThrowNotFoundException('Join fields with proxy class', $proxyClass);
+            $this->getGiServiceLocator()->throwNotFoundException('Join fields with proxy class', $proxyClass);
         }
 
         /** @var SetInterface|RecordInterface $proxyObject */
-        $proxyObject = $this->giGetClassMeta($proxyClass)->create();
+        $proxyObject = $this->getGiServiceLocator()->getClassMeta($proxyClass)->create();
 
-        $joinPredicates   = $this->giGetSqlFactory()->createJoinPredicates(
+        $joinPredicates   = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createJoinPredicates(
             $joinFields, $this->getTable(), $proxyObject->getTable()
         );
 
-        $assignPredicates = $this->giGetSqlFactory()->createAndAssignPredicates($contents, $proxyObject->getTable());
+        $assignPredicates = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createAndAssignPredicates($contents, $proxyObject->getTable());
 
-        $proxyTable = $this->giGetSqlFactory()->createFieldExpression($proxyObject->getTable()->getFullName());
+        $proxyTable = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldExpression($proxyObject->getTable()->getFullName());
 
         if (!($builder instanceof SQLBuilderInterface)) {
-            $builder = $this->giGetSqlFactory()
+            $builder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()
                 ->createSQLBuilder()
                 ->setTemplate($this->getCommonProxyTemplate())
                 ->addOrder($order);
@@ -365,7 +365,7 @@ abstract class AbstractSet implements SetInterface
      */
     protected function getProxyJoinFields(string $proxyClass)
     {
-        $methodReflections = $this->giGetClassMeta($this->getItemClass())
+        $methodReflections = $this->getGiServiceLocator()->getClassMeta($this->getItemClass())
             ->getMethods()
             ->findByDescriptorName($proxyClass);
 
@@ -426,18 +426,18 @@ abstract class AbstractSet implements SetInterface
         } else {
             $nextClass = array_shift($nextClasses);
             if (!is_a($nextClass, SetInterface::class, true)) {
-                $this->giThrowInvalidTypeException('Cascade class', $nextClass, 'SetInterface');
+                $this->getGiServiceLocator()->throwInvalidTypeException('Cascade class', $nextClass, 'SetInterface');
             }
 
             $joinFields = $this->getProxyJoinFields($nextClass);
             if (empty($joinFields)) {
-                $this->giThrowNotFoundException('Join fields with proxy class', $nextClass);
+                $this->getGiServiceLocator()->throwNotFoundException('Join fields with proxy class', $nextClass);
             }
 
             /** @var SetInterface $nextSet */
-            $nextSet = $this->giGetClassMeta($nextClass)->create();
+            $nextSet = $this->getGiServiceLocator()->getClassMeta($nextClass)->create();
 
-            $joinPredicates = $this->giGetSqlFactory()->createJoinPredicates(
+            $joinPredicates = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createJoinPredicates(
                 $joinFields, $this->getTable(), $nextSet->getTable()
             );
 
@@ -459,18 +459,18 @@ abstract class AbstractSet implements SetInterface
     {
         $firstClass = array_shift($cascadeClasses);
         if (!is_a($firstClass, SetInterface::class, true)) {
-            $this->giThrowInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Cascade class', $firstClass, 'SetInterface');
         }
 
         /** @var SetInterface $firstSet */
-        $firstSet = $this->giGetClassMeta($firstClass)->create();
+        $firstSet = $this->getGiServiceLocator()->getClassMeta($firstClass)->create();
 
         $cascadeClasses[] = static::class;
         $cascadeJoinPredicates = $firstSet->getCascadeJoinPredicates($cascadeClasses);
 
         $sql = 'SELECT {{%result-table%}}.*' . PHP_EOL . 'FROM {{%first-table%}}' . PHP_EOL;
 
-        $builder = $this->giGetSqlFactory()->createSQLBuilder()
+        $builder = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createSQLBuilder()
             ->setParam('result-table', $this->getTable()->getFullName())
             ->setParam('first-table', $firstSet->getTable()->getFullName())
             ->addOrder($order);
@@ -485,7 +485,7 @@ abstract class AbstractSet implements SetInterface
                 ->setParam('table', $cascadeJoinPredicate->getJoinTable()->getFullName())
                 ->setParam('condition', $cascadeJoinPredicate->toString());
             if ($index == 0) {
-                $assignPredicates = $this->giGetSqlFactory()
+                $assignPredicates = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()
                     ->createAndAssignPredicates($contents, $firstSet->getTable());
                 $builder->setParam('assigns', $assignPredicates->toString());
             }

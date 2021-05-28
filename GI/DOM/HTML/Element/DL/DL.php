@@ -56,7 +56,7 @@ class DL extends ContainerElement implements DLInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(ItemsInterface::class, Items::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(ItemsInterface::class, Items::class);
 
         return $this;
     }

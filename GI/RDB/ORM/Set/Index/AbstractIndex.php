@@ -69,7 +69,7 @@ abstract class AbstractIndex implements IndexInterface
     protected function arrayToKey(array $keys)
     {
         if (empty($keys)) {
-            $this->giThrowIsEmptyException('Keys');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys');
         }
 
         return array_shift($keys);
@@ -101,7 +101,7 @@ abstract class AbstractIndex implements IndexInterface
         }
 
         if (!$this->has($key)) {
-            $this->giThrowNotInScopeException($key);
+            $this->getGiServiceLocator()->throwNotInScopeException($key);
         }
 
         return $this->items[$key];
@@ -164,10 +164,10 @@ abstract class AbstractIndex implements IndexInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $key = $this->giGetPSRFormatParser()->parseWithPrefixGet($method, '', false);
+            $key = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method, '', false);
         } catch (\Exception $exception) {
             $key = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         return $this->get($key);

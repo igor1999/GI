@@ -56,7 +56,7 @@ class Body implements BodyInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->parts[$index];
@@ -169,7 +169,7 @@ class Body implements BodyInterface
     protected function createAttachment(FSOFileInterface $file, bool $base64Encoding)
     {
         try {
-            $result = $this->giGetDi(AttachmentInterface::class, null, [$file, $base64Encoding]);
+            $result = $this->getGiServiceLocator()->getDependency(AttachmentInterface::class, null, [$file, $base64Encoding]);
         } catch (\Exception $e) {
             $result = new Attachment($file, $base64Encoding);
         }
@@ -218,7 +218,7 @@ class Body implements BodyInterface
     protected function createText(string $text)
     {
         try {
-            $result = $this->giGetDi(TextInterface::class, null, [$text]);
+            $result = $this->getGiServiceLocator()->getDependency(TextInterface::class, null, [$text]);
         } catch (\Exception $e) {
             $result = new Text($text);
         }
@@ -276,7 +276,7 @@ class Body implements BodyInterface
     protected function createMultipart()
     {
         try {
-            $result = $this->giGetDi(MultipartInterface::class);
+            $result = $this->getGiServiceLocator()->getDependency(MultipartInterface::class);
         } catch (\Exception $e) {
             $result = new Multipart();
         }

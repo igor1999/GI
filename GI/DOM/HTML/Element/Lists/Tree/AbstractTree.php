@@ -89,7 +89,7 @@ abstract class AbstractTree extends UL implements TreeInterface
             $context  = $this->getContext($node);
             $children = $this->getChildren($node);
 
-            $li = $this->giGetDOMFactory()->createLI($context);
+            $li = $this->getGiServiceLocator()->getDOMFactory()->createLI($context);
 
             if (!empty($children)) {
                 $childrenContainer = new static($children, $parentKey);

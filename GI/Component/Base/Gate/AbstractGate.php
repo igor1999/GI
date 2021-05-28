@@ -59,10 +59,10 @@ abstract class AbstractGate implements GateInterface
     {
         $this->call = $call;
 
-        $this->commonErrors = $this->giGetDi(ErrorsInterface::class, Errors::class);
-        $this->ajaxErrors   = $this->giGetDi(ErrorsInterface::class, Errors::class);
+        $this->commonErrors = $this->getGiServiceLocator()->getDependency(ErrorsInterface::class, Errors::class);
+        $this->ajaxErrors   = $this->getGiServiceLocator()->getDependency(ErrorsInterface::class, Errors::class);
 
-        $response = $this->giGetResponseFactory()->createStatus403(static::ACCESS_DENIED_MESSAGE);
+        $response = $this->getGiServiceLocator()->getResponseFactory()->createStatus403(static::ACCESS_DENIED_MESSAGE);
         $this->ajaxErrors->create(AccessException::class, $response);
     }
 
@@ -98,7 +98,7 @@ abstract class AbstractGate implements GateInterface
     protected function handleError(\Throwable $throwable)
     {
         try {
-            if ($this->giGetRequest()->getHeaders()->isAjaxRequest()) {
+            if ($this->getGiServiceLocator()->getRequest()->getHeaders()->isAjaxRequest()) {
                 $response = $this->getAjaxErrors()->findByThrowable($throwable);
             } else {
                 $response = $this->getCommonErrors()->findByThrowable($throwable);

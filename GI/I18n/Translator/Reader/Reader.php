@@ -57,7 +57,7 @@ class Reader implements ReaderInterface
     {
         $this->source = $source;
 
-        $this->mainLocales = $this->giGetDi(MainLocalesInterface::class,MainLocales::class);
+        $this->mainLocales = $this->getGiServiceLocator()->getDependency(MainLocalesInterface::class,MainLocales::class);
 
         $this->createContents();
     }

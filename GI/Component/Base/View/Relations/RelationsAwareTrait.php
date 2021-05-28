@@ -31,7 +31,7 @@ trait RelationsAwareTrait
     protected function getRelationList()
     {
         if (!($this->relationList instanceof RelationsInterface)) {
-            $this->relationList = $this->giGetDi(RelationsInterface::class, Relations::class, [$this]);
+            $this->relationList = $this->getGiServiceLocator()->getDependency(RelationsInterface::class, Relations::class, [$this]);
         }
 
         return $this->relationList;

@@ -168,7 +168,7 @@ class RowList extends AbstractImmutable implements RowListInterface
      */
     protected function createRow()
     {
-        return $this->giGetDOMFactory()->createTR();
+        return $this->getGiServiceLocator()->getDOMFactory()->createTR();
     }
 
     /**

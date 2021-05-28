@@ -60,7 +60,7 @@ class Immutable implements ImmutableInterface
     public function get(string $constant)
     {
         if (!$this->has($constant)) {
-            $this->giThrowNotInScopeException($constant);
+            $this->getGiServiceLocator()->throwNotInScopeException($constant);
         }
 
         return $this->items[$constant];

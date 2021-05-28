@@ -56,7 +56,7 @@ class Collection implements CollectionInterface
      */
     protected function createDay(\DateTime $date)
     {
-        return $this->giGetCalendarFactory()->getDay($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getDay($date);
     }
 
     /**
@@ -76,7 +76,7 @@ class Collection implements CollectionInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];

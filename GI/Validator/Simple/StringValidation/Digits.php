@@ -38,6 +38,6 @@ class Digits extends AbstractSimple implements DigitsInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class,DefaultMessages::DIGITS);
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class,DefaultMessages::DIGITS);
     }
 }

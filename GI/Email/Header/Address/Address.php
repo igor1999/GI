@@ -63,7 +63,7 @@ class Address implements AddressInterface
     public function setEmail(string $email)
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $this->giThrowInvalidFormatException('Email', $email, 'email format');
+            $this->getGiServiceLocator()->throwInvalidFormatException('Email', $email, 'email format');
         }
 
         $this->email = $email;

@@ -125,23 +125,23 @@ class Item implements ItemInterface
     {
         $this->id = $this->createId();
 
-        $this->serverSocket = $this->giGetSocketDemonFactory()->createServerSocket();
+        $this->serverSocket = $this->getGiServiceLocator()->getSocketDemonFactory()->createServerSocket();
 
-        $this->commonRequest     = $this->giGetSocketDemonFactory()->createCommonRequest()->setId($this->id);
-        $this->expirationRequest = $this->giGetSocketDemonFactory()->createExpirationRequest()->setId($this->id);
-        $this->waitingRequest    = $this->giGetSocketDemonFactory()->createWaitingRequest()->setId($this->id);
+        $this->commonRequest     = $this->getGiServiceLocator()->getSocketDemonFactory()->createCommonRequest()->setId($this->id);
+        $this->expirationRequest = $this->getGiServiceLocator()->getSocketDemonFactory()->createExpirationRequest()->setId($this->id);
+        $this->waitingRequest    = $this->getGiServiceLocator()->getSocketDemonFactory()->createWaitingRequest()->setId($this->id);
 
-        $this->shell = $this->giGetSocketDemonFactory()->createShell();
+        $this->shell = $this->getGiServiceLocator()->getSocketDemonFactory()->createShell();
 
-        $this->responseCollection = $this->giGetSocketDemonFactory()->createResponseCollection();
+        $this->responseCollection = $this->getGiServiceLocator()->getSocketDemonFactory()->createResponseCollection();
 
         try {
-            $this->logger = $this->giCreateLogger();
+            $this->logger = $this->getGiServiceLocator()->createLogger();
         } catch (\Exception $e) {}
 
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             try {
                 $this->bufferLength = $context->getBufferLength();
@@ -222,7 +222,7 @@ class Item implements ItemInterface
     public function getSocket()
     {
         if (!$this->isAlive()) {
-            $this->giThrowCommonException('Socket does not opened');
+            $this->getGiServiceLocator()->throwCommonException('Socket does not opened');
         }
 
         return $this->socket;
@@ -358,7 +358,7 @@ class Item implements ItemInterface
     protected function getLogger()
     {
         if (!($this->logger instanceof LoggerInterface)) {
-            $this->giThrowNotSetException('Logger');
+            $this->getGiServiceLocator()->throwNotSetException('Logger');
         }
 
         return $this->logger;

@@ -79,7 +79,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     public function getDescriptionForEntriesTotal()
     {
         return sprintf(
-            $this->giTranslate(
+            $this->getGiServiceLocator()->translate(
                 GlossaryInterface::class, Glossary::class, static::DESCRIPTION_FOR_ENTRIES_TOTAL
             ),
             $this->getPagingModel()->getFirstShowedEntry(),
@@ -107,7 +107,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getForm()
     {
         if (!($this->form instanceof FormInterface)) {
-            $this->form = $this->giGetDOMFactory()->createForm();
+            $this->form = $this->getGiServiceLocator()->getDOMFactory()->createForm();
 
             $this->addCommonFormId($this->form);
         }
@@ -123,7 +123,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
         return $this->container;
@@ -137,7 +137,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     public function getSizesSelect()
     {
         if (!($this->sizesSelect instanceof SelectInterface)) {
-            $template = $this->giTranslate(
+            $template = $this->getGiServiceLocator()->translate(
                 GlossaryInterface::class, Glossary::class, static::TITLE_FOR_SIZES_SELECT
             );
 
@@ -146,7 +146,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
                 return sprintf($template, $value);
             };
 
-            $this->sizesSelect = $this->giGetDOMFactory()->createSelect()->buildByValues(
+            $this->sizesSelect = $this->getGiServiceLocator()->getDOMFactory()->createSelect()->buildByValues(
                 $this->getPagingModel()->getContext()->getSizes()->getItems(), $f
             );
 
@@ -167,7 +167,7 @@ abstract class AbstractWidget extends Base implements WidgetInterface
     protected function getSelectedPageHidden()
     {
         if (!($this->selectedPageHidden instanceof HiddenInterface)) {
-            $this->selectedPageHidden = $this->giGetDOMFactory()->getInputFactory()->createHidden(
+            $this->selectedPageHidden = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createHidden(
                 $this->getViewModel()->getSelectedPageName(), $this->getPagingModel()->getSelectedPage()
             );
 
@@ -258,10 +258,10 @@ abstract class AbstractWidget extends Base implements WidgetInterface
      */
     protected function createNavi(string $title, int $page, bool $activity)
     {
-        $navi = $this->giGetDOMFactory()->createDiv();
+        $navi = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
 
-        $content = $this->giGetDOMFactory()->createHyperlink(
-            '', $this->giTranslate(GlossaryInterface::class, Glossary::class, $title)
+        $content = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink(
+            '', $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, $title)
         )->setHrefToMock();
         $navi->getChildNodes()->set($content);
 

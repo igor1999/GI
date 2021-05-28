@@ -70,7 +70,7 @@ class ThrowableErrors implements ThrowableErrorsInterface
     protected function createError(ResponseInterface $response, bool $forCallerInherits = false)
     {
         try {
-            $result = $this->giGetDi(ErrorInterface::class, null, [$response, $forCallerInherits]);
+            $result = $this->getGiServiceLocator()->getDependency(ErrorInterface::class, null, [$response, $forCallerInherits]);
         } catch (\Exception $exception) {
             $result = new Error($response, $forCallerInherits);
         }
@@ -93,7 +93,7 @@ class ThrowableErrors implements ThrowableErrorsInterface
     public function getNoCaller()
     {
         if (!$this->hasNoCaller()) {
-            $this->giThrowNotSetException('No caller error');
+            $this->getGiServiceLocator()->throwNotSetException('No caller error');
         }
 
         return $this->noCaller;
@@ -138,7 +138,7 @@ class ThrowableErrors implements ThrowableErrorsInterface
     public function get(string $caller)
     {
         if (!$this->has($caller)) {
-            $this->giThrowNotInScopeException($caller);
+            $this->getGiServiceLocator()->throwNotInScopeException($caller);
         }
 
         return $this->items[$caller];
@@ -205,7 +205,7 @@ class ThrowableErrors implements ThrowableErrorsInterface
         };
         $callers = array_keys(array_filter($this->getItems(), $f));
 
-        $ancestors = $this->giGetClassMeta($caller)->getParents()->getOrderedAncestors($callers);
+        $ancestors = $this->getGiServiceLocator()->getClassMeta($caller)->getParents()->getOrderedAncestors($callers);
 
         return $ancestors->getFirst()->getName();
     }

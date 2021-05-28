@@ -38,7 +38,7 @@ class AlphaNumeric extends AbstractSimple implements AlphaNumericInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::ALPHA_NUMERIC
         );
     }

@@ -28,7 +28,7 @@ class HourMinute extends AbstractDateTime implements HourMinuteInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createHourMinute();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createHourMinute();
     }
 
     /**

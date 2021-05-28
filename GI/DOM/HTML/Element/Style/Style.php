@@ -49,7 +49,7 @@ class Style extends ContainerElement implements StyleInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(SelectorListInterface::class, SelectorList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(SelectorListInterface::class, SelectorList::class);
 
         return $this;
     }

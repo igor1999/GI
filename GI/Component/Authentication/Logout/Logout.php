@@ -53,7 +53,7 @@ class Logout extends AbstractComponent implements LogoutInterface
      */
     public function __construct()
     {
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
 
         $this->createContext()->createIdentity();
     }
@@ -81,9 +81,9 @@ class Logout extends AbstractComponent implements LogoutInterface
     protected function createContext()
     {
         try {
-            $this->context = $this->giGetDi(ContextInterface::class);
+            $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Logout contents');
+            $this->getGiServiceLocator()->throwDependencyException('Logout contents');
         }
 
         return $this;
@@ -104,9 +104,9 @@ class Logout extends AbstractComponent implements LogoutInterface
     protected function createIdentity()
     {
         try {
-            $this->identity = $this->giGetDi(IdentityInterface::class);
+            $this->identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('Identity');
+            $this->getGiServiceLocator()->throwDependencyException('Identity');
         }
 
         return $this;

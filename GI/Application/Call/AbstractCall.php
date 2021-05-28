@@ -77,9 +77,10 @@ abstract class AbstractCall implements CallInterface
      */
     public function __construct(RouteInterface $route, \Closure $handler)
     {
-        $this->handlers = $this->giGetStorageFactory()->createClosureArrayListClosable()->add($handler);
+        $this->handlers = $this->getGiServiceLocator()->getStorageFactory()->createClosureArrayListClosable()
+            ->add($handler);
         $this->route    = $route;
-        $this->request  = $this->giGetServiceLocator()->createRequestFactory();
+        $this->request  = $this->getGiServiceLocator()->createRequestFactory();
     }
 
     /**
@@ -103,7 +104,7 @@ abstract class AbstractCall implements CallInterface
     protected function getProvider()
     {
         if (!($this->provider instanceof ProviderInterface)) {
-            $this->giThrowNotSetException('Provider');
+            $this->getGiServiceLocator()->throwNotSetException('Provider');
         }
 
         return $this->provider;
@@ -130,7 +131,7 @@ abstract class AbstractCall implements CallInterface
     protected function getModuleLocator()
     {
         if (!($this->moduleLocator instanceof ModuleLocatorInterface)) {
-            $this->giThrowNotSetException('Module Locator');
+            $this->getGiServiceLocator()->throwNotSetException('Module Locator');
         }
 
         return $this->moduleLocator;
@@ -173,7 +174,7 @@ abstract class AbstractCall implements CallInterface
     protected function getDi()
     {
         if (!$this->hasDi()) {
-            $this->giThrowNotSetException('DI');
+            $this->getGiServiceLocator()->throwNotSetException('DI');
         }
 
         return $this->di;
@@ -222,7 +223,7 @@ abstract class AbstractCall implements CallInterface
     protected function getEventManager()
     {
         if (!$this->hasEventManager()) {
-            $this->giThrowNotSetException('Event Manager');
+            $this->getGiServiceLocator()->throwNotSetException('Event Manager');
         }
 
         return $this->eventManager;
@@ -278,10 +279,10 @@ abstract class AbstractCall implements CallInterface
      */
     protected function saveCallAndModuleContents()
     {
-        if (!$this->giGetServiceLocator()->isClosed()) {
-            $this->giGetServiceLocator()->setExceptionHandler();
-            $this->giGetServiceLocator()->setRoute($this->getRoute());
-            $this->giGetServiceLocator()->setRequest($this->getRequest());
+        if (!$this->getGiServiceLocator()->isClosed()) {
+            $this->getGiServiceLocator()->setExceptionHandler();
+            $this->getGiServiceLocator()->setRoute($this->getRoute());
+            $this->getGiServiceLocator()->setRequest($this->getRequest());
         }
 
         $this->saveDI()->saveEventManager()->saveSessionExchangeClasses();
@@ -294,12 +295,12 @@ abstract class AbstractCall implements CallInterface
      */
     protected function saveDI()
     {
-        if (!$this->giGetServiceLocator()->isClosed()) {
+        if (!$this->getGiServiceLocator()->isClosed()) {
             try {
-                $this->giGetServiceLocator()->setDi($this->getDi());
+                $this->getGiServiceLocator()->setDi($this->getDi());
             } catch (\Exception $e) {
                 try {
-                    $this->giGetServiceLocator()->setDi($this->getProvider()->getDI());
+                    $this->getGiServiceLocator()->setDi($this->getProvider()->getDI());
                 } catch (\Exception $e) {}
             }
         }
@@ -312,13 +313,13 @@ abstract class AbstractCall implements CallInterface
      */
     protected function saveEventManager()
     {
-        if (!$this->giGetServiceLocator()->isClosed()) {
+        if (!$this->getGiServiceLocator()->isClosed()) {
             try {
-                $this->giGetServiceLocator()->mergeEvents($this->getModuleLocator()->getEventManager());
+                $this->getGiServiceLocator()->mergeEvents($this->getModuleLocator()->getEventManager());
             } catch (\Exception $e) {}
 
             try {
-                $this->giGetServiceLocator()->mergeEvents($this->getEventManager());
+                $this->getGiServiceLocator()->mergeEvents($this->getEventManager());
             } catch (\Exception $e) {}
         }
 
@@ -330,9 +331,9 @@ abstract class AbstractCall implements CallInterface
      */
     protected function saveSessionExchangeClasses()
     {
-        if (!$this->giGetServiceLocator()->isClosed()) {
+        if (!$this->getGiServiceLocator()->isClosed()) {
             try {
-                $this->giGetServiceLocator()->setSessionExchangeClasses(
+                $this->getGiServiceLocator()->setSessionExchangeClasses(
                     $this->getModuleLocator()->getSessionExchangeClasses()
                 );
             } catch (\Exception $e) {}

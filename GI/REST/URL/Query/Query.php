@@ -53,7 +53,7 @@ class Query extends AbstractRequestTree implements QueryInterface
     protected function getReader()
     {
         if (!($this->reader instanceof ReaderInterface)) {
-            $this->reader = $this->giGetDi(ReaderInterface::class, Reader::class);
+            $this->reader = $this->getGiServiceLocator()->getDependency(ReaderInterface::class, Reader::class);
         }
 
         return $this->reader;
@@ -66,7 +66,7 @@ class Query extends AbstractRequestTree implements QueryInterface
     protected function getCompiler()
     {
         if (!($this->compiler instanceof CompilerInterface)) {
-            $this->compiler = $this->giGetDi(CompilerInterface::class, Compiler::class);
+            $this->compiler = $this->getGiServiceLocator()->getDependency(CompilerInterface::class, Compiler::class);
         }
 
         return $this->compiler;
@@ -78,7 +78,7 @@ class Query extends AbstractRequestTree implements QueryInterface
     protected function getEscaper()
     {
         if (!($this->escaper instanceof URLEscaperInterface)) {
-            $this->escaper = $this->giGetEscaperFactory()->createURL();
+            $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createURL();
         }
 
         return $this->escaper;
@@ -97,7 +97,8 @@ class Query extends AbstractRequestTree implements QueryInterface
         };
         $this->getReader()->read($query, static::SEPARATOR)->map($f);
 
-        $items = $this->giGetFlatExtractor()->extractWithArrayLikeKeys($this->getReader()->getItems());
+        $items = $this->getGiServiceLocator()->getUtilites()->getFlatExtractor()
+            ->extractWithArrayLikeKeys($this->getReader()->getItems());
         $this->hydrate($items);
 
         return $this;
@@ -109,7 +110,8 @@ class Query extends AbstractRequestTree implements QueryInterface
      */
     public function toString()
     {
-        $items = $this->giGetFlatCreator()->createWithArrayLikeKeys($this->extract());
+        $items = $this->getGiServiceLocator()->getUtilites()->getFlatCreator()
+            ->createWithArrayLikeKeys($this->extract());
 
         $f = function($value)
         {

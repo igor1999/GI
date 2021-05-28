@@ -61,7 +61,7 @@ class TR extends ContainerElement implements TRInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(CellListInterface::class, CellList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(CellListInterface::class, CellList::class);
 
         return $this;
     }

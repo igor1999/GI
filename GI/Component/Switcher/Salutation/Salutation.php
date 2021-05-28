@@ -45,9 +45,9 @@ class Salutation extends AbstractSwitcher implements SalutationInterface
     {
         parent::__construct($name);
 
-        $this->selection = $this->giGetClientSelectionFactory()->createSalutation();
+        $this->selection = $this->getGiServiceLocator()->getClientSelectionFactory()->createSalutation();
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
     }
 
     /**

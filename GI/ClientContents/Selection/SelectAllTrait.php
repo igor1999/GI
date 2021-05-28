@@ -17,8 +17,6 @@
  */
 namespace GI\ClientContents\Selection;
 
-use GI\Exception\Common as CommonException;
-
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 
 use GI\ClientContents\Selection\Item\ItemInterface;
@@ -27,14 +25,14 @@ trait SelectAllTrait
 {
     /**
      * @return static
-     * @throws CommonException
+     * @throws \Exception
      */
     public function selectAll()
     {
         if (!$this->isMulti()) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowCommonException('Selection should be multi');
+            $me->getGiServiceLocator()->throwCommonException('Selection should be multi');
         }
 
         /** @var ItemInterface $item */

@@ -53,7 +53,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
     public function __construct()
     {
         try {
-            $this->authentication = $this->giGetDi(AuthenticationInterface::class, Authentication::class);
+            $this->authentication = $this->getGiServiceLocator()->getDependency(AuthenticationInterface::class, Authentication::class);
         } catch (\Exception $e) {}
     }
 
@@ -88,7 +88,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
     public function getAuthentication()
     {
         if (!($this->authentication instanceof AuthenticationInterface)) {
-            $this->giThrowNotSetException('Authentication');
+            $this->getGiServiceLocator()->throwNotSetException('Authentication');
         }
 
         return $this->authentication;
@@ -99,7 +99,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     public function getNaviBreadCrumbs()
     {
-        $this->giThrowNotSetException('Bread crumbs');
+        $this->getGiServiceLocator()->throwNotSetException('Bread crumbs');
     }
 
     /**
@@ -107,7 +107,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     public function getNaviMenu()
     {
-        $this->giThrowNotSetException('Navi menu');
+        $this->getGiServiceLocator()->throwNotSetException('Navi menu');
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
     public function getContent()
     {
         if (!($this->content instanceof ComponentInterface)) {
-            $this->giThrowNotSetException('Content');
+            $this->getGiServiceLocator()->throwNotSetException('Content');
         }
 
         return $this->content;
@@ -139,7 +139,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     protected function createAccessDeniedTitle()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Access denied');
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Access denied');
     }
 
     /**
@@ -148,7 +148,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     public function createAccessDenied(string $message)
     {
-        $content = $this->giGetComponentFactory()->getErrorFactory()->createAccessDenied($message);
+        $content = $this->getGiServiceLocator()->getComponentFactory()->getErrorFactory()->createAccessDenied($message);
 
         $this->setTitle($this->createAccessDeniedTitle())->setContent($content);
 
@@ -160,7 +160,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     protected function createNotFoundTitle()
     {
-        return $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Page not found');
+        return $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Page not found');
     }
 
     /**
@@ -169,7 +169,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     public function createNotFound(string $message)
     {
-        $content = $this->giGetComponentFactory()->getErrorFactory()->createNotFound($message);
+        $content = $this->getGiServiceLocator()->getComponentFactory()->getErrorFactory()->createNotFound($message);
 
         $this->setTitle($this->createNotFoundTitle())->setContent($content);
 
@@ -181,7 +181,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     protected function createServerErrorTitle()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class, 'Internal server error'
         );
     }
@@ -192,7 +192,7 @@ abstract class AbstractLayout extends AbstractComponent implements LayoutInterfa
      */
     public function createServerError(string $message)
     {
-        $content = $this->giGetComponentFactory()->getErrorFactory()->createServerError($message);
+        $content = $this->getGiServiceLocator()->getComponentFactory()->getErrorFactory()->createServerError($message);
 
         $this->setTitle($this->createServerErrorTitle())->setContent($content);
 

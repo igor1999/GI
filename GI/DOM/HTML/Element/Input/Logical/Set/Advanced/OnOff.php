@@ -38,7 +38,7 @@ class OnOff extends AbstractSet implements OnOffInterface
     {
         parent::__construct($commonName);
 
-        $this->options = $this->giGetClientSelectionFactory()->createOnOff();
+        $this->options = $this->getGiServiceLocator()->getClientSelectionFactory()->createOnOff();
     }
 
     /**

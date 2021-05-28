@@ -92,7 +92,7 @@ abstract class AbstractResult implements ResultInterface
      */
     public function getJSON()
     {
-        return $this->giCreateJsonEncoder()->extractAndEncode($this);
+        return $this->getGiServiceLocator()->createJsonEncoder()->extractAndEncode($this);
     }
 
     /**

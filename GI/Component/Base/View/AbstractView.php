@@ -60,7 +60,7 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     public function createLoadingImage(string $giId = '')
     {
         try {
-            $image = $this->giGetDi(LoadingImageInterface::class);
+            $image = $this->getGiServiceLocator()->getDependency(LoadingImageInterface::class);
         } catch (\Exception $exception) {
             $image = new LoadingImage();
         }

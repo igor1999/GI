@@ -32,7 +32,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateAction()
     {
         if (empty($this->getAction())) {
-            $this->giThrowIsEmptyException('Logout action');
+            $this->getGiServiceLocator()->throwIsEmptyException('Logout action');
         }
     }
 
@@ -43,7 +43,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateRedirectURI()
     {
         if (empty($this->getRedirectUri())) {
-            $this->giThrowIsEmptyException('Logout redirect uri');
+            $this->getGiServiceLocator()->throwIsEmptyException('Logout redirect uri');
         }
     }
 }

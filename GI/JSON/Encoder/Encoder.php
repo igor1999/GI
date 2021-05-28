@@ -56,7 +56,7 @@ class Encoder extends AbstractJson implements EncoderInterface
      */
     public function __construct()
     {
-        $this->flags = $this->giGetDi(FlagsInterface::class, Flags::class);
+        $this->flags = $this->getGiServiceLocator()->getDependency(FlagsInterface::class, Flags::class);
     }
 
     /**
@@ -88,6 +88,6 @@ class Encoder extends AbstractJson implements EncoderInterface
      */
     public function extractAndEncode($data)
     {
-        return $this->encode($this->giGetExtractor()->extract($data));
+        return $this->encode($this->getGiServiceLocator()->getUtilites()->getExtractor()->extract($data));
     }
 }

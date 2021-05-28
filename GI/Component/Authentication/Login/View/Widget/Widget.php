@@ -76,7 +76,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
 
@@ -136,7 +136,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
         return $this->container;
@@ -149,9 +149,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getLoginLink()
     {
         if (!($this->loginLink instanceof HyperlinkInterface)) {
-            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign in');
+            $title = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'sign in');
 
-            $this->loginLink = $this->giGetDOMFactory()->createHyperlink('', $title)->setHrefToMock();
+            $this->loginLink = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink('', $title)->setHrefToMock();
         }
 
         return $this->loginLink;
@@ -164,9 +164,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getRegisterLink()
     {
         if (!($this->registerLink instanceof HyperlinkInterface)) {
-            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign up');
+            $title = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'sign up');
 
-            $this->registerLink = $this->giGetDOMFactory()->createHyperlink($this->getRegisterURI(), $title);
+            $this->registerLink = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink($this->getRegisterURI(), $title);
 
         }
 
@@ -181,11 +181,11 @@ class Widget extends AbstractWidget implements WidgetInterface
     {
         if (!($this->restorePasswordLink instanceof HyperlinkInterface)) {
             $text  = 'forget password?';
-            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, $text);
+            $title = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, $text);
 
             $href = $this->getRestorePasswordURI();
 
-            $this->restorePasswordLink = $this->giGetDOMFactory()->createHyperlink($href, $title);
+            $this->restorePasswordLink = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink($href, $title);
         }
 
         return $this->restorePasswordLink;

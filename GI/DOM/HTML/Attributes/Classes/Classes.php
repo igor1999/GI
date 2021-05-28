@@ -44,11 +44,11 @@ class Classes extends ArrayList implements ClassesInterface
      */
     public function __construct(array $classes = [])
     {
-        $option =$this->giGetStorageFactory()->getOptionFactory()->createStringArrayList()->setUnique(true);
+        $option =$this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createStringArrayList()->setUnique(true);
 
         parent::__construct($classes, $option);
 
-        $this->escaper = $this->giGetUtilites()->getEscaperFactory()->createHTMLAttribute()->setOn(false);
+        $this->escaper = $this->getGiServiceLocator()->getUtilites()->getEscaperFactory()->createHTMLAttribute()->setOn(false);
     }
 
     /**

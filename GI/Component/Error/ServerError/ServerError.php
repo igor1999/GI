@@ -39,7 +39,7 @@ class ServerError extends AbstractError implements ServerErrorInterface
     {
         parent::__construct($message);
 
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
     }
 
     /**

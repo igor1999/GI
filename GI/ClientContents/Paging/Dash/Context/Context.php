@@ -59,11 +59,11 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateFrontPart()
     {
         if (!is_int($this->getFrontPart())) {
-            $this->giThrowInvalidTypeException('Front Part', $this->getFrontPart(), 'integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Front Part', $this->getFrontPart(), 'integer');
         }
 
         if ($this->getFrontPart() < 1) {
-            $this->giThrowInvalidMinimumException('Front Part', $this->getFrontPart(), 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Front Part', $this->getFrontPart(), 1);
         }
     }
 
@@ -74,11 +74,11 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateReach()
     {
         if (!is_int($this->getReach())) {
-            $this->giThrowInvalidTypeException('Reach', $this->getReach(), 'integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Reach', $this->getReach(), 'integer');
         }
 
         if ($this->getReach() < 1) {
-            $this->giThrowInvalidMinimumException('Reach', $this->getReach(), 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Reach', $this->getReach(), 1);
         }
     }
 
@@ -89,11 +89,11 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateBackPart()
     {
         if (!is_int($this->getBackPart())) {
-            $this->giThrowInvalidTypeException('Back Part', $this->getBackPart(), 'integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Back Part', $this->getBackPart(), 'integer');
         }
 
         if ($this->getBackPart() < 1) {
-            $this->giThrowInvalidMinimumException('Back Part', $this->getBackPart(), 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Back Part', $this->getBackPart(), 1);
         }
     }
 }

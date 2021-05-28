@@ -50,13 +50,13 @@ class Symlink extends AbstractFSO implements SymlinkInterface
         $this->fireInexistence();
 
         if (!$this->isLink()) {
-            $this->giThrowInvalidTypeException('File', $this->getPath(), 'Symlink');
+            $this->getGiServiceLocator()->throwInvalidTypeException('File', $this->getPath(), 'Symlink');
         }
 
         $target = readlink($this->getPath());
 
         if (!is_string($target) || ($target == $this->getPath())) {
-            $this->giThrowNotFoundException('Target for symlink', $this->getPath());
+            $this->getGiServiceLocator()->throwNotFoundException('Target for symlink', $this->getPath());
         }
 
         $file    = $this->getFactory()->createFile($target);
@@ -71,7 +71,7 @@ class Symlink extends AbstractFSO implements SymlinkInterface
             $result = $symlink;
         } else {
             $result = null;
-            $this->giThrowInvalidTypeException('Target for symlink', $target, 'File system object');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Target for symlink', $target, 'File system object');
         }
 
         return $result;
@@ -120,7 +120,7 @@ class Symlink extends AbstractFSO implements SymlinkInterface
     public function getTarget()
     {
         if (!$this->hasTarget()) {
-            $this->giThrowNotSetException('Symlink target');
+            $this->getGiServiceLocator()->throwNotSetException('Symlink target');
         }
 
         return $this->target;

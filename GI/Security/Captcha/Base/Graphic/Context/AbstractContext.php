@@ -34,7 +34,7 @@ abstract class AbstractContext implements ContextInterface
     protected function validateBaseImage()
     {
         if (!($this->getBaseImage() instanceof FSOFileInterface)) {
-            $this->giThrowNotSetException('Captcha base image');
+            $this->getGiServiceLocator()->throwNotSetException('Captcha base image');
         }
 
         $this->getBaseImage()->fireInexistence();

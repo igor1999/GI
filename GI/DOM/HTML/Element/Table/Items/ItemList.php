@@ -152,7 +152,7 @@ class ItemList extends AbstractImmutable implements ItemListInterface
      */
     protected function createRow()
     {
-        return $this->giGetDOMFactory()->createTR();
+        return $this->getGiServiceLocator()->getDOMFactory()->createTR();
     }
 
     /**
@@ -187,7 +187,7 @@ class ItemList extends AbstractImmutable implements ItemListInterface
      */
     protected function createTBody()
     {
-        return $this->giGetDOMFactory()->createTBody();
+        return $this->getGiServiceLocator()->getDOMFactory()->createTBody();
     }
 
     /**
@@ -222,7 +222,7 @@ class ItemList extends AbstractImmutable implements ItemListInterface
      */
     protected function createTHead()
     {
-        return $this->giGetDOMFactory()->createTHead();
+        return $this->getGiServiceLocator()->getDOMFactory()->createTHead();
     }
 
     /**
@@ -257,7 +257,7 @@ class ItemList extends AbstractImmutable implements ItemListInterface
      */
     protected function createTFooter()
     {
-        return $this->giGetDOMFactory()->createTFooter();
+        return $this->getGiServiceLocator()->getDOMFactory()->createTFooter();
     }
 
     /**

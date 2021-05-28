@@ -52,13 +52,13 @@ abstract class AbstractAttributes extends Base implements AttributesInterface
      */
     public function __construct(array $constantAttributes = [])
     {
-        $this->constantAttributes = $this->giGetStorageFactory()->createScalarHashSetImmutable($constantAttributes);
+        $this->constantAttributes = $this->getGiServiceLocator()->getStorageFactory()->createScalarHashSetImmutable($constantAttributes);
 
-        $option = $this->giGetStorageFactory()->getOptionFactory()->createScalarHashSet();
+        $option = $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createScalarHashSet();
         $option->setKeyFormatToHyphenLowerCase()->setValueFormatToHyphenLowerCase();
         parent::__construct([], $option);
 
-        $this->escapedAttributes = $this->giGetStorageFactory()->createStringArrayListAlterable();
+        $this->escapedAttributes = $this->getGiServiceLocator()->getStorageFactory()->createStringArrayListAlterable();
 
         $this->createEscaper();
     }
@@ -86,7 +86,7 @@ abstract class AbstractAttributes extends Base implements AttributesInterface
     public function set(string $key, $item, int $position = null)
     {
         if ($this->getConstantAttributes()->has($key)) {
-            $this->giThrowCommonException('Attribute \'%s\' is constant', [$key]);
+            $this->getGiServiceLocator()->throwCommonException('Attribute \'%s\' is constant', [$key]);
         }
 
         parent::set($key, $item);
@@ -102,7 +102,7 @@ abstract class AbstractAttributes extends Base implements AttributesInterface
     public function remove(string $key)
     {
         if ($this->getConstantAttributes()->has($key)) {
-            $this->giThrowCommonException('Attribute \'%s\' is constant', [$key]);
+            $this->getGiServiceLocator()->throwCommonException('Attribute \'%s\' is constant', [$key]);
         }
 
         return parent::remove($key);

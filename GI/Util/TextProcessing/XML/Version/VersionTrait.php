@@ -54,7 +54,7 @@ trait VersionTrait
     {
         try {
             /** @var ContextInterface $context */
-            $context  = $this->giGetDi(ContextInterface::class);
+            $context  = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->setXmlVersion($context->getVersion());
         } catch (\Exception $e) {

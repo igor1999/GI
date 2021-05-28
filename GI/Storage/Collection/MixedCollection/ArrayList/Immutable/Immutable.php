@@ -44,7 +44,7 @@ class Immutable implements ImmutableInterface
      */
     public function __construct(array $items = [], OptionInterface $option = null)
     {
-        $this->service = $this->giGetDi(ServiceInterface::class, Service::class, [$option]);
+        $this->service = $this->getGiServiceLocator()->getDependency(ServiceInterface::class, Service::class, [$option]);
 
         $this->setItems($items);
     }
@@ -74,7 +74,7 @@ class Immutable implements ImmutableInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];

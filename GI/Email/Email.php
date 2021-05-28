@@ -47,8 +47,8 @@ class Email implements EmailInterface
      */
     public function __construct()
     {
-        $this->header = $this->giGetDi(HeaderInterface::class, Header::class);
-        $this->body   = $this->giGetDi(BodyInterface::class, Body::class);
+        $this->header = $this->getGiServiceLocator()->getDependency(HeaderInterface::class, Header::class);
+        $this->body   = $this->getGiServiceLocator()->getDependency(BodyInterface::class, Body::class);
     }
 
     /**

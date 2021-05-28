@@ -127,7 +127,7 @@ class FSODir extends AbstractFSO implements FSODirInterface
     public function getChildren()
     {
         try {
-            $children = $this->giGetDi(ChildrenInterface::class,null, [$this]);
+            $children = $this->getGiServiceLocator()->getDependency(ChildrenInterface::class,null, [$this]);
         } catch (\Exception $e) {
             $children = new Children($this);
         }
@@ -142,7 +142,7 @@ class FSODir extends AbstractFSO implements FSODirInterface
     public function getNodes()
     {
         try {
-            $nodes = $this->giGetDi(NodesInterface::class,null, [$this]);
+            $nodes = $this->getGiServiceLocator()->getDependency(NodesInterface::class,null, [$this]);
         } catch (\Exception $e) {
             $nodes = new Nodes($this);
         }

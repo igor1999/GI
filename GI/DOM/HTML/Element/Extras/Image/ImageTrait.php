@@ -49,7 +49,7 @@ trait ImageTrait
         /** @var ServiceLocatorAwareTrait $me */
         $me = $this;
 
-        $this->setSrc($me->giGetFromFileSourceMaker()->create($file));
+        $this->setSrc($me->getGiServiceLocator()->getUtilites()->getFromFile()->create($file));
 
         return $this;
     }
@@ -65,7 +65,7 @@ trait ImageTrait
         /** @var ServiceLocatorAwareTrait $me */
         $me = $this;
 
-        $this->setSrc($me->giGetFromResourceSourceMaker()->create($resource, $contentType));
+        $this->setSrc($me->getGiServiceLocator()->getUtilites()->getFromResource()->create($resource, $contentType));
 
         return $this;
     }

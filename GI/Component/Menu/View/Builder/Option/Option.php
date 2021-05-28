@@ -45,7 +45,7 @@ class Option implements OptionInterface
      */
     public function buildClearItem()
     {
-        $li = $this->giGetDOMFactory()->createLI();
+        $li = $this->getGiServiceLocator()->getDOMFactory()->createLI();
         $this->setClearLIStyle($li);
 
         return $li;
@@ -79,7 +79,7 @@ class Option implements OptionInterface
      */
     protected function buildBarOption(DivInterface $optionContent, ULInterface $submenu = null)
     {
-        $result = $this->giGetDOMFactory()->createLI();
+        $result = $this->getGiServiceLocator()->getDOMFactory()->createLI();
 
         $result->getChildNodes()->set(array_filter([$optionContent, $submenu]));
         $this->setFloatLIStyle($result);
@@ -95,15 +95,15 @@ class Option implements OptionInterface
      */
     protected function buildOptionForPopup(DivInterface $optionContent, ULInterface $submenu)
     {
-        $li1 = $this->giGetDOMFactory()->createLI();
+        $li1 = $this->getGiServiceLocator()->getDOMFactory()->createLI();
         $li1->getChildNodes()->set($optionContent);
         $this->setFloatLIStyle($li1);
 
-        $li2 = $this->giGetDOMFactory()->createLI();
+        $li2 = $this->getGiServiceLocator()->getDOMFactory()->createLI();
         $li2->getChildNodes()->set($submenu);
         $this->setFloatLIStyle($li2);
 
-        $li3 = $this->giGetDOMFactory()->createLI();
+        $li3 = $this->getGiServiceLocator()->getDOMFactory()->createLI();
         $this->setClearLIStyle($li3);
 
         return [$li1, $li2, $li3];
@@ -116,7 +116,7 @@ class Option implements OptionInterface
      */
     protected function buildCommonOption(DivInterface $optionContent)
     {
-        $result = $this->giGetDOMFactory()->createLI();
+        $result = $this->getGiServiceLocator()->getDOMFactory()->createLI();
 
         $result->getChildNodes()->set($optionContent);
         $this->setBasicLIStyle($result);

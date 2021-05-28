@@ -15,37 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\RDB\DI\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
 
 use GI\RDB\Platform\PlatformInterface;
 use GI\RDB\SQL\Factory\FactoryInterface as SQLFactoryInterface;
 
-trait RDBAwareTrait
+/**
+ * Interface DecoratorInterface
+ * @package GI\RDB\DI\Decorator
+ *
+ * @method SQLFactoryInterface getSqlFactory()
+ */
+interface DecoratorInterface extends BaseInterface
 {
     /**
      * @param \PDO $pdo
      * @return PlatformInterface
      * @throws \Exception
      */
-    protected function giGetRDBPlatform(\PDO $pdo)
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getRdbDI()->getPlatform($pdo, static::class);
-    }
-
-    /**
-     * @return SQLFactoryInterface
-     * @throws \Exception
-     */
-    protected function giGetSqlFactory()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getRdbDI()->getSqlFactory(static::class);
-    }
+    public function getPlatform(\PDO $pdo);
 }

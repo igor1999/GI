@@ -89,7 +89,7 @@ trait CollectionTrait
         if (empty($found)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowNotFoundException('Element of collection');
+            $me->getGiServiceLocator()->throwNotFoundException('Element of collection');
         }
 
         return array_shift($found);
@@ -125,7 +125,7 @@ trait CollectionTrait
         if (empty($found)) {
             /** @var ServiceLocatorAwareTrait $me */
             $me = $this;
-            $me->giThrowNotFoundException('Element of collection');
+            $me->getGiServiceLocator()->throwNotFoundException('Element of collection');
         }
 
         return array_shift($found);

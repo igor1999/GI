@@ -15,34 +15,39 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\RDB\DI\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\ServiceLocator\Decorator\AbstractDecorator as Base;
+use GI\ServiceLocator\ServiceLocator;
 
-use GI\Filter\Factory\FactoryInterface as FilterFactoryInterface;
-use GI\Validator\Factory\FactoryInterface as ValidatorFactoryInterface;
+use GI\RDB\DI\DIInterface;
 
-trait FilterValidatorAwareTrait
+use GI\RDB\Platform\PlatformInterface;
+use GI\RDB\SQL\Factory\FactoryInterface as SQLFactoryInterface;
+
+/**
+ * Class Decorator
+ * @package GI\RDB\DI\Decorator
+ *
+ * @method SQLFactoryInterface getSqlFactory()
+ */
+class Decorator extends Base implements DecoratorInterface
 {
     /**
-     * @return FilterFactoryInterface
+     * @return DIInterface
      */
-    protected function giGetFilterFactory()
+    protected function getServiceLocator()
     {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getFilterFactory(static::class);
+        return ServiceLocator::getInstance()->getRdbDI();
     }
 
     /**
-     * @return ValidatorFactoryInterface
+     * @param \PDO $pdo
+     * @return PlatformInterface
+     * @throws \Exception
      */
-    protected function giGetValidatorFactory()
+    public function getPlatform(\PDO $pdo)
     {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getValidatorFactory(static::class);
+        return $this->getServiceLocator()->getPlatform($pdo, $this->getCaller());
     }
 }

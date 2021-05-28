@@ -38,7 +38,7 @@ class IsArray extends AbstractSimple implements IsArrayInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_ARRAY
         );
     }

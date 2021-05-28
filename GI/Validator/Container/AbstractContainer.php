@@ -72,13 +72,14 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
         foreach ($contents as $key => $value) {
             if (is_object($value) && ($value instanceof ValidatorInterface)) {
                 $validator = $value;
-            } elseif (is_array($value) && $this->giGetAssocProcessor()->isAssoc($value)) {
-                $validator = $this->giGetValidatorFactory()->createRecursive($value);
+            } elseif (is_array($value) && $this->getGiServiceLocator()->getUtilites()->getAssocProcessor()
+                    ->isAssoc($value)) {
+                $validator = $this->getGiServiceLocator()->getValidatorFactory()->createRecursive($value);
             } elseif (is_array($value)) {
-                $validator = $this->giGetValidatorFactory()->createChain($value);
+                $validator = $this->getGiServiceLocator()->getValidatorFactory()->createChain($value);
             } else {
                 $validator = null;
-                $this->giThrowInvalidFormatException('Validator', $key, 'validator contents');
+                $this->getGiServiceLocator()->throwInvalidFormatException('Validator', $key, 'validator contents');
             }
 
             $this->_set($key, $validator);
@@ -96,17 +97,17 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $keys = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+            $keys = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
         } catch (\Exception $exception) {
             $keys = null;
-            $this->giThrowMagicMethodException($method);
+            $this->getGiServiceLocator()->throwMagicMethodException($method);
         }
 
         $keys = array_filter(explode(static::KEY_SEPARATOR, $keys));
 
         $f = function($key)
         {
-            return $this->giGetCamelCaseConverter()->convertToHyphenLowerCase($key);
+            return $this->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($key);
         };
         $keys = array_map($f, $keys);
 
@@ -121,7 +122,7 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
     public function findNodeRecursive(array $keys)
     {
         if (empty($keys)) {
-            $this->giThrowIsEmptyException('Keys for recursive search');
+            $this->getGiServiceLocator()->throwIsEmptyException('Keys for recursive search');
         }
 
         $localKey = array_shift($keys);
@@ -132,7 +133,7 @@ abstract class AbstractContainer extends AbstractValidator implements ContainerI
             if ($result instanceof ContainerInterface) {
                 $result = $result->findNodeRecursive($keys);
             } else {
-                $this->giThrowNotFoundException('Node in recursive search');
+                $this->getGiServiceLocator()->throwNotFoundException('Node in recursive search');
             }
         }
 

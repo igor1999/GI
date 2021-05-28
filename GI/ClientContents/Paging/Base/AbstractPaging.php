@@ -61,17 +61,17 @@ abstract class AbstractPaging implements PagingInterface
         $this->getContext()->validateProperties();
 
         if ($entriesTotal < 0) {
-            $this->giThrowInvalidMinimumException('Entries total', $entriesTotal, 0);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Entries total', $entriesTotal, 0);
         }
 
         if ($selectedPage <= 0) {
-            $this->giThrowInvalidMinimumException('Selected page', $selectedPage, 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Selected page', $selectedPage, 1);
         }
 
         if (empty($entriesProPage)) {
             $entriesProPage = $this->getContext()->getSizes()->getFirst();
         } elseif (!$this->getContext()->getSizes()->contains($entriesProPage)) {
-            $this->giThrowCommonException('Items pro page is out of given sizes');
+            $this->getGiServiceLocator()->throwCommonException('Items pro page is out of given sizes');
         }
 
         $this->entriesTotal   = $entriesTotal;
@@ -171,7 +171,7 @@ abstract class AbstractPaging implements PagingInterface
     public function getPrevious()
     {
         if ($this->isFirst()) {
-            $this->giThrowCommonException('This is the first page');
+            $this->getGiServiceLocator()->throwCommonException('This is the first page');
         }
 
         return $this->selectedPage - 1;
@@ -192,7 +192,7 @@ abstract class AbstractPaging implements PagingInterface
     public function getNext()
     {
         if ($this->isLast()) {
-            $this->giThrowCommonException('This is the last page');
+            $this->getGiServiceLocator()->throwCommonException('This is the last page');
         }
 
         return $this->selectedPage + 1;
@@ -240,7 +240,7 @@ abstract class AbstractPaging implements PagingInterface
     protected function createShowedPages(int $firstPage, int $lastPage, int $selectedPage)
     {
         try {
-            $result =$this->giGetDi(
+            $result =$this->getGiServiceLocator()->getDependency(
                 ShowedPagesInterface::class, null, [$firstPage, $lastPage, $selectedPage]
             );
         } catch (\Exception $e) {

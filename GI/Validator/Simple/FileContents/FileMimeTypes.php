@@ -91,7 +91,7 @@ class FileMimeTypes extends AbstractSimple implements FileMimeTypesInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::FILE_MIME_TYPES
         );
     }

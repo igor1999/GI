@@ -52,7 +52,7 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
     {
         parent::__construct($pdo);
 
-        $this->platform = $this->giGetRDBPlatform($this->getPdo());
+        $this->platform = $this->getGiServiceLocator()->getRdbDi()->getPlatform($this->getPdo());
     }
 
     /**
@@ -100,7 +100,7 @@ class Execution extends AbstractBehaviour implements ExecutionInterface
         {
             return $this->getPlatform()->quoteEntity($field);
         };
-        $sql = $this->giGetSqlFactory()->createFieldParser()->parse($sql, $f);
+        $sql = $this->getGiServiceLocator()->getRdbDi()->getSqlFactory()->createFieldParser()->parse($sql, $f);
 
         $statement = $this->getPdo()->prepare($sql);
         $statement->execute($params);

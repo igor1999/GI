@@ -28,7 +28,7 @@ class Date extends AbstractDateTime implements DateInterface
      */
     protected function createValidator()
     {
-        return $this->giGetValidatorFactory()->createDate();
+        return $this->getGiServiceLocator()->getValidatorFactory()->createDate();
     }
 
     /**

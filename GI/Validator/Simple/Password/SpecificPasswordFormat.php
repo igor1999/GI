@@ -43,7 +43,7 @@ class SpecificPasswordFormat extends AbstractSimple implements SpecificPasswordF
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::SPECIFIC_PASSWORD_FORMAT
         );
     }

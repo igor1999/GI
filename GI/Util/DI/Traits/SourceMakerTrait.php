@@ -48,7 +48,7 @@ trait SourceMakerTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(FromFileInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(FromFileInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->fromFile instanceof FromFileInterface)) {
                 $this->fromFile = new FromFile();
@@ -70,7 +70,7 @@ trait SourceMakerTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(FromResourceInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(FromResourceInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->fromResource instanceof FromResourceInterface)) {
                 $this->fromResource = new FromResource();

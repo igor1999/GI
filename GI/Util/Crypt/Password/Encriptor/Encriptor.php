@@ -54,7 +54,7 @@ class Encriptor implements EncriptorInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->algorithm = $context->getAlgorithm();
             $this->options   = $context->getOptions();

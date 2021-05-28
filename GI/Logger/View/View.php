@@ -66,7 +66,7 @@ class View extends AbstractRenderer implements ViewInterface
 
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->maxLength  = $context->getMaxLength();
             $this->dateFormat = $context->getDateFormat();
         }catch (\Exception $e) {

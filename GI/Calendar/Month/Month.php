@@ -87,13 +87,13 @@ class Month implements MonthInterface
     public function getPrevious(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->firstDate;
         $date->sub(new \DateInterval('P' . (int)$interval . 'M'));
 
-        return $this->giGetCalendarFactory()->getMonth($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getMonth($date);
     }
 
     /**
@@ -105,13 +105,13 @@ class Month implements MonthInterface
     public function getNext(int $interval = 1)
     {
         if (!is_numeric($interval) || ($interval <= 0)) {
-            $this->giThrowInvalidTypeException('Interval', $interval, 'positive integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Interval', $interval, 'positive integer');
         }
 
         $date = clone $this->firstDate;
         $date->add(new \DateInterval('P' . (int)$interval . 'M'));
 
-        return $this->giGetCalendarFactory()->getMonth($date);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getMonth($date);
     }
 
     /**
@@ -119,7 +119,7 @@ class Month implements MonthInterface
      */
     public function getWeeks()
     {
-        return $this->giGetCalendarFactory()->getWeekCollection($this->firstDate, $this->lastDate);
+        return $this->getGiServiceLocator()->getCalendarFactory()->getWeekCollection($this->firstDate, $this->lastDate);
     }
 
     /**

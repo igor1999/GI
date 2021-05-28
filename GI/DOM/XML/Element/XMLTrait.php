@@ -40,7 +40,7 @@ trait XMLTrait
      */
     protected function createAttributes()
     {
-        $this->attributes = $this->giGetDi(AttributesInterface::class, Attributes::class);
+        $this->attributes = $this->getGiServiceLocator()->getDependency(AttributesInterface::class, Attributes::class);
 
         return $this;
     }

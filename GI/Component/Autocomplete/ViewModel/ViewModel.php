@@ -63,7 +63,7 @@ class ViewModel extends AbstractViewModel implements ViewModelInterface
     public function getValidator()
     {
         if (!($this->validator instanceof ValidatorInterface)) {
-            $this->validator = $this->giGetDi(ValidatorInterface::class, Validator::class);
+            $this->validator = $this->getGiServiceLocator()->getDependency(ValidatorInterface::class, Validator::class);
         }
 
         return $this->validator;

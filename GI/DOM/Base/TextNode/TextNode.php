@@ -45,7 +45,7 @@ class TextNode implements TextNodeInterface
     {
         $this->setText($text);
 
-        $this->textProcessor = $this->giGetUtilites()->createMarkupTextProcessor();
+        $this->textProcessor = $this->getGiServiceLocator()->getUtilites()->createMarkupTextProcessor();
     }
 
     /**

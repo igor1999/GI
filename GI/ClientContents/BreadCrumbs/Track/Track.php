@@ -64,7 +64,7 @@ class Track implements TrackInterface
     public function add(NodeInterface $node)
     {
         if (in_array($node, $this->nodes)) {
-            $this->giThrowCommonException('Recursive reference by node id \'%s\'', [$node->getId()]);
+            $this->getGiServiceLocator()->throwCommonException('Recursive reference by node id \'%s\'', [$node->getId()]);
         }
 
         array_unshift($this->nodes, $node);

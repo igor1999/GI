@@ -76,7 +76,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -120,7 +120,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getTextbox()
     {
         if (!($this->textbox instanceof TextInterface)) {
-            $this->textbox = $this->giGetDOMFactory()->getInputFactory()->createText($this->getName(), $this->getValue());
+            $this->textbox = $this->getGiServiceLocator()->getDOMFactory()->getInputFactory()->createText($this->getName(), $this->getValue());
 
             $this->textbox->getAttributes()->setAutocompleteToOff();
             $this->textbox->setPlaceholder($this->getContext()->getPlaceholder());
@@ -140,7 +140,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getListContainer()
     {
         if (!($this->listContainer instanceof DivInterface)) {
-            $this->listContainer = $this->giGetDOMFactory()->createDiv();
+            $this->listContainer = $this->getGiServiceLocator()->getDOMFactory()->createDiv();
             $this->listContainer->hide()->getStyle()->setPositionToAbsolute();
         }
 
@@ -154,7 +154,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getList()
     {
         if (!($this->list instanceof ULInterface)) {
-            $this->list = $this->giGetDOMFactory()->createUL();
+            $this->list = $this->getGiServiceLocator()->getDOMFactory()->createUL();
         }
 
         return $this->list;

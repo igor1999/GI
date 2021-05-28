@@ -125,12 +125,12 @@ abstract class AbstractIdentity extends Base implements IdentityInterface
     public function __call(string $method, array $arguments = [])
     {
         try {
-            $has = $this->giGetPSRFormatParser()->parseWithPrefixHas($method);
+            $has = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixHas($method);
         } catch (\Exception $exception) {
             try {
-                $get = $this->giGetPSRFormatParser()->parseWithPrefixGet($method);
+                $get = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser()->parseWithPrefixGet($method);
             } catch (\Exception $exception) {
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
         }
 

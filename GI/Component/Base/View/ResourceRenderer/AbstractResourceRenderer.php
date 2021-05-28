@@ -110,7 +110,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     protected function createClassContentsContainer(string $class)
     {
         try {
-            $result = $this->giGetDi(ClassContentsInterface::class, ClassContents::class, [$class]);
+            $result = $this->getGiServiceLocator()->getDependency(ClassContentsInterface::class, ClassContents::class, [$class]);
         } catch (\Exception $exception) {
             $result = new ClassContents($class);
         }
@@ -125,9 +125,9 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     protected function getImages()
     {
         if (!($this->images instanceof ImagesInterface)) {
-            $option = $this->giGetStorageFactory()->getOptionFactory()->createStringHashSet();
+            $option = $this->getGiServiceLocator()->getStorageFactory()->getOptionFactory()->createStringHashSet();
             $option->setKeyFormatToHyphenLowerCase();
-            $this->images = $this->giGetDi(ImagesInterface::class, Images::class, [[], $option]);
+            $this->images = $this->getGiServiceLocator()->getDependency(ImagesInterface::class, Images::class, [[], $option]);
         }
 
         return $this->images;
@@ -150,7 +150,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     public function get(string $relativeURL)
     {
         if (!$this->has($relativeURL)) {
-            $this->giThrowNotInScopeException($relativeURL);
+            $this->getGiServiceLocator()->throwNotInScopeException($relativeURL);
         }
 
         return $this->items[$relativeURL];
@@ -260,7 +260,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     protected function createJSResource(FSOFileInterface $target, string $relativeURL)
     {
         try {
-            $resource = $this->giGetDi(
+            $resource = $this->getGiServiceLocator()->getDependency(
                 JSInterface::class, JS::class, [$target, $relativeURL]
             );
         } catch (\Exception $exception) {
@@ -278,7 +278,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
     protected function createCSSResource(FSOFileInterface $target, string $relativeURL)
     {
         try {
-            $resource = $this->giGetDi(
+            $resource = $this->getGiServiceLocator()->getDependency(
                 CSSInterface::class, CSS::class, [$target, $relativeURL]
             );
         } catch (\Exception $exception) {
@@ -306,8 +306,8 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
             $targetRelativeDir = static::DEFAULT_TARGET_RELATIVE_DIR;
         }
 
-        $targetBase = $this->giCreateClassDirChildDir($targetClass, $targetRelativeDir);
-        $urlBase    = $this->giCreateFSODir($urlDir);
+        $targetBase = $this->getGiServiceLocator()->createClassDirChildDir($targetClass, $targetRelativeDir);
+        $urlBase    = $this->getGiServiceLocator()->createFSODir($urlDir);
 
         foreach ($css as $path) {
             $this->addCSSByRelativePath($targetBase, $urlBase, $path);
@@ -318,7 +318,7 @@ abstract class AbstractResourceRenderer implements ResourceRendererInterface
         }
 
         foreach ($images as $key => $path) {
-            $urlHolder = $this->giCreateURLHolderByRelativePath($targetBase, $urlBase, $path);
+            $urlHolder = $this->getGiServiceLocator()->createURLHolderByRelativePath($targetBase, $urlBase, $path);
             if (is_string($key)) {
                 $this->getImages()->set($key, $urlHolder->getUrlWithModificationTime());
             }

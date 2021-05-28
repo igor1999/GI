@@ -50,7 +50,7 @@ abstract class AbstractValidator extends Recursive implements ValidatorInterface
 
         parent::__construct();
 
-        $param = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'Captcha');
+        $param = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'Captcha');
         $this->getValue()->setValidatedParam($param);
     }
 
@@ -72,7 +72,7 @@ abstract class AbstractValidator extends Recursive implements ValidatorInterface
      */
     protected function getContents()
     {
-        $factory = $this->giGetValidatorFactory();
+        $factory = $this->getGiServiceLocator()->getValidatorFactory();
 
         $idFinder = function()
         {

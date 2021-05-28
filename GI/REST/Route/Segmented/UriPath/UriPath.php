@@ -37,7 +37,7 @@ class UriPath extends AbstractSegmented implements UriPathInterface
      */
     protected function createFormatter()
     {
-        $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+        $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
 
         return $this;
     }

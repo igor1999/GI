@@ -43,7 +43,7 @@ trait TextProcessorTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(
+            $result = $me->getGiServiceLocator()->getDi()->find(
                 MarkupTextProcessorInterface::class, $caller
             );
         } catch (\Exception $e) {
@@ -63,7 +63,7 @@ trait TextProcessorTrait
         $me = $this;
 
         try {
-            $result = $me->giGetServiceLocator()->getDi()->find(SplitterInterface::class, $caller);
+            $result = $me->getGiServiceLocator()->getDi()->find(SplitterInterface::class, $caller);
         } catch (\Exception $e) {
             if (!($this->misc instanceof SplitterInterface)) {
                 $this->misc = new Splitter();

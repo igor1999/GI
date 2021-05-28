@@ -64,7 +64,7 @@ abstract class AbstractAuthor extends AbstractResult implements AuthorInterface
     {
         try {
             /** @var IdentityInterface $identity */
-            $identity = $this->giGetDi(IdentityInterface::class);
+            $identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
             $this->setAuthor($identity->getLogin());
         } catch (\Exception $e) {}
 

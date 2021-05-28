@@ -72,11 +72,11 @@ abstract class AbstractBuilder implements BuilderInterface
 
         $this->createTableBuilders();
 
-        $this->factoryClassView = $this->giGetDi(
+        $this->factoryClassView = $this->getGiServiceLocator()->getDependency(
             FactoryClassViewInterface::class, FactoryClassView::class
         );
 
-        $this->factoryInterfaceView = $this->giGetDi(
+        $this->factoryInterfaceView = $this->getGiServiceLocator()->getDependency(
             FactoryInterfaceViewInterface::class, FactoryInterfaceView::class
         );
     }
@@ -102,7 +102,7 @@ abstract class AbstractBuilder implements BuilderInterface
     protected function createTableBuilder(TableInterface $table)
     {
         try {
-            $builder = $this->giGetDi(
+            $builder = $this->getGiServiceLocator()->getDependency(
                 TableBuilderInterface::class,
                 null,
                 [$table, $this->getOrmDir(), $this->getOrmNamespace(), $this->getBaseNamespace()]

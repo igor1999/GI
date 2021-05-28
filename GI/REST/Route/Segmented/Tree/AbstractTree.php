@@ -38,7 +38,7 @@ abstract class AbstractTree extends AbstractFactory implements TreeInterface
      */
     public function getParent()
     {
-        $this->giThrowNotSetException('Parent tree');
+        $this->getGiServiceLocator()->throwNotSetException('Parent tree');
     }
 
     /**
@@ -51,7 +51,7 @@ abstract class AbstractTree extends AbstractFactory implements TreeInterface
      */
     protected function getConstraints()
     {
-        return $this->giGetRouteFactory()->createConstraints();
+        return $this->getGiServiceLocator()->getRouteFactory()->createConstraints();
     }
 
     /**
@@ -132,14 +132,14 @@ abstract class AbstractTree extends AbstractFactory implements TreeInterface
         try {
             $result = parent::__call($method, $arguments);
         } catch (\Exception $e) {
-            $parser  = $this->giGetPSRFormatParser();
-            $builder = $this->giGetPSRFormatBuilder();
+            $parser  = $this->getGiServiceLocator()->getUtilites()->getPSRFormatParser();
+            $builder = $this->getGiServiceLocator()->getUtilites()->getPSRFormatBuilder();
 
             list($routeName, $params) = $parser->parseBuildWithArgumentList($method);
             $getter = $builder->buildGet($routeName);
 
             if (!method_exists($this, $getter)) {
-                $this->giThrowMagicMethodException($method);
+                $this->getGiServiceLocator()->throwMagicMethodException($method);
             }
 
             $route = call_user_func([$this, $getter]);
@@ -148,7 +148,7 @@ abstract class AbstractTree extends AbstractFactory implements TreeInterface
                 $result = $route->build($this->createBuildArguments($params, $arguments));
             } else {
                 $result = null;
-                $this->giThrowInvalidTypeException('Result of method', $method, 'route');
+                $this->getGiServiceLocator()->throwInvalidTypeException('Result of method', $method, 'route');
             }
         }
 
@@ -164,7 +164,7 @@ abstract class AbstractTree extends AbstractFactory implements TreeInterface
     protected function createBuildArguments(array $params, array $arguments)
     {
         if (count($params) != count($arguments)) {
-            $this->giThrowCommonException('Number of params failed');
+            $this->getGiServiceLocator()->throwCommonException('Number of params failed');
         }
 
         return array_combine($params, $arguments);

@@ -67,7 +67,7 @@ class Table extends ContainerElement implements TableInterface
      */
     protected function createChildNodes()
     {
-        $this->childNodes = $this->giGetDi(ItemListInterface::class, ItemList::class);
+        $this->childNodes = $this->getGiServiceLocator()->getDependency(ItemListInterface::class, ItemList::class);
 
         return $this;
     }

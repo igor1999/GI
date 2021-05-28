@@ -57,15 +57,15 @@ class ImageText extends AbstractComponent implements ImageTextInterface
      */
     public function __construct(ViewModelInterface $viewModel = null)
     {
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
 
         if ($viewModel instanceof ViewModelInterface) {
             $this->viewModel = $viewModel;
         } else {
-            $this->viewModel = $this->giGetDi(ViewModelInterface::class, ViewModel::class);
+            $this->viewModel = $this->getGiServiceLocator()->getDependency(ViewModelInterface::class, ViewModel::class);
         }
 
-        $this->secureCaptcha = $this->giGetDi(SecureCaptchaInterface::class, SecureCaptcha::class);
+        $this->secureCaptcha = $this->getGiServiceLocator()->getDependency(SecureCaptchaInterface::class, SecureCaptcha::class);
 
         $this->createRecaptchaURI();
     }
@@ -110,11 +110,11 @@ class ImageText extends AbstractComponent implements ImageTextInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
 
             $this->recaptchaURI = $context->getRecaptchaURI();
         } catch (\Exception $e) {
-            $this->giThrowDependencyException('ContextInterface');
+            $this->getGiServiceLocator()->throwDependencyException('ContextInterface');
         }
 
         return $this;

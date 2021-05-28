@@ -37,7 +37,7 @@ abstract class AbstractResponse implements ResponseInterface
      */
     public function __construct()
     {
-        $this->headers = $this->giGetResponseFactory()->getHeaderFactory()->createCollection();
+        $this->headers = $this->getGiServiceLocator()->getResponseFactory()->getHeaderFactory()->createCollection();
     }
 
     /**

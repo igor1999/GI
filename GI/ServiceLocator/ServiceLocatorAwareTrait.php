@@ -17,46 +17,27 @@
  */
 namespace GI\ServiceLocator;
 
-use GI\ServiceLocator\AwareTraits\CLIAwareTrait;
-use GI\ServiceLocator\AwareTraits\DIAwareTrait;
-use GI\ServiceLocator\AwareTraits\ExceptionAwareTrait;
-use GI\ServiceLocator\AwareTraits\FileSystemAwareTrait;
-use GI\ServiceLocator\AwareTraits\FilterValidatorAwareTrait;
-use GI\ServiceLocator\AwareTraits\I18nAwareTrait;
-use GI\ServiceLocator\AwareTraits\IdentityAwareTrait;
-use GI\ServiceLocator\AwareTraits\JsonAwareTrait;
-use GI\ServiceLocator\AwareTraits\MetaAwareTrait;
-use GI\ServiceLocator\AwareTraits\MiscAwareTrait;
-use GI\ServiceLocator\AwareTraits\RDBAwareTrait;
-use GI\ServiceLocator\AwareTraits\RESTAwareTrait;
-use GI\ServiceLocator\AwareTraits\SecurityAwareTrait;
-use GI\ServiceLocator\AwareTraits\UtilAwareTrait;
-use GI\ServiceLocator\AwareTraits\ViewAwareTrait;
+use GI\ServiceLocator\Decorator\GI\Decorator;
+
+use GI\ServiceLocator\Decorator\GI\DecoratorInterface;
 
 trait ServiceLocatorAwareTrait
 {
-    use CLIAwareTrait,
-        DIAwareTrait,
-        ExceptionAwareTrait,
-        FileSystemAwareTrait,
-        FilterValidatorAwareTrait,
-        I18nAwareTrait,
-        IdentityAwareTrait,
-        JsonAwareTrait,
-        MetaAwareTrait,
-        MiscAwareTrait,
-        RDBAwareTrait,
-        RESTAwareTrait,
-        SecurityAwareTrait,
-        UtilAwareTrait,
-        ViewAwareTrait;
+    /**
+     * @var ServiceLocatorInterface
+     */
+    private $giServiceLocator;
 
 
     /**
-     * @return ServiceLocatorInterface
+     * @return DecoratorInterface
      */
-    protected function giGetServiceLocator()
+    protected function getGiServiceLocator()
     {
-        return ServiceLocator::getInstance();
+        if (!($this->giServiceLocator instanceof DecoratorInterface)) {
+            $this->giServiceLocator = new Decorator(static::class);
+        }
+
+        return $this->giServiceLocator;
     }
 }

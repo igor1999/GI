@@ -39,11 +39,11 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateSize()
     {
         if (!is_int($this->getSize())) {
-            $this->giThrowInvalidTypeException('Size', $this->getSize(), 'integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Size', $this->getSize(), 'integer');
         }
 
         if ($this->getSize() < 1) {
-            $this->giThrowInvalidMinimumException('Size', $this->getSize(), 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Size', $this->getSize(), 1);
         }
     }
 }

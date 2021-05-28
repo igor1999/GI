@@ -66,7 +66,7 @@ class Alphabet implements AlphabetInterface
     {
         try {
             /** @var ContextInterface $context */
-            $context = $this->giGetDi(ContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(ContextInterface::class);
             $this->custom = $context->getCustom();
         } catch (\Exception $e) {}
     }

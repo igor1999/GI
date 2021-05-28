@@ -47,17 +47,17 @@ trait ValueFormatTrait
         if ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_CAMEL_CASE_UCFIRST) {
             $value = ucfirst($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_HYPHEN_UPPER_CASE) {
-            $value = $me->giGetCamelCaseConverter()->convertToHyphenUpperCase($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenUpperCase($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_HYPHEN_LOWER_CASE) {
-            $value = $me->giGetCamelCaseConverter()->convertToHyphenLowerCase($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenLowerCase($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_HYPHEN_UCFIRST) {
-            $value = $me->giGetCamelCaseConverter()->convertToHyphenUpperFirst($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToHyphenUpperFirst($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_UNDERLINE_UPPER_CASE) {
-            $value = $me->giGetCamelCaseConverter()->convertToUnderlineUpperCase($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineUpperCase($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_UNDERLINE_LOWER_CASE) {
-            $value = $me->giGetCamelCaseConverter()->convertToUnderlineLowerCase($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineLowerCase($value);
         } elseif ($this->getValueFormat() == OptionInterface::VALUE_FORMAT_UNDERLINE_UCFIRST) {
-            $value = $me->giGetCamelCaseConverter()->convertToUnderlineUpperFirst($value);
+            $value = $me->getGiServiceLocator()->getUtilites()->getCamelCaseConverter()->convertToUnderlineUpperFirst($value);
         }
 
         return $value;

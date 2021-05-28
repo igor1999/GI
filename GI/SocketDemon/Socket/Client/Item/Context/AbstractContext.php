@@ -14,6 +14,6 @@ abstract class AbstractContext implements ContextInterface
      */
     public function getBufferLength()
     {
-        $this->giThrowNotSetException('Buffer length');
+        $this->getGiServiceLocator()->throwNotSetException('Buffer length');
     }
 }

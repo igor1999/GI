@@ -37,7 +37,7 @@ class NotInArray extends InArray implements NotInArrayInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::IS_NOT_IN_ARRAY
         );
     }

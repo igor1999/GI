@@ -40,10 +40,10 @@ class Validator extends Recursive implements ValidatorInterface
     {
         parent::__construct();
 
-        $validatedParam = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'login');
+        $validatedParam = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'login');
         $this->getLogin()->setValidatedParam($validatedParam);
 
-        $validatedParam = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'password');
+        $validatedParam = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'password');
         $this->getPassword()->setValidatedParam($validatedParam);
     }
 
@@ -52,7 +52,7 @@ class Validator extends Recursive implements ValidatorInterface
      */
     protected function getContents()
     {
-        $factory = $this->giGetValidatorFactory();
+        $factory = $this->getGiServiceLocator()->getValidatorFactory();
 
         return [
             'login'    => $factory->createNotEmpty(),

@@ -51,7 +51,7 @@ class Decoder extends AbstractJson implements DecoderInterface
      */
     public function __construct()
     {
-        $this->flags = $this->giGetDi(FlagsInterface::class, Flags::class);
+        $this->flags = $this->getGiServiceLocator()->getDependency(FlagsInterface::class, Flags::class);
     }
 
     /**

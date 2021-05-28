@@ -15,22 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\AwareTraits;
+namespace GI\RDB\DI\Decorator;
 
-use GI\ServiceLocator\ServiceLocatorAwareTrait;
-
-use GI\Identity\Access\ProfileInterface as AccessProfileInterface;
-
-trait IdentityAwareTrait
+interface DecoratorAwareInterface
 {
     /**
-     * @return AccessProfileInterface
+     * @return DecoratorInterface
      */
-    protected function giGetAccessProfile()
-    {
-        /** @var ServiceLocatorAwareTrait $me */
-        $me = $this;
-
-        return $me->giGetServiceLocator()->getAccessProfile(static::class);
-    }
+    public function getRdbDi();
 }

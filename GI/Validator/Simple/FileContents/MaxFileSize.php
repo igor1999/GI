@@ -76,7 +76,7 @@ class MaxFileSize extends AbstractSimple implements MaxFileSizeInterface
      */
     protected function getMessage()
     {
-        return $this->giTranslate(
+        return $this->getGiServiceLocator()->translate(
             GlossaryInterface::class, Glossary::class,DefaultMessages::MAX_FILE_SIZE
         );
     }

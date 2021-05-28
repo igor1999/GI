@@ -70,7 +70,7 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     public function __construct()
     {
-        $this->resourceRenderer = $this->giGetDi(
+        $this->resourceRenderer = $this->getGiServiceLocator()->getDependency(
             ResourceRendererInterface::class, ResourceRenderer::class
         );
     }
@@ -108,7 +108,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getContainer()
     {
         if (!($this->container instanceof LayoutInterface)) {
-            $this->container = $this->giGetDOMFactory()->createLayout();
+            $this->container = $this->getGiServiceLocator()->getDOMFactory()->createLayout();
         }
 
         return $this->container;
@@ -121,7 +121,7 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getSalutationSpan()
     {
         if (!($this->salutationSpan instanceof SpanInterface)) {
-            $this->salutationSpan = $this->giGetDOMFactory()->createSpan();
+            $this->salutationSpan = $this->getGiServiceLocator()->getDOMFactory()->createSpan();
 
             $this->salutationSpan->getChildNodes()->set($this->getSalutation());
         }
@@ -137,9 +137,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     protected function getLogoutLink()
     {
         if (!($this->logoutLink instanceof HyperlinkInterface)) {
-            $title = $this->giTranslate(GlossaryInterface::class, Glossary::class, 'sign out');
+            $title = $this->getGiServiceLocator()->translate(GlossaryInterface::class, Glossary::class, 'sign out');
 
-            $this->logoutLink = $this->giGetDOMFactory()->createHyperlink('', $title)->setHrefToMock();
+            $this->logoutLink = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink('', $title)->setHrefToMock();
 
             $action = $this->getLogoutAction();
 

@@ -46,7 +46,7 @@ class AddressList implements AddressListInterface
     public function get(int $index)
     {
         if (!$this->has($index)) {
-            $this->giThrowNotInScopeException($index);
+            $this->getGiServiceLocator()->throwNotInScopeException($index);
         }
 
         return $this->items[$index];
@@ -109,7 +109,7 @@ class AddressList implements AddressListInterface
     protected function createAddress(string $email, string $name)
     {
         try {
-            $result = $this->giGetDi(AddressInterface::class, null, [$email, $name]);
+            $result = $this->getGiServiceLocator()->getDependency(AddressInterface::class, null, [$email, $name]);
         } catch (\Exception $e) {
             $result = new Address($email, $name);
         }
@@ -149,7 +149,7 @@ class AddressList implements AddressListInterface
     public function validateIfNotEmpty()
     {
         if ($this->isEmpty()) {
-            $this->giThrowIsEmptyException('Address list');
+            $this->getGiServiceLocator()->throwIsEmptyException('Address list');
         }
 
         return $this;

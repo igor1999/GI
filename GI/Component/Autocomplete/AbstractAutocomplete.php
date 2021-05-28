@@ -54,7 +54,7 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
         $this->name  = $name;
         $this->value = $value;
 
-        $this->view = $this->giGetDi(WidgetInterface::class, Widget::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(WidgetInterface::class, Widget::class);
 
         $this->createContext();
     }
@@ -104,7 +104,7 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
      */
     protected function createContext()
     {
-        return $this->giGetDi(ContextInterface::class);
+        return $this->getGiServiceLocator()->getDependency(ContextInterface::class);
     }
 
     /**
@@ -117,7 +117,7 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
         $viewModel = $this->createViewModel()->hydrate($data);
 
         if (!$viewModel->validate()) {
-            $this->giThrowCommonException($viewModel->getValidator()->getFirstMessage());
+            $this->getGiServiceLocator()->throwCommonException($viewModel->getValidator()->getFirstMessage());
         }
 
         return $this->createList($viewModel->getSearch());
@@ -135,7 +135,7 @@ abstract class AbstractAutocomplete extends AbstractComponent implements Autocom
     protected function createViewModel()
     {
         try {
-            $result = $this->giGetDi(ViewModelInterface::class);
+            $result = $this->getGiServiceLocator()->getDependency(ViewModelInterface::class);
         } catch (\Exception $e) {
             $result = new ViewModel();
         }

@@ -143,7 +143,7 @@ abstract class AbstractFSO implements FSOInterface
      */
     protected function getFactory()
     {
-        return $this->giGetFileSystemFactory();
+        return $this->getGiServiceLocator()->getFileSystemFactory();
     }
 
     /**
@@ -154,7 +154,7 @@ abstract class AbstractFSO implements FSOInterface
     public function createParent(int $up = 1)
     {
         if ($up < 1) {
-            $this->giThrowInvalidMinimumException('Up', $up, 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Up', $up, 1);
         }
 
         $path = $this->path;

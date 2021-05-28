@@ -87,7 +87,7 @@ class Option implements OptionInterface
     public function getContainer()
     {
         if (!$this->hasContainer()) {
-            $this->giThrowNotSetException('Option container');
+            $this->getGiServiceLocator()->throwNotSetException('Option container');
         }
 
         return $this->container;
@@ -130,7 +130,7 @@ class Option implements OptionInterface
     public function getPopup()
     {
         if (!$this->hasPopup()) {
-            $this->giThrowNotSetException('Popup');
+            $this->getGiServiceLocator()->throwNotSetException('Popup');
         }
 
         return $this->popup;
@@ -144,7 +144,7 @@ class Option implements OptionInterface
     public function setPopup(MenuInterface $popup)
     {
         if ($this->hasPopup()) {
-            $this->giThrowAlreadySetException('Popup');
+            $this->getGiServiceLocator()->throwAlreadySetException('Popup');
         }
 
         $this->popup = $popup;

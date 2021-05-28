@@ -39,11 +39,11 @@ class Context extends AbstractContext implements ContextInterface
     protected function validateReach()
     {
         if (!is_int($this->getReach())) {
-            $this->giThrowInvalidTypeException('Reach', $this->getReach(), 'integer');
+            $this->getGiServiceLocator()->throwInvalidTypeException('Reach', $this->getReach(), 'integer');
         }
 
         if ($this->getReach() < 1) {
-            $this->giThrowInvalidMinimumException('Reach', $this->getReach(), 1);
+            $this->getGiServiceLocator()->throwInvalidMinimumException('Reach', $this->getReach(), 1);
         }
     }
 }

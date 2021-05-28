@@ -63,7 +63,7 @@ class Tracing implements TracingInterface
         };
         $this->options = array_values(array_filter($this->options, $f));
 
-        $this->view = $this->giGetDi(ViewInterface::class, View::class);
+        $this->view = $this->getGiServiceLocator()->getDependency(ViewInterface::class, View::class);
     }
 
     /**
@@ -74,7 +74,7 @@ class Tracing implements TracingInterface
     protected function createOption(array $contents)
     {
         try {
-            $result = $this->giGetDi(OptionInterface::class, null, [$contents]);
+            $result = $this->getGiServiceLocator()->getDependency(OptionInterface::class, null, [$contents]);
         } catch (\Exception $exception) {
             $result = new Option($contents);
         }

@@ -37,7 +37,7 @@ class Host extends AbstractSegmented implements HostInterface
      */
     protected function createFormatter()
     {
-        $this->formatter = $this->giGetDi(FormatterInterface::class, Formatter::class);
+        $this->formatter = $this->getGiServiceLocator()->getDependency(FormatterInterface::class, Formatter::class);
 
         return $this;
     }

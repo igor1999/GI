@@ -61,13 +61,13 @@ abstract class AbstractOrdered extends TH implements OrderedInterface
 
         $criteria       = $this->getOrderCriteria();
         $direction      = $this->isOrderBothDirections();
-        $this->ordering = $this->giGetDi(
+        $this->ordering = $this->getGiServiceLocator()->getDependency(
             TableOrderingInterface::class,TableOrdering::class, [$criteria, $direction]
         );
 
         $this->ordering->setOrdering($actualOrderCriteria, $actualOrderDirection);
 
-        $this->hyperlink = $this->giGetDOMFactory()->createHyperlink('', $this->getCaption())->setHrefToMock();
+        $this->hyperlink = $this->getGiServiceLocator()->getDOMFactory()->createHyperlink('', $this->getCaption())->setHrefToMock();
 
         $this->hyperlink->getAttributes()
             ->setDataAttribute(static::ATTRIBUTE_ORDER_CRITERIA, $this->ordering->getCriteria())

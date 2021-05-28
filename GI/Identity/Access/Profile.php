@@ -54,9 +54,9 @@ class Profile extends ArrayList implements ProfileInterface
     protected function createIdentity()
     {
         try {
-            $this->identity = $this->giGetDi(IdentityInterface::class);
+            $this->identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
         } catch (\Exception $e) {
-            $this->giThrowDependencyException(IdentityInterface::class);
+            $this->getGiServiceLocator()->throwDependencyException(IdentityInterface::class);
         }
 
         return $this;

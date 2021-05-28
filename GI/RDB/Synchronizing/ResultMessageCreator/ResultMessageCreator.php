@@ -70,7 +70,7 @@ class ResultMessageCreator implements ResultMessageCreatorInterface
      */
     public function __construct()
     {
-        $this->context = $this->giGetDi(ContextInterface::class, Context::class);
+        $this->context = $this->getGiServiceLocator()->getDependency(ContextInterface::class, Context::class);
     }
 
     /**
@@ -194,7 +194,7 @@ class ResultMessageCreator implements ResultMessageCreatorInterface
      */
     protected function create(string $title, string $message, string $foregroundColor, string $backgroundColor)
     {
-        $title = $this->giGetCliFactory()->createColorizing()->colorize(
+        $title = $this->getGiServiceLocator()->getCliFactory()->createColorizing()->colorize(
             $title, $foregroundColor, $backgroundColor
         );
 
