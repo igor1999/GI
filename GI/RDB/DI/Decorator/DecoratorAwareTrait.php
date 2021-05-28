@@ -17,8 +17,6 @@
  */
 namespace GI\RDB\DI\Decorator;
 
-use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
-
 trait DecoratorAwareTrait
 {
     /**
@@ -33,10 +31,7 @@ trait DecoratorAwareTrait
     public function getRdbDi()
     {
         if (!($this->rdbDi instanceof DecoratorInterface)) {
-            /** @var BaseInterface $me */
-            $me = $this;
-
-            $this->rdbDi = new Decorator($me->getCaller());
+            $this->rdbDi = new Decorator($this->getCaller());
         }
 
         return $this->rdbDi;

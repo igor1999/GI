@@ -15,25 +15,12 @@
  * You should have received a copy of the GNU General Public License
  * along with PHP-framework GI. If not, see <https://www.gnu.org/licenses/>.
  */
-namespace GI\ServiceLocator\Decorator\GI;
+namespace GI\ServiceLocator\Decorator\Module;
 
-trait DecoratorAwareTrait
+use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
+use GI\ServiceLocator\Decorator\GI\DecoratorAwareInterface;
+
+interface DecoratorInterface extends BaseInterface, DecoratorAwareInterface
 {
-    /**
-     * @var DecoratorInterface
-     */
-    private $giServiceLocator;
 
-
-    /**
-     * @return DecoratorInterface
-     */
-    public function getGiServiceLocator()
-    {
-        if (!($this->giServiceLocator instanceof DecoratorInterface)) {
-            $this->giServiceLocator = new Decorator($this->getCaller());
-        }
-
-        return $this->giServiceLocator;
-    }
 }

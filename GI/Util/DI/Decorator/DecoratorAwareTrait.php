@@ -17,8 +17,6 @@
  */
 namespace GI\Util\DI\Decorator;
 
-use GI\ServiceLocator\Decorator\DecoratorInterface as BaseInterface;
-
 trait DecoratorAwareTrait
 {
     /**
@@ -33,10 +31,7 @@ trait DecoratorAwareTrait
     public function getUtilites()
     {
         if (!($this->utilites instanceof DecoratorInterface)) {
-            /** @var BaseInterface $me */
-            $me = $this;
-
-            $this->utilites = new Decorator($me->getCaller());
+            $this->utilites = new Decorator($this->getCaller());
         }
 
         return $this->utilites;
