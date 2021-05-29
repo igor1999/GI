@@ -2,9 +2,10 @@
 
 namespace GI\Component\Base\View\Siblings;
 
+use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Pattern\ArrayExchange\ExtractionTrait;
 
 abstract class AbstractSiblings implements SiblingsInterface
 {
-    use ExtractionTrait;
+    use ServiceLocatorAwareTrait, ExtractionTrait;
 }
