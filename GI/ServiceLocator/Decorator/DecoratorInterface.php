@@ -20,7 +20,7 @@ namespace GI\ServiceLocator\Decorator;
 interface DecoratorInterface
 {
     /**
-     * @return string
+     * @return mixed
      */
     public function getCaller();
 }

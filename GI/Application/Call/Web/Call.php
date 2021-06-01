@@ -229,7 +229,7 @@ class Call extends AbstractCall implements CallInterface
     {
         try {
             /** @var UserLocaleContextInterface $context */
-            $context = $this->getGiServiceLocator()->getDi(UserLocaleContextInterface::class);
+            $context = $this->getGiServiceLocator()->getDependency(UserLocaleContextInterface::class);
 
             $cookie = $context->getCookieName();
             $locale = $this->findLocale($context);

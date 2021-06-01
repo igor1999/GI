@@ -29,7 +29,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwAlreadyExistException($title, $this, $previous);
+        $me->getServiceLocator()->throwAlreadyExistException($title, $this->getCaller(), $previous);
     }
 
     /**
@@ -42,7 +42,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwAlreadySetException($title, $this, $previous);
+        $me->getServiceLocator()->throwAlreadySetException($title, $this->getCaller(), $previous);
     }
 
     /**
@@ -56,7 +56,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwCommonException($this, $message, $messageParams, $previous);
+        $me->getServiceLocator()->throwCommonException($this->getCaller(), $message, $messageParams, $previous);
     }
 
     /**
@@ -69,7 +69,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwDependencyException($dependency, $this, $previous);
+        $me->getServiceLocator()->throwDependencyException($dependency, $this->getCaller(), $previous);
     }
 
     /**
@@ -85,7 +85,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwInvalidFormatException($title, $value, $format, $this, $previous);
+        $me->getServiceLocator()->throwInvalidFormatException($title, $value, $format, $this->getCaller(), $previous);
     }
 
     /**
@@ -100,7 +100,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwInvalidMaximumException($title, $value, $maximum, $this, $previous);
+        $me->getServiceLocator()->throwInvalidMaximumException($title, $value, $maximum, $this->getCaller(), $previous);
     }
 
     /**
@@ -115,7 +115,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwInvalidMinimumException($title, $value, $minimum, $this, $previous);
+        $me->getServiceLocator()->throwInvalidMinimumException($title, $value, $minimum, $this->getCaller(), $previous);
     }
 
     /**
@@ -131,7 +131,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwInvalidTypeException($title, $value, $type, $this, $previous);
+        $me->getServiceLocator()->throwInvalidTypeException($title, $value, $type, $this->getCaller(), $previous);
     }
 
     /**
@@ -147,7 +147,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwInvalidValueException($title, $value, $template, $this, $previous);
+        $me->getServiceLocator()->throwInvalidValueException($title, $value, $template, $this->getCaller(), $previous);
     }
 
     /**
@@ -160,7 +160,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwIsEmptyException($title, $this, $previous);
+        $me->getServiceLocator()->throwIsEmptyException($title, $this->getCaller(), $previous);
     }
 
     /**
@@ -173,7 +173,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwMagicMethodException($method, $this, $previous);
+        $me->getServiceLocator()->throwMagicMethodException($method, $this->getCaller(), $previous);
     }
 
     /**
@@ -187,7 +187,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwNotFoundException($title, $param, $this, $previous);
+        $me->getServiceLocator()->throwNotFoundException($title, $param, $this->getCaller(), $previous);
     }
 
     /**
@@ -200,7 +200,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwNotGivenException($title, $this, $previous);
+        $me->getServiceLocator()->throwNotGivenException($title, $this->getCaller(), $previous);
     }
 
     /**
@@ -213,7 +213,7 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwNotInScopeException($key, $this, $previous);
+        $me->getServiceLocator()->throwNotInScopeException($key, $this->getCaller(), $previous);
     }
 
     /**
@@ -226,6 +226,6 @@ trait ExceptionAwareTrait
         /** @var DecoratorInterface $me */
         $me = $this;
 
-        $me->getServiceLocator()->throwNotSetException($title, $this, $previous);
+        $me->getServiceLocator()->throwNotSetException($title, $this->getCaller(), $previous);
     }
 }

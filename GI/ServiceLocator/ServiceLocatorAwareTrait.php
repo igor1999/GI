@@ -35,7 +35,7 @@ trait ServiceLocatorAwareTrait
     protected function getGiServiceLocator()
     {
         if (!($this->giServiceLocator instanceof DecoratorInterface)) {
-            $this->giServiceLocator = new Decorator(static::class);
+            $this->giServiceLocator = new Decorator($this);
         }
 
         return $this->giServiceLocator;

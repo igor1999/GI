@@ -159,7 +159,7 @@ class Decorator extends Base implements DecoratorInterface
      */
     public function getDependency(string $interface, $default = null, array $params = [])
     {
-        return $this->getServiceLocator()->getDi()->find($interface, static::class, $default, $params);
+        return $this->getServiceLocator()->getDi()->find($interface, $this->getCallerClass(), $default, $params);
     }
 
     /**
@@ -336,7 +336,7 @@ class Decorator extends Base implements DecoratorInterface
     public function getClassMeta($source = null)
     {
         if (empty($source)) {
-            $source = static::class;
+            $source = $this->getCallerClass();
         }
 
         return $this->getMeta()->getClassMeta($source);
@@ -349,7 +349,7 @@ class Decorator extends Base implements DecoratorInterface
      */
     public function extract(string $descriptor = null)
     {
-        return $this->getClassMeta()->extract($this, $descriptor);
+        return $this->getClassMeta()->extract($this->getCaller(), $descriptor);
     }
 
     /**
@@ -360,7 +360,7 @@ class Decorator extends Base implements DecoratorInterface
      */
     public function hydrate(array $data, string $descriptor = null)
     {
-        $this->getClassMeta()->hydrate($this, $data, $descriptor);
+        $this->getClassMeta()->hydrate($this->getCaller(), $data, $descriptor);
 
         return $this;
     }
@@ -372,7 +372,7 @@ class Decorator extends Base implements DecoratorInterface
      */
     public function validate(string $descriptor = null)
     {
-        $this->getClassMeta()->getMethods()->validate($this, $descriptor);
+        $this->getClassMeta()->getMethods()->validate($this->getCaller(), $descriptor);
 
         return $this;
     }

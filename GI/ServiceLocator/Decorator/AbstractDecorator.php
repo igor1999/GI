@@ -20,22 +20,22 @@ namespace GI\ServiceLocator\Decorator;
 abstract class AbstractDecorator implements DecoratorInterface
 {
     /**
-     * @var string
+     * @var mixed
      */
     private $caller;
 
 
     /**
      * AbstractDecorator constructor.
-     * @param string $caller
+     * @param mixed $caller
      */
-    public function __construct(string $caller)
+    public function __construct($caller)
     {
         $this->caller = $caller;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getCaller()
     {
@@ -43,14 +43,22 @@ abstract class AbstractDecorator implements DecoratorInterface
     }
 
     /**
-     * @param string $caller
+     * @param mixed $caller
      * @return static
      */
-    protected function setCaller(string $caller)
+    protected function setCaller($caller)
     {
         $this->caller = $caller;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCallerClass()
+    {
+        return get_class($this->getCaller());
     }
 
     /**
@@ -68,7 +76,7 @@ abstract class AbstractDecorator implements DecoratorInterface
         $serviceLocator = $this->getServiceLocator();
 
         if (method_exists($serviceLocator, $method)) {
-            $result = call_user_func([$serviceLocator, $method], $this->caller);
+            $result = call_user_func([$serviceLocator, $method], $this->getCallerClass());
         } else {
             $result = null;
             die('Method ' . $method . ' of class ' . get_class($serviceLocator) . ' not found');
