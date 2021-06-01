@@ -48,6 +48,6 @@ class Decorator extends Base implements DecoratorInterface
      */
     public function getPlatform(\PDO $pdo)
     {
-        return $this->getServiceLocator()->getPlatform($pdo, $this->getCaller());
+        return $this->getServiceLocator()->getPlatform($pdo, $this->getCallerClass());
     }
 }
