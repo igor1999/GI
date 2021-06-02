@@ -112,7 +112,7 @@ class Call extends AbstractCall implements CallInterface
     {
         if (!($this->identity instanceof IdentityInterface)) {
             try {
-                $this->identity = $this->getGiServiceLocator()->getDi(IdentityInterface::class);
+                $this->identity = $this->getGiServiceLocator()->getDependency(IdentityInterface::class);
             } catch (\Exception $e) {}
         }
 
@@ -282,7 +282,8 @@ class Call extends AbstractCall implements CallInterface
     protected function createSymlinksDir()
     {
         /** @var URLHolderContextInterface $context */
-        $context = $this->getGiServiceLocator()->getDi(URLHolderContextInterface::class, URLHolderContext::class);
+        $context = $this->getGiServiceLocator()
+            ->getDependency(URLHolderContextInterface::class, URLHolderContext::class);
 
         $context->getWebRoot()->create();
 
