@@ -504,48 +504,42 @@ abstract class AbstractSet implements SetInterface
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      * @throws \Exception
      */
     public function insert(SQLBuilderInterface $builder = null)
     {
-        $result = 0;
-
         foreach ($this->getItems() as $item) {
-            $result += $item->insert($builder);
+            $item->insert($builder);
         }
 
-        return $result;
+        return $this;
     }
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      * @throws \Exception
      */
     public function delete(SQLBuilderInterface $builder = null)
     {
-        $result = 0;
-
         foreach ($this->getItems() as $item) {
-            $result += $item->delete($builder);
+            $item->delete($builder);
         }
 
-        return $result;
+        return $this;
     }
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      */
     public function update(SQLBuilderInterface $builder = null)
     {
-        $result = 0;
-
         foreach ($this->getItems() as $item) {
-            $result += $item->update($builder);
+            $item->update($builder);
         }
 
-        return $result;
+        return $this;
     }
 }

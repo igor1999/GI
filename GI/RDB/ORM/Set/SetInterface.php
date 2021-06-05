@@ -148,21 +148,21 @@ interface SetInterface extends  ArrayExchangeInterface
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      * @throws \Exception
      */
     public function insert(SQLBuilderInterface $builder = null);
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      * @throws \Exception
      */
     public function delete(SQLBuilderInterface $builder = null);
 
     /**
      * @param SQLBuilderInterface|null $builder
-     * @return int
+     * @return static
      */
     public function update(SQLBuilderInterface $builder = null);
 }
