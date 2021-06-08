@@ -251,7 +251,7 @@ class Widget extends AbstractWidget implements WidgetInterface
             }
         }
 
-        $clearItem = $this->getBuilderContainer()->getoptionBuilder()->buildClearItem();
+        $clearItem = $this->getBuilderContainer()->getOptionBuilder()->buildClearItem();
         $menu->getChildNodes()->addItem($clearItem);
 
         return $this;
