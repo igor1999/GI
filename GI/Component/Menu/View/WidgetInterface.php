@@ -19,6 +19,7 @@ namespace GI\Component\Menu\View;
 
 use GI\Component\Base\View\Widget\WidgetInterface as BaseInterface;
 use GI\ClientContents\Menu\MenuInterface as ModelInterface;
+use GI\Component\Base\ComponentInterface;
 
 /**
  * Interface WidgetInterface
@@ -31,5 +32,45 @@ use GI\ClientContents\Menu\MenuInterface as ModelInterface;
  */
 interface WidgetInterface extends BaseInterface
 {
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeSelectRelation(ComponentInterface $component);
 
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterSelectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeUnselectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterUnselectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeClickRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterClickRelation(ComponentInterface $component);
 }

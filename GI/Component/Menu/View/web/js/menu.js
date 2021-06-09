@@ -89,36 +89,60 @@ giClient.component.menu.Menu = function()
     // noinspection JSUnusedLocalSymbols
     this.beforeSelect = function(option)
     {
+        try {
+            this.findRelationTarget('before-select').beforeSelect(option);
+        } catch (e) {}
 
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
     this.afterSelect = function(option)
     {
+        try {
+            this.findRelationTarget('after-select').afterSelect(option);
+        } catch (e) {}
 
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
     this.beforeUnselect = function(option)
     {
+        try {
+            this.findRelationTarget('before-unselect').beforeUnselect(option);
+        } catch (e) {}
 
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
     this.afterUnselect = function(option)
     {
+        try {
+            this.findRelationTarget('after-unselect').afterUnselect(option);
+        } catch (e) {}
 
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
     this.beforeClick = function(option)
     {
+        try {
+            this.findRelationTarget('before-click').beforeClick(option);
+        } catch (e) {}
 
+        return this;
     };
 
     // noinspection JSUnusedLocalSymbols
     this.afterClick = function(option)
     {
+        try {
+            this.findRelationTarget('after-click').afterClick(option);
+        } catch (e) {}
 
+        return this;
     };
 };

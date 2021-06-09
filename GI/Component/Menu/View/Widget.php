@@ -24,6 +24,7 @@ use GI\ClientContents\Menu\MenuInterface as ModelInterface;
 use GI\Component\Menu\View\Builder\Container\ContainerInterface as BuilderContainerInterface;
 use GI\DOM\HTML\Element\Div\DivInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
+use GI\Component\Base\ComponentInterface;
 
 /**
  * Class Widget
@@ -43,6 +44,19 @@ class Widget extends AbstractWidget implements WidgetInterface
     const GI_ID_MENU      = 'menu';
 
     const GI_ID_OPTION    = 'option';
+
+
+    const BEFORE_SELECT_RELATION   = 'before-select';
+
+    const AFTER_SELECT_RELATION    = 'after-select';
+
+    const BEFORE_UNSELECT_RELATION = 'before-unselect';
+
+    const AFTER_UNSELECT_RELATION  = 'after-unselect';
+
+    const BEFORE_CLICK_RELATION    = 'before-click';
+
+    const AFTER_CLICK_RELATION     = 'after-click';
 
 
     /**
@@ -262,6 +276,78 @@ class Widget extends AbstractWidget implements WidgetInterface
      */
     protected function build()
     {
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeSelectRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::BEFORE_SELECT_RELATION, $component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterSelectRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::AFTER_SELECT_RELATION, $component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeUnselectRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::BEFORE_UNSELECT_RELATION, $component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterUnselectRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::AFTER_UNSELECT_RELATION, $component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeClickRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::BEFORE_CLICK_RELATION, $component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterClickRelation(ComponentInterface $component)
+    {
+        $this->getRelationList()->set(static::AFTER_CLICK_RELATION, $component);
+
         return $this;
     }
 }
