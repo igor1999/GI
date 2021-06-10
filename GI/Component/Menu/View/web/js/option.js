@@ -16,6 +16,8 @@
  */
 giClient.component.menu.Option = function()
 {
+    let _nsDom = giClient.core.dom;
+
     let me = this;
 
 
@@ -122,10 +124,10 @@ giClient.component.menu.Option = function()
             function()
             {
                 _menu.beforeClick(me);
-
                 _element.querySelector('a').click();
-
                 _menu.afterClick(me);
+
+                _menu.hide(0);
             }
         );
     };
@@ -172,7 +174,7 @@ giClient.component.menu.Option = function()
     this.showSubmenu = function(show)
     {
         if (_submenu) {
-            _submenu.style.display = show ? 'block' : 'none';
+            _nsDom.setVisibility(_submenu, show);
         }
 
         return this;

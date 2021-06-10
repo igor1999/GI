@@ -19,6 +19,8 @@ giClient.component.menu.Menu = function()
     giClient.core.widget.Base.call(this);
 
 
+    let _nsDom = giClient.core.dom;
+
     let _container;
     this.getContainer = function()
     {
@@ -43,6 +45,32 @@ giClient.component.menu.Menu = function()
         }
 
         return _options[optionId];
+    };
+
+    let _eventAllocationMargins = {x: -15, y: 10};
+    this.getEventAllocationMargins = function()
+    {
+        return _eventAllocationMargins;
+    };
+    this.setEventAllocationMarginX = function(x)
+    {
+        if (typeof(x) !== 'number') {
+            throw new Error('Allocation margin x should be a number');
+        }
+
+        _eventAllocationMargins.x = x;
+
+        return this;
+    };
+    this.setEventAllocationMarginY = function(y)
+    {
+        if (typeof(y) !== 'number') {
+            throw new Error('Allocation margin y should be a number');
+        }
+
+        _eventAllocationMargins.y = y;
+
+        return this;
     };
 
 
@@ -90,7 +118,8 @@ giClient.component.menu.Menu = function()
     this.beforeSelect = function(option)
     {
         try {
-            this.findRelationTarget('before-select').beforeSelect(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('before-select').beforeSelectMenu(option);
         } catch (e) {}
 
         return this;
@@ -100,7 +129,8 @@ giClient.component.menu.Menu = function()
     this.afterSelect = function(option)
     {
         try {
-            this.findRelationTarget('after-select').afterSelect(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('after-select').afterSelectMenu(option);
         } catch (e) {}
 
         return this;
@@ -110,7 +140,8 @@ giClient.component.menu.Menu = function()
     this.beforeUnselect = function(option)
     {
         try {
-            this.findRelationTarget('before-unselect').beforeUnselect(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('before-unselect').beforeUnselectMenu(option);
         } catch (e) {}
 
         return this;
@@ -120,7 +151,8 @@ giClient.component.menu.Menu = function()
     this.afterUnselect = function(option)
     {
         try {
-            this.findRelationTarget('after-unselect').afterUnselect(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('after-unselect').afterUnselectMenu(option);
         } catch (e) {}
 
         return this;
@@ -130,7 +162,8 @@ giClient.component.menu.Menu = function()
     this.beforeClick = function(option)
     {
         try {
-            this.findRelationTarget('before-click').beforeClick(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('before-click').beforeMenuClick(option);
         } catch (e) {}
 
         return this;
@@ -140,9 +173,32 @@ giClient.component.menu.Menu = function()
     this.afterClick = function(option)
     {
         try {
-            this.findRelationTarget('after-click').afterClick(option);
+            // noinspection JSUnresolvedFunction
+            this.findRelationTarget('after-click').afterMenuClick(option);
         } catch (e) {}
 
         return this;
     };
+
+    this.openAsContextMenu = function(e)
+    {
+        if (!(e instanceof Event)) {
+            throw new Error('Argument is not an Event object');
+        }
+
+        _container.style.left = (e.location.pageX + _eventAllocationMargins.x) + 'px';
+        _container.style.top  = (e.location.pageY + _eventAllocationMargins.y) + 'px';
+
+        _nsDom.show(_container);
+
+        let documentClick = function ()
+        {
+            _nsDom.hide(_container);
+            document.removeEventListener('click', documentClick);
+        };
+
+        document.addEventListener('click', documentClick);
+
+        return this;
+    }
 };
