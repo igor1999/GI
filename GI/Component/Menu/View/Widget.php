@@ -34,6 +34,8 @@ use GI\Component\Base\ComponentInterface;
  * @method WidgetInterface setModel(ModelInterface $model)
  * @method bool isBar()
  * @method WidgetInterface setBar(bool $bar)
+ * @method bool isContext()
+ * @method WidgetInterface setContext(bool $context)
  */
 class Widget extends AbstractWidget implements WidgetInterface
 {
@@ -44,6 +46,9 @@ class Widget extends AbstractWidget implements WidgetInterface
     const GI_ID_MENU      = 'menu';
 
     const GI_ID_OPTION    = 'option';
+
+
+    const SERVER_KEY_IS_CONTEXT = 'is-context';
 
 
     const BEFORE_SELECT_RELATION   = 'before-select';
@@ -273,9 +278,12 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     /**
      * @return static
+     * @throws \Exception
      */
     protected function build()
     {
+        $this->getServerDataList()->set(static::SERVER_KEY_IS_CONTEXT, ($this->isContext() ? 1 : 0));
+
         return $this;
     }
 

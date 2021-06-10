@@ -27,8 +27,55 @@ interface MenuInterface extends ComponentInterface
     public function isBar();
 
     /**
+     * @return bool
+     */
+    public function isContext();
+
+    /**
      * @return string
      * @throws \Exception
      */
     public function toString();
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeSelectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterSelectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeUnselectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterUnselectRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeClickRelation(ComponentInterface $component);
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterClickRelation(ComponentInterface $component);
 }

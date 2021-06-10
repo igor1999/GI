@@ -128,6 +128,10 @@ giClient.component.menu.Option = function()
                 _menu.afterClick(me);
 
                 _menu.hide(0);
+
+                try {
+                    _menu.hideAsContextMenu();
+                } catch (e) {}
             }
         );
     };

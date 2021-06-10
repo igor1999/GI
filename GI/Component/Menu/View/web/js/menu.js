@@ -21,6 +21,14 @@ giClient.component.menu.Menu = function()
 
     let _nsDom = giClient.core.dom;
 
+    let me = this;
+
+    let _context;
+    this.getContext = function()
+    {
+        return _context;
+    };
+
     let _container;
     this.getContainer = function()
     {
@@ -77,6 +85,8 @@ giClient.component.menu.Menu = function()
     this.construct = function(objectHash)
     {
         this.setObjectHash(objectHash);
+
+        _context = this.getServerData('is-context');
 
         _container = this.getObjectElement('top-menu');
 
@@ -180,8 +190,12 @@ giClient.component.menu.Menu = function()
         return this;
     };
 
-    this.openAsContextMenu = function(e)
+    this.showAsContextMenu = function(e)
     {
+        if (!_context) {
+            throw new Error('This menu is not context');
+        }
+
         if (!(e instanceof Event)) {
             throw new Error('Argument is not an Event object');
         }
@@ -193,11 +207,22 @@ giClient.component.menu.Menu = function()
 
         let documentClick = function ()
         {
-            _nsDom.hide(_container);
+            me.hideAsContextMenu();
             document.removeEventListener('click', documentClick);
         };
 
         document.addEventListener('click', documentClick);
+
+        return this;
+    }
+
+    this.hideAsContextMenu = function()
+    {
+        if (!_context) {
+            throw new Error('This menu is not context');
+        }
+
+        _nsDom.hide(_container);
 
         return this;
     }

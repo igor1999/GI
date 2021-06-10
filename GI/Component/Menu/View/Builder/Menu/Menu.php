@@ -18,12 +18,13 @@
 namespace GI\Component\Menu\View\Builder\Menu;
 
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
+use GI\Component\Menu\View\Builder\WidgetAwareTrait;
 
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 
 class Menu implements MenuInterface
 {
-    use ServiceLocatorAwareTrait;
+    use ServiceLocatorAwareTrait, WidgetAwareTrait;
 
 
     const SUBMENU_ATTRIBUTE  = 'submenu';
@@ -40,6 +41,10 @@ class Menu implements MenuInterface
 
         $menu->getAttributes()->setDataAttribute(static::SUBMENU_ATTRIBUTE, $id);
         $menu->getStyle()->setPadding(0)->setMargin(0);
+
+        if ($this->getWidget()->isContext()) {
+            $menu->getStyle()->setPositionToAbsolute()->setDisplayToNone();
+        }
 
         return $menu;
     }

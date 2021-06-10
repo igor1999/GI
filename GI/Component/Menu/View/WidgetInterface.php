@@ -29,6 +29,8 @@ use GI\Component\Base\ComponentInterface;
  * @method WidgetInterface setModel(ModelInterface $model)
  * @method bool isBar()
  * @method WidgetInterface setBar(bool $bar)
+ * @method bool isContext()
+ * @method WidgetInterface setContext(bool $context)
  */
 interface WidgetInterface extends BaseInterface
 {

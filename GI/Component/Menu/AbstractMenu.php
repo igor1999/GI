@@ -22,6 +22,7 @@ use GI\Component\Menu\View\Widget;
 
 use GI\Component\Menu\View\WidgetInterface;
 use GI\ClientContents\Menu\MenuInterface as MenuModelInterface;
+use GI\Component\Base\ComponentInterface;
 
 abstract class AbstractMenu extends AbstractComponent implements MenuInterface
 {
@@ -34,6 +35,11 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
      * @var bool
      */
     private $bar = true;
+
+    /**
+     * @var bool
+     */
+    private $context = false;
 
 
     /**
@@ -78,6 +84,25 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isContext()
+    {
+        return $this->context;
+    }
+
+    /**
+     * @param bool $context
+     * @return static
+     */
+    protected function setContext(bool $context)
+    {
+        $this->context = $context;
+
+        return $this;
+    }
+
+    /**
      * @param string $method
      * @param array $arguments
      * @return static
@@ -100,6 +125,80 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
      */
     public function toString()
     {
-        return $this->getView()->setModel($this->getMenuModel())->setBar($this->bar)->toString();
+        return $this->getView()
+            ->setModel($this->getMenuModel())->setBar($this->bar)->setContext($this->context)
+            ->toString();
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeSelectRelation(ComponentInterface $component)
+    {
+        $this->getView()->setBeforeSelectRelation($component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterSelectRelation(ComponentInterface $component)
+    {
+        $this->getView()->setAfterSelectRelation($component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeUnselectRelation(ComponentInterface $component)
+    {
+        $this->getView()->setBeforeUnselectRelation($component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterUnselectRelation(ComponentInterface $component)
+    {
+        $this->getView()->setAfterUnselectRelation($component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setBeforeClickRelation(ComponentInterface $component)
+    {
+        $this->getView()->setBeforeClickRelation($component);
+
+        return $this;
+    }
+
+    /**
+     * @param ComponentInterface $component
+     * @return static
+     * @throws \Exception
+     */
+    public function setAfterClickRelation(ComponentInterface $component)
+    {
+        $this->getView()->setAfterClickRelation($component);
+
+        return $this;
     }
 }
