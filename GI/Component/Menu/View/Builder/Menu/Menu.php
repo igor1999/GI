@@ -20,6 +20,7 @@ namespace GI\Component\Menu\View\Builder\Menu;
 use GI\ServiceLocator\ServiceLocatorAwareTrait;
 use GI\Component\Menu\View\Builder\WidgetAwareTrait;
 
+use GI\Component\Menu\View\WidgetInterface;
 use GI\DOM\HTML\Element\Lists\UL\ULInterface;
 
 class Menu implements MenuInterface
@@ -29,6 +30,15 @@ class Menu implements MenuInterface
 
     const SUBMENU_ATTRIBUTE  = 'submenu';
 
+
+    /**
+     * Option constructor.
+     * @param WidgetInterface $widget
+     */
+    public function __construct(WidgetInterface $widget)
+    {
+        $this->setWidget($widget);
+    }
 
     /**
      * @param string $id

@@ -86,7 +86,7 @@ giClient.component.menu.Menu = function()
     {
         this.setObjectHash(objectHash);
 
-        _context = this.getServerData('is-context');
+        _context = (this.getServerData('is-context') === 1);
 
         _container = this.getObjectElement('top-menu');
 
