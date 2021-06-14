@@ -54,6 +54,15 @@ abstract class AbstractView extends AbstractRenderer implements ViewInterface
     }
 
     /**
+     * @return string
+     * @throws \Exception
+     */
+    public function renderServerDataList()
+    {
+        return $this->getServerDataList()->toString();
+    }
+
+    /**
      * @param string $giId
      * @return LoadingImageInterface
      * @throws \Exception

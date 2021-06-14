@@ -30,6 +30,12 @@ interface ViewInterface extends RendererInterface, ClientAttributesInterface
     public function renderRelationList();
 
     /**
+     * @return string
+     * @throws \Exception
+     */
+    public function renderServerDataList();
+
+    /**
      * @param string $giId
      * @return LoadingImageInterface
      * @throws \Exception
