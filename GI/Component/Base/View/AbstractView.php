@@ -22,12 +22,13 @@ use GI\Component\Base\View\LoadingImage\LoadingImage;
 
 use GI\Component\Base\View\ClientAttributes\ClientAttributesTrait;
 use GI\Component\Base\View\Relations\RelationsAwareTrait;
+use GI\Component\Base\View\ServerData\ServerDataAwareTrait;
 
 use GI\Component\Base\View\LoadingImage\LoadingImageInterface;
 
 abstract class AbstractView extends AbstractRenderer implements ViewInterface
 {
-    use ClientAttributesTrait, RelationsAwareTrait;
+    use ClientAttributesTrait, RelationsAwareTrait, ServerDataAwareTrait;
 
 
     const CLIENT_JS  = '';
