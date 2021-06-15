@@ -86,7 +86,7 @@ giClient.component.menu.Menu = function()
     {
         this.setObjectHash(objectHash);
 
-        _context = (this.getServerData('is-context') === 1);
+        _context = (this.getServerData('is-context') === '1');
 
         _container = this.getObjectElement('top-menu');
 
@@ -200,8 +200,8 @@ giClient.component.menu.Menu = function()
             throw new Error('Argument is not an Event object');
         }
 
-        _container.style.left = (e.location.pageX + _eventAllocationMargins.x) + 'px';
-        _container.style.top  = (e.location.pageY + _eventAllocationMargins.y) + 'px';
+        _container.style.left = (e.pageX + _eventAllocationMargins.x) + 'px';
+        _container.style.top  = (e.pageY + _eventAllocationMargins.y) + 'px';
 
         _nsDom.show(_container);
 
