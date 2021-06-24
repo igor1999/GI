@@ -67,6 +67,44 @@ giClient.core.form = new function()
         return value;
     };
 
+    this.hydrate = function(values, form)
+    {
+        let formControls   = form.querySelectorAll('[name]');
+        let externControls = document.querySelectorAll(`[form="${form.id}"]`);
+
+        hydrateControls(values, formControls);
+        hydrateControls(values, externControls);
+
+        return this;
+    };
+
+    let hydrateControls = function(values, controls)
+    {
+        for (let i = 0; i <= controls.length - 1; i ++) {
+            let control = controls[i];
+            let name    = control.name;
+
+            if (name in values) {
+                hydrateControl(values[name], control);
+            }
+        }
+    };
+
+    let hydrateControl = function(value, control)
+    {
+        let tagName = control.tagName.toUpperCase();
+        let type    = control.getAttribute('type');
+        if (type) {
+            type = type.toUpperCase();
+        }
+
+        if ((tagName === 'INPUT') && (type === 'CHECKBOX' || type === 'RADIO')) {
+            control.checked = (control.value === value);
+        } else if (tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA') {
+            control.value = value;
+        }
+    };
+
     this.submitControlRelatedForm = function(control)
     {
         let formId = control.getAttribute('form');
