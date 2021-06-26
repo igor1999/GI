@@ -119,12 +119,23 @@ giClient.component.menu.Option = function()
 
     let initClick = function()
     {
+        let link = _element.querySelector('a');
+
         _element.addEventListener(
             'click',
             function()
             {
-                _menu.beforeClick(me);
-                _element.querySelector('a').click();
+                link.click();
+            }
+        );
+
+        link.addEventListener(
+            'click',
+            function(ev)
+            {
+                ev.stopPropagation();
+
+                _menu.beforeClick(me, ev);
                 _menu.afterClick(me);
 
                 _menu.hide(0);

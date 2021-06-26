@@ -169,11 +169,11 @@ giClient.component.menu.Menu = function()
     };
 
     // noinspection JSUnusedLocalSymbols
-    this.beforeClick = function(option)
+    this.beforeClick = function(option, ev)
     {
         try {
             // noinspection JSUnresolvedFunction
-            this.findRelationTarget('before-click').beforeMenuClick(option);
+            this.findRelationTarget('before-click').beforeMenuClick(option, ev);
         } catch (e) {}
 
         return this;
@@ -199,7 +199,6 @@ giClient.component.menu.Menu = function()
         if (!(e instanceof Event)) {
             throw new Error('Argument is not an Event object');
         }
-
         _container.style.left = (e.pageX + _eventAllocationMargins.x) + 'px';
         _container.style.top  = (e.pageY + _eventAllocationMargins.y) + 'px';
 
