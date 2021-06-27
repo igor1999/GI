@@ -59,9 +59,7 @@ class Widget extends AbstractWidget implements WidgetInterface
 
     const AFTER_UNSELECT_RELATION  = 'after-unselect';
 
-    const BEFORE_CLICK_RELATION    = 'before-click';
-
-    const AFTER_CLICK_RELATION     = 'after-click';
+    const ON_CLICK_RELATION        = 'on-click';
 
 
     /**
@@ -340,21 +338,9 @@ class Widget extends AbstractWidget implements WidgetInterface
      * @return static
      * @throws \Exception
      */
-    public function setBeforeClickRelation(ComponentInterface $component)
+    public function setOnClickRelation(ComponentInterface $component)
     {
-        $this->getRelationList()->set(static::BEFORE_CLICK_RELATION, $component);
-
-        return $this;
-    }
-
-    /**
-     * @param ComponentInterface $component
-     * @return static
-     * @throws \Exception
-     */
-    public function setAfterClickRelation(ComponentInterface $component)
-    {
-        $this->getRelationList()->set(static::AFTER_CLICK_RELATION, $component);
+        $this->getRelationList()->set(static::ON_CLICK_RELATION, $component);
 
         return $this;
     }

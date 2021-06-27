@@ -169,22 +169,11 @@ giClient.component.menu.Menu = function()
     };
 
     // noinspection JSUnusedLocalSymbols
-    this.beforeClick = function(option, ev)
+    this.onClick = function(option, ev)
     {
         try {
             // noinspection JSUnresolvedFunction
-            this.findRelationTarget('before-click').beforeMenuClick(option, ev);
-        } catch (e) {}
-
-        return this;
-    };
-
-    // noinspection JSUnusedLocalSymbols
-    this.afterClick = function(option)
-    {
-        try {
-            // noinspection JSUnresolvedFunction
-            this.findRelationTarget('after-click').afterMenuClick(option);
+            this.findRelationTarget('on-click').onMenuClick(option, ev);
         } catch (e) {}
 
         return this;

@@ -70,12 +70,5 @@ interface MenuInterface extends ComponentInterface
      * @return static
      * @throws \Exception
      */
-    public function setBeforeClickRelation(ComponentInterface $component);
-
-    /**
-     * @param ComponentInterface $component
-     * @return static
-     * @throws \Exception
-     */
-    public function setAfterClickRelation(ComponentInterface $component);
+    public function setOnClickRelation(ComponentInterface $component);
 }

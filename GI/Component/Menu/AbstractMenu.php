@@ -183,21 +183,9 @@ abstract class AbstractMenu extends AbstractComponent implements MenuInterface
      * @return static
      * @throws \Exception
      */
-    public function setBeforeClickRelation(ComponentInterface $component)
+    public function setOnClickRelation(ComponentInterface $component)
     {
-        $this->getView()->setBeforeClickRelation($component);
-
-        return $this;
-    }
-
-    /**
-     * @param ComponentInterface $component
-     * @return static
-     * @throws \Exception
-     */
-    public function setAfterClickRelation(ComponentInterface $component)
-    {
-        $this->getView()->setAfterClickRelation($component);
+        $this->getView()->setOnClickRelation($component);
 
         return $this;
     }

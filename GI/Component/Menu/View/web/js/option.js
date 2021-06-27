@@ -135,8 +135,7 @@ giClient.component.menu.Option = function()
             {
                 ev.stopPropagation();
 
-                _menu.beforeClick(me, ev);
-                _menu.afterClick(me);
+                _menu.onClick(me, ev);
 
                 _menu.hide(0);
 

@@ -19,7 +19,7 @@ giClient.component.locales.Locales = function()
     giClient.component.menu.Menu.call(this);
 
 
-    this.afterClick = function(option)
+    this.onClick = function(option)
     {
         if (!option.getSubmenu()) {
             let name   = this.getServerData('cookie-name');
